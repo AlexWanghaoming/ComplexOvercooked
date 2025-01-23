@@ -62,8 +62,6 @@ envs/overcook_pygame/
 │   ├── overcooked_human.py                      #提供其中一个智能体为用户可以用键盘控制的使用样例
 │   ├── overcooked_llm.py                      #提供智能体的控制由输入给定规则和语义环境信息的语言模型控制
 ├── _init_.py                   # 初始化模块
-├── game_class.py               # overcook游戏类的定义，如playertable等交互体
-├── game_main.py                # 主游戏类，利用pygame按照给定的地图实例化对应的游戏地图，以及游戏循环的主逻辑，提供双人进行键盘使用的接口
 ├── maps.json                   # 游戏地图配置数据，包含难易程度不同，菜谱不同和人数不同的额外配置。
 ├── overcook_gym_class.py       # 游戏的Gym环境类，相比game_class提供了一些环境主逻辑
 ├── overcook_gym_main.py        # 定义游戏类，可以通过maps.json中的配置文件构建地图信息，都是静态元素
