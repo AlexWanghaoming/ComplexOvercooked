@@ -1,0 +1,105 @@
+{
+    "supereasy": {
+            "name": "supereasy",
+            "layout": [
+                "XXXEX____",
+                "C___X____",
+                "X1_2U____",
+                "XFDLX____",
+                "_________",
+                "_________"
+            ],
+            "items": ["dish", "BClemon", "AClemon", "rawfish", "AClemoncookedfish", "cookedfish"],
+            "task": {"AClemoncookedfish": 20},
+            "tasknum": 1,
+            "players": 2
+    },
+
+          "veryeasy": {
+            "name": "veryeasy",
+            "layout": [
+                 "XXXXEX___",
+                 "C____X___",
+                 "X1__2U___",
+                 "X____X___",
+                 "XFXDLX___",
+                 "_________"
+            ],
+            "items": ["dish", "BClemon", "AClemon", "rawfish", "AClemoncookedfish", "cookedfish"],
+            "task": {"AClemoncookedfish": 20, "cookedfish": 10},
+            "tasknum": 1,
+            "players": 2
+          },
+
+          "easy": {
+            "name": "easy",
+            "layout": [
+                 "XBMXXEX__",
+                 "C__X__X__",
+                 "X1_X2_U__",
+                 "X_____T__",
+                 "XFHDLXX__",
+                 "_________" ],
+            "items": ["cookedfish","ACtomato","BCtomato","cookedbeef","rawbeef","hamburger",
+             "ACtomatocookedbeefhamburger","ACtomatohamburger","cookedbeefhamburger","dish", "BClemon", "AClemon", "rawfish",
+                        "AClemoncookedfish"],
+            "task": {"AClemoncookedfish":20,"cookedfish":10,
+             "ACtomatocookedbeefhamburger":25,"cookedbeefhamburger":15},
+            "tasknum": 2,
+            "players": 2
+          },
+
+          "4playereasy":{
+            "name": "4playereasy",
+            "layout": [
+                 "XBXMEX__",
+                 "C1__4U__",
+                 "X____X__",
+                 "H3__2T__",
+                 "XFXDLX__",
+                 "________"],
+
+            "items": ["cookedfish","ACtomato","BCtomato","cookedbeef","rawbeef","hamburger",
+              "ACtomatocookedbeefhamburger","ACtomatohamburger","cookedbeefhamburger",
+              "dish", "BClemon", "AClemon", "rawfish", "AClemoncookedfish"],
+            "task": {"AClemoncookedfish":20, "cookedfish":10, "ACtomatocookedbeefhamburger":25,"cookedbeefhamburger":15},
+            "tasknum": 2,
+            "players": 4
+          },
+
+          "2playerhard":{
+            "name": "2playerhard",
+            "layout": [
+                 "XBMEX__",
+                 "C1__U__",
+                 "X___X__",
+                 "F__2T__",
+                 "XHDLX__",
+                 "_______"],
+            "items": ["cookedfish","ACtomato","BCtomato","cookedbeef","rawbeef","hamburger",
+             "ACtomatocookedbeefhamburger","ACtomatohamburger","cookedbeefhamburger",
+              "dish", "BClemon", "AClemon", "rawfish", "AClemoncookedfish"],
+            "task": {"AClemoncookedfish":20, "cookedfish":10, "ACtomatocookedbeefhamburger":25,"cookedbeefhamburger":15},
+            "tasknum": 2,
+            "players": 2
+          },
+          
+          "4playersplit":{
+            "name": "4playersplit",
+            "layout": [
+                 "XBXEXXHMX_",
+                 "C1__X__2U_",
+                 "X___X___T_",
+                 "H3__X__4X_",
+                 "XFXDXXXLX_",
+                 "__________"],
+
+            "items": ["cookedfish","ACtomato","BCtomato","cookedbeef","rawbeef","hamburger",
+              "ACtomatocookedbeefhamburger","ACtomatohamburger","cookedbeefhamburger",
+              "dish", "BClemon", "AClemon", "rawfish", "AClemoncookedfish"],
+            "task": {"AClemoncookedfish":20,"cookedfish":10, "ACtomatocookedbeefhamburger":25,"cookedbeefhamburger":15},
+            "tasknum": 2,
+            "players": 4
+
+          }
+}

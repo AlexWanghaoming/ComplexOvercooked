@@ -1,0 +1,5 @@
+results/*
+wandb/*
+__pycache__/
+*pdf
+*pptx

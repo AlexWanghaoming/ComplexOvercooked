@@ -1,0 +1,27 @@
+exclude: null
+grid-search:
+
+  "--config":
+    - "ippo"
+
+  lr:
+    - 0.001
+
+  use_rnn:
+    - True
+
+  hidden_dim:
+    - 64
+
+  eps_clip:
+    - 0.1
+
+  entropy_coef:
+    - 0.01
+
+    
+grid-search-groups:
+  env0:
+    - "--env-config": "overcooked2"
+    - env_args.map_name: supereasy
+    - env_args.ifrender: False

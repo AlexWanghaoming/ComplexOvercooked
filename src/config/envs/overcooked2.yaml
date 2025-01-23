@@ -1,0 +1,33 @@
+env: "overcooked2"
+
+env_args:
+  map_name: "supereasy"
+  ifrender: False
+
+common_reward: True  # Run experiment with common reward setup
+reward_scalarisation: "mean"  # How to aggregate rewards to single common reward (only used if common_reward is True)
+test_greedy: True
+test_nepisode: 1
+test_interval: 50000
+log_interval: 6000
+runner_log_interval: 6000
+learner_log_interval: 6000
+
+t_max: 2.0e+7
+use_cuda: False # Use gpu by default unless it isn't available
+buffer_cpu_only: True # If true we won't keep all of the replay buffer in vram
+use_rnn: True
+hidden_dim: 64
+
+gamma: 0.99
+lr: 1.0e-3 # Learning rate for agents
+lr_decay: True # Decay learning rate over time
+reward_shaping_horizon: 1.0e+7 # Linearly decay reward shaping over this many timesteps
+
+use_wandb: True # Log results to W&B
+wandb_team: "wanghm" # W&B team name
+wandb_project: epymarl_overcooked2 # W&B project name
+wandb_mode: "online" # W&B mode (online/offline)
+wandb_save_model: False # Save models to W&B (only done if use_wandb is True and save_model is True)
+save_model: True # Save the models to disk
+save_model_interval: 50000 # Save models after this many timesteps
