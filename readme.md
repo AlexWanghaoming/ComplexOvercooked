@@ -1,4 +1,4 @@
-# Overcooked - pygame 🍳
+# ComplexOvercooked 🍳
 
 🌐 [中文](/readme.ch.md) | [English](/readme.md) 🌐
 
@@ -20,7 +20,7 @@ Hi👋, the current open-source overcook project is an H5 game🕹️ written ba
 </p>
 To better adapt to reinforcement learning🧠, we have made the following improvements🔧:
 
-Firstly, the game logic is closer to the real Overcooked 2👨‍🍳 compared to the simplified overcook, which is actually a multiplayer and multitasking cooperative game👫👬. The maximum number of players is four🎮, and at the same time, the agents might need to cook various dishes🍲. Multiple agents need to have a sense of division of labor and task allocation🤝, which is not fully reflected in the simplified overcook environment.
+Firstly, the game logic is closer to the real Overcooked 2👨‍🍳 compared to the simplified Overcooked_AI, which is actually a multiplayer and multitasking cooperative game👫👬. The maximum number of players is four🎮, and at the same time, the agents might need to cook various dishes🍲. Multiple agents need to have a sense of division of labor and task allocation🤝, which is not fully reflected in the simplified overcook environment.
 
 Moreover, the task steps in the simplified overcook are quite simple, like making onion soup only requires putting three onions into the pot, cooking, and serving🍜. This makes the cooperation model among agents quite singular. Diverse modes of cooperation test the coordination and collaboration among agents🤖, which is beneficial for training agents with superior cooperative abilities.
 
@@ -38,41 +38,37 @@ In terms of engineering🔨, the original overcook environment used frontend int
 - Supports user-defined game scenes🌆, you just need to configure the map, number of players, and recipes in maps.json to get a brand new environment!
 - Provides a multifunctional reinforcement learning interface🔌, for agent-to-agent, human-to-agent, and LLM-controlled agent interactions!
 - Provides some basic drawing interfaces🎨, like drawing agents' successful delivery rates or heatmaps of each agent's movement trajectory, etc.
-![heatmaps](showpic/heatmaps.png "Project Image")
 ### Installation 🛠️
 
 ---
 
 You can clone this project📁:
-```git
-git clone https://github.com/AlexWanghaoming/llm_rl.git
+```bash
+git clone https://anonymous.4open.science/r/ComplexOvercooked-1D82/readme.md
+pip install -r requirements.txt
 ```
 
 ### Training 🚀
-Train self-play MAPPO agents via: 
+For example, train ippo agents in the 2playerhard layout: 
 ```Bash
-./train/train_mappo.sh
+python src/main.py --config=ippo --env-config=overcooked2 with env_args.map_name=2playerhard
+```
+To train agents over various algorithms, layouts and seeds in batch:
+```Bash
+./runalgo.sh
 ```
 
-### Code Structure 📐
+### ComplexOvercooked Environment Code Structure 📐
+The source code of ComplexOvercooked environment is under the path src/envs/overcook_pygame
 ```
-envs/overcook_pygame/
-├── assets/                         # Game resource files, such as images and music
-│   ├── chef1/                      # Resources for chef1
-│   ├──...
-├── showpic/                        # Images and GIFs for display
-│   ├──...
-├── demo/                           # Environment interface example usage
-│   ├── overcooked_mdp.py           # Example usage providing random actions for each agent
-│   ├── overcooked_human.py         # Example where one of the agents can be controlled by the user using a keyboard
-│   ├── overcooked_llm.py           # Control of agents by a language model given rules and semantic environment information
-├── _init_.py                       # Module initialization
-├── game_class.py                   # Definition of overcook game class, like playertable and other interactables
-├── game_main.py                    # Main game class, uses pygame to instantiate corresponding game maps and main game logic loop, provides two-player keyboard interface
-├── maps.json                       # Game map configuration data, including additional configurations with different difficulty levels, recipes, and number of players.
-├── overcook_gym_class.py           # Gym environment class of the game, provides some main logic of the environment compared to game_class
-├── overcook_gym_main.py            # Defines game class, can build map information through configuration files in maps.json, all static elements
-├── overcook_gym_env.py             # Defines environment class, ensures main logic by calling game class in overcook_gym_main.py, all environment-related information and configurations are in this file
-├── readme.ch.md                    # README in Chinese
-├── readme.md                       # README in English
+├── assets  # Game resource files, such as images of items
+├── easyversion.png
+├── __init__.py
+├── main.jpg
+├── maps.json #  The map configuration file supports flexible configuration of the map, the number of players, and pygame event types.
+├── overcook_gym_class.py # Definitions of various element classes in the game, such as tables, pots, cutting boards, etc., along with their respective event logic.
+├── overcook_gym_env.py # Definition of gym-format RL environment class.
+├── overcook_gym_main.py  # Game initialization class.
+├── test_overcook_gym_env.py
+└── yes.gif
 ```

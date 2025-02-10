@@ -1,4 +1,4 @@
-# 分手厨房-pygame 🍳
+# ComplexOvercooked 🍳
 
 🌐 [中文](/readme.ch.md) | [English](/readme.md) 🌐
 
@@ -20,7 +20,7 @@
 </p>
 为了更加适配强化学习🧠，我们做了以下的改进🔧：
 
-首先是游戏逻辑相比简化的overcook更贴近真实的overcooked 2👨‍🍳，真实的overcooked游戏实际上是一个多人多任务的合作游戏👫👬，玩家数量最多是4个人🎮，并且同一时间智能体需要烹饪的菜品可能是多种🍲，多个智能体在完成任务时需要具有分工意识和任务分配意识🤝，这些方面的能力在简化的overcooked环境中体现得不够充分。
+首先是游戏逻辑相比简化的Overcooked_AI更贴近真实的overcooked 2👨‍🍳，真实的overcooked游戏实际上是一个多人多任务的合作游戏👫👬，玩家数量最多是4个人🎮，并且同一时间智能体需要烹饪的菜品可能是多种🍲，多个智能体在完成任务时需要具有分工意识和任务分配意识🤝，这些方面的能力在简化的overcooked环境中体现得不够充分。
 
 此外，简化的overcooked的任务步骤较为简单，例如完成洋葱汤只需要将三个洋葱放入锅中，然后烹饪，送菜🍜，这使得智能体之间的合作模型较为单一。多样的合作模式更加考验智能体之间的配合和协调🤖，也有利于训练合作能力更出色的智能体。
 
@@ -38,34 +38,35 @@
 - 支持用户定义游戏场景🌆，仅需要在maps.json中配置你想要的地图人数和菜谱，你就可以得到全新的环境！
 - 提供多功能的强化学习接口🔌，智能体与智能体，人与智能体以及LLM控制智能体！
 - 提供了一些基本的绘图接口🎨，如绘制agents的送菜成功率或者每个智能体的移动轨迹热力图等等。
-![heatmaps](showpic/heatmaps.png "Project Image")
 ### 安装 🛠️
 
 ---
 
 你可以克隆本项目📁：
-```git
-git clone https://github.com/AlexWanghaoming/llm_rl.git
+```bash
+git clone https://anonymous.4open.science/r/ComplexOvercooked-1D82/readme.md
+pip install -r requirements.txt
 ```
-然后参考demo中的示例，构建你自己的overcook
-## 代码结构 📐
+### 训练 🚀
+举个例子, 在2playerhard中训练ippo智能体: 
+```Bash
+python src/main.py --config=ippo --env-config=overcooked2 with env_args.map_name=2playerhard
+```
+使用不同的算法在不同的游戏地图中批量训练多个随机种子：
+```Bash
+./runalgo.sh
+```
+###  ComplexOvercooked环境代码结构 📐
 
 ```
-envs/overcook_pygame/
-├── assets/                         # 存放游戏资源文件，如图片和音乐
-│   ├── chef1/                      #如chef1的资源文件
-│   ├──...
-├── showpic/                        # 展示用的图片和GIF
-│   ├──...
-├── demo/                         # 环境接口示例使用样例
-│   ├── overcooked_mdp.py                      #提供每个智能体随机动作的使用样例
-│   ├── overcooked_human.py                      #提供其中一个智能体为用户可以用键盘控制的使用样例
-│   ├── overcooked_llm.py                      #提供智能体的控制由输入给定规则和语义环境信息的语言模型控制
-├── _init_.py                   # 初始化模块
-├── maps.json                   # 游戏地图配置数据，包含难易程度不同，菜谱不同和人数不同的额外配置。
-├── overcook_gym_class.py       # 游戏的Gym环境类，相比game_class提供了一些环境主逻辑
-├── overcook_gym_main.py        # 定义游戏类，可以通过maps.json中的配置文件构建地图信息，都是静态元素
-├── overcook_gym_env.py         # 定义环境类，通过调用overcook_gym_main.py中的游戏类来保证主逻辑，所有和环境相关的信息与配置均在此文件
-├── readme.ch.md                    # 中文版README
-├── readme.md                       # 英文版README
+├── assets  # 游戏元素的图片
+├── easyversion.png
+├── __init__.py
+├── main.jpg
+├── maps.json # 地图配置文件，支持灵活地配置地图，玩家个数和任务类别
+├── overcook_gym_class.py # 定义了游戏中的各种元素类，例如桌子、锅、案板等以及各元素的事件逻辑
+├── overcook_gym_env.py # 定义了gym格式的RL环境类
+├── overcook_gym_main.py  # 初始化游戏
+├── test_overcook_gym_env.py
+└── yes.gif
 ```
