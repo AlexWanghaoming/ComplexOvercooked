@@ -59,16 +59,38 @@ To train agents over various algorithms, layouts and seeds in batch:
 ```
 
 ### ComplexOvercooked Environment Code Structure 📐
-The source code of ComplexOvercooked environment is under the path src/envs/overcook_pygame
+
 ```
-├── assets  # Game resource files, such as images of items
-├── easyversion.png
-├── __init__.py
-├── main.jpg
-├── maps.json #  The map configuration file supports flexible configuration of the map, the number of players, and pygame event types.
-├── overcook_gym_class.py # Definitions of various element classes in the game, such as tables, pots, cutting boards, etc., along with their respective event logic.
-├── overcook_gym_env.py # Definition of gym-format RL environment class.
-├── overcook_gym_main.py  # Game initialization class.
-├── test_overcook_gym_env.py
-└── yes.gif
+ComplexOvercooked/
+├── assets/  # Game resource files, such as images of items
+├── src/  # Core source code directory
+│   ├── components/  # Basic components
+│   │   ├── action_selectors.py  # Action selectors (epsilon-greedy, etc.)
+│   │   ├── episode_buffer.py    # Experience replay buffer
+│   │   ├── epsilon_schedules.py # Epsilon decay scheduler
+│   │   ├── standarize_stream.py # Data standardization
+│   │   └── transforms.py        # Data transformation tools
+│   ├── config/  # Configuration directory
+│   │   └── algs/  # Algorithm configurations
+│   │       ├── coma.yaml        # COMA algorithm config
+│   │       ├── ia2c.yaml        # IA2C algorithm config
+│   │       ├── ippo.yaml        # IPPO algorithm config
+│   │       ├── iql.yaml         # IQL algorithm config
+│   │       └── *_ns.yaml        # Non-shared parameter versions
+│   └── envs/  # Environment implementation
+│       └── overcook_pygame/  # Overcooked environment
+│           ├── overcook_gym_class.py  # Game basic classes (tables, pots, boards, etc.)
+│           ├── overcook_gym_env.py    # Gym environment wrapper
+│           └── overcook_gym_main.py   # Environment main entry
+├── maps.json  # Map configuration file
+├── requirements.txt  # Project dependencies
+└── runalgo.sh  # Batch training script
 ```
+
+Main directory description:
+- `src/components/`: Contains implementations of reinforcement learning algorithm components, such as action selection, experience replay, etc.
+- `src/config/algs/`: Contains configuration files for various algorithms (COMA, IA2C, IPPO, IQL, etc.)
+- `src/envs/`: Contains the specific implementation of the Overcooked environment
+- `assets/`: Stores game resource materials
+- `maps.json`: Used to configure game maps, number of players, and task types
+- `runalgo.sh`: Script for batch training with different algorithms and maps

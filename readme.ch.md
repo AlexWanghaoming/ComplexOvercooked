@@ -34,7 +34,7 @@
 - 步骤任意性🔄，我们像原版游戏一样，提供多路径同终点的合成规则设置，比如番茄汉堡+牛肉和牛肉汉堡+番茄都能合成番茄牛肉汉堡🍅🍔！
 - 还原切菜动作✂️，相当于为环境增加了更复杂的中间步骤，切菜时不可移动，移动则暂停切菜！
 - 菜单滚动条倒计时⏲️，支持用户自己定义，增加图片和合成菜谱即可！
-- 垃圾桶🗑️，原版游戏因为有“煮糊了”这个设定，是需要提供灭火器和垃圾桶来消除烧焦物的影响的。但我们在自然人与agent的合作中发现，如果有时候想要提前备菜，容易遇到做错菜导致桌子不够用的情况，这个时候训练好的智能体就丧失了行动能力。因此还是添加了垃圾桶的设置，希望智能体可以做到有纠错能力。
+- 垃圾桶🗑️，原版游戏因为有"煮糊了"这个设定，是需要提供灭火器和垃圾桶来消除烧焦物的影响的。但我们在自然人与agent的合作中发现，如果有时候想要提前备菜，容易遇到做错菜导致桌子不够用的情况，这个时候训练好的智能体就丧失了行动能力。因此还是添加了垃圾桶的设置，希望智能体可以做到有纠错能力。
 - 支持用户定义游戏场景🌆，仅需要在maps.json中配置你想要的地图人数和菜谱，你就可以得到全新的环境！
 - 提供多功能的强化学习接口🔌，智能体与智能体，人与智能体以及LLM控制智能体！
 - 提供了一些基本的绘图接口🎨，如绘制agents的送菜成功率或者每个智能体的移动轨迹热力图等等。
@@ -59,14 +59,36 @@ python src/main.py --config=ippo --env-config=overcooked2 with env_args.map_name
 ###  ComplexOvercooked环境代码结构 📐
 
 ```
-├── assets  # 游戏元素的图片
-├── easyversion.png
-├── __init__.py
-├── main.jpg
-├── maps.json # 地图配置文件，支持灵活地配置地图，玩家个数和任务类别
-├── overcook_gym_class.py # 定义了游戏中的各种元素类，例如桌子、锅、案板等以及各元素的事件逻辑
-├── overcook_gym_env.py # 定义了gym格式的RL环境类
-├── overcook_gym_main.py  # 初始化游戏
-├── test_overcook_gym_env.py
-└── yes.gif
+ComplexOvercooked/
+├── assets/  # 游戏元素的图片资源
+├── src/  # 核心源代码目录
+│   ├── components/  # 基础组件
+│   │   ├── action_selectors.py  # 动作选择器(epsilon-greedy等)
+│   │   ├── episode_buffer.py    # 经验回放缓冲区
+│   │   ├── epsilon_schedules.py # epsilon衰减调度器
+│   │   ├── standarize_stream.py # 数据标准化
+│   │   └── transforms.py        # 数据转换工具
+│   ├── config/  # 配置文件目录
+│   │   └── algs/  # 算法配置
+│   │       ├── coma.yaml        # COMA算法配置
+│   │       ├── ia2c.yaml        # IA2C算法配置  
+│   │       ├── ippo.yaml        # IPPO算法配置
+│   │       ├── iql.yaml         # IQL算法配置
+│   │       └── *_ns.yaml        # 非共享参数版本的算法配置
+│   └── envs/  # 环境实现
+│       └── overcook_pygame/  # Overcooked环境
+│           ├── overcook_gym_class.py  # 游戏基础类(桌子、锅、案板等)
+│           ├── overcook_gym_env.py    # Gym环境封装
+│           └── overcook_gym_main.py   # 环境主入口
+├── maps.json  # 地图配置文件
+├── requirements.txt  # 项目依赖
+└── runalgo.sh  # 批量训练脚本
 ```
+
+主要目录说明:
+- `src/components/`: 包含强化学习算法的基础组件实现，如动作选择、经验回放等
+- `src/config/algs/`: 包含各种算法(COMA、IA2C、IPPO、IQL等)的配置文件
+- `src/envs/`: 包含Overcooked环境的具体实现
+- `assets/`: 存放游戏素材资源
+- `maps.json`: 用于配置游戏地图、玩家数量和任务类型
+- `runalgo.sh`: 用于批量训练不同算法、不同地图的脚本

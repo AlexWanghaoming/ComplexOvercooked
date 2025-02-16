@@ -24,12 +24,12 @@ class KeyboardThread(threading.Thread):
             new_actions = np.zeros(2, dtype=np.int32)
 
             for key, value in self.player_1.items():
-                if curr_keys[key] and not self.prev_keys[key]:
+                if curr_keys[key]:
                     new_actions[0] = value
                     break
                     
             for key, value in self.player_2.items():
-                if curr_keys[key] and not self.prev_keys[key]:
+                if curr_keys[key]:
                     new_actions[1] = value
                     break
 
