@@ -67,6 +67,35 @@ def get_cleaned_matrix_size(matrix):
     return len(matrix)-height, width
 
 
+class ComplexOvercookedGridworld(object):
+
+    def __init__(self, map_name):
+        terrain = maps[map_name]['layout']
+        self.height = len(terrain)
+        self.width = len(terrain[0])
+        self.shape = (self.width, self.height)
+        self.terrain_mtx = terrain
+        self.terrain_pos_dict = self._get_terrain_type_pos_dict()
+
+        # self.start_player_positions = start_player_positions
+        # self.num_players = len(start_player_positions)
+        # self.start_order_list = start_order_list
+        # self.soup_cooking_time = cook_time
+        # self.num_items_for_soup = num_items_for_soup
+        # self.delivery_reward = delivery_reward
+        # self.reward_shaping_params = NO_REW_SHAPING_PARAMS if rew_shaping_params is None else rew_shaping_params
+        # self.layout_name = layout_name
+
+    def _get_terrain_type_pos_dict(self):
+        pos_dict = defaultdict(list)
+        for y, terrain_row in enumerate(self.terrain_mtx):
+            for x, terrain_type in enumerate(terrain_row):
+                pos_dict[terrain_type].append((x, y))
+        return pos_dict
+    
+
+
+
 class OvercookPygameEnv(gym.Env):
     metadata = {'name': 'MyEnv-v0', 'render.modes': ['human']}
 
