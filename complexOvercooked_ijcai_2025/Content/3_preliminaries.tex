@@ -1,8 +1,0 @@
-\subsection{Cooperative multi-agent MDP}
-\textit{ComplexOvercooked} is a fully cooperative and fully observable MARL environment. The multi-agent Markov decision process (MDP) can be modelled by a tuple $\langle S,a,\{A_{i\in{a}}\},\mathcal{T},\mathcal{R},d^0 \rangle$ with a finite set of states $\mathcal{S}$, a real-value reward function $\mathcal{R}:\mathcal{S}\times \mathcal{A} \to \Delta(\mathbb{R}) $. $a$ is a finite set of agents; $A\_{i}$ is the finite set of actions available to agent $i$, $d^0$ is the start-state distribution. 
-A transition function $\mathcal{T}:S\times A_{1}\times\cdots\times A_{n} \to \Delta(\mathcal{S})$ specifies the distribution over next states, where $\Delta$ denotes a conditional distribution.
-
-\subsection{Original \textit{Overcooked\_AI} environment}
-The original \textit{Overcooked\_AI} environment is introduced in \cite{carroll2019utility}. In this game, two players should cooperate to finish as many orders as possible within a limited time. The steps to complete a dish are: putting three onions in a pot, taking the cooked onion out of the pot with a plate, and delivering the plate with onion soup to the serving area. The players can move to face any objects and interact with them. The action space of the environment is a set of $\{up, down, left, right, stay, interact\}$. The observation space is defined by a vector which consider each player’s facing direction, absolute position and relative positions to: the partner, the closest onion, the closest pot, the closest dish, the closest serving area, etc.
-
-
