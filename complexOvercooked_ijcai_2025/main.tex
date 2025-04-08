@@ -1,0 +1,187 @@
+%%%% ijcai25.tex
+
+\typeout{IJCAI--25 Instructions for Authors}
+
+% These are the instructions for authors for IJCAI-25.
+
+\documentclass{article}
+\pdfpagewidth=8.5in
+\pdfpageheight=11in
+
+\usepackage{ijcai25}
+
+% Use the postscript times font!
+\usepackage{times}
+\usepackage{soul}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[small]{caption}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage[switch]{lineno}
+
+% Comment out this line in the camera-ready submission
+\linenumbers
+
+\urlstyle{same}
+
+\usepackage{pifont} % 引入 pifont 宏包
+\usepackage{amssymb} % 引入 amssymb 宏包
+\usepackage{graphicx} % For including images
+\usepackage{booktabs} % For three-line tables
+\usepackage{tabularx} % For adjustable table width
+\usepackage{array}
+\usepackage{makecell} % 用于单元格内容换行和居中
+
+% Use the postscript times font!
+\usepackage{times}
+\usepackage{soul}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[small]{caption}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage[switch]{lineno}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsfonts}
+\usepackage{amsthm,amsmath,amssymb}
+\usepackage{mathrsfs}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{subfig}
+\newtheorem{theorem}{Theorem}
+\usepackage{color}
+\usepackage{graphicx} % 用于插入图片
+\usepackage{array}    % 用于调整表格格式
+\usepackage{multirow} % 用于合并单元格
+%% 自定义代码块的风格
+\documentclass{article}
+\usepackage{listings} % 引入 listings 宏包
+\usepackage{xcolor}   % 引入颜色支持
+
+% 定义 JSON 格式的高亮样式
+\lstdefinestyle{json}{
+    basicstyle=\ttfamily\footnotesize,
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    keywordstyle=\color{blue},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    breaklines=true,
+    frame=single,
+    captionpos=b,
+    showstringspaces=false
+}\definecolor{codegreen}{rgb}{0,0.6,0.1}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=4pt,         % 行号和代码的距离          
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\usepackage[utf8]{inputenc}
+
+
+\pdfinfo{
+/TemplateVersion (IJCAI.2024.0)
+}
+
+\title{\textit{ComplexOvercooked}: A Dynamic-Objective Challenge for Cooperative Multi-Agent Reinforcement Learning}
+
+
+% Single author syntax
+\author{
+    Author Name
+    \affiliations
+    Affiliation
+    \emails
+    email@example.com
+}
+
+% Multiple author syntax (remove the single-author syntax above and the \iffalse ... \fi here)
+\iffalse
+\author{
+First Author$^1$
+\and
+Second Author$^2$\and
+Third Author$^{2,3}$\And
+Fourth Author$^4$
+\affiliations
+$^1$First Affiliation\\
+$^2$Second Affiliation\\
+$^3$Third Affiliation\\
+$^4$Fourth Affiliation
+\emails
+\{first, second\}@example.com,
+third@other.example.com,
+fourth@example.com
+}
+\fi
+
+\begin{document}
+
+\maketitle
+\input{Content/0_abstract}
+
+\section{Introduction}
+\label{sec:intro}
+\input{Content/1_introduction}
+
+\section{Related Work}
+\label{sec:related}
+\input{Content/2_related_work}
+
+\section{Preliminaries}
+\label{sec:preliminary}
+\input{Content/3_preliminaries}
+
+\section{\textit{ComplexOvercooked} Environment}
+\label{sec:cbpr}
+\input{Content/4_environment}
+
+\section{Implementation}
+\label{sec:imple}
+\input{Content/5_Implementation_details}
+
+\section{Experiments}
+\label{sec:exp}
+\input{Content/6_experiments}
+
+\section{Conclusion and Future Directions}
+\label{sec:dis}
+\input{Content/7_discussion}
+
+\bibliographystyle{named}
+\bibliography{ref}
+
+\newpage 
+\clearpage
+\appendix
+\input{Appendix/appendix}
+\end{document}

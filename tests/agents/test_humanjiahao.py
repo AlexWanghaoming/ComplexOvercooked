@@ -66,7 +66,7 @@ def test_keyboard():
             print(f"Step: {step_count}, Actions: {current_actions}")
 
             env.render()
-            clock.tick(60)
+            clock.tick(120)
 
     except (KeyboardInterrupt, SystemExit):
         pass

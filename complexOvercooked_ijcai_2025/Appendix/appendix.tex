@@ -1,0 +1,44 @@
+\section{Hyperparameters of MARL agents}\label{appendix:hyper}
+In our experiments, we benchmarks the ippo, vdn and iql MARL algorithms. The specific hyperparameters of PPO and Q-learning are shown in Table \ref{tab:ippo_hyper} and Table \ref{tab:qlearning_hyper}, respectively. Apart from the hyperparameters in the table, we set common hyperparameters of ippo, vdn and iql with an initial learning rate of 1e-3, a reward shaping horizons of half the total timesteps, hidden dim of 64, 128, 256, 256 for the envs \textit{supereasy}, \textit{2playerhard}, \textit{4playereasy}, \textit{4playersplit} respectively. In addition, we set learning rate decay and use a RNN agent in both Q network and PPO policy network. 
+\begin{table}[htb]
+\centering
+\caption{PPO hyperparameters. }
+\label{tab:ippo_hyper}
+\setlength{\tabcolsep}{3.5mm}
+\begin{tabular}{lc}
+\toprule
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+Entropy coefficient        & 0.01         \\
+n rollout threads                & 10        \\
+Clipping                  & 0.1       \\
+PPO epochs                & 8 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htb]
+\centering
+\caption{Q-learning hyperparameters. }
+\label{tab:qlearning_hyper}
+\setlength{\tabcolsep}{3.5mm}
+\begin{tabular}{lc}
+\toprule
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+Replay buffer size       & 5000         \\
+Epsilon start                   & 1        \\
+Epsilon finish                     & 0.1        \\
+Epsilon anneal time                & 5e6        \\
+Target update interval                  & 100       \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+
+
+
+
+
