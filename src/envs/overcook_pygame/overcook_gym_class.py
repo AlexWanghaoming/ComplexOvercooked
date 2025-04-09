@@ -81,13 +81,19 @@ class TaskBoard(pygame.sprite.Sprite):
     def __init__(self, x, y, taskmenu):
         super().__init__()
         self.menu = taskmenu
-        self.task = random.choice(list(self.menu.keys())) # random a task from task menu
+        # 根据概率选择任务
+        task_items = list(self.menu.keys())
+        if isinstance(self.menu[task_items[0]], list):  # 检查是否是新格式 [分数, 概率]
+            probs = [self.menu[item][1] for item in task_items]
+            self.task = random.choices(task_items, weights=probs, k=1)[0]
+        else:  # 兼容旧格式
+            self.task = random.choice(task_items)
+        
         self.image = picscale(picload(os.path.join(current_dir, f'assets/TASK/{self.task}.png')).convert_alpha(), (3 * ONEBLOCK, ONEBLOCK))
-        self.rect = self.image.get_rect()  # 获取图片的矩形区域
-        self.rect.x = x  # 设置矩形区域的位置
+        self.rect = self.image.get_rect()
+        self.rect.x = x
         self.rect.y = y
-        # self.timer = random.randint(50,100)
-        self.timer = 200  # total timesteps of dish in task menu
+        self.timer = 200
         self.remaining_time = self.timer
         self.start_time = 0
 
@@ -109,14 +115,15 @@ class TaskBoard(pygame.sprite.Sprite):
                 progress_bar_surface.fill((128, 200, 0))
                 self.image.blit(progress_bar_surface, progress_bar_rect)
 
-    def newtask(self,nowtime):
-        # listkey = list(self.menu.keys())
-        # listkey+=[listkey[2]]*10
-        # listkey+=[listkey[3]]*10
-        self.task = random.choice(list(self.menu.keys()))
-        # self.task = random.choice(listkey)
-        # self.timer = random.randint(50, 100)
-        # self.timer = 50
+    def newtask(self, nowtime):
+        # 根据概率选择新任务
+        task_items = list(self.menu.keys())
+        if isinstance(self.menu[task_items[0]], list):  # 检查是否是新格式
+            probs = [self.menu[item][1] for item in task_items]
+            self.task = random.choices(task_items, weights=probs, k=1)[0]
+        else:  # 兼容旧格式
+            self.task = random.choice(task_items)
+            
         self.start_time = nowtime
         self.remaining_time = self.timer
         self.image = picscale(picload(os.path.join(current_dir, f'assets/TASK/{self.task}.png')).convert_alpha(), (3 * ONEBLOCK, ONEBLOCK))
@@ -250,11 +257,10 @@ class CoinTable(pygame.sprite.Sprite):
         if keys:
             if player.rect.move(player.direction[0] * ONEBLOCK / 2,
                                 player.direction[1] * ONEBLOCK / 2).colliderect(self.rect):
-                #
-
                 if player.dish and player.item in taskmenu:
-
-                    pygame.event.post(pygame.event.Event(TASK_FINISH_EVENT, {'action': player.item,'player':player.name}))
+                    # 如果是新格式 [分数, 概率]，则取第一个元素作为分数
+                    score = taskmenu[player.item][0] if isinstance(taskmenu[player.item], list) else taskmenu[player.item]
+                    pygame.event.post(pygame.event.Event(TASK_FINISH_EVENT, {'action': player.item, 'player': player.name, 'score': score}))
                     player.dish = None
                     player.item = None
                     player.updateimg()

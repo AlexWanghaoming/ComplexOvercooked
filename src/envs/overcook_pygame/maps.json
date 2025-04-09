@@ -10,7 +10,7 @@
                 "_________"
             ],
             "items": ["dish", "BClemon", "AClemon", "rawfish", "AClemoncookedfish", "cookedfish"],
-            "task": {"AClemoncookedfish": 20},
+            "task": {"AClemoncookedfish": [20, 1.0]},
             "tasknum": 1,
             "players": 2
     },
@@ -26,7 +26,7 @@
                  "_________"
             ],
             "items": ["dish", "BClemon", "AClemon", "rawfish", "AClemoncookedfish", "cookedfish"],
-            "task": {"AClemoncookedfish": 20, "cookedfish": 10},
+            "task": {"AClemoncookedfish": [20, 0.7], "cookedfish": [10, 0.3]},
             "tasknum": 1,
             "players": 2
           },
