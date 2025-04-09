@@ -8,7 +8,7 @@ from collections import defaultdict
 from typing import Union, Dict, Tuple, List, Optional, Any
 from gymnasium.spaces import flatdim
 from overcook_gym_main import MainGame
-from overcook_gym_class import ONEBLOCK, Table, Action, \
+from overcook_gym_class import ONEBLOCK, Table, Action, Direction, \
     TASK_FINISH_EVENT, OUT_SUPPLY_EVENT, OUT_DISH_EVENT, GET_MATERIAL_EVENT, \
         GET_DISH_EVENT, MADE_NEWTHING_EVENT, BEGINCUTTING_EVENT, CUTTINGDOWN_EVENT, \
             BEGINCOOKING_EVENT, COOKINGDOWN_EVENT, COOKINGOUT_EVENT, TRY_NEWTHING_EVENT,\
@@ -65,35 +65,6 @@ def get_cleaned_matrix_size(matrix):
     width = max(len(s.rstrip('_')) for s in matrix[:len(matrix) - height])
     # Size of the cleaned matrix (width, height)
     return len(matrix)-height, width
-
-
-class ComplexOvercookedGridworld(object):
-
-    def __init__(self, map_name):
-        terrain = maps[map_name]['layout']
-        self.height = len(terrain)
-        self.width = len(terrain[0])
-        self.shape = (self.width, self.height)
-        self.terrain_mtx = terrain
-        self.terrain_pos_dict = self._get_terrain_type_pos_dict()
-
-        # self.start_player_positions = start_player_positions
-        # self.num_players = len(start_player_positions)
-        # self.start_order_list = start_order_list
-        # self.soup_cooking_time = cook_time
-        # self.num_items_for_soup = num_items_for_soup
-        # self.delivery_reward = delivery_reward
-        # self.reward_shaping_params = NO_REW_SHAPING_PARAMS if rew_shaping_params is None else rew_shaping_params
-        # self.layout_name = layout_name
-
-    def _get_terrain_type_pos_dict(self):
-        pos_dict = defaultdict(list)
-        for y, terrain_row in enumerate(self.terrain_mtx):
-            for x, terrain_type in enumerate(terrain_row):
-                pos_dict[terrain_type].append((x, y))
-        return pos_dict
-    
-
 
 
 class OvercookPygameEnv(gym.Env):
@@ -200,14 +171,17 @@ class OvercookPygameEnv(gym.Env):
     def dummy_reset(self):
         self.initialize_game()
         self.timercount = 0
+        self.state = {}  # self.state is used in LLM
+
         nobs = self.get_obs()
         return nobs
-
+    
     def reset(self) -> Tuple[Tuple[np.ndarray, np.ndarray], np.ndarray, np.ndarray]:  # wanghm
         self.initialize_game()
         self.timercount = 0
-
-        nobs = self.get_obs()
+        self.state = {}  # self.state is used in LLM
+        nobs = self.get_obs() 
+        
         available_actions = self.get_avail_actions()
         share_obs = self.get_share_observation(nobs)
         self.episode_reward_dict = {
@@ -243,10 +217,10 @@ class OvercookPygameEnv(gym.Env):
         return avaliable_actions
         
     def get_avail_agent_actions(self, agent_id:int)->np.ndarray:
-        availaction = [Action.STAY.value]
+        availaction = [Action.STAY]
         player = self.game.playergroup[agent_id] #python中理论上改动这个player原先的也会变
         if player.cutting:#切菜时只有不动和交互合法
-            availaction.append(Action.INTERACT.value)
+            availaction.append(Action.INTERACT)
             avaliable_actions = [0] * 6
             for index in availaction:
                 avaliable_actions[index] = 1
@@ -265,10 +239,10 @@ class OvercookPygameEnv(gym.Env):
         #检测交互是否合法（比如前面是空气，桌子上也没有菜或者任何可取的，就不合法）
         for table in self.game.tables:
             if table.availbeinter(player):
-                availaction.append(Action.INTERACT.value)
+                availaction.append(Action.INTERACT)
                 break
         if self.game.Cointable.availbeinter(player):
-                availaction.append(Action.INTERACT.value)
+                availaction.append(Action.INTERACT)
         # availaction.append(5)
 
         avaliable_actions = [0] * 6
@@ -284,7 +258,7 @@ class OvercookPygameEnv(gym.Env):
         self.timercount += 1
 
         for i in range(self.n_agents):
-            if action_n[i] == Action.INTERACT.value:
+            if action_n[i] == Action.INTERACT:
                 self.game.tables.update(self.game.playergroup[i], 
                                         True, 
                                         self.timercount)#有可能会post not finished
@@ -369,18 +343,6 @@ class OvercookPygameEnv(gym.Env):
         pass
 
     def showkey(self):
-        # 将各种状态转换为onehot的字典
-        self.directiondict = {'[0, 1]': 0, 
-                              '[1, 0]': 1, 
-                              '[-1, 0]': 2, 
-                              '[0, -1]': 3}
-        
-        self.directionzhongwen = {'[0, 1]': '上', 
-                                  '[1, 0]': '右', 
-                                  '[-1, 0]': '左', 
-                                  '[0, -1]': '下'
-                                  }
-
         # 可以让环境反馈一个itempiclist，就不用自己设定了
         # itempicslist = self.showitemlist()
         '''
@@ -567,6 +529,31 @@ class OvercookPygameEnv(gym.Env):
 
         # return sparse_reward, shaped_reward, tasksequence
         return sparse_reward, shaped_reward
+    
+    def get_state(self, nobs):
+        tasks, tasktime = self.cal_tasktime()
+
+
+        game_state = {
+                "player1_pos": (nobs[0][0], nobs[0][1]),  # 玩家位置
+                "player1_item": nobs[0][3],  # 手持物品
+                "player1_has_dish": nobs[0][4],  # 是否持有盘子
+                "player1_is_cutting": nobs[0][5],  # 是否在切菜
+                
+                "player2_pos": (nobs[1][0], nobs[1][1]),
+                "player2_item": nobs[1][3],
+                "player2_has_dish": nobs[1][4],
+                "player2_is_cutting": nobs[1][5],
+                
+                "order": tasks,  # 当前订单列表
+                "tasktime": tasktime,  # 当前得分
+                "time_left":  self.timercount  # 剩余时间
+            }
+        
+        return game_state
+    
+    
+    
 
     def get_obs(self) -> List[List[np.ndarray]]:
         """
@@ -682,6 +669,7 @@ class OvercookPygameEnv(gym.Env):
         playab_pots_pos = [[10e9, 10e9]*len(self.game.pots) for _ in range(self.n_agents)]  #所有锅的相对距离
         pots_state = [0, 0]*len(self.game.pots)
         pots_remaining_time = [-1]*len(self.game.pots)
+        pots_lang = []
         for p, pot in enumerate(self.game.pots):
             for i, player in enumerate(players):
                 potpos = rel_xy(player, pot)
@@ -692,12 +680,19 @@ class OvercookPygameEnv(gym.Env):
             # (1,0) - 食物准备好 (is_ready)
             if pot.is_empty:
                 pots_state[p*2:(p+1)*2] = [0, 0]
+                pots_lang.append(f"pot{p} is empty")
             elif pot.is_cooking:
                 pots_state[p*2:(p+1)*2] = [0, 1]
+                pots_lang.append(f"pot{p} is cooking, the {pot.item} will be ready in {pot.remaining_time} seconds")
+
             elif pot.is_ready:
                 pots_state[p*2:(p+1)*2] = [1, 0]
+                pots_lang.append(f"{pot.item} in pot{p} is ready")
+
             pots_remaining_time[p] = pot.remaining_time / 10 if pot.remaining_time >=0 else -1
-        
+
+        self.state.update({"pot": pots_lang})
+
         
         playab_cuttingtables_pos = [[10e9, 10e9]*len(self.game.cuttingtables) for _ in range(self.n_agents)]  #所有案板的相对距离
         cuttingtables_state = [0,0]*len(self.game.cuttingtables)
@@ -712,14 +707,20 @@ class OvercookPygameEnv(gym.Env):
             elif pot.is_ready:
                 cuttingtables_state[p*2:(p+1)*2] = [1, 0]
 
-        tasks = []
+
         tasktime = []
         nowtime = self.timercount
+        self.state.update({"timestep": nowtime})
 
+        tasks = []
+        task_name = []
         for task in self.game.task_sprites:
             tasks.append(task)
+            task_name.append(task.task)
             tasktime.append((task.timer - (nowtime - task.start_time)))
-        
+        self.state.update({"task": task_name, 
+                           "tasktime": tasktime})
+
         current_goal = list(map(lambda x: (np.eye(len(self.taskdict))[self.taskdict[x.task]]).tolist(), tasks))  # 这里为什么+1
         # current_goal = list(map(lambda x: (np.eye(len(self.taskdict)+1)[self.taskdict[x.task]]).tolist(), tasks))  # 这里为什么+1
         
@@ -756,18 +757,23 @@ class OvercookPygameEnv(gym.Env):
         player_features = []
         if self.debug:
             print(f"当前时间步: {self.timercount}")
-
+        hold_objects = []
+        ori = []
+        pos = []
+        
         for i, player in enumerate(players):
             # 玩家朝向
-            orientation_idx = self.directiondict[str(player.direction)]
-            orientation = np.eye(len(self.directiondict))[orientation_idx].tolist()
-
+            orientation_idx = Direction.DIRECTION2INDEX[player.direction]
+            orientation = np.eye(len(Direction.DIRECTION2INDEX))[orientation_idx].tolist()
+            ori.append(tuple(player.direction))
             # 玩家手持物品
             if player.item:
                 hold_obj = np.eye(len(self.itemdict))[self.itemdict[player.item]-1].tolist()
+                hold_objects.append(player.item)
             else:
                 hold_obj = np.zeros(len(self.itemdict)).tolist()
-            
+                hold_objects.append("nothing")
+
             # 玩家四周是否有墙壁
             collide = []
             rect_sprite = pygame.sprite.Sprite()
@@ -803,12 +809,15 @@ class OvercookPygameEnv(gym.Env):
 
             player_absolute_positions.append(np.array([player.rect.x / 80, 
                                                         player.rect.y / 80]))
+            pos.append((player.rect.x//80, player.rect.y//80))
             tempdis = []
             for j in range(self.n_agents):
                 if j != i:
                     tempdis += rel_xy(players[i], self.game.playergroup[j])
             player_relative_positions.append(np.array(tempdis))
 
+        self.state.update({"player": hold_objects})
+        self.state.update({"players_pos_and_or": tuple(zip(*[pos, ori]))})
         ordered_features = []
         for i in range(self.n_agents):
             player_i_features = player_features[i]

@@ -64,21 +64,21 @@ class MainGame(object):
 
         # 设置窗口大小和标题
         picplayerlist = [{
-            '[0, 1]_': picscale(picload(os.path.join(current_dir, f'assets/chef{i}/f1.png')).convert_alpha(),
+            '(0, 1)_': picscale(picload(os.path.join(current_dir, f'assets/chef{i}/f1.png')).convert_alpha(),
                                 ONEBLOCKSIZE),
-            '[-1, 0]_': picscale(picload(os.path.join(current_dir, f'assets/chef{i}/l1.png')).convert_alpha(),
+            '(-1, 0)_': picscale(picload(os.path.join(current_dir, f'assets/chef{i}/l1.png')).convert_alpha(),
                                  ONEBLOCKSIZE),
-            '[1, 0]_': picscale(picload(os.path.join(current_dir, f'assets/chef{i}/r1.png')).convert_alpha(),
+            '(1, 0)_': picscale(picload(os.path.join(current_dir, f'assets/chef{i}/r1.png')).convert_alpha(),
                                 ONEBLOCKSIZE),
-            '[0, -1]_': picscale(picload(os.path.join(current_dir, f'assets/chef{i}/b1.png')).convert_alpha(),
+            '(0, -1)_': picscale(picload(os.path.join(current_dir, f'assets/chef{i}/b1.png')).convert_alpha(),
                                  ONEBLOCKSIZE),
-            '[0, 1]': picscale(picload(os.path.join(current_dir, f'assets/chef{i}/f0.png')).convert_alpha(),
+            '(0, 1)': picscale(picload(os.path.join(current_dir, f'assets/chef{i}/f0.png')).convert_alpha(),
                                ONEBLOCKSIZE),
-            '[-1, 0]': picscale(picload(os.path.join(current_dir, f'assets/chef{i}/l0.png')).convert_alpha(),
+            '(-1, 0)': picscale(picload(os.path.join(current_dir, f'assets/chef{i}/l0.png')).convert_alpha(),
                                 ONEBLOCKSIZE),
-            '[1, 0]': picscale(picload(os.path.join(current_dir, f'assets/chef{i}/r0.png')).convert_alpha(),
+            '(1, 0)': picscale(picload(os.path.join(current_dir, f'assets/chef{i}/r0.png')).convert_alpha(),
                                ONEBLOCKSIZE),
-            '[0, -1]': picscale(picload(os.path.join(current_dir, f'assets/chef{i}/b0.png')).convert_alpha(),
+            '(0, -1)': picscale(picload(os.path.join(current_dir, f'assets/chef{i}/b0.png')).convert_alpha(),
                                 ONEBLOCKSIZE),
         } for i in range(1, PLAYERNUM + 1)]
 

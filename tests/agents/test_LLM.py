@@ -7,6 +7,8 @@ import time
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../../")
 from src.envs.overcook_pygame.overcook_gym_env import OvercookPygameEnv
+from src.envs.overcook_pygame.llm_agent import LlmMediumLevelAgent 
+from src.envs.overcook_pygame.overcook_mdp import ComplexOvercookedGridworld
 import pygame
 
 class LLMController:
@@ -100,9 +102,11 @@ def test_llm_control():
     env = OvercookPygameEnv(map_name='supereasy', ifrender=True, debug=True)
     clock = pygame.time.Clock()
     
-    llm_controller = LLMController()
     
     nobs, share_obs, available_actions = env.reset()
+    mdp = ComplexOvercookedGridworld(env)
+    llm_controller = LlmMediumLevelAgent(mdp=mdp, env=env, agent_index=0)
+    llm_controller.action(state=env.state)
     done = False
     step_count = 0
     
@@ -114,33 +118,15 @@ def test_llm_control():
                     pygame.quit()
                     return
             
-            # 构建游戏状态信息
-            game_state = {
-                "player1_pos": (nobs[0][0], nobs[0][1]),  # 玩家位置
-                "player1_direction": nobs[0][2],  # 玩家朝向
-                "player1_item": nobs[0][3],  # 手持物品
-                "player1_has_dish": nobs[0][4],  # 是否持有盘子
-                "player1_is_cutting": nobs[0][5],  # 是否在切菜
-                
-                "player2_pos": (nobs[1][0], nobs[1][1]),
-                "player2_direction": nobs[1][2],
-                "player2_item": nobs[1][3],
-                "player2_has_dish": nobs[1][4],
-                "player2_is_cutting": nobs[1][5],
-                
-                "orders": infos.get('orders', []),  # 当前订单列表
-                "score": infos.get('score', 0),  # 当前得分
-                "time_left": infos.get('time_left', 0)  # 剩余时间
-            }
-            
+
             # 获取LLM决策的动作
-            current_actions = llm_controller.get_actions(game_state)
+            # current_actions = llm_controller.
             
             # 执行动作
-            nobs, share_obs, rewards, dones, infos, available_actions = env.step(current_actions)
-            done = any(dones)
-            step_count += 1
-            print(f"Step: {step_count}, Actions: {current_actions}")
+            # nobs, share_obs, rewards, dones, infos, available_actions = env.step(current_actions)
+            # done = any(dones)
+            # step_count += 1
+            # print(f"Step: {step_count}, Actions: {current_actions}")
 
             env.render()
             clock.tick(1)  # 降低帧率以适应API调用延迟

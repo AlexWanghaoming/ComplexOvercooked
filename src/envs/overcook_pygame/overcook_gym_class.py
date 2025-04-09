@@ -41,7 +41,7 @@ RECIPE = {
 }
 
 
-class Action(Enum):
+class Action():
     STAY = 0
     DOWN = 1
     RIGHT = 2
@@ -50,6 +50,32 @@ class Action(Enum):
     INTERACT = 5
     # to do 可以以table类为基础做基类
 
+        # self.control = {0:[0,0],
+        #                 1:[0,1],
+        #                 2:[1,0],
+        #                 3:[0,-1],
+        #                 4:[-1,0]}
+                
+class Direction():
+
+    NORTH = (0, -1)
+    SOUTH = (0, 1)
+    EAST = (1, 0)
+    WEST = (-1, 0)
+    
+    DIRECTION2INDEX = {
+                        NORTH: 0, 
+                        EAST: 1, 
+                        WEST: 2, 
+                        SOUTH: 3
+                        }
+        
+    DIRECTION2CAR = {
+                    NORTH: '↑', 
+                    EAST: '→', 
+                    WEST: '←', 
+                    SOUTH: '↓'
+                    }
 
 class TaskBoard(pygame.sprite.Sprite):
     def __init__(self, x, y, taskmenu):
@@ -219,6 +245,7 @@ class CoinTable(pygame.sprite.Sprite):
         item_rect = pygame.Rect(0,0, ONEBLOCK, ONEBLOCK)
         item_surface = picscale(picload(os.path.join(current_dir, f'assets/table/cointable.png')), (ONEBLOCK, ONEBLOCK))
         self.image.blit(item_surface, item_rect)    
+
     def update(self, player:pygame.sprite.Sprite, keys:bool, taskmenu) -> None:
         if keys:
             if player.rect.move(player.direction[0] * ONEBLOCK / 2,
@@ -251,6 +278,7 @@ class TrashTable(pygame.sprite.Sprite):
 
     def updateimg(self, ):
         self.image = picscale(picload(os.path.join(current_dir, f'assets/table/trashbin.png')).convert_alpha(), ONEBLOCKSIZE)  #
+
     def update(self, player:pygame.sprite.Sprite, keys:bool, nowtime) -> None:
         if keys:
             if player.rect.move(player.direction[0] * ONEBLOCK / 2,
@@ -409,18 +437,19 @@ class Player(pygame.sprite.Sprite):
         self.name = name
         self.playerpic = playerpic
         self.itempic = itempic
-        self.direction = [0, 1]
+        self.direction = (0, 1)
         self.item = None
         self.dish = None
         self.image = playerpic[str(self.direction)]
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-        self.control = {0:[0,0],
-                        1:[0,1],
-                        2:[1,0],
-                        3:[0,-1],
-                        4:[-1,0]}
+        # TODO: 目前layout矩阵中x轴是从0开始，y轴从1开始
+        self.control = {Action.STAY: (0,0),
+                        Action.DOWN: (0,1),
+                        Action.RIGHT: (1,0),
+                        Action.UP: (0,-1),
+                        Action.LEFT: (-1,0)}
                 
         self.speed = ONEBLOCK
         self.cutting=False
@@ -440,7 +469,7 @@ class Player(pygame.sprite.Sprite):
     def updateimg(self):
         if self.dish or self.item:
             self.image = self.playerpic[str(self.direction) + '_'].copy()
-            if self.direction != [0, -1]:
+            if self.direction != (0, -1):
                 if self.dish:
                         item_rect = pygame.Rect((1 + self.direction[0]) * ONEBLOCK / 8, ONEBLOCK / 4, DISHSIZE[0],DISHSIZE[0])
                         item_surface = picscale(self.itempic[self.dish], DISHSIZE)

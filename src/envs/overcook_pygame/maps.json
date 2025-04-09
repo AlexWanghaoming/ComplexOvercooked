@@ -3,8 +3,8 @@
             "name": "supereasy",
             "layout": [
                 "XXXEX____",
-                "C___X____",
-                "X1_2U____",
+                "C1  X____",
+                "X  2U____",
                 "XFDLX____",
                 "_________",
                 "_________"
@@ -19,9 +19,9 @@
             "name": "veryeasy",
             "layout": [
                  "XXXXEX___",
-                 "C____X___",
-                 "X1__2U___",
-                 "X____X___",
+                 "C    X___",
+                 "X1  2U___",
+                 "X    X___",
                  "XFXDLX___",
                  "_________"
             ],
@@ -35,9 +35,9 @@
             "name": "easy",
             "layout": [
                  "XBMXXEX__",
-                 "C__X__X__",
-                 "X1_X2_U__",
-                 "X_____T__",
+                 "C  X  X__",
+                 "X1 X2 U__",
+                 "X     T__",
                  "XFHDLXX__",
                  "_________" ],
             "items": ["cookedfish","ACtomato","BCtomato","cookedbeef","rawbeef","hamburger",
@@ -53,9 +53,9 @@
             "name": "4playereasy",
             "layout": [
                  "XBXMEX__",
-                 "C1__4U__",
-                 "X____X__",
-                 "H3__2T__",
+                 "C1  4U__",
+                 "X    X__",
+                 "H3  2T__",
                  "XFXDLX__",
                  "________"],
 
@@ -71,9 +71,9 @@
             "name": "2playerhard",
             "layout": [
                  "XBMEX__",
-                 "C1__U__",
-                 "X___X__",
-                 "F__2T__",
+                 "C1  U__",
+                 "X   X__",
+                 "F  2T__",
                  "XHDLX__",
                  "_______"],
             "items": ["cookedfish","ACtomato","BCtomato","cookedbeef","rawbeef","hamburger",
@@ -88,9 +88,9 @@
             "name": "4playersplit",
             "layout": [
                  "XBXEXXHMX_",
-                 "C1__X__2U_",
-                 "X___X___T_",
-                 "H3__X__4X_",
+                 "C1  X  2U_",
+                 "X   X   T_",
+                 "H3  X  4X_",
                  "XFXDXXXLX_",
                  "__________"],
 
