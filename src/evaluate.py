@@ -1,9 +1,3 @@
-try:
-    # until python 3.10
-    from collections import Mapping
-except:
-    # from python 3.10
-    from collections.abc import Mapping
 from copy import deepcopy
 import os
 from os.path import dirname, abspath
@@ -17,7 +11,8 @@ import torch as th
 
 from utils.logging import get_logger
 from run import run
-from typing import Dict, Tuple, List
+from utils.utils import config_copy, get_config, recursive_dict_update
+
 
 SETTINGS["CAPTURE_MODE"] = (
     "fd"  # set to "no" if you want to see stdout/stderr in console
@@ -30,7 +25,6 @@ ex.logger = logger
 ex.captured_out_filter = apply_backspaces_and_linefeeds
 
 results_path = os.path.join(dirname(dirname(abspath(__file__))), "results")
-# results_path = "/home/ubuntu/data"
 
 
 @ex.main
@@ -45,51 +39,6 @@ def my_main(_run, _config, _log):
     run(_run, config, _log)
 
 
-def _get_config(params, arg_name, subfolder):
-    config_name = None
-    for _i, _v in enumerate(params):
-        if _v.split("=")[0] == arg_name:
-            config_name = _v.split("=")[1]
-            del params[_i]
-            break
-
-    if config_name is not None:
-        with open(
-            os.path.join(
-                os.path.dirname(__file__),
-                "config",
-                subfolder,
-                "{}.yaml".format(config_name),
-            ),
-            "r",
-        ) as f:
-            try:
-                config_dict = yaml.load(f, Loader=yaml.FullLoader)
-            except yaml.YAMLError as exc:
-                assert False, "{}.yaml error: {}".format(config_name, exc)
-        return config_dict
-
-
-def recursive_dict_update(d:Dict, u:Dict) -> Dict:
-    """
-    update parameters in d using the parameters in u,  recrusively.
-    """
-    for k, v in u.items():
-        if isinstance(v, Mapping):
-            d[k] = recursive_dict_update(d.get(k, {}), v)
-        else:
-            d[k] = v
-    return d
-
-
-def config_copy(config):
-    if isinstance(config, dict):
-        return {k: config_copy(v) for k, v in config.items()}
-    elif isinstance(config, list):
-        return [config_copy(v) for v in config]
-    else:
-        return deepcopy(config)
-
 
 if __name__ == "__main__":
     params = deepcopy(sys.argv)
@@ -99,10 +48,9 @@ if __name__ == "__main__":
     # load_step = 9979800
     # params.append('--config=qmix')
 
-    checkpoint_path = "/alpha/my_marl/results/models/mappo_seed579159893_supereasy_2025-01-07 22:26:55.775349"
-    load_step = 27600
-    params.append('--config=mappo')
-    # params.append('--config=mappo')
+    checkpoint_path = "results/models/ippo_seed4_supereasy_2025-01-16 21:06:38.941962"
+    load_step = 19770000
+    params.append('--config=ippo')
     params.append('--env-config=overcooked2_evaluate')
     
     # Get the defaults from default.yaml
@@ -115,8 +63,8 @@ if __name__ == "__main__":
             assert False, "default.yaml error: {}".format(exc)
 
     # Load algorithm and env base configs
-    alg_config = _get_config(params, "--config", "algs")
-    env_config = _get_config(params, "--env-config", "envs")
+    alg_config = get_config(params, "--config", "algs")
+    env_config = get_config(params, "--env-config", "envs")
 
     # config_dict = {**config_dict, **env_config, **alg_config}
     config_dict = recursive_dict_update(config_dict, alg_config) # 用alg_config更新config_dict

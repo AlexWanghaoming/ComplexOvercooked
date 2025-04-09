@@ -3,8 +3,8 @@ from pygame.transform import scale as picscale
 from pygame.image import load as picload
 import random
 import os
-from enum import Enum
 from typing import List, Dict, Tuple, Any, Union
+import ipdb
 
 current_dir = os.path.dirname(__file__)
 
@@ -265,9 +265,9 @@ class CoinTable(pygame.sprite.Sprite):
             if player.rect.move(player.direction[0] * ONEBLOCK / 2,
                                 player.direction[1] * ONEBLOCK / 2).colliderect(self.rect):
                 if player.dish and player.item in taskmenu:
-                    # 如果是新格式 [分数, 概率]，则取第一个元素作为分数
-                    score = taskmenu[player.item][0] if isinstance(taskmenu[player.item], list) else taskmenu[player.item]
-                    pygame.event.post(pygame.event.Event(TASK_FINISH_EVENT, {'action': player.item, 'player': player.name, 'score': score}))
+                    # score = taskmenu[player.item][0] if isinstance(taskmenu[player.item], list) else taskmenu[player.item]
+                    # pygame.event.post(pygame.event.Event(TASK_FINISH_EVENT, {'action': player.item, 'player': player.name, 'score': score}))
+                    pygame.event.post(pygame.event.Event(TASK_FINISH_EVENT, {'action': player.item, 'player': player.name}))
                     player.dish = None
                     player.item = None
                     player.updateimg()

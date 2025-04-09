@@ -27,7 +27,7 @@
             "items": ["cookedfish","ACtomato","BCtomato","cookedbeef","rawbeef","hamburger",
              "ACtomatocookedbeefhamburger","ACtomatohamburger","cookedbeefhamburger",
               "dish", "BClemon", "AClemon", "rawfish", "AClemoncookedfish"],
-            "task": {"AClemoncookedfish":[20, 0.2], "cookedfish":[10, 0], "ACtomatocookedbeefhamburger":[25, 0],"cookedbeefhamburger":[15, 0.5]},
+            "task": {"AClemoncookedfish":[20, 0.7], "cookedfish":[10, 0.1], "ACtomatocookedbeefhamburger":[25, 0.1],"cookedbeefhamburger":[15, 0.1]},
             "tasknum": 2,
             "players": 2
           },

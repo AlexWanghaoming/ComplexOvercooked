@@ -172,7 +172,7 @@ class OvercookPygameEnv(gym.Env):
     def dummy_reset(self):
         self.initialize_game()
         self.timercount = 0
-        self.state = {}  # self.state is used in LLM
+        self.state = {}  
 
         nobs = self.get_obs()
         return nobs
@@ -381,10 +381,11 @@ class OvercookPygameEnv(gym.Env):
                     # reward-=10
 
             elif event.type == TASK_FINISH_EVENT:  # hjh这里是任务完成的奖励
-                self.game.NOWCOIN += self.TASK_MENU[event.action]
-                finished_count += self.TASK_MENU[event.action]
+            
+                self.game.NOWCOIN += self.TASK_MENU[event.action][0] if isinstance(self.TASK_MENU[event.action], list) else self.TASK_MENU[event.action]
+                # finished_count += self.TASK_MENU[event.action]
                 self.taskcount[self.playerdic[event.player]][event.action] += 1  # 用于展示任务完成次数
-                sparse_reward += self.TASK_MENU[event.action]
+                sparse_reward += self.TASK_MENU[event.action][0] if isinstance(self.TASK_MENU[event.action], list) else self.TASK_MENU[event.action]
                 # print(f"成功送出菜品 {event.action}")
 
                 named_tasks = []

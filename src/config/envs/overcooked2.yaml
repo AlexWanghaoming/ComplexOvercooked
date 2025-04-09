@@ -30,4 +30,4 @@ wandb_project: epymarl_overcooked2 # W&B project name
 wandb_mode: "online" # W&B mode (online/offline)
 wandb_save_model: False # Save models to W&B (only done if use_wandb is True and save_model is True)
 save_model: True # Save the models to disk
-save_model_interval: 50000 # Save models after this many timesteps
+save_model_interval: 100000 # Save models after this many timesteps

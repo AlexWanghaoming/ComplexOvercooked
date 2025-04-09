@@ -191,7 +191,7 @@ def run_sequential(args, logger):
             runner.log_train_stats_t = runner.t_env
             evaluate_sequential(args, runner)
             logger.log_stat("episode", runner.t_env, runner.t_env)
-            # logger.print_recent_stats()
+            logger.print_recent_stats()
             logger.console_logger.info("Finished Evaluation")
             return
 
