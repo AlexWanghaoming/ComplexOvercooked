@@ -13,7 +13,7 @@ do
        do
           python src/main.py --config=${algo} --env-config=overcooked2 with env_args.map_name=$e seed=$i hidden_dim=128 &
           echo "Running with ippo and $e for seed=$i"
-          sleep 2s
+          sleep 1s
        done
    done
 done

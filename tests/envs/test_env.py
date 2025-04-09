@@ -7,8 +7,8 @@ from src.envs.overcook_pygame.overcook_gym_env import OvercookPygameEnv
 def test_overcooked2_env():
     print("\n| test_overcooked2_env()")
     # env = OvercookPygameEnv(map_name='4playersplit', ifrender=True, debug=True)
-    # env = OvercookPygameEnv(map_name='2playerhard', ifrender=True, debug=True)
-    env = OvercookPygameEnv(map_name='supereasy', ifrender=True, debug=True)
+    env = OvercookPygameEnv(map_name='2playerhard', ifrender=True, debug=True, fps=30)
+    # env = OvercookPygameEnv(map_name='supereasy', ifrender=True, debug=True)
 
     # print(env.get_state()[0].shape[0])
     # print(env.observation_space[0].shape)
@@ -19,6 +19,7 @@ def test_overcooked2_env():
     # assert isinstance(env.env_name, str)
     # assert isinstance(env.state_dim, int)
     # assert isinstance(env.action_dim, int)
+    
     nobs, share_obs, available_actions = env.reset()
     assert isinstance(nobs, list)
     assert isinstance(share_obs, np.ndarray)

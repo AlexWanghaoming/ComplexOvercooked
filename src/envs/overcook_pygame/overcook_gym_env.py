@@ -78,7 +78,8 @@ class OvercookPygameEnv(gym.Env):
                  seed=1, 
                  ifrender=False, 
                  debug=False,
-                 pltheatmap=False):
+                 pltheatmap=False,
+                 fps=60):
         # 初始化 pygame
         self.reward_shaping_params = {
             'one_step': 0, # 每走一步给一个负奖励
@@ -107,7 +108,7 @@ class OvercookPygameEnv(gym.Env):
 
         self.debug = debug
         self.episode_limit = 600
-        self.fps = 5
+        self.fps = fps
         self.game_over = False
         self.timercount = 0  # 自定义的计时器
         self.showkey()
@@ -674,7 +675,6 @@ class OvercookPygameEnv(gym.Env):
             for i, player in enumerate(players):
                 potpos = rel_xy(player, pot)
                 playab_pots_pos[i][p*2:(p*2)+2] = potpos  # 修正索引计算
-            # 设置状态:
             # (0,0) - 空锅 (is_empty)
             # (0,1) - 正在烹饪 (is_cooking)  
             # (1,0) - 食物准备好 (is_ready)
@@ -777,7 +777,7 @@ class OvercookPygameEnv(gym.Env):
             # 玩家四周是否有墙壁
             collide = []
             rect_sprite = pygame.sprite.Sprite()
-            for direction in [[0, 1], [1, 0], [0, -1], [-1, 0]]: # 下右上左
+            for direction in list(Direction.directions.values()): # 下右上左
                 rect_sprite.rect = player.rect.move(direction[0] * ONEBLOCK / 2,
                                                     direction[1] * ONEBLOCK / 2)
                 is_block = pygame.sprite.spritecollide(rect_sprite, self.game.tables, False)

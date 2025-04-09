@@ -165,7 +165,7 @@ class LlmMediumLevelAgent():
 
 		# 		unblocking_joint_actions = []
 		# 		for j_a in joint_actions:
-		# 			if j_a != [Action.INTERACT,Action.STAY] and  j_a != [Action.STAY,Action.INTERACT]:
+		# 			if j_a != [Action.INTERACT, Action.STAY] and  j_a != [Action.STAY,Action.INTERACT]:
 		# 				if pkg_resources.get_distribution("overcooked_ai").version == '1.1.0':
 		# 					new_state, _ = self.mlam.mdp.get_state_transition(state, j_a)
 		# 				elif pkg_resources.get_distribution("overcooked_ai").version == '0.0.1':
@@ -186,13 +186,7 @@ class LlmMediumLevelAgent():
 			self.time_to_wait = 1
 			chosen_action = Action.STAY
 		self.current_ml_action_steps += 1
-
-		# print(f'ml_action = {self.current_ml_action}') 
-		# print(f'P{self.agent_index} : {Action.to_char(chosen_action)}')
-		if pkg_resources.get_distribution("overcooked_ai").version == '1.1.0':
-			return chosen_action, {}
-		elif pkg_resources.get_distribution("overcooked_ai").version == '0.0.1':
-			return chosen_action
+		return chosen_action
 		
 		
 	def generate_state_prompt(self, state):
@@ -371,6 +365,8 @@ class LlmMediumLevelAgent():
 		# 根据当前动作选择目标
 		if current_action in ["pickup(BClemon)", "pickup_BClemon"]:
 			lemon_dispenser_loc = self.mdp.get_lemon_dispenser_locations()
+			lemon_pickup_loc = lemon_dispenser_loc + counter_pickup_objects['BClemon']
+			self.mdp.get_interaction_pos_and_dire(lemon_pickup_loc)
 			# 查找 BClemon 的目标点
 			for table, pos in zip(tables, table_positions):
 				if table.item == "BClemon":
@@ -379,11 +375,10 @@ class LlmMediumLevelAgent():
 		elif current_action in ["pickup(rawfish)", "pickup_rawfish"]:
 			# 查找 rawfish 的目标点
 			rawfish_dispenser_loc = self.mdp.get_rawfish_dispenser_locations()
-
-			for table, pos in zip(tables, table_positions):
-				if table.item == "rawfish":
-					motion_goals.append(pos)
+			rawfish_pickup_loc = rawfish_dispenser_loc + counter_pickup_objects['rawfish']
+			motion_goals = self.mdp.get_interaction_pos_and_dire(goal_pos=rawfish_pickup_loc)
 		else:
+			print("001")
 			raise NotImplementedError
 		
 
@@ -420,20 +415,22 @@ class LlmMediumLevelAgent():
 			action_plan, plan_cost = self.real_time_planner(
 				start_pos_and_or, goal, state
 			)     
-			print("action_plan = {}".format(action_plan))
-			print("plan_cost = {}".format(plan_cost))
+			# print("action_plan = {}".format(action_plan))
+			# print("plan_cost = {}".format(plan_cost))
 			if plan_cost < min_cost:
 				best_action = action_plan
 				min_cost = plan_cost
 				best_goal = goal     
 		if best_action is None: 
-			# print('\n\n\nBlocking Happend, executing default path\n\n\n')
+			# TODO: 如何A*算法没有找到路径，则有一定概率原地不动或者执行旧动作
+
 			# print('current position = {}'.format(start_pos_and_or)) 
-			# print('goal position = {}'.format(motion_goals))        
-			if np.random.rand() < 0.5:  
-				return None, Action.STAY
-			else: 
-				return self.get_lowest_cost_action_and_goal(start_pos_and_or, motion_goals)
+			# print('goal position = {}'.format(motion_goals))  
+			#       
+			# if np.random.rand() < 0.5:  
+			return None, Action.STAY
+			# else: 
+			# 	return self.get_lowest_cost_action_and_goal(start_pos_and_or, motion_goals)
 		return best_goal, best_action
 
 	def real_time_planner(self, start_pos_and_or, goal, state):   
@@ -447,10 +444,8 @@ class LlmMediumLevelAgent():
 		## 在A*算法路径规划前暂时修正layout矩阵的y轴坐标偏差  TODO： 在overcook_gym_class中永久修复
 		start_pos_and_or = [list(pos) for pos in start_pos_and_or]
 		other_pos_and_or = [list(pos) for pos in other_pos_and_or]
-		goal = list(goal)
 		start_pos_and_or[0][1] -= 1
 		other_pos_and_or[0][1] -= 1
-		goal[1] -= 1
 
 		action_plan, plan_cost = find_path(start_pos_and_or, other_pos_and_or, goal, terrain_matrix) 
 

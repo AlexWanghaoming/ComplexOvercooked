@@ -58,6 +58,13 @@ class Action():
                 
 class Direction():
 
+    directions = {
+            "up": (0, -1),
+            "down": (0, 1),
+            "left": (-1, 0),
+            "right": (1, 0)
+        }
+    
     NORTH = (0, -1)
     SOUTH = (0, 1)
     EAST = (1, 0)
