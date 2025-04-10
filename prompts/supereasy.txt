@@ -21,7 +21,7 @@ Instructions:
 - One counter can place Only one item.
 
 Skill: 
-In this game, each player can ONLY perform the following 6 allowed skills: pickup, place_obj_on_counter, put_raw_in_pot, fill_dish_with_order, deliver_order, wait. Do not attempt to use any other skills that are not listed here.
+In this game, each player can ONLY perform the following 8 allowed skills: pickup, place_obj_on_counter, put_raw_on_cutting_table, put_raw_in_pot, fill_dish_with_pot_food, fill_dish_with_cutting_food, deliver_order, wait. Do not attempt to use any other skills that are not listed here.
 def pickup(obj):
     if object_in_hand() == "nothing": # hand holds nothing
         if obj in ["BClemon", "dish", "AClemon", "BCtomato"， "ACtomato", "rawbeef", "cookedfish", "cookedbeef", "cookedbeefhamburger", "ACtomatocookedbeefhamburger", "AClemoncookedfish"]:
@@ -29,14 +29,20 @@ def pickup(obj):
 def place_obj_on_counter(obj):
     if object_in_hand() == obj:
         pass
+def put_raw_on_cutting_table(obj):
+    if object_in_hand() in ["BClemon", "BCtomato"]:
+        pass
 def put_raw_in_pot(): # put one onion 
     if object_in_hand() in ["rawbeef", "rawfish"]:
         if pot_ingredient_count() == 1:
             pass
-def fill_dish_with_order():
+def fill_dish_with_pot_food():
     if object_in_hand() == "dish":
-        if order_ready() or pot_started_cooking():
-        # It is enough for one condition to be true
+        if pot_started_cooking():
+            pass
+def fill_dish_with_cutting_food():
+    if object_in_hand() == "dish":
+        if cutting_ready():
             pass
 def deliver_order(order):
     if object_in_hand(order):

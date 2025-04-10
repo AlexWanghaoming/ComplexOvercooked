@@ -694,7 +694,7 @@ class OvercookPygameEnv(gym.Env):
 
         self.state.update({"pot": pots_lang})
 
-        
+        cuttingtables_lang = []
         playab_cuttingtables_pos = [[10e9, 10e9]*len(self.game.cuttingtables) for _ in range(self.n_agents)]  #所有案板的相对距离
         cuttingtables_state = [0,0]*len(self.game.cuttingtables)
         for p,cuttingtable in enumerate(self.game.cuttingtables):
@@ -703,11 +703,15 @@ class OvercookPygameEnv(gym.Env):
                 playab_cuttingtables_pos[i][p*2:(p*2)+2] = cuttingtablepos
             if cuttingtable.is_empty:
                 cuttingtables_state[p*2:(p+1)*2] = [0, 0]
+                cuttingtables_lang.append(f"cutting_table{p} is empty")
             elif cuttingtable.is_cutting:#非空又没切这种情况理论上没有？
                 cuttingtables_state[p*2:(p+1)*2] = [0, 1]
+                cuttingtables_lang.append(f"cutting_table{p} is occupied")
             elif pot.is_ready:
                 cuttingtables_state[p*2:(p+1)*2] = [1, 0]
+                cuttingtables_lang.append(f"cutting_table{p} is occupied")
 
+        self.state.update({"cutting_table": cuttingtables_lang})
 
         tasktime = []
         nowtime = self.timercount
@@ -758,7 +762,7 @@ class OvercookPygameEnv(gym.Env):
         player_features = []
         if self.debug:
             print(f"当前时间步: {self.timercount}")
-        hold_objects = []
+        hold_objects = [[], []]  # 每个玩家手持物品可以有多个
         ori = []
         pos = []
         
@@ -768,14 +772,17 @@ class OvercookPygameEnv(gym.Env):
             orientation = np.eye(len(Direction.DIRECTION2INDEX))[orientation_idx].tolist()
             ori.append(tuple(player.direction))
             # 玩家手持物品
+
             if player.item:
                 hold_obj = np.eye(len(self.itemdict))[self.itemdict[player.item]-1].tolist()
-                if player.item == "dish":
-                    print(111)
-                hold_objects.append(player.item)
+                hold_objects[i].append(player.item)
+            if player.dish:
+                hold_obj = np.eye(len(self.itemdict))[self.itemdict["dish"]-1].tolist()
+                hold_objects[i].append("dish")
+
             else:
                 hold_obj = np.zeros(len(self.itemdict)).tolist()
-                hold_objects.append("nothing")
+                hold_objects[i].append("nothing")
 
             # 玩家四周是否有墙壁
             collide = []

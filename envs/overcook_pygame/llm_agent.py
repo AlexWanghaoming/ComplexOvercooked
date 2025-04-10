@@ -116,7 +116,7 @@ class LlmMediumLevelAgent():
 		print("layout_prompt:", layout_prompt)
 		return layout_prompt
 	  
-	def action(self, env):
+	def action(self, env:OvercookPygameEnv):
 		state = env.state
 		start_pos_and_or = state["players_pos_and_or"][self.agent_index]
 		# only use to record the teammate ml_action, 
@@ -142,11 +142,10 @@ class LlmMediumLevelAgent():
 				print("llm generated current_ml_action:", self.current_ml_action)
 		# count = 0
 		# while not self.validate_current_ml_action(state):
-
 		# 	self.trace = False
-		# 	self.generate_failure_feedback(state)
+		# 	# self.generate_failure_feedback(state)
 		# 	self.current_ml_action = self.generate_ml_action(state)
-			
+
 		# 	count += 1
 		# 	if count > 3:
 		# 		self.current_ml_action = "wait(1)"
@@ -157,7 +156,7 @@ class LlmMediumLevelAgent():
 		if "wait" in self.current_ml_action:
 			self.current_ml_action_steps += 1
 			self.time_to_wait -= 1
-			lis_actions = self.get_avail_agent_actions(agent_id=self.agent_index).index(1)
+			lis_actions = env.get_avail_agent_actions(agent_id=self.agent_index)
 			lis_actions = [i for i, value in enumerate(lis_actions) if value == 1]
 			chosen_action =lis_actions[np.random.randint(0,len(lis_actions))]
 			self.prev_state = state
@@ -181,7 +180,30 @@ class LlmMediumLevelAgent():
 			chosen_action = Action.ACTION2INDEX[chosen_action]
 		# print("chosen_action:", chosen_action)
 		return chosen_action
+	
+	def validate_current_ml_action(self, state):
+		"""
+		make sure the current_ml_action exists and is valid
+		"""	
+		if self.current_ml_action == "put_raw_on_cutting_table":
+			if "cutting_table0 is occupied" in state["cutting_table"]:
+				return False
+			else:
+				return True
 		
+	# def generate_failure_feedback(self, state):
+	# 	failure_feedback = self.generate_state_prompt(state)
+	# 	failure_feedback += f" Player {self.agent_index} failed at {self.current_ml_action}."
+	# 	failure_feedback += f" Why did Player {self.agent_index} fail ?"     
+	# 	print(f"\n~~~~~~~~ Explainer~~~~~~~~\n{failure_feedback}")  
+	# 	failure_message = {"role": "user", "content": failure_feedback}
+	# 	self.explainer.current_user_message = failure_message
+	# 	failure_explanation = self.explainer.query(self.openai_api_key())
+	# 	print(failure_explanation)  
+	# 	if "wait" not in failure_explanation or self.layout == 'forced_coodination':
+	# 		self.explainer.add_msg_to_dialog_history({"role": "user", "content": failure_feedback})
+	# 		self.explainer.add_msg_to_dialog_history({"role": "assistant", "content": failure_explanation})
+	# 	self.planner.add_msg_to_dialog_history({"role": "user", "content": failure_explanation}) 
 		
 	def generate_state_prompt(self, state):
 		print(state)
@@ -196,6 +218,7 @@ class LlmMediumLevelAgent():
 		
 		kitchen_state_prompt = "Kitchen states: "
 		kitchen_state_prompt += ",".join(state['pot'])
+		kitchen_state_prompt += ",".join(state['cutting_table'])
 
 		task_state_prompt = f"Task states: Current task is {state['task']} and the remaining time is {state['tasktime']}."
 		return (self.layout_prompt + time_prompt + ego_state_prompt +
@@ -240,14 +263,17 @@ class LlmMediumLevelAgent():
 		elif "put" in action_string:
 			if "rawfish" in action_string:
 				ml_action = "put_rawfish_in_pot"
-			elif "BClemon" in action_string:
-				ml_action = "put_BClemon_in_cutting_table"
+			elif "BClemon" in action_string or "BCtomato" in action_string:
+				ml_action = "put_raw_on_cutting_table"
 
-		elif "fill" in action_string:   
-			ml_action = "fill_dish_with_soup"
+		elif "fill" in action_string:
+			if "cutting" in action_string:
+				ml_action = "fill_dish_with_cutting_food"	
+			if "pot" in action_string:
+				ml_action = "fill_dish_with_pot_food"
 
 		elif "deliver" in action_string:
-			ml_action = "deliver_soup"
+			ml_action = "deliver_order"
 
 		elif "wait" not in action_string:
 			ml_action='wait(1)'  
@@ -360,10 +386,18 @@ class LlmMediumLevelAgent():
 			dish_pickup_loc = dish_dispenser_loc + counter_pickup_objects['dish']
 			motion_goals = self.mdp.get_interaction_pos_and_dire(goal_pos=dish_pickup_loc)
 
-		elif "put_raw_in_pot" in current_action:
+		elif "put_raw_in_pot" in current_action or "fill_dish_with_pot_food" in current_action:
 			pot_loc = self.mdp.get_pot_locations()
 			motion_goals = self.mdp.get_interaction_pos_and_dire(goal_pos=pot_loc)
 		
+		elif "cutting_table" in current_action or "fill_dish_with_cutting_food" in current_action:
+			cutting_table_loc = self.mdp.get_cutting_table_locations()
+			motion_goals = self.mdp.get_interaction_pos_and_dire(goal_pos=cutting_table_loc)
+		
+		elif "place_obj_on_counter" in self.current_ml_action:  
+			counter_table_loc = self.mdp.get_counter_locations()
+			motion_goals = self.mdp.get_interaction_pos_and_dire(goal_pos=counter_table_loc)
+
 		else:
 			print("001")
 			raise NotImplementedError
@@ -458,16 +492,16 @@ class LlmMediumLevelAgent():
 			pattern = r"pickup(?:[(]|_)(\w+)(?:[)]|)" # fit both pickup(onion) and pickup_onion
 			obj_str = re.search(pattern, self.current_ml_action).group(1)
 			print("obj_str:", obj_str)
-			return state["player"][self.agent_index] == obj_str
+			return obj_str in state["player"][self.agent_index]
 		
-		# elif "fill" in self.current_ml_action:
-		# 	return player.held_object.name == 'soup'
+		elif "fill_dish" in self.current_ml_action:
+			return len(state["player"][self.agent_index]) >= 2 # 盘子和食材都在手上
 		
 		elif "put" in self.current_ml_action or "place" in self.current_ml_action:
-			return state["player"][self.agent_index] == 'nothing'
+			return state["player"][self.agent_index][0] == 'nothing'
 		
 		elif "deliver" in self.current_ml_action:
-			return state["player"][self.agent_index] == 'nothing'
+			return state["player"][self.agent_index][0] == 'nothing'
 		
 		elif "wait" in self.current_ml_action:
 			return self.time_to_wait == 0
