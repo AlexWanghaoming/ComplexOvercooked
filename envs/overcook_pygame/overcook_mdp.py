@@ -80,7 +80,7 @@ class ComplexOvercookedGridworld(object):
 
         for pos in goal_pos:
             for _, direction_vector in directions.items():
-                interaction_pos = (pos[0] + direction_vector[0], pos[1] + direction_vector[1])
+                interaction_pos = (pos[0] - direction_vector[0], pos[1] - direction_vector[1])
                 # 检查交互位置是否在地图范围内
                 if 0 <= interaction_pos[0] < self.width and 0 <= interaction_pos[1] < self.height:
                     # 检查交互位置是否可到达（不是障碍物）

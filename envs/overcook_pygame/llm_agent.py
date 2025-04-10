@@ -11,11 +11,12 @@ from openai.types.chat.chat_completion import ChatCompletion
 import itertools, os, json, re
 from collections import defaultdict
 import numpy as np
-from overcook_gym_class import Action
 import copy
+from overcook_gym_class import Direction,Action
+from typing import List, Dict, Tuple, Optional, Union
+
 
 PROMPT_DIR = '/alpha/ComplexOvercooked/prompts'
-
 client = openai.OpenAI(api_key="EMPTY", base_url="http://202.117.43.44:8099/v1")
 
 class LlmMediumLevelAgent():
@@ -23,6 +24,7 @@ class LlmMediumLevelAgent():
 			self,
 			mdp:ComplexOvercookedGridworld,
 			env:OvercookPygameEnv,
+			agent_index:int,
 			layout='supereasy',
 			model='Qwen2.5-72B-Int4-Chat',
 			prompt_level='l2-ap', # ['l1-p', 'l2-ap', 'l3-aip']
@@ -32,7 +34,6 @@ class LlmMediumLevelAgent():
 			auto_unstuck=False,
 			controller_mode='new', # the default overcooked-ai Greedy controller
 			debug_mode='N', 
-			agent_index=None,
 			outdir = None 
 	):
 		self.model = model
@@ -44,26 +45,52 @@ class LlmMediumLevelAgent():
 		self.env = env 
 		self.out_dir = outdir 
 		self.agent_index = agent_index
-
 		self.prompt_level = prompt_level
 		self.belief_revision = belief_revision
-
 		self.retrival_method = retrival_method
 		self.K = K
-		
 		self.prev_state = None
-		self.auto_unstuck = auto_unstuck
-
 		self.current_ml_action = None
 		self.current_ml_action_steps = 0
 		self.time_to_wait = 0
 		self.possible_motion_goals = None
 		self.pot_id_to_pos = []
 
+		self.dialog_history_list = []
+		self.current_user_message = None
+		self.cache_list = None
 		self.layout_prompt = self.generate_layout_prompt()
+
 		with open("/alpha/ComplexOvercooked/prompts/supereasy.txt", "r") as f:
 			self.instruction_message = [{"role": "system", "content": f.read()}]
 
+	def get_cache(self)->list:
+		"""
+		检索历史k条对话
+		"""
+		if self.retrival_method == "recent_k":
+			if self.K > 0:
+				return self.dialog_history_list[-self.K:]
+			else: 
+				return []
+		else:
+			return None 
+		
+	def query_llm(self):
+		self.cache_list = self.get_cache()
+		messages = self.instruction_message + self.cache_list + [self.current_user_message]
+		response = client.chat.completions.create(
+							messages=messages,
+							model=self.model,
+							max_tokens=256,
+							temperature=0,
+							stop=None,
+						)
+		response = response.choices[0].message.content
+		return response
+	
+	def add_msg_to_dialog_history(self, message: dict):
+		self.dialog_history_list.append(message)
 
 	def generate_layout_prompt(self):
 		layout_prompt_dict = {
@@ -89,15 +116,15 @@ class LlmMediumLevelAgent():
 		print("layout_prompt:", layout_prompt)
 		return layout_prompt
 	  
-	def action(self, state):
-
+	def action(self, env):
+		state = env.state
 		start_pos_and_or = state["players_pos_and_or"][self.agent_index]
-
 		# only use to record the teammate ml_action, 
 		# if teammate finish ml_action in t-1, it will record in s_t, 
 		# otherwise, s_t will just record None,
 		# and we here check this information and store it into proagent
 		self.current_timestep = state["timestep"]
+
 		# if state.ml_actions[1-self.agent_index] != None:
 		# 	self.teammate_ml_actions_dict[str(self.current_timestep-1)] = state.ml_actions[1-self.agent_index]
 
@@ -110,10 +137,10 @@ class LlmMediumLevelAgent():
 			current_ml_action_done = self.check_current_ml_action_done(state)  # 判断当前的ml_action是否执行结束了
 			if current_ml_action_done:
 				# generate a new ml action
-				self.generate_success_feedback(state)  # 在大模型上下文中加入ml_action成功的反馈
+				self.generate_success_feedback()  # 在大模型上下文中加入ml_action成功的反馈
 				self.current_ml_action = self.generate_ml_action(state)
-
-		count = 0
+				print("llm generated current_ml_action:", self.current_ml_action)
+		# count = 0
 		# while not self.validate_current_ml_action(state):
 
 		# 	self.trace = False
@@ -130,55 +157,18 @@ class LlmMediumLevelAgent():
 		if "wait" in self.current_ml_action:
 			self.current_ml_action_steps += 1
 			self.time_to_wait -= 1
-			
-			# lis_actions = self.mdp.get_valid_actions(state.players[self.agent_index])
 			lis_actions = self.get_avail_agent_actions(agent_id=self.agent_index).index(1)
 			lis_actions = [i for i, value in enumerate(lis_actions) if value == 1]
 			chosen_action =lis_actions[np.random.randint(0,len(lis_actions))]
 			self.prev_state = state
 			return chosen_action
 		else:
-			possible_motion_goals = self.find_motion_goals(state)   
-
+			possible_motion_goals = self.find_motion_goals(env)   
 			current_motion_goal, chosen_action = self.choose_motion_goal(
 				start_pos_and_or, 
 				possible_motion_goals, 
 				state
 			)
-
-		# if self.auto_unstuck and chosen_action != Action.INTERACT:
-		# 	if (
-		# 			self.prev_state is not None
-		# 			and state.players
-		# 			== self.prev_state.players
-		# 	):
-		# 		if self.agent_index == 0:
-		# 			joint_actions = list(
-		# 				itertools.product(Action.ALL_ACTIONS, [Action.STAY])
-		# 			)
-		# 		elif self.agent_index == 1:
-		# 			joint_actions = list(
-		# 				itertools.product([Action.STAY], Action.ALL_ACTIONS)
-		# 			)
-		# 		else:
-		# 			raise ValueError("Player index not recognized")
-
-		# 		unblocking_joint_actions = []
-		# 		for j_a in joint_actions:
-		# 			if j_a != [Action.INTERACT, Action.STAY] and  j_a != [Action.STAY,Action.INTERACT]:
-		# 				if pkg_resources.get_distribution("overcooked_ai").version == '1.1.0':
-		# 					new_state, _ = self.mlam.mdp.get_state_transition(state, j_a)
-		# 				elif pkg_resources.get_distribution("overcooked_ai").version == '0.0.1':
-		# 					new_state, _, _ = self.mlam.mdp.get_state_transition(state, j_a)		
-		# 				if (
-		# 						new_state.players_pos_and_or
-		# 						!= self.prev_state.players_pos_and_or
-		# 					):
-		# 					unblocking_joint_actions.append(j_a)
-		# 		unblocking_joint_actions.append([Action.STAY, Action.STAY])
-		# 		chosen_action = unblocking_joint_actions[
-		# 			np.random.choice(len(unblocking_joint_actions))
-		# 		][self.agent_index]
 
 		self.prev_state = state
 		if chosen_action is None:
@@ -186,6 +176,10 @@ class LlmMediumLevelAgent():
 			self.time_to_wait = 1
 			chosen_action = Action.STAY
 		self.current_ml_action_steps += 1
+
+		if isinstance(chosen_action, tuple):
+			chosen_action = Action.ACTION2INDEX[chosen_action]
+		# print("chosen_action:", chosen_action)
 		return chosen_action
 		
 		
@@ -208,7 +202,6 @@ class LlmMediumLevelAgent():
 				teammate_state_prompt + kitchen_state_prompt + task_state_prompt)
 	
 	def parse_ml_action(self, response, agent_index): 
-
 		if agent_index == 0: 
 			pattern = r'layer\s*0: (.+)'
 		elif agent_index == 1: 
@@ -291,8 +284,7 @@ class LlmMediumLevelAgent():
 		# aviod to generate two skill, eg, Plan for Player 0: "deliver_soup(), pickup(onion)".
 		if "," in ml_action:
 			ml_action = ml_action.split(',')[0].strip()
-
-		            
+       
 		return ml_action    
 
 	def generate_ml_action(self, state):
@@ -316,18 +308,12 @@ class LlmMediumLevelAgent():
 		print(f"{state_prompt}")
 		
 
-		state_message = [{"role": "user", "content": state_prompt}]
-		response = client.chat.completions.create(
-							messages=self.instruction_message + state_message,
-							model=self.model,
-							max_tokens=256,
-							temperature=0,
-							stop=None,
-						)
-		response = response.choices[0].message.content
-		# if 'wait' not in response:
-		# 	self.planner.add_msg_to_dialog_history(state_message) 
-		# 	self.planner.add_msg_to_dialog_history({"role": "assistant", "content": response})
+		state_message = {"role": "user", "content": state_prompt}
+		self.current_user_message = state_message
+		response = self.query_llm()
+		if 'wait' not in response:
+			self.add_msg_to_dialog_history(state_message) 
+			self.add_msg_to_dialog_history({"role": "assistant", "content": response})
 		
 		print(f"\n\n\n### GPT Planner module\n")   
 		print("====== GPT Query ======")
@@ -338,45 +324,46 @@ class LlmMediumLevelAgent():
 		
 		ml_action = self.parse_ml_action(response, self.agent_index)
 
-		# if "wait" not in ml_action:
-		# 	self.planner.add_msg_to_dialog_history({"role": "assistant", "content": ml_action})
+		if "wait" not in ml_action:
+			self.add_msg_to_dialog_history({"role": "assistant", "content": ml_action})
 		
 		print(f"Player {self.agent_index}: {ml_action}")
 		self.current_ml_action_steps = 0
 		return ml_action
 
-
-
-	def find_motion_goals(self, state):
+	def find_motion_goals(self, env) -> List[Tuple[int, int]]:
 		"""
-		Generates the motion goals for the given medium level action.
-		Specifically handles BClemon and rawfish target locations.
-		:param state: Current environment state
-		:return: List of motion goals (position, direction)
+		计算完成current_ml_action需要到达的目标点以及玩家面朝方向
 		"""
 		motion_goals = []
 		# player = state["players_pos_and_or"][self.agent_index]
 		current_action = self.current_ml_action
 		counter_pickup_objects = self.mdp.get_counter_objects_dict()
-		# 获取所有桌子的位置和物品信息
-		tables = self.env.game.tables
-		table_positions = [(table.rect.x // 80, table.rect.y // 80) for table in tables]
+		# # 获取所有桌子的位置和物品信息
+		# tables = env.game.tables
+		# table_positions = [(table.rect.x // 80, table.rect.y // 80) for table in tables]
 
 		# 根据当前动作选择目标
 		if current_action in ["pickup(BClemon)", "pickup_BClemon"]:
 			lemon_dispenser_loc = self.mdp.get_lemon_dispenser_locations()
 			lemon_pickup_loc = lemon_dispenser_loc + counter_pickup_objects['BClemon']
-			self.mdp.get_interaction_pos_and_dire(lemon_pickup_loc)
-			# 查找 BClemon 的目标点
-			for table, pos in zip(tables, table_positions):
-				if table.item == "BClemon":
-					motion_goals.append(pos)
+			motion_goals = self.mdp.get_interaction_pos_and_dire(lemon_pickup_loc)
+			
 
 		elif current_action in ["pickup(rawfish)", "pickup_rawfish"]:
-			# 查找 rawfish 的目标点
-			rawfish_dispenser_loc = self.mdp.get_rawfish_dispenser_locations()
-			rawfish_pickup_loc = rawfish_dispenser_loc + counter_pickup_objects['rawfish']
+			rawfish_dispenser_loc = self.mdp.get_rawfish_dispenser_locations() # 计算 rawfish dispenser位置
+			rawfish_pickup_loc = rawfish_dispenser_loc + counter_pickup_objects['rawfish'] # 计算 被放到桌子上的 rawfish 
 			motion_goals = self.mdp.get_interaction_pos_and_dire(goal_pos=rawfish_pickup_loc)
+
+		elif current_action in ["pickup(dish)", "pickup_dish"]:
+			dish_dispenser_loc = self.mdp.get_dish_dispenser_locations()
+			dish_pickup_loc = dish_dispenser_loc + counter_pickup_objects['dish']
+			motion_goals = self.mdp.get_interaction_pos_and_dire(goal_pos=dish_pickup_loc)
+
+		elif "put_raw_in_pot" in current_action:
+			pot_loc = self.mdp.get_pot_locations()
+			motion_goals = self.mdp.get_interaction_pos_and_dire(goal_pos=pot_loc)
+		
 		else:
 			print("001")
 			raise NotImplementedError
@@ -446,11 +433,47 @@ class LlmMediumLevelAgent():
 		other_pos_and_or = [list(pos) for pos in other_pos_and_or]
 		start_pos_and_or[0][1] -= 1
 		other_pos_and_or[0][1] -= 1
+		start_pos_and_or = tuple(tuple(i) for i in start_pos_and_or)
+		other_pos_and_or = tuple(tuple(i) for i in other_pos_and_or)
 
+		# start_pos_and_or[1][1] = -start_pos_and_or[1][1]
+		# other_pos_and_or[1][1] = -other_pos_and_or[1][1]
 		action_plan, plan_cost = find_path(start_pos_and_or, other_pos_and_or, goal, terrain_matrix) 
 
 		return action_plan, plan_cost
+	
+	def generate_success_feedback(self):
+		success_feedback = f"### Controller Validation\nPlayer {self.agent_index} succeeded at {self.current_ml_action}. \n"
+		print(success_feedback)  
+		if 'wait' not in success_feedback:
+			self.add_msg_to_dialog_history({"role": "user", "content": f'Player {self.agent_index} succeeded at {self.current_ml_action}.'})
 
+	def check_current_ml_action_done(self, state):
+		"""
+		checks if the current ml action is done
+		:return: True or False
+		"""
+		# player = state.players[self.agent_index]
+		if "pickup" in self.current_ml_action:
+			pattern = r"pickup(?:[(]|_)(\w+)(?:[)]|)" # fit both pickup(onion) and pickup_onion
+			obj_str = re.search(pattern, self.current_ml_action).group(1)
+			print("obj_str:", obj_str)
+			return state["player"][self.agent_index] == obj_str
+		
+		# elif "fill" in self.current_ml_action:
+		# 	return player.held_object.name == 'soup'
+		
+		elif "put" in self.current_ml_action or "place" in self.current_ml_action:
+			return state["player"][self.agent_index] == 'nothing'
+		
+		elif "deliver" in self.current_ml_action:
+			return state["player"][self.agent_index] == 'nothing'
+		
+		elif "wait" in self.current_ml_action:
+			return self.time_to_wait == 0
+
+		else:
+			print("002")
 
 class Node:
     """
@@ -476,19 +499,15 @@ class Node:
 def find_path(start_pos_and_or, other_pos_and_or, goal, terrain_mtx):  
     
     start_node = Node(None, start_pos_and_or)  
-    # end_node   = Node(None, goal)
+    end_node   = Node(None, goal)
 
     yet_to_visit_list = [] 
     visited_list = [] 
-	
+
     move = [(-1, 0),    # left 
             (0, -1),    # up 
             (1, 0),     # right 
             (0, 1)]     # down 
-    # NORTH = (0, 1)
-    # SOUTH = (0, -1)
-    # EAST = (1, 0)
-    # WEST = (-1, 0)
 
     n_rows = terrain_mtx['height']  
     n_cols = terrain_mtx['width']    
@@ -515,9 +534,9 @@ def find_path(start_pos_and_or, other_pos_and_or, goal, terrain_mtx):
             ) 
 
             # position out of bound 
-            if (node_position[0] > (n_cols) or 
+            if (node_position[0] > (n_cols - 1) or 
                 node_position[0] < 0 or 
-                node_position[1] > (n_rows) or 
+                node_position[1] > (n_rows - 1) or 
                 node_position[1] < 0): 
                 continue 
             
@@ -549,6 +568,7 @@ def find_path(start_pos_and_or, other_pos_and_or, goal, terrain_mtx):
                     last_node = Node(i, (goal[0], goal[1])) 
                     last_node.f = i.f + 1 
 
+    
     # no available plans. 
     if last_node is None: 
         return None, np.inf 

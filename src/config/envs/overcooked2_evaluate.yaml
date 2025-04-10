@@ -1,10 +1,15 @@
 env: "overcooked2"
+runner: "episode" # Runs 1 env for an episode
 
 env_args:
   map_name: "supereasy"
   ifrender: False
   debug: False
   fps: 60
+
+# agents:
+#   p0: "rl"  # 可选值: ["random", "rl", "human", "llm"]
+#   p1: "llm"  # 可选值: ["random", "rl", "human", "llm"]
 
 common_reward: True  # Run experiment with common reward setup
 reward_scalarisation: "mean"  # How to aggregate rewards to single common reward (only used if common_reward is True)

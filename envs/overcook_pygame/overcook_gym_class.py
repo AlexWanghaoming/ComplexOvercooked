@@ -48,13 +48,11 @@ class Action():
     UP = 3
     LEFT = 4
     INTERACT = 5
-    # to do 可以以table类为基础做基类
-
-        # self.control = {0:[0,0],
-        #                 1:[0,1],
-        #                 2:[1,0],
-        #                 3:[0,-1],
-        #                 4:[-1,0]}
+    ACTION2INDEX = {(0,0): 0,
+                    (0,1): 1,
+                    (1,0): 2,
+                    (0,-1): 3,
+                    (-1,0): 4}
                 
 class Direction():
 

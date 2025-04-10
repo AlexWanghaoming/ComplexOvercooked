@@ -2,12 +2,12 @@ import numpy as np
 # export PYTHONPATH="$PWD"
 import sys,os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../../")
-from src.envs.overcook_pygame.overcook_gym_env import OvercookPygameEnv
+from envs.overcook_pygame.overcook_gym_env import OvercookPygameEnv
 
 def test_overcooked2_env():
     print("\n| test_overcooked2_env()")
     # env = OvercookPygameEnv(map_name='4playersplit', ifrender=True, debug=True)
-    env = OvercookPygameEnv(map_name='2playerhard', ifrender=True, debug=True, fps=30)
+    env = OvercookPygameEnv(map_name='2playerhard', ifrender=True, debug=False, fps=30)
     # env = OvercookPygameEnv(map_name='supereasy', ifrender=True, debug=True)
 
     # print(env.get_state()[0].shape[0])

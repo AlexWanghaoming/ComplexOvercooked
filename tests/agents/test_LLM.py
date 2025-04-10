@@ -6,9 +6,9 @@ import json
 import time
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../../")
-from src.envs.overcook_pygame.overcook_gym_env import OvercookPygameEnv
-from src.envs.overcook_pygame.llm_agent import LlmMediumLevelAgent 
-from src.envs.overcook_pygame.overcook_mdp import ComplexOvercookedGridworld
+from envs.overcook_pygame.overcook_gym_env import OvercookPygameEnv
+from envs.overcook_pygame.llm_agent import LlmMediumLevelAgent 
+from envs.overcook_pygame.overcook_mdp import ComplexOvercookedGridworld
 import pygame
 
 class LLMController:

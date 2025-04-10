@@ -770,6 +770,8 @@ class OvercookPygameEnv(gym.Env):
             # 玩家手持物品
             if player.item:
                 hold_obj = np.eye(len(self.itemdict))[self.itemdict[player.item]-1].tolist()
+                if player.item == "dish":
+                    print(111)
                 hold_objects.append(player.item)
             else:
                 hold_obj = np.zeros(len(self.itemdict)).tolist()

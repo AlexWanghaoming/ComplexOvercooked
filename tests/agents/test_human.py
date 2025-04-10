@@ -1,7 +1,7 @@
 import numpy as np
 import sys,os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../../")
-from src.envs.overcook_pygame.overcook_gym_env import OvercookPygameEnv
+from envs.overcook_pygame.overcook_gym_env import OvercookPygameEnv
 import pygame
 from pygame import K_w, K_a, K_s, K_d, K_SPACE, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_m
 import threading
@@ -12,10 +12,9 @@ import time
 def test_keyboard():
     env = OvercookPygameEnv(map_name='supereasy', ifrender=True, debug=True)
     nobs, share_obs, available_actions = env.reset()
-    clock = pygame.time.Clock()
 
     # 设置键盘检测的时间间隔
-    key_check_interval = 100  # 单位：毫秒
+    key_check_interval = 10  # 单位：毫秒
 
     # 初始化上一次键盘检测的时间
     last_key_check_time = pygame.time.get_ticks()
@@ -29,9 +28,9 @@ def test_keyboard():
     }
     reward = 0
     while not game_over:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                game_over = True
+        # for event in pygame.event.get():
+        #     if event.type == pygame.QUIT:
+        #         game_over = True
 
         current = pygame.time.get_ticks()
 
@@ -56,11 +55,9 @@ def test_keyboard():
         if dones[0]:
             game_over = True
 
-        pygame.display.update()
-        pygame.display.flip()
+        # pygame.display.update()
+        # pygame.display.flip()
 
-        # 控制游戏帧率
-        clock.tick(10) # 1s 10 timesteps
 
     # 退出pygame
     pygame.quit()

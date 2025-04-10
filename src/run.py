@@ -146,7 +146,7 @@ def run_sequential(args, logger):
     )
 
     # Setup multiagent controller here
-    mac = mac_REGISTRY[args.mac](buffer.scheme, groups, args)
+    mac = mac_REGISTRY[args.mac](buffer.scheme, args, groups)
 
     # Give runner the scheme
     runner.setup(scheme=scheme, groups=groups, preprocess=preprocess, mac=mac)
@@ -157,6 +157,7 @@ def run_sequential(args, logger):
     if args.use_cuda:
         learner.cuda()
 
+    ######################### start training  #######################
     if args.checkpoint_path != "":
         timesteps = []
         timestep_to_load = 0
@@ -195,7 +196,7 @@ def run_sequential(args, logger):
             logger.console_logger.info("Finished Evaluation")
             return
 
-    # start training
+    ######################### start training  #######################
     episode = 0
     last_test_T = -args.test_interval - 1
     last_log_T = 0
@@ -205,6 +206,8 @@ def run_sequential(args, logger):
     last_time = start_time
 
     logger.console_logger.info("Beginning training for {} timesteps".format(args.t_max))
+    best_performance = -float("inf")  # Initialize with a very low value
+    best_model_path = None
 
     while runner.t_env <= args.t_max:
 
@@ -248,34 +251,66 @@ def run_sequential(args, logger):
             last_time = time.time()
 
             last_test_T = runner.t_env
+            test_performance = 0
+
             for _ in range(n_test_runs):
-                runner.run(test_mode=True)
+                episode_info = runner.run(test_mode=True)
+                test_performance += episode_info["reward"].sum()/args.batch_size_run           
+            test_performance /= n_test_runs  # Average performance
 
-        if args.save_model and (
-            runner.t_env - model_save_time >= args.save_model_interval
-            or model_save_time == 0
-        ):
-            model_save_time = runner.t_env
-            save_path = os.path.join(
-                args.local_results_path, "models", args.unique_token, str(runner.t_env)
-            )
-            # "results/models/{}".format(unique_token)
-            os.makedirs(save_path, exist_ok=True)
-            logger.console_logger.info("Saving models to {}".format(save_path))
 
-            # learner should handle saving/loading -- delegate actor save/load to mac,
-            # use appropriate filenames to do critics, optimizer states
-            learner.save_models(save_path)
-
-            if args.use_wandb and args.wandb_save_model:
-                wandb_save_dir = os.path.join(
-                    logger.wandb.dir, "models", args.unique_token, str(runner.t_env)
+            # Check if this is the best performance
+            if test_performance > best_performance:
+                best_performance = test_performance
+                # Save the best model
+                save_path = os.path.join(
+                    args.local_results_path, "models", args.unique_token, "best_model"
                 )
-                os.makedirs(wandb_save_dir, exist_ok=True)
-                for f in os.listdir(save_path):
-                    shutil.copyfile(
-                        os.path.join(save_path, f), os.path.join(wandb_save_dir, f)
+                os.makedirs(save_path, exist_ok=True)
+                learner.save_models(save_path)
+
+                # Remove the previous best model if it exists
+                if best_model_path and best_model_path != save_path:
+                    shutil.rmtree(best_model_path)
+                best_model_path = save_path
+                logger.console_logger.info(
+                    f"New best model saved with performance: {best_performance}"
+                )
+                if args.use_wandb and args.wandb_save_model:
+                    wandb_save_dir = os.path.join(
+                        logger.wandb.dir, "models", args.unique_token, str(runner.t_env)
                     )
+                    os.makedirs(wandb_save_dir, exist_ok=True)
+                    for f in os.listdir(save_path):
+                        shutil.copyfile(
+                            os.path.join(save_path, f), os.path.join(wandb_save_dir, f)
+                        )
+
+        # if args.save_model and (
+        #     runner.t_env - model_save_time >= args.save_model_interval
+        #     or model_save_time == 0
+        # ):
+        #     model_save_time = runner.t_env
+        #     save_path = os.path.join(
+        #         args.local_results_path, "models", args.unique_token, str(runner.t_env)
+        #     )
+        #     # "results/models/{}".format(unique_token)
+        #     os.makedirs(save_path, exist_ok=True)
+        #     logger.console_logger.info("Saving models to {}".format(save_path))
+
+        #     # learner should handle saving/loading -- delegate actor save/load to mac,
+        #     # use appropriate filenames to do critics, optimizer states
+        #     learner.save_models(save_path)
+
+        #     if args.use_wandb and args.wandb_save_model:
+        #         wandb_save_dir = os.path.join(
+        #             logger.wandb.dir, "models", args.unique_token, str(runner.t_env)
+        #         )
+        #         os.makedirs(wandb_save_dir, exist_ok=True)
+        #         for f in os.listdir(save_path):
+        #             shutil.copyfile(
+        #                 os.path.join(save_path, f), os.path.join(wandb_save_dir, f)
+        #             )
 
         episode += args.batch_size_run
 

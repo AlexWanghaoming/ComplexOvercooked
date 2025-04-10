@@ -39,7 +39,6 @@ def my_main(_run, _config, _log):
     run(_run, config, _log)
 
 
-
 if __name__ == "__main__":
     params = deepcopy(sys.argv)
     th.set_num_threads(1)
@@ -69,12 +68,12 @@ if __name__ == "__main__":
     # config_dict = {**config_dict, **env_config, **alg_config}
     config_dict = recursive_dict_update(config_dict, alg_config) # 用alg_config更新config_dict
     config_dict = recursive_dict_update(config_dict, env_config)
+
     config_dict.update({"checkpoint_path": checkpoint_path, 
                         "load_step": load_step})
-    try:
-        map_name = config_dict["env_args"]["map_name"]
-    except:
-        map_name = config_dict["env_args"]["key"]
+    
+    map_name = config_dict["env_args"]["map_name"]
+
 
     print("config_dict:",config_dict)
     # now add all the config to sacred

@@ -9,7 +9,17 @@ except:
     # from python 3.10
     from collections.abc import Mapping
 from copy import deepcopy
+import argparse
 
+
+def create_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--hidden_dim", type=int,  default=128)
+    parser.add_argument("--use_rnn", type=bool,  default=True)
+    parser.add_argument("--n_actions", type=int,  default=6)
+    parser.add_argument("--n_agents", type=int,  default=2)
+    parser.add_argument("--obs_agent_id", type=bool,  default=True)
+    return parser
 
 def get_config(params, arg_name, subfolder):
     config_name = None
