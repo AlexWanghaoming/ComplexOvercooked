@@ -7,16 +7,13 @@
 -----
 
 嗨👋，目前的开源的overcook项目是基于前后端编写的h5游戏🕹️。因为只会python🐍，考察了一下pygame，发现写这样一个游戏很简单🎉，并且可以更加还原游戏原本的一些环境🌍，更加适合python同学👥。以下是游戏场景的动态展示👀：
-
 <p align="center">
-  <img src="showpic/2player.gif" width="33%" />
-  <img src="showpic/2playerhuman.gif" width="33%" />
-  <img src="showpic/4player.gif" width="33%" />
+  <img src="showpic/2player.gif" width="40%" />
+  <img src="showpic/4player.gif" width="50%" />
 </p>
 <p align="center">
-  <span style="display: inline-block; width: 33%; text-align: left;">2player_overcooked</span>
-  <span style="display: inline-block; width: 33%; text-align: center;">2player_agentwithhuan_overcooked</span>
-  <span style="display: inline-block; width: 33%; text-align: right;">4player_overcooked</span>
+  <span style="display: inline-block; width: 30%; text-align: left;">2playerhard</span>
+  <span style="display: inline-block; width: 36%; text-align: right;">4playereasy</span>
 </p>
 为了更加适配强化学习🧠，我们做了以下的改进🔧：
 

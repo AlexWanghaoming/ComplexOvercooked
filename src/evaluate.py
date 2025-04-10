@@ -47,8 +47,8 @@ if __name__ == "__main__":
     # load_step = 9979800
     # params.append('--config=qmix')
 
-    checkpoint_path = "results/models/ippo_seed4_supereasy_2025-01-16 21:06:38.941962"
-    load_step = 19770000
+    checkpoint_path = "/alpha/ComplexOvercooked/results/models/ippo_seed7_supereasy_2025-04-10 10:07:15.864392/"
+    load_step = 1111
     params.append('--config=ippo')
     params.append('--env-config=overcooked2_evaluate')
     

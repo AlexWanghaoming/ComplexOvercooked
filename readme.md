@@ -9,14 +9,12 @@
 Hi👋, the current open-source overcook project is an H5 game🕹️ written based on frontend and backend. As I only know Python🐍, I looked into pygame and found that writing such a game is quite simple🎉, and it can better restore some of the original game environments🌍, making it more suitable for Python learners👥. Below is a dynamic display of the game scenes👀:
 
 <p align="center">
-  <img src="showpic/2player.gif" width="33%" />
-  <img src="showpic/2playerhuman.gif" width="33%" />
-  <img src="showpic/4player.gif" width="33%" />
+  <img src="showpic/2player.gif" width="40%" />
+  <img src="showpic/4player.gif" width="50%" />
 </p>
 <p align="center">
-  <span style="display: inline-block; width: 33%; text-align: left;">2player_overcooked</span>
-  <span style="display: inline-block; width: 33%; text-align: center;">2player_agentwithhuan_overcooked</span>
-  <span style="display: inline-block; width: 33%; text-align: right;">4player_overcooked</span>
+  <span style="display: inline-block; width: 30%; text-align: left;">2playerhard</span>
+  <span style="display: inline-block; width: 36%; text-align: right;">4playereasy</span>
 </p>
 To better adapt to reinforcement learning🧠, we have made the following improvements🔧:
 
@@ -58,6 +56,12 @@ To train agents over various algorithms, layouts and seeds in batch:
 ./runalgo.sh
 ```
 
+### Test 
+For example, evaluate the performance of agents ("llm", "human", "rl", "random") collaboration. p0 and p1 can be chosen from ["llm", "human", "rl", "random"]: 
+```Bash
+python tests/agents/test_agent.py --p0=rl --p1=human --map_name=supereasy --n_episode=5
+```
+
 ### ComplexOvercooked Environment Code Structure 📐
 
 ```
@@ -85,6 +89,7 @@ ComplexOvercooked/
 ├── maps.json  # Map configuration file
 ├── requirements.txt  # Project dependencies
 └── runalgo.sh  # Batch training script
+
 ```
 
 Main directory description:

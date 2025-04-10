@@ -773,6 +773,7 @@ class OvercookPygameEnv(gym.Env):
             ori.append(tuple(player.direction))
             # 玩家手持物品
 
+            # player.item和player.dish需要分开判断
             if player.item:
                 hold_obj = np.eye(len(self.itemdict))[self.itemdict[player.item]-1].tolist()
                 hold_objects[i].append(player.item)

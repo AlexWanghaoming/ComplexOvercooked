@@ -28,50 +28,64 @@ def load_agents(p0_type, p1_type, args, rl_checkpoint_path=None, mdp:ComplexOver
 
 def main():
     parser = create_parser()
-    parser.add_argument("--map_name", type=str, default="supereasy")
-    parser.add_argument("--rl_checkpoint_path", type=str, default="/alpha/ComplexOvercooked/results/models/ippo_seed7_supereasy_2025-04-10 10:07:15.864392/best_model")
-    parser.add_argument("--p0", type=str, default="llm", choices=["random", "rl", "human", "llm"])
-    parser.add_argument("--p1", type=str, default="random", choices=["random", "rl", "human", "llm"])
+    parser.add_argument("--map_name", type=str, default="2playerhard")
+    parser.add_argument("--rl_checkpoint_path", type=str, default="/alpha/ComplexOvercooked/results/models/ippo_seed7_2playerhard_2025-04-10 14:35:56.640193/best_model")
+    parser.add_argument("--p0", type=str, default="rl", choices=["random", "rl", "human", "llm"])
+    parser.add_argument("--p1", type=str, default="human", choices=["random", "rl", "human", "llm"])
+    parser.add_argument("--n_episodes", type=int, default=5)
 
     args = parser.parse_args()
     print("蓝色玩家:", args.p0)
     print("红色玩家:", args.p1)
-    env = OvercookPygameEnv(map_name=args.map_name,
+ 
+
+    if args.p0 != "human" and args.p1 != "human":
+        env = OvercookPygameEnv(map_name=args.map_name,
+                            ifrender=True,
+                            debug=False)
+    else:
+        env = OvercookPygameEnv(map_name=args.map_name,
                             ifrender=True,
                             debug=False,
                             fps=10)
     mdp = ComplexOvercookedGridworld(env)
+
     if args.p0 == args.p1 == 'human':
         args.both_human = True
     else:
         args.both_human = False
-    nobs, _, available_actions = env.reset()
-    p0_agent, p1_agent = load_agents(args.p0, args.p1, args, args.rl_checkpoint_path, mdp=mdp, env=env)
-    done = False
 
-    while not done:
-        # 更新 HumanAgent 的动作
-        if isinstance(p0_agent, HumanAgent):
-            p0_agent.update_actions()
-        if isinstance(p1_agent, HumanAgent):
-            p1_agent.update_actions()
+    for i in range(args.n_episodes):
+        nobs, _, available_actions = env.reset()
+        p0_agent, p1_agent = load_agents(args.p0, args.p1, args, args.rl_checkpoint_path, mdp=mdp, env=env)
+        done = False
+        ep_rewards = []
+        while not done:
+            # 更新 HumanAgent 的动作
+            if isinstance(p0_agent, HumanAgent):
+                p0_agent.update_actions()
+            if isinstance(p1_agent, HumanAgent):
+                p1_agent.update_actions()
 
-        if isinstance(p0_agent, LLMAgent):
-            p0_action = p0_agent.select_action(env, available_actions, agent_idx=0)
-        else:
-            p0_action = p0_agent.select_action(nobs, available_actions, agent_idx=0)
+            if isinstance(p0_agent, LLMAgent):
+                p0_action = p0_agent.select_action(env, available_actions, agent_idx=0)
+            else:
+                p0_action = p0_agent.select_action(nobs, available_actions, agent_idx=0)
 
-        if isinstance(p1_agent, LLMAgent):
-            p1_action = p1_agent.select_action(env, available_actions, agent_idx=1)
-        else:
-            p1_action = p1_agent.select_action(nobs, available_actions, agent_idx=1)
+            if isinstance(p1_agent, LLMAgent):
+                p1_action = p1_agent.select_action(env, available_actions, agent_idx=1)
+            else:
+                p1_action = p1_agent.select_action(nobs, available_actions, agent_idx=1)
 
-        actions = [p0_action, p1_action]
-        nobs, _, rewards, dones, infos, available_actions = env.step(actions)
-        done = dones[0]
-        if done:
-            print(infos['episode']['ep_sparse_r'])
-        # print(f"Actions: {actions}")
+            actions = [p0_action, p1_action]
+            nobs, _, rewards, dones, infos, available_actions = env.step(actions)
+            done = dones[0]
+            if done:
+                print(infos['episode']['ep_sparse_r'])
+                ep_rewards.append(infos['episode']['ep_sparse_r'])
+            # print(f"Actions: {actions}")
+    print(ep_rewards)
+
 
 if __name__ == "__main__":
     main()
