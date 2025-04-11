@@ -7,8 +7,8 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from collections import defaultdict
 from typing import Union, Dict, Tuple, List, Optional, Any
 from gymnasium.spaces import flatdim
-from overcook_gym_main import MainGame
-from overcook_gym_class import ONEBLOCK, Table, Action, Direction, \
+from envs.overcook_main import MainGame
+from envs.overcook_class import ONEBLOCK, Table, Action, Direction, \
     TASK_FINISH_EVENT, OUT_SUPPLY_EVENT, OUT_DISH_EVENT, GET_MATERIAL_EVENT, \
         GET_DISH_EVENT, MADE_NEWTHING_EVENT, BEGINCUTTING_EVENT, CUTTINGDOWN_EVENT, \
             BEGINCOOKING_EVENT, COOKINGDOWN_EVENT, COOKINGOUT_EVENT, TRY_NEWTHING_EVENT,\

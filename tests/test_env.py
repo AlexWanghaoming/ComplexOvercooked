@@ -1,8 +1,8 @@
 import numpy as np
 # export PYTHONPATH="$PWD"
 import sys,os
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../../")
-from envs.overcook_pygame.overcook_gym_env import OvercookPygameEnv
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../")
+from envs.overcook_gym_env import OvercookPygameEnv
 
 def test_overcooked2_env():
     print("\n| test_overcooked2_env()")

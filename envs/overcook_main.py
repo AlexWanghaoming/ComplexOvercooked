@@ -2,7 +2,7 @@ import pygame
 import os, sys
 from pygame.transform import scale as picscale
 from pygame.image import load as picload
-from overcook_gym_class import ONEBLOCK, ONEBLOCKSIZE, Player, TaskBoard, TimerTable, Wall, SupplyTable, Pot,\
+from envs.overcook_class import ONEBLOCK, ONEBLOCKSIZE, Player, TaskBoard, TimerTable, Wall, SupplyTable, Pot,\
     Table, CoinTable, TrashTable, DigitDisplay, Picshow, CuttingTable, TASK_FINISH_EVENT
 import json
 

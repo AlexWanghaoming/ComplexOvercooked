@@ -5,9 +5,9 @@ import sys
 from typing import List, Dict, Tuple, Optional, Union
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../../")
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../src")))
-from envs.overcook_pygame.overcook_gym_env import OvercookPygameEnv
-from envs.overcook_pygame.overcook_mdp import ComplexOvercookedGridworld
-from envs.overcook_pygame.agents import RandomAgent, RLAgent, HumanAgent, LLMAgent
+from envs.overcook_gym_env import OvercookPygameEnv
+from envs.overcook_mdp import ComplexOvercookedGridworld
+from envs.agents import RandomAgent, RLAgent, HumanAgent, LLMAgent
 from src.utils.utils import create_parser
 
 

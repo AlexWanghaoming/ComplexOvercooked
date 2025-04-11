@@ -3,8 +3,8 @@ import torch as th
 import numpy as np
 import sys
 from typing import List, Dict, Tuple, Optional, Union
-from overcook_pygame.overcook_gym_env import OvercookPygameEnv
-from overcook_pygame.llm_agent import LlmMediumLevelAgent
+from overcook_gym_env import OvercookPygameEnv
+from llm_agent import LlmMediumLevelAgent
 
 from src.modules.agents.rnn_agent import RNNAgent
 from src.components.action_selectors import SoftPoliciesSelector

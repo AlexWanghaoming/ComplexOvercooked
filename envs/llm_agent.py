@@ -12,7 +12,7 @@ import itertools, os, json, re
 from collections import defaultdict
 import numpy as np
 import copy
-from overcook_gym_class import Direction,Action
+from envs.overcook_class import Direction,Action
 from typing import List, Dict, Tuple, Optional, Union
 
 

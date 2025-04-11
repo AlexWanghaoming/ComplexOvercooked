@@ -6,7 +6,7 @@ from utils import load_from_json
 import os
 import json
 from overcook_gym_env import OvercookPygameEnv
-from overcook_gym_class import Table, Direction, Action
+from envs.overcook_class import Table, Direction, Action
 from typing import List, Tuple, Optional, Dict, Union
 
 # 获取当前文件的目录

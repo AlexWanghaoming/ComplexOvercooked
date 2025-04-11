@@ -1,7 +1,7 @@
 import numpy as np
 import sys,os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../../")
-from envs.overcook_pygame.overcook_gym_env import OvercookPygameEnv
+from envs.overcook_gym_env import OvercookPygameEnv
 import pygame
 from pygame import K_w, K_a, K_s, K_d, K_SPACE, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_m
 import threading

@@ -21,13 +21,13 @@ Instructions:
 - One counter can place Only one item.
 
 Skill: 
-In this game, each player can ONLY perform the following 8 allowed skills: pickup, place_obj_on_counter, put_raw_on_cutting_table, put_raw_in_pot, fill_dish_with_pot_food, fill_dish_with_cutting_food, deliver_order, wait. Do not attempt to use any other skills that are not listed here.
+In this game, each player can ONLY perform the following 9 allowed skills: pickup, place_obj_on_counter, put_raw_on_cutting_table, put_raw_in_pot, fill_dish_with_pot_food, fill_dish_with_cutting_food, deliver_order, wait. Do not attempt to use any other skills that are not listed here.
 def pickup(obj):
     if object_in_hand() == "nothing": # hand holds nothing
         if obj in ["BClemon", "dish", "AClemon", "BCtomato"， "ACtomato", "rawbeef", "cookedfish", "cookedbeef", "cookedbeefhamburger", "ACtomatocookedbeefhamburger", "AClemoncookedfish"]:
             pass
 def place_obj_on_counter(obj):
-    if object_in_hand() == obj:
+    if object_in_hand() in ["BClemon", "dish", "AClemon", "BCtomato"， "ACtomato", "rawbeef", "cookedfish", "cookedbeef", "cookedbeefhamburger", "ACtomatocookedbeefhamburger", "AClemoncookedfish"]:
         pass
 def put_raw_on_cutting_table(obj):
     if object_in_hand() in ["BClemon", "BCtomato"]:
@@ -44,6 +44,9 @@ def fill_dish_with_cutting_food():
     if object_in_hand() == "dish":
         if cutting_ready():
             pass
+def fill_dish_with_AClemoncookedfish():
+    if object_in_hand() == "dish":
+        if is_exist(AClemoncookedfish)
 def deliver_order(order):
     if object_in_hand(order):
         pass
@@ -53,43 +56,36 @@ def wait(num):  # wait positive num timesteps
 
 Here are few examples:
 <example>
-H: Scene 0: Player 0 holds nothing. Player 1 holds nothing. Kitchen states: Pot empty.
-A: Analysis: Pot is empty. Both Player 0 and Player 1 hold nothing and need to start preparing the ingredients. These two players should pickup(onion) and then the pot will has 2 onions.
-Intention for Player 1: "pickup(onion)".
-Plan for Player 0: "pickup(onion)".
+H: Scene 0: Player 0 holds nothing. Player 1 holds nothing. Kitchen states: Pot is empty, cutting_table is empty.
+A: Analysis: Pot is empty. Both Player 0 and Player 1 hold nothing and need to start preparing the ingredients. These two players should pickup(rawfish) and then the pot will start cooking.
+Intention for Player 1: "pickup(rawfish)".
+Plan for Player 0: "pickup(rawfish)".
 </example>
 
 <example> 
-H: Scene 81: Player 0 holds nothing. Player 1 holds nothing. Kitchen states: Pot has 1 onion; 
-A: Analysis: The pot has one onion and both players are holding nothing. Player 1 should pick up an onion from the dispenser and put it in the pot to start cooking the soup. Player 0 can wait for the soup to be ready or pick up a dish from the dispenser to prepare for the next cooking cycle.
-Intention for Player 1: "pickup(onion)".
+H: Scene 81: Player 0 holds nothing. Player 1 holds nothing. Kitchen states: Pot has 1 rawfish, cutting table is empty; 
+A: Analysis: The pot has a rawfish and both players are holding nothing. Player 1 should pick up an BClemon from the dispenser and put it on the cuttingtable to start cutting. Player 0 can wait for the cookedfish to be ready or pick up a dish from the dispenser to prepare for the next cooking cycle.
+Intention for Player 1: "pickup(BClemon)".
 Plan for Player 0: "wait(20)" or "pickup(dish)".
 </example>
 
 <example> 
-H: Scene 42: Player 0 holds one onion. Player 1 holds one onion. Kitchen states: Pot has 1 onion and needs more. 
-A: Analysis: The pot has one onions and needs two onions to start cooking the soup. Both Player 0 and Player 1 are holding an onion. Both players should put the onions in the pot and then the pot will has 3 onions and start cooking the soup.
-Intention for Player 1: "put_onion_in_pot()".
-Plan for Player 0: "put_onion_in_pot()".
+H: Scene 42: Player 0 holds one rawfish. Player 1 holds one rawfish. Kitchen states: Pot is empty and need only one rawfish, cutting table is empty. 
+A: Analysis: The pot has is empty and need one rawfish to start cooking. Both Player 0 and Player 1 are holding a rawfish. Player 0 should put the rawfish in the pot and Player 1 should place the rawfish on the counter.
+Intention for Player 1: "put_rawfish_in_pot()".
+Plan for Player 0: "place_rawfish_on_counter()".
 </example>
 
 <exmaple> 
-H: Scene 9: Player 0 holds nothing. Player 1 holds one onion. Kitchen states: Pot has 2 onions and needs one more. 
-A: Analysis: The pot has two onions and needs one more to start cooking the soup. Since Player 1 is holding an onion, it may put it in the pot. Then the pot is full and will start cooking. Player 0 can pick up dish first and wait for the soup to be finished.
-Intention for Player 1: "put_onion_in_pot()".
-Plan for Player 0: "pickup(dish)".
+H: Scene 9: Player 0 holds one cookedfish. Player 1 holds one AClemon. Kitchen states: Pot is empty, cutting table is empty. 
+A: Analysis: Since Player 1 is holding a cookedfish, he may place it on the counter. Player 0 can place the AClemon one the same counter. Then AClemon and cookedfish will combine to form AClemoncookedfish.
+Intention for Player 1: "place_AClemon_on_counter()".
+Plan for Player 0: "place_cookedfish_on_counter".
 </example>
 
 <exmaple> 
-H: Scene 39: Player 0 holds one dish. Player 1 holds one onion. Kitchen states: Pot has already cooked the soup and soup needs to be filled in a dish.  
-A: Analysis: The pot has soup ready. Player 0 holds one dish, and Player 1 holds one onion. Player 0 should fill the dish with soup, and then the pot will be empty and Player 1 can put the onion into the pot.
-Intention for Player 1: "put_onion_in_pot()". 
-Plan for Player 0: "fill_dish_with_soup()".
-</example>
-
-<example> 
-H: Scene 164: Player 0 holds nothing. Player 1 holds nothing. Kitchen states: Pot makes a soup and soup needs to be filled in a dish. 
-A: Analysis: The pot has made a soup and it needs to be filled in a dish. Both players are holding nothing. One player should pick up a dish from the dispenser, and the other player should pick up an onion from the dispenser to start another cooking cycle.
-Intention for Player 1: "pickup(onion)".
-Plan for Player 0: "pickup(dish)".
+H: Scene 39: Player 0 holds one dish. Player 1 holds one BClemon. Kitchen states: Pot is empty, cutting_table has one AClemon on it, AClemoncookedfish is on one counter.  
+A: Analysis: Player 0 holds one dish, and Player 1 holds one BClemon. Player 0 should fill the dish with AClemoncookedfish, and then the cutting_table is full so that Player 1 should place the BClemon on one counter.
+Intention for Player 1: "fill_dish_with_AClemoncookedfish()". 
+Plan for Player 0: "place_BClemon_on_counter()".
 </example>
