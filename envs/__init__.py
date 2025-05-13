@@ -1,6 +1,6 @@
 from gym.envs.registration import register
 import sys, os
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 
 register(

@@ -1,4 +1,4 @@
-from .overcook_pygame.overcook_gym_env import OvercookPygameEnv
+from overcook_gym_env import OvercookPygameEnv
 from .multiagentenv import MultiAgentEnv
 from gymnasium.spaces import flatdim
 import numpy as np

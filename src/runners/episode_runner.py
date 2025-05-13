@@ -4,7 +4,8 @@ from components.episode_buffer import EpisodeBatch
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../../")
-from envs import REGISTRY as env_REGISTRY
+from envs.overcooked2_wrapper import Overcooked2Wrapper
+
 import torch as th
 
     
@@ -22,7 +23,7 @@ class EpisodeRunner:
         # elif self.args.env == "sc2v2":
         #     register_smacv2()
 
-        self.env = env_REGISTRY[self.args.env](
+        self.env = Overcooked2Wrapper(
             **self.args.env_args,
             common_reward=self.args.common_reward,
             reward_scalarisation=self.args.reward_scalarisation,

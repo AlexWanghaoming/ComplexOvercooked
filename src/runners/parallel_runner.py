@@ -4,8 +4,7 @@ from multiprocessing import Pipe, Process
 import numpy as np
 
 from components.episode_buffer import EpisodeBatch
-from envs import REGISTRY as env_REGISTRY
-from envs import register_smac, register_smacv2
+from envs.overcooked2_wrapper import Overcooked2Wrapper
 
 
 # Based (very) heavily on SubprocVecEnv from OpenAI Baselines
@@ -28,7 +27,7 @@ class ParallelRunner:
         # elif self.args.env == "sc2v2":
         #     register_smacv2()
 
-        env_fn = env_REGISTRY[self.args.env]
+        env_fn = Overcooked2Wrapper
         env_args = [self.args.env_args.copy() for _ in range(self.batch_size)]
         for i in range(self.batch_size):
             env_args[i]["seed"] += i
