@@ -37,7 +37,6 @@ class ComplexOvercookedGridworld(object):
         # self.layout_name = layout_name
     # X: 桌子， F：生鱼供应处，B：生牛肉供应处，H：汉堡包供应处，M：番茄供应处，D：盘子供应处，L：柠檬供应处，T：垃圾桶，E：送菜口，C：锅，U：案板
     def convert_layout_to_2d_list(self) -> List[List[str]]:
-
         ignore_chars = ['_']
         terrain_mtx = [[char for char in row if char not in  ignore_chars] for row in self.terrain]
         terrain_mtx = [row for row in terrain_mtx if row]  # Remove empty rows
@@ -55,18 +54,36 @@ class ComplexOvercookedGridworld(object):
                 pos_dict[terrain_type].append((x, y))
         return pos_dict
     
-    def get_counter_objects_dict(self) -> Dict[str, List[Tuple[int, int]]]:
+    def get_player_hold_objects(self) -> List[List]:
+        return self.env.state["player"]
+
+    def get_counter_objects_dict(self) -> Tuple[List[str], Dict[str, List[Tuple[int, int]]]]:
         """计算每个桌子X上物体的位置
 
         Returns:
             {item: [pos1, pos2]}
         """
-        counter_objects = defaultdict(list)
+        counter_objects_pos = defaultdict(list)
         for table in self.env.game.tables:
-            if isinstance(table, Table) and table.item:
-                counter_objects[table.item].append((table.rect.x//80, table.rect.y//80-1))
+            if table.item:
+                counter_objects_pos[table.item].append((table.rect.x//80, table.rect.y//80-1))
+            # else:
+            #     print("000")
+        return list(counter_objects_pos.keys()), counter_objects_pos
     
-        return counter_objects
+    # def get_table_item(self) -> Dict[str, List[Tuple[int, int]]]:
+    #     """查看桌子上已经有哪些item和dish
+
+    #     Returns:
+    #         {item: [pos1, pos2]}
+    #     """
+    #     counter_objects = defaultdict(list)
+    #     for table in self.env.game.tables:
+    #         if isinstance(table, Table) and table.item:
+    #             counter_objects[table.item].append((table.rect.x//80, table.rect.y//80-1))
+    #         else:
+    #             print("000")
+    #     return counter_objects
     
     def get_interaction_pos_and_dire(self, goal_pos:List[Tuple[int, int]]) -> List[Tuple[Tuple[int, int], Tuple[int, int]]]:
         """

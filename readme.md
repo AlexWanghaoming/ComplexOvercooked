@@ -28,7 +28,7 @@ Compared to the classic [overcooked_ai](https://github.com/HumanCompatibleAI/ove
 ## Installation 🛠️
 You can clone this project📁:
 ```bash
-git clone https://anonymous.4open.science/r/ComplexOvercooked-1D82/readme.md
+git clone https://github.com/AlexWanghaoming/ComplexOvercooked.git
 pip install -r requirements.txt
 ```
 
@@ -47,18 +47,28 @@ Evaluate the performance of agents ("llm", "human", "rl", "random") collaboratio
 ```Bash
 python tests/agents/test_agent.py --p0=rl --p1=human --map_name=supereasy --n_episode=5
 ```
-
+Note: If the LLM agent is selected, a LLM inference engine must be launched in advance. We use [vlmm](https://github.com/vllm-project/vllm) as the inference engine, and the LLM we employ is `Qwen2.5-72B-Instruct-int4`. Deploying this model requires 4 NVIDIA RTX 4090 GPUs , each with 24GB of VRAM . The command to launch vLLM is:
+```Bash
+CUDA_VISIBLE_DEVICES=4,5,6,7 python -m vllm.entrypoints.openai.api_server \
+ --host 0.0.0.0 \
+ --port 8089 \
+ --served-model-name Qwen2.5-72B-int4-Chat \
+ --model /path/to/your/models/Qwen2.5-72B-Instruct-GPTQ-Int4 \
+ --tensor-parallel-size 4 \
+ --max-model-len 8192 \
+ --gpu-memory-utilization 0.8
+```
 
 ## Main directory description
 - `envs/`: Contains the specific implementation of the Overcooked environment
 - `envs/overcooked_gym_env`: Contains the gym env of CompleOvercooked. 
 - `envs/overcooked_class`: Contains the class used in CompleOvercooked. 
-- `envs/overcooked__main`: Contains the game initialization of CompleOvercooked. 
+- `envs/overcooked_main`: Contains the game initialization of CompleOvercooked. 
 - `envs/agents`: Contains the class of the human, llm and RL agents. 
 - `envs/`: Contains the implementation of the Overcooked environment
-- `prompts`: Contains prompts used in LLM agent.
+- `prompts`: Contains prompts for LLM agent.
 - `src/`: Contains config files and main implementation of various MARL algorithms (IPPO, VDN, IQL, etc.)
-- `tests/`: Stores game resource materials
+- `tests/`: Contains the evaluation and unit test scripts. 
 
 # Acknowledgement
 Our code is built upon some prior works.

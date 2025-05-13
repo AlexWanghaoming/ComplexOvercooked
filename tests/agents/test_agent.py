@@ -29,9 +29,13 @@ def load_agents(p0_type, p1_type, args, rl_checkpoint_path=None, mdp:ComplexOver
 def main():
     parser = create_parser()
     parser.add_argument("--map_name", type=str, default="2playerhard")
-    parser.add_argument("--rl_checkpoint_path", type=str, default="/alpha/ComplexOvercooked/results/models/ippo_seed7_2playerhard_2025-04-10 14:35:56.640193/best_model")
+    # parser.add_argument("--map_name", type=str, default="supereasy")
+
+    parser.add_argument("--rl_checkpoint_path", type=str, default="results/models/ippo_seed7_2playerhard_2025-04-10 14:35:56.640193/best_model")
+    # parser.add_argument("--rl_checkpoint_path", type=str, default="results/models/ippo_seed7_supereasy_2025-04-10 10:07:15.864392/best_model")
+
     parser.add_argument("--p0", type=str, default="rl", choices=["random", "rl", "human", "llm"])
-    parser.add_argument("--p1", type=str, default="human", choices=["random", "rl", "human", "llm"])
+    parser.add_argument("--p1", type=str, default="rl", choices=["random", "rl", "human", "llm"])
     parser.add_argument("--n_episodes", type=int, default=5)
 
     args = parser.parse_args()
