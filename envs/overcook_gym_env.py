@@ -467,13 +467,14 @@ class OvercookPygameEnv(gym.Env):
 
             elif event.type == CUTTINGDOWN_EVENT:
                 for task in self.game.task_sprites:
-                    if event.item in task.task:
+                    if event.item in task.task:  # TODO: 目前是简单的字符串判定逻辑，例如：AClemon in AClemoncookedfish,后期考虑修改
                         shaped_reward += self.reward_shaping_params['get_need_cutting']
                         self.get_need_cutting += 1
                         tasksequence.append(f"cut the {event.item} completely")
                         if self.debug:
                             print(f"把{event.item}切好了，奖励{shaped_reward}")
-
+                    else:
+                        shaped_reward -= self.reward_shaping_params['get_need_cutting'] # 切出当前任务中不需要的东西，惩罚
             elif event.type == BEGINCOOKING_EVENT:
                 shaped_reward += self.reward_shaping_params['process_cooking']
                 tasksequence.append(f"begin cooking")
@@ -488,6 +489,9 @@ class OvercookPygameEnv(gym.Env):
                         tasksequence.append(f"cook up the required material{event.item}")
                         if self.debug:
                             print(f"把{event.item}煮好了，奖励{self.reward_shaping_params['get_need_cooking']}")
+                    else:
+                        shaped_reward -= self.reward_shaping_params['get_need_cooking'] # 烹饪出当前任务中不需要的东西，惩罚
+
             # elif event.type == COOKINGOUT_EVENT:
             #     if 'raw' in event.item:
             #         reward-=10
@@ -779,6 +783,7 @@ class OvercookPygameEnv(gym.Env):
                 hold_objects[i].append(player.item)
                 if player.dish:
                     hold_obj[self.itemdict[player.item]-1] = 1.0
+                    hold_obj[self.itemdict["dish"]-1] = 1.0
                     hold_objects[i].append("dish")
             else:
                 if player.dish:

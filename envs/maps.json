@@ -18,16 +18,16 @@
       "2playerhard":{
             "name": "2playerhard",
             "layout": [
-                 "XBMEX__",
-                 "C1  U__",
-                 "X   X__",
-                 "F  2T__",
-                 "XHDLX__",
+                 "XBMXEX__",
+                 "C1   U__",
+                 "X    X__",
+                 "F   2T__",
+                 "XHDXLX__",
                  "_______"],
             "items": ["cookedfish","ACtomato","BCtomato","cookedbeef","rawbeef","hamburger",
              "ACtomatocookedbeefhamburger","ACtomatohamburger","cookedbeefhamburger",
               "dish", "BClemon", "AClemon", "rawfish", "AClemoncookedfish"],
-            "task": {"AClemoncookedfish":[20, 0.7], "cookedfish":[10, 0.1], "ACtomatocookedbeefhamburger":[25, 0.1],"cookedbeefhamburger":[15, 0.1]},
+            "task": {"AClemoncookedfish":[20, 0.25], "cookedfish":[10, 0.25], "ACtomatocookedbeefhamburger":[25, 0.25],"cookedbeefhamburger":[15, 0.25]},
             "tasknum": 2,
             "players": 2
           },
@@ -35,11 +35,11 @@
           "4playereasy":{
             "name": "4playereasy",
             "layout": [
-                 "XBXMEX__",
-                 "C1  4U__",
-                 "X    X__",
-                 "H3  2T__",
-                 "XFXDLX__",
+                 "XBXMXEX__",
+                 "C1   4U__",
+                 "X     X__",
+                 "H3   2T__",
+                 "XFXDCLX__",
                  "________"],
 
             "items": ["cookedfish","ACtomato","BCtomato","cookedbeef","rawbeef","hamburger",
