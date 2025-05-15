@@ -30,8 +30,8 @@ def main():
     parser = create_parser()
     # parser.add_argument("--map_name", type=str, default="2playerhard")
     parser.add_argument("--map_name", type=str, default="supereasy")
-    # parser.add_argument("--rl_checkpoint_path", type=str, default="results/models/vdn_seed7_2playerhard_2025-05-14 20:39:57.128174/best_model")
-    parser.add_argument("--rl_checkpoint_path", type=str, default="results/models/ippo_seed7_supereasy_2025-04-10 10:07:15.864392/best_model")
+    # parser.add_argument("--rl_checkpoint_path", type=str, default="results/models/vdn_seed7_2playerhard_20250514_203957/best_model")
+    parser.add_argument("--rl_checkpoint_path", type=str, default="results/models/ippo_seed7_supereasy_20250410_100715/best_model")
 
     parser.add_argument("--p0", type=str, default="rl", choices=["random", "rl", "human", "llm"])
     parser.add_argument("--p1", type=str, default="llm", choices=["random", "rl", "human", "llm"])

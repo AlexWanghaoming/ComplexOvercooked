@@ -46,6 +46,7 @@ mpyq==0.2.5
 munch==4.0.0
 networkx==3.4.2
 numpy==2.2.0
+openai==1.71.0
 orderly-set==5.2.2
 packaging==24.2
 pandas==2.2.3
