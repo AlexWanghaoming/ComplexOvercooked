@@ -1,4 +1,4 @@
-# results/*
+results/sacred
 wandb/*
 __pycache__/
 *pdf
