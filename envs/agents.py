@@ -7,7 +7,7 @@ from overcook_gym_env import OvercookPygameEnv
 from llm_agent import LlmMediumLevelAgent
 
 from src.modules.agents.rnn_agent import RNNAgent
-from src.components.action_selectors import SoftPoliciesSelector
+from src.components.action_selectors import SoftPoliciesSelector, EpsilonGreedyActionSelector
 import argparse
 import random
 import pygame
@@ -25,6 +25,7 @@ class RLAgent:
         self.hidden_states = self.agent.init_hidden().unsqueeze(0).expand(1, self.args.n_agents, -1)
         self.agent_output_type = "pi_logits"
         self.action_selector = SoftPoliciesSelector(args) 
+        self.deterministic = False
 
     def load_model(self, checkpoint_path):
         self.agent.load_state_dict(th.load("{}/agent.th".format(checkpoint_path), map_location="cpu"))
@@ -42,8 +43,13 @@ class RLAgent:
             reshaped_avail_actions = np.array(avail_actions).reshape(self.args.n_agents, -1)
             agent_outs[reshaped_avail_actions == 0] = -1e10
             agent_outs = th.nn.functional.softmax(agent_outs, dim=-1).view(1, self.args.n_agents, -1)
-            chosen_actions = self.action_selector.select_action(agent_inputs=agent_outs)            
-            return chosen_actions[0][agent_idx].item()
+            if self.deterministic:
+                chosen_actions = th.argmax(agent_outs[0][0]).item()
+            else:
+                chosen_actions = self.action_selector.select_action(agent_inputs=agent_outs)
+                chosen_actions = chosen_actions[0][agent_idx].item()
+
+            return chosen_actions
         
 
 class HumanAgent:

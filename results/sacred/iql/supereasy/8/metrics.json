@@ -1,0 +1,90 @@
+{
+  "AClemoncookedfish_mean": {
+    "steps": [
+      600
+    ],
+    "timestamps": [
+      "2025-04-10T01:41:15.401044"
+    ],
+    "values": [
+      0.0
+    ]
+  },
+  "cooked_count_mean": {
+    "steps": [
+      600
+    ],
+    "timestamps": [
+      "2025-04-10T01:41:15.401016"
+    ],
+    "values": [
+      3.0
+    ]
+  },
+  "cutted_count_mean": {
+    "steps": [
+      600
+    ],
+    "timestamps": [
+      "2025-04-10T01:41:15.401025"
+    ],
+    "values": [
+      1.0
+    ]
+  },
+  "ep_length_mean": {
+    "steps": [
+      600
+    ],
+    "timestamps": [
+      "2025-04-10T01:41:15.401006"
+    ],
+    "values": [
+      600.0
+    ]
+  },
+  "epsilon": {
+    "steps": [
+      600
+    ],
+    "timestamps": [
+      "2025-04-10T01:41:15.401054"
+    ],
+    "values": [
+      1.0
+    ]
+  },
+  "return_mean": {
+    "steps": [
+      600
+    ],
+    "timestamps": [
+      "2025-04-10T01:41:15.400853"
+    ],
+    "values": [
+      12.0
+    ]
+  },
+  "return_std": {
+    "steps": [
+      600
+    ],
+    "timestamps": [
+      "2025-04-10T01:41:15.400991"
+    ],
+    "values": [
+      0.0
+    ]
+  },
+  "synthesis_count_mean": {
+    "steps": [
+      600
+    ],
+    "timestamps": [
+      "2025-04-10T01:41:15.401035"
+    ],
+    "values": [
+      0.0
+    ]
+  }
+}

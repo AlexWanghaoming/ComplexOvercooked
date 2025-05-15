@@ -1,0 +1,121 @@
+{
+  "artifacts": [],
+  "command": "my_main",
+  "experiment": {
+    "base_dir": "/alpha/ComplexOvercooked/src",
+    "dependencies": [
+      "numpy==2.0.2",
+      "PyYAML==6.0.2",
+      "sacred==0.8.7",
+      "torch==2.6.0"
+    ],
+    "mainfile": "evaluate.py",
+    "name": "pymarl",
+    "repositories": [
+      {
+        "commit": "e782d77b0b75c21b4ecc0a4320d9a158e1883b21",
+        "dirty": true,
+        "url": "git@github.com:AlexWanghaoming/ComplexOvercooked.git"
+      },
+      {
+        "commit": "e782d77b0b75c21b4ecc0a4320d9a158e1883b21",
+        "dirty": true,
+        "url": "git@github.com:AlexWanghaoming/ComplexOvercooked.git"
+      },
+      {
+        "commit": "e782d77b0b75c21b4ecc0a4320d9a158e1883b21",
+        "dirty": true,
+        "url": "git@github.com:AlexWanghaoming/ComplexOvercooked.git"
+      },
+      {
+        "commit": "e782d77b0b75c21b4ecc0a4320d9a158e1883b21",
+        "dirty": true,
+        "url": "git@github.com:AlexWanghaoming/ComplexOvercooked.git"
+      }
+    ],
+    "sources": [
+      [
+        "evaluate.py",
+        "_sources/evaluate_bb9304f7febbdd7944e3525b0bbd8c3c.py"
+      ],
+      [
+        "run.py",
+        "_sources/run_c5b1b2f4466da7288cc2c09410402711.py"
+      ],
+      [
+        "utils/logging.py",
+        "_sources/logging_987a6549f2515dae5d883771d25ca8af.py"
+      ],
+      [
+        "utils/utils.py",
+        "_sources/utils_d09937f53f96d48a095729190bb48ae8.py"
+      ]
+    ]
+  },
+  "fail_trace": [
+    "Traceback (most recent call last):\n",
+    "  File \"/home/wanghm/anaconda3/envs/proagent/lib/python3.9/site-packages/sacred/config/captured_function.py\", line 42, in captured_function\n    result = wrapped(*args, **kwargs)\n",
+    "  File \"/alpha/ComplexOvercooked/src/evaluate.py\", line 39, in my_main\n    run(_run, config, _log)\n",
+    "  File \"/alpha/ComplexOvercooked/src/run.py\", line 78, in run\n    run_sequential(args=args, logger=logger)\n",
+    "  File \"/alpha/ComplexOvercooked/src/run.py\", line 149, in run_sequential\n    mac = mac_REGISTRY[args.mac](buffer.scheme, groups, args)\n",
+    "  File \"/alpha/ComplexOvercooked/src/controllers/basic_controller.py\", line 9, in __init__\n    self.n_agents = args.n_agents\n",
+    "AttributeError: 'dict' object has no attribute 'n_agents'\n"
+  ],
+  "heartbeat": "2025-04-09T21:09:28.029429",
+  "host": {
+    "ENV": {},
+    "cpu": "11th Gen Intel(R) Core(TM) i9-11900K @ 3.50GHz",
+    "gpus": {
+      "driver_version": "535.86.05",
+      "gpus": [
+        {
+          "model": "NVIDIA GeForce RTX 3080",
+          "persistence_mode": false,
+          "total_memory": 10240
+        }
+      ]
+    },
+    "hostname": "wanghm",
+    "os": [
+      "Linux",
+      "Linux-6.5.0-18-generic-x86_64-with-glibc2.35"
+    ],
+    "python_version": "3.9.21"
+  },
+  "meta": {
+    "command": "my_main",
+    "config_updates": {},
+    "named_configs": [],
+    "options": {
+      "--beat-interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--id": null,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print-config": false,
+      "--priority": null,
+      "--queue": false,
+      "--s3": null,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [],
+      "help": false,
+      "with": false
+    }
+  },
+  "resources": [],
+  "result": null,
+  "start_time": "2025-04-09T21:09:27.302625",
+  "status": "FAILED",
+  "stop_time": "2025-04-09T21:09:28.031816"
+}

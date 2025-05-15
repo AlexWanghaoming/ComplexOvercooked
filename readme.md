@@ -26,7 +26,7 @@ Compared to the classic [overcooked_ai](https://github.com/HumanCompatibleAI/ove
 - TODO: Support PettingZoo API
 
 ## Installation 🛠️
-You can clone this project📁:
+You should install Python >=3.10 and clone this project📁:
 ```bash
 git clone https://github.com/AlexWanghaoming/ComplexOvercooked.git
 pip install -r requirements.txt

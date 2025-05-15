@@ -1,0 +1,1366 @@
+[INFO 20:31:32] pymarl Running command 'my_main'
+[INFO 20:31:32] pymarl Started run with ID "4"
+[DEBUG 20:31:32] pymarl Starting Heartbeat
+[DEBUG 20:31:32] my_main Started
+[INFO 20:31:32] my_main Experiment Parameters:
+[INFO 20:31:32] my_main 
+
+{   'action_selector': 'epsilon_greedy',
+    'add_value_last_step': True,
+    'agent': 'rnn',
+    'agent_output_type': 'q',
+    'batch_size': 32,
+    'batch_size_run': 1,
+    'buffer_cpu_only': True,
+    'buffer_size': 5000,
+    'checkpoint_path': '',
+    'common_reward': True,
+    'double_q': True,
+    'env': 'overcooked2',
+    'env_args': {   'ifrender': False,
+                    'map_name': '2playerhard',
+                    'seed': 3},
+    'epsilon_anneal_time': 5000000,
+    'epsilon_finish': 0.05,
+    'epsilon_start': 1.0,
+    'evaluate': False,
+    'evaluation_epsilon': 0.0,
+    'gamma': 0.99,
+    'grad_norm_clip': 10,
+    'hidden_dim': 128,
+    'hypergroup': None,
+    'label': 'default_label',
+    'learner': 'q_learner',
+    'learner_log_interval': 6000,
+    'load_step': 0,
+    'local_results_path': 'results',
+    'log_interval': 6000,
+    'lr': 0.001,
+    'lr_decay': True,
+    'mac': 'basic_mac',
+    'mixer': None,
+    'name': 'iql',
+    'obs_agent_id': True,
+    'obs_individual_obs': False,
+    'obs_last_action': False,
+    'optim_alpha': 0.99,
+    'optim_eps': 1e-05,
+    'render': False,
+    'repeat_id': 1,
+    'reward_scalarisation': 'mean',
+    'reward_shaping_horizon': 10000000.0,
+    'runner': 'episode',
+    'runner_log_interval': 6000,
+    'save_model': True,
+    'save_model_interval': 50000,
+    'save_replay': False,
+    'seed': 3,
+    'standardise_returns': False,
+    'standardise_rewards': False,
+    't_max': 20000000.0,
+    'target_update_interval_or_tau': 100,
+    'test_greedy': True,
+    'test_interval': 50000,
+    'test_nepisode': 1,
+    'use_cuda': False,
+    'use_rnn': True,
+    'use_tensorboard': False,
+    'use_wandb': True,
+    'wandb_mode': 'online',
+    'wandb_project': 'epymarl_overcooked2',
+    'wandb_save_model': False,
+    'wandb_team': 'wanghm'}
+
+[DEBUG 20:31:32] wandb.docker.auth Trying paths: ['/data/home/pssun/.docker/config.json', '/data/home/pssun/.dockercfg']
+[DEBUG 20:31:32] wandb.docker.auth No config file found
+[DEBUG 20:31:32] git.cmd Popen(['git', 'rev-parse', '--show-toplevel'], cwd=/data/home/pssun/my_marl_old, stdin=None, shell=False, universal_newlines=False)
+wandb: Using wandb-core as the SDK backend.  Please refer to https://wandb.me/wandb-core for more information.
+[DEBUG 20:31:32] urllib3.connectionpool Starting new HTTPS connection (1): api.wandb.ai:443
+[DEBUG 20:31:33] urllib3.connectionpool https://api.wandb.ai:443 "POST /graphql HTTP/11" 200 None
+[DEBUG 20:31:33] urllib3.connectionpool https://api.wandb.ai:443 "POST /graphql HTTP/11" 200 None
+wandb: Currently logged in as: wanghm. Use `wandb login --relogin` to force relogin
+[DEBUG 20:31:33] git.cmd Popen(['git', 'cat-file', '--batch-check'], cwd=/data/home/pssun/my_marl_old, stdin=<valid stream>, shell=False, universal_newlines=False)
+wandb: Tracking run with wandb version 0.19.1
+wandb: Run data is saved locally in /data/home/pssun/my_marl_old/wandb/run-20250113_203133-1ncatq4f
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run mild-bird-346
+wandb: ⭐️ View project at https://wandb.ai/wanghm/epymarl_overcooked2
+wandb: 🚀 View run at https://wandb.ai/wanghm/epymarl_overcooked2/runs/1ncatq4f
+[INFO 20:31:34] my_main *******************
+[INFO 20:31:34] my_main WANDB RUN ID:
+[INFO 20:31:34] my_main 1ncatq4f
+[INFO 20:31:34] my_main *******************
+[INFO 20:31:35] my_main Beginning training for 20000000.0 timesteps
+[INFO 20:31:37] my_main t_env: 600 / 20000000.0
+[INFO 20:31:37] my_main Estimated time left: 7 minutes, 6 seconds. Time passed: 1 seconds
+[INFO 20:31:37] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/600
+[INFO 20:33:48] my_main t_env: 51000 / 20000000.0
+[INFO 20:33:48] my_main Estimated time left: 14 hours, 26 minutes, 52 seconds. Time passed: 2 minutes, 12 seconds
+[INFO 20:33:49] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/51000
+[INFO 20:36:31] my_main t_env: 101400 / 20000000.0
+[INFO 20:36:31] my_main Estimated time left: 17 hours, 50 minutes, 51 seconds. Time passed: 4 minutes, 55 seconds
+[INFO 20:36:32] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/101400
+[INFO 20:39:17] my_main t_env: 151800 / 20000000.0
+[INFO 20:39:17] my_main Estimated time left: 18 hours, 12 minutes, 28 seconds. Time passed: 7 minutes, 41 seconds
+[INFO 20:39:18] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/151800
+[INFO 20:42:03] my_main t_env: 202200 / 20000000.0
+[INFO 20:42:03] my_main Estimated time left: 18 hours, 5 minutes, 16 seconds. Time passed: 10 minutes, 27 seconds
+[INFO 20:42:04] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/202200
+[INFO 20:44:49] my_main t_env: 252600 / 20000000.0
+[INFO 20:44:49] my_main Estimated time left: 18 hours, 4 minutes, 40 seconds. Time passed: 13 minutes, 13 seconds
+[INFO 20:44:50] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/252600
+[INFO 20:47:37] my_main t_env: 303000 / 20000000.0
+[INFO 20:47:37] my_main Estimated time left: 18 hours, 12 minutes, 35 seconds. Time passed: 16 minutes, 1 seconds
+[INFO 20:47:38] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/303000
+[INFO 20:50:23] my_main t_env: 353400 / 20000000.0
+[INFO 20:50:23] my_main Estimated time left: 17 hours, 59 minutes, 57 seconds. Time passed: 18 minutes, 47 seconds
+[INFO 20:50:24] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/353400
+[INFO 20:53:08] my_main t_env: 403800 / 20000000.0
+[INFO 20:53:08] my_main Estimated time left: 17 hours, 52 minutes, 21 seconds. Time passed: 21 minutes, 32 seconds
+[INFO 20:53:09] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/403800
+[INFO 20:55:53] my_main t_env: 454200 / 20000000.0
+[INFO 20:55:53] my_main Estimated time left: 17 hours, 43 minutes, 56 seconds. Time passed: 24 minutes, 17 seconds
+[INFO 20:55:54] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/454200
+[INFO 20:58:37] my_main t_env: 504600 / 20000000.0
+[INFO 20:58:37] my_main Estimated time left: 17 hours, 37 minutes, 47 seconds. Time passed: 27 minutes, 1 seconds
+[INFO 20:58:38] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/504600
+[INFO 21:01:21] my_main t_env: 555000 / 20000000.0
+[INFO 21:01:21] my_main Estimated time left: 17 hours, 31 minutes, 58 seconds. Time passed: 29 minutes, 45 seconds
+[INFO 21:01:22] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/555000
+[INFO 21:04:06] my_main t_env: 605400 / 20000000.0
+[INFO 21:04:06] my_main Estimated time left: 17 hours, 41 minutes, 42 seconds. Time passed: 32 minutes, 30 seconds
+[INFO 21:04:07] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/605400
+[INFO 21:06:52] my_main t_env: 655800 / 20000000.0
+[INFO 21:06:52] my_main Estimated time left: 17 hours, 37 minutes, 34 seconds. Time passed: 35 minutes, 16 seconds
+[INFO 21:06:52] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/655800
+[INFO 21:09:37] my_main t_env: 706200 / 20000000.0
+[INFO 21:09:37] my_main Estimated time left: 17 hours, 34 minutes, 10 seconds. Time passed: 38 minutes, 1 seconds
+[INFO 21:09:38] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/706200
+[INFO 21:12:22] my_main t_env: 756600 / 20000000.0
+[INFO 21:12:22] my_main Estimated time left: 17 hours, 32 minutes, 31 seconds. Time passed: 40 minutes, 46 seconds
+[INFO 21:12:23] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/756600
+[INFO 21:15:08] my_main t_env: 807000 / 20000000.0
+[INFO 21:15:08] my_main Estimated time left: 17 hours, 29 minutes, 24 seconds. Time passed: 43 minutes, 32 seconds
+[INFO 21:15:08] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/807000
+[INFO 21:17:53] my_main t_env: 857400 / 20000000.0
+[INFO 21:17:53] my_main Estimated time left: 17 hours, 29 minutes, 49 seconds. Time passed: 46 minutes, 17 seconds
+[INFO 21:17:54] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/857400
+[INFO 21:20:41] my_main t_env: 907800 / 20000000.0
+[INFO 21:20:41] my_main Estimated time left: 17 hours, 36 minutes, 15 seconds. Time passed: 49 minutes, 5 seconds
+[INFO 21:20:42] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/907800
+[INFO 21:23:29] my_main t_env: 958200 / 20000000.0
+[INFO 21:23:29] my_main Estimated time left: 17 hours, 40 minutes, 41 seconds. Time passed: 51 minutes, 53 seconds
+[INFO 21:23:30] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/958200
+[INFO 21:26:15] my_main t_env: 1008600 / 20000000.0
+[INFO 21:26:15] my_main Estimated time left: 17 hours, 21 minutes, 44 seconds. Time passed: 54 minutes, 39 seconds
+[INFO 21:26:16] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/1008600
+[INFO 21:29:02] my_main t_env: 1059000 / 20000000.0
+[INFO 21:29:02] my_main Estimated time left: 17 hours, 26 minutes, 33 seconds. Time passed: 57 minutes, 26 seconds
+[INFO 21:29:03] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/1059000
+[INFO 21:31:48] my_main t_env: 1109400 / 20000000.0
+[INFO 21:31:48] my_main Estimated time left: 17 hours, 13 minutes, 54 seconds. Time passed: 1 hours, 12 seconds
+[INFO 21:31:49] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/1109400
+[INFO 21:34:34] my_main t_env: 1159800 / 20000000.0
+[INFO 21:34:34] my_main Estimated time left: 17 hours, 18 minutes, 59 seconds. Time passed: 1 hours, 2 minutes, 58 seconds
+[INFO 21:34:35] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/1159800
+[INFO 21:37:21] my_main t_env: 1210200 / 20000000.0
+[INFO 21:37:21] my_main Estimated time left: 17 hours, 12 minutes, 24 seconds. Time passed: 1 hours, 5 minutes, 45 seconds
+[INFO 21:37:21] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/1210200
+[INFO 21:40:07] my_main t_env: 1260600 / 20000000.0
+[INFO 21:40:07] my_main Estimated time left: 17 hours, 9 minutes, 12 seconds. Time passed: 1 hours, 8 minutes, 31 seconds
+[INFO 21:40:07] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/1260600
+[INFO 21:42:53] my_main t_env: 1311000 / 20000000.0
+[INFO 21:42:53] my_main Estimated time left: 17 hours, 6 minutes, 18 seconds. Time passed: 1 hours, 11 minutes, 17 seconds
+[INFO 21:42:54] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/1311000
+[INFO 21:45:38] my_main t_env: 1361400 / 20000000.0
+[INFO 21:45:38] my_main Estimated time left: 17 hours, 2 minutes, 1 seconds. Time passed: 1 hours, 14 minutes, 3 seconds
+[INFO 21:45:39] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/1361400
+[INFO 21:48:24] my_main t_env: 1411800 / 20000000.0
+[INFO 21:48:24] my_main Estimated time left: 17 hours, 29 seconds. Time passed: 1 hours, 16 minutes, 49 seconds
+[INFO 21:48:25] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/1411800
+[INFO 21:51:10] my_main t_env: 1462200 / 20000000.0
+[INFO 21:51:10] my_main Estimated time left: 16 hours, 56 minutes, 38 seconds. Time passed: 1 hours, 19 minutes, 34 seconds
+[INFO 21:51:11] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/1462200
+[INFO 21:53:58] my_main t_env: 1512600 / 20000000.0
+[INFO 21:53:58] my_main Estimated time left: 17 hours, 4 minutes, 49 seconds. Time passed: 1 hours, 22 minutes, 22 seconds
+[INFO 21:53:59] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/1512600
+[INFO 21:56:45] my_main t_env: 1563000 / 20000000.0
+[INFO 21:56:45] my_main Estimated time left: 16 hours, 58 minutes, 56 seconds. Time passed: 1 hours, 25 minutes, 9 seconds
+[INFO 21:56:46] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/1563000
+[INFO 21:59:30] my_main t_env: 1613400 / 20000000.0
+[INFO 21:59:30] my_main Estimated time left: 16 hours, 43 minutes, 1 seconds. Time passed: 1 hours, 27 minutes, 54 seconds
+[INFO 21:59:31] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/1613400
+[INFO 22:02:15] my_main t_env: 1663800 / 20000000.0
+[INFO 22:02:15] my_main Estimated time left: 16 hours, 41 minutes, 16 seconds. Time passed: 1 hours, 30 minutes, 39 seconds
+[INFO 22:02:16] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/1663800
+[INFO 22:04:59] my_main t_env: 1714200 / 20000000.0
+[INFO 22:04:59] my_main Estimated time left: 16 hours, 32 minutes, 27 seconds. Time passed: 1 hours, 33 minutes, 23 seconds
+[INFO 22:05:00] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/1714200
+[INFO 22:07:45] my_main t_env: 1764600 / 20000000.0
+[INFO 22:07:45] my_main Estimated time left: 16 hours, 40 minutes, 41 seconds. Time passed: 1 hours, 36 minutes, 9 seconds
+[INFO 22:07:46] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/1764600
+[INFO 22:10:31] my_main t_env: 1815000 / 20000000.0
+[INFO 22:10:31] my_main Estimated time left: 16 hours, 36 minutes, 35 seconds. Time passed: 1 hours, 38 minutes, 55 seconds
+[INFO 22:10:32] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/1815000
+[INFO 22:13:19] my_main t_env: 1865400 / 20000000.0
+[INFO 22:13:19] my_main Estimated time left: 16 hours, 48 minutes, 20 seconds. Time passed: 1 hours, 41 minutes, 43 seconds
+[INFO 22:13:20] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/1865400
+[INFO 22:16:14] my_main t_env: 1915800 / 20000000.0
+[INFO 22:16:14] my_main Estimated time left: 17 hours, 24 minutes, 21 seconds. Time passed: 1 hours, 44 minutes, 38 seconds
+[INFO 22:16:15] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/1915800
+[INFO 22:19:09] my_main t_env: 1966200 / 20000000.0
+[INFO 22:19:09] my_main Estimated time left: 17 hours, 23 minutes, 44 seconds. Time passed: 1 hours, 47 minutes, 33 seconds
+[INFO 22:19:10] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/1966200
+[INFO 22:22:02] my_main t_env: 2016600 / 20000000.0
+[INFO 22:22:02] my_main Estimated time left: 17 hours, 8 minutes, 47 seconds. Time passed: 1 hours, 50 minutes, 26 seconds
+[INFO 22:22:03] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/2016600
+[INFO 22:24:53] my_main t_env: 2067000 / 20000000.0
+[INFO 22:24:53] my_main Estimated time left: 16 hours, 55 minutes, 7 seconds. Time passed: 1 hours, 53 minutes, 17 seconds
+[INFO 22:24:54] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/2067000
+[INFO 22:27:44] my_main t_env: 2117400 / 20000000.0
+[INFO 22:27:44] my_main Estimated time left: 16 hours, 53 minutes, 34 seconds. Time passed: 1 hours, 56 minutes, 8 seconds
+[INFO 22:27:45] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/2117400
+[INFO 22:30:38] my_main t_env: 2167800 / 20000000.0
+[INFO 22:30:38] my_main Estimated time left: 17 hours, 5 minutes, 36 seconds. Time passed: 1 hours, 59 minutes, 2 seconds
+[INFO 22:30:39] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/2167800
+[INFO 22:33:28] my_main t_env: 2218200 / 20000000.0
+[INFO 22:33:28] my_main Estimated time left: 16 hours, 37 minutes, 15 seconds. Time passed: 2 hours, 1 minutes, 52 seconds
+[INFO 22:33:29] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/2218200
+[INFO 22:36:20] my_main t_env: 2268600 / 20000000.0
+[INFO 22:36:20] my_main Estimated time left: 16 hours, 49 minutes, 55 seconds. Time passed: 2 hours, 4 minutes, 44 seconds
+[INFO 22:36:21] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/2268600
+[INFO 22:39:10] my_main t_env: 2319000 / 20000000.0
+[INFO 22:39:10] my_main Estimated time left: 16 hours, 34 minutes, 34 seconds. Time passed: 2 hours, 7 minutes, 34 seconds
+[INFO 22:39:11] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/2319000
+[INFO 22:42:01] my_main t_env: 2369400 / 20000000.0
+[INFO 22:42:01] my_main Estimated time left: 16 hours, 35 minutes, 26 seconds. Time passed: 2 hours, 10 minutes, 25 seconds
+[INFO 22:42:02] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/2369400
+[INFO 22:44:52] my_main t_env: 2419800 / 20000000.0
+[INFO 22:44:52] my_main Estimated time left: 16 hours, 33 minutes, 45 seconds. Time passed: 2 hours, 13 minutes, 16 seconds
+[INFO 22:44:53] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/2419800
+[INFO 22:47:44] my_main t_env: 2470200 / 20000000.0
+[INFO 22:47:44] my_main Estimated time left: 16 hours, 38 minutes, 5 seconds. Time passed: 2 hours, 16 minutes, 8 seconds
+[INFO 22:47:45] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/2470200
+[INFO 22:50:37] my_main t_env: 2520600 / 20000000.0
+[INFO 22:50:37] my_main Estimated time left: 16 hours, 38 minutes, 38 seconds. Time passed: 2 hours, 19 minutes, 1 seconds
+[INFO 22:50:38] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/2520600
+[INFO 22:53:28] my_main t_env: 2571000 / 20000000.0
+[INFO 22:53:28] my_main Estimated time left: 16 hours, 24 minutes, 27 seconds. Time passed: 2 hours, 21 minutes, 52 seconds
+[INFO 22:53:29] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/2571000
+[INFO 22:56:19] my_main t_env: 2621400 / 20000000.0
+[INFO 22:56:19] my_main Estimated time left: 16 hours, 27 minutes, 1 seconds. Time passed: 2 hours, 24 minutes, 43 seconds
+[INFO 22:56:20] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/2621400
+[INFO 22:59:11] my_main t_env: 2671800 / 20000000.0
+[INFO 22:59:11] my_main Estimated time left: 16 hours, 21 minutes, 37 seconds. Time passed: 2 hours, 27 minutes, 35 seconds
+[INFO 22:59:12] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/2671800
+[INFO 23:02:02] my_main t_env: 2722200 / 20000000.0
+[INFO 23:02:02] my_main Estimated time left: 16 hours, 16 minutes, 23 seconds. Time passed: 2 hours, 30 minutes, 26 seconds
+[INFO 23:02:03] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/2722200
+[INFO 23:04:53] my_main t_env: 2772600 / 20000000.0
+[INFO 23:04:53] my_main Estimated time left: 16 hours, 15 minutes, 47 seconds. Time passed: 2 hours, 33 minutes, 17 seconds
+[INFO 23:04:54] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/2772600
+[INFO 23:07:44] my_main t_env: 2823000 / 20000000.0
+[INFO 23:07:44] my_main Estimated time left: 16 hours, 10 minutes, 24 seconds. Time passed: 2 hours, 36 minutes, 8 seconds
+[INFO 23:07:45] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/2823000
+[INFO 23:10:35] my_main t_env: 2873400 / 20000000.0
+[INFO 23:10:35] my_main Estimated time left: 16 hours, 8 minutes, 20 seconds. Time passed: 2 hours, 38 minutes, 59 seconds
+[INFO 23:10:36] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/2873400
+[INFO 23:13:25] my_main t_env: 2923800 / 20000000.0
+[INFO 23:13:25] my_main Estimated time left: 16 hours, 2 minutes, 56 seconds. Time passed: 2 hours, 41 minutes, 49 seconds
+[INFO 23:13:26] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/2923800
+[INFO 23:16:14] my_main t_env: 2974200 / 20000000.0
+[INFO 23:16:14] my_main Estimated time left: 15 hours, 51 minutes, 31 seconds. Time passed: 2 hours, 44 minutes, 38 seconds
+[INFO 23:16:15] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/2974200
+[INFO 23:19:03] my_main t_env: 3024600 / 20000000.0
+[INFO 23:19:03] my_main Estimated time left: 15 hours, 46 minutes, 13 seconds. Time passed: 2 hours, 47 minutes, 27 seconds
+[INFO 23:19:04] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/3024600
+[INFO 23:21:54] my_main t_env: 3075000 / 20000000.0
+[INFO 23:21:54] my_main Estimated time left: 15 hours, 58 minutes, 26 seconds. Time passed: 2 hours, 50 minutes, 18 seconds
+[INFO 23:21:55] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/3075000
+[INFO 23:24:44] my_main t_env: 3125400 / 20000000.0
+[INFO 23:24:44] my_main Estimated time left: 15 hours, 49 minutes, 8 seconds. Time passed: 2 hours, 53 minutes, 8 seconds
+[INFO 23:24:45] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/3125400
+[INFO 23:27:34] my_main t_env: 3175800 / 20000000.0
+[INFO 23:27:34] my_main Estimated time left: 15 hours, 45 minutes, 5 seconds. Time passed: 2 hours, 55 minutes, 58 seconds
+[INFO 23:27:35] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/3175800
+[INFO 23:30:24] my_main t_env: 3226200 / 20000000.0
+[INFO 23:30:24] my_main Estimated time left: 15 hours, 44 minutes, 12 seconds. Time passed: 2 hours, 58 minutes, 48 seconds
+[INFO 23:30:25] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/3226200
+[INFO 23:33:15] my_main t_env: 3276600 / 20000000.0
+[INFO 23:33:15] my_main Estimated time left: 15 hours, 46 minutes, 49 seconds. Time passed: 3 hours, 1 minutes, 40 seconds
+[INFO 23:33:16] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/3276600
+[INFO 23:36:06] my_main t_env: 3327000 / 20000000.0
+[INFO 23:36:06] my_main Estimated time left: 15 hours, 41 minutes, 9 seconds. Time passed: 3 hours, 4 minutes, 30 seconds
+[INFO 23:36:07] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/3327000
+[INFO 23:39:00] my_main t_env: 3377400 / 20000000.0
+[INFO 23:39:00] my_main Estimated time left: 15 hours, 56 minutes, 32 seconds. Time passed: 3 hours, 7 minutes, 24 seconds
+[INFO 23:39:01] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/3377400
+[INFO 23:41:54] my_main t_env: 3427800 / 20000000.0
+[INFO 23:41:54] my_main Estimated time left: 15 hours, 51 minutes, 34 seconds. Time passed: 3 hours, 10 minutes, 18 seconds
+[INFO 23:41:55] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/3427800
+[INFO 23:44:48] my_main t_env: 3478200 / 20000000.0
+[INFO 23:44:48] my_main Estimated time left: 15 hours, 50 minutes, 51 seconds. Time passed: 3 hours, 13 minutes, 12 seconds
+[INFO 23:44:49] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/3478200
+[INFO 23:47:38] my_main t_env: 3528600 / 20000000.0
+[INFO 23:47:38] my_main Estimated time left: 15 hours, 27 minutes, 1 seconds. Time passed: 3 hours, 16 minutes, 2 seconds
+[INFO 23:47:39] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/3528600
+[INFO 23:50:27] my_main t_env: 3579000 / 20000000.0
+[INFO 23:50:27] my_main Estimated time left: 15 hours, 18 minutes, 4 seconds. Time passed: 3 hours, 18 minutes, 51 seconds
+[INFO 23:50:28] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/3579000
+[INFO 23:53:20] my_main t_env: 3629400 / 20000000.0
+[INFO 23:53:20] my_main Estimated time left: 15 hours, 36 minutes, 7 seconds. Time passed: 3 hours, 21 minutes, 44 seconds
+[INFO 23:53:21] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/3629400
+[INFO 23:56:11] my_main t_env: 3679800 / 20000000.0
+[INFO 23:56:11] my_main Estimated time left: 15 hours, 23 minutes, 50 seconds. Time passed: 3 hours, 24 minutes, 35 seconds
+[INFO 23:56:12] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/3679800
+[INFO 23:59:02] my_main t_env: 3730200 / 20000000.0
+[INFO 23:59:02] my_main Estimated time left: 15 hours, 18 minutes, 35 seconds. Time passed: 3 hours, 27 minutes, 26 seconds
+[INFO 23:59:03] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/3730200
+[INFO 00:01:53] my_main t_env: 3780600 / 20000000.0
+[INFO 00:01:53] my_main Estimated time left: 15 hours, 17 minutes, 52 seconds. Time passed: 3 hours, 30 minutes, 17 seconds
+[INFO 00:01:54] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/3780600
+[INFO 00:04:46] my_main t_env: 3831000 / 20000000.0
+[INFO 00:04:46] my_main Estimated time left: 15 hours, 24 minutes, 22 seconds. Time passed: 3 hours, 33 minutes, 10 seconds
+[INFO 00:04:47] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/3831000
+[INFO 00:07:38] my_main t_env: 3881400 / 20000000.0
+[INFO 00:07:38] my_main Estimated time left: 15 hours, 19 minutes, 1 seconds. Time passed: 3 hours, 36 minutes, 2 seconds
+[INFO 00:07:39] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/3881400
+[INFO 00:10:28] my_main t_env: 3931800 / 20000000.0
+[INFO 00:10:28] my_main Estimated time left: 15 hours, 3 minutes, 51 seconds. Time passed: 3 hours, 38 minutes, 53 seconds
+[INFO 00:10:29] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/3931800
+[INFO 00:13:17] my_main t_env: 3982200 / 20000000.0
+[INFO 00:13:17] my_main Estimated time left: 14 hours, 54 minutes, 58 seconds. Time passed: 3 hours, 41 minutes, 41 seconds
+[INFO 00:13:18] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/3982200
+[INFO 00:16:07] my_main t_env: 4032600 / 20000000.0
+[INFO 00:16:07] my_main Estimated time left: 14 hours, 54 minutes, 3 seconds. Time passed: 3 hours, 44 minutes, 31 seconds
+[INFO 00:16:08] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/4032600
+[INFO 00:19:00] my_main t_env: 4083000 / 20000000.0
+[INFO 00:19:00] my_main Estimated time left: 15 hours, 14 minutes, 4 seconds. Time passed: 3 hours, 47 minutes, 24 seconds
+[INFO 00:19:01] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/4083000
+[INFO 00:21:54] my_main t_env: 4133400 / 20000000.0
+[INFO 00:21:54] my_main Estimated time left: 15 hours, 12 minutes, 29 seconds. Time passed: 3 hours, 50 minutes, 18 seconds
+[INFO 00:21:55] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/4133400
+[INFO 00:24:48] my_main t_env: 4183800 / 20000000.0
+[INFO 00:24:48] my_main Estimated time left: 15 hours, 8 minutes, 49 seconds. Time passed: 3 hours, 53 minutes, 12 seconds
+[INFO 00:24:49] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/4183800
+[INFO 00:27:40] my_main t_env: 4234200 / 20000000.0
+[INFO 00:27:40] my_main Estimated time left: 14 hours, 54 minutes, 55 seconds. Time passed: 3 hours, 56 minutes, 4 seconds
+[INFO 00:27:41] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/4234200
+[INFO 00:30:32] my_main t_env: 4284600 / 20000000.0
+[INFO 00:30:32] my_main Estimated time left: 14 hours, 53 minutes, 35 seconds. Time passed: 3 hours, 58 minutes, 56 seconds
+[INFO 00:30:33] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/4284600
+[INFO 00:33:31] my_main t_env: 4335000 / 20000000.0
+[INFO 00:33:31] my_main Estimated time left: 15 hours, 27 minutes, 15 seconds. Time passed: 4 hours, 1 minutes, 55 seconds
+[INFO 00:33:32] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/4335000
+[INFO 00:36:32] my_main t_env: 4385400 / 20000000.0
+[INFO 00:36:32] my_main Estimated time left: 15 hours, 34 minutes, 4 seconds. Time passed: 4 hours, 4 minutes, 56 seconds
+[INFO 00:36:33] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/4385400
+[INFO 00:39:29] my_main t_env: 4435800 / 20000000.0
+[INFO 00:39:29] my_main Estimated time left: 15 hours, 11 minutes, 5 seconds. Time passed: 4 hours, 7 minutes, 53 seconds
+[INFO 00:39:30] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/4435800
+[INFO 00:42:27] my_main t_env: 4486200 / 20000000.0
+[INFO 00:42:27] my_main Estimated time left: 15 hours, 16 minutes, 27 seconds. Time passed: 4 hours, 10 minutes, 51 seconds
+[INFO 00:42:28] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/4486200
+[INFO 00:45:21] my_main t_env: 4536600 / 20000000.0
+[INFO 00:45:21] my_main Estimated time left: 14 hours, 49 minutes, 44 seconds. Time passed: 4 hours, 13 minutes, 45 seconds
+[INFO 00:45:22] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/4536600
+[INFO 00:48:17] my_main t_env: 4587000 / 20000000.0
+[INFO 00:48:17] my_main Estimated time left: 14 hours, 54 minutes, 51 seconds. Time passed: 4 hours, 16 minutes, 41 seconds
+[INFO 00:48:18] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/4587000
+[INFO 00:51:16] my_main t_env: 4637400 / 20000000.0
+[INFO 00:51:16] my_main Estimated time left: 15 hours, 11 minutes, 2 seconds. Time passed: 4 hours, 19 minutes, 40 seconds
+[INFO 00:51:17] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/4637400
+[INFO 00:54:14] my_main t_env: 4687800 / 20000000.0
+[INFO 00:54:14] my_main Estimated time left: 14 hours, 59 minutes, 35 seconds. Time passed: 4 hours, 22 minutes, 38 seconds
+[INFO 00:54:15] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/4687800
+[INFO 00:57:08] my_main t_env: 4738200 / 20000000.0
+[INFO 00:57:08] my_main Estimated time left: 14 hours, 37 minutes, 4 seconds. Time passed: 4 hours, 25 minutes, 32 seconds
+[INFO 00:57:09] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/4738200
+[INFO 01:00:03] my_main t_env: 4788600 / 20000000.0
+[INFO 01:00:03] my_main Estimated time left: 14 hours, 42 minutes, 10 seconds. Time passed: 4 hours, 28 minutes, 27 seconds
+[INFO 01:00:04] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/4788600
+[INFO 01:02:56] my_main t_env: 4839000 / 20000000.0
+[INFO 01:02:56] my_main Estimated time left: 14 hours, 29 minutes, 3 seconds. Time passed: 4 hours, 31 minutes, 20 seconds
+[INFO 01:02:57] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/4839000
+[INFO 01:05:50] my_main t_env: 4889400 / 20000000.0
+[INFO 01:05:50] my_main Estimated time left: 14 hours, 29 minutes, 58 seconds. Time passed: 4 hours, 34 minutes, 14 seconds
+[INFO 01:05:51] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/4889400
+[INFO 01:08:46] my_main t_env: 4939800 / 20000000.0
+[INFO 01:08:46] my_main Estimated time left: 14 hours, 32 minutes, 38 seconds. Time passed: 4 hours, 37 minutes, 10 seconds
+[INFO 01:08:47] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/4939800
+[INFO 01:11:42] my_main t_env: 4990200 / 20000000.0
+[INFO 01:11:42] my_main Estimated time left: 14 hours, 34 minutes, 9 seconds. Time passed: 4 hours, 40 minutes, 6 seconds
+[INFO 01:11:43] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/4990200
+[INFO 01:14:37] my_main t_env: 5040600 / 20000000.0
+[INFO 01:14:37] my_main Estimated time left: 14 hours, 24 minutes, 36 seconds. Time passed: 4 hours, 43 minutes, 1 seconds
+[INFO 01:14:38] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/5040600
+[INFO 01:17:25] my_main t_env: 5091000 / 20000000.0
+[INFO 01:17:25] my_main Estimated time left: 13 hours, 51 minutes, 22 seconds. Time passed: 4 hours, 45 minutes, 49 seconds
+[INFO 01:17:26] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/5091000
+[INFO 01:20:12] my_main t_env: 5141400 / 20000000.0
+[INFO 01:20:12] my_main Estimated time left: 13 hours, 39 minutes, 55 seconds. Time passed: 4 hours, 48 minutes, 36 seconds
+[INFO 01:20:13] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/5141400
+[INFO 01:22:58] my_main t_env: 5191800 / 20000000.0
+[INFO 01:22:58] my_main Estimated time left: 13 hours, 31 minutes, 38 seconds. Time passed: 4 hours, 51 minutes, 22 seconds
+[INFO 01:22:59] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/5191800
+[INFO 01:25:44] my_main t_env: 5242200 / 20000000.0
+[INFO 01:25:44] my_main Estimated time left: 13 hours, 29 minutes, 24 seconds. Time passed: 4 hours, 54 minutes, 8 seconds
+[INFO 01:25:45] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/5242200
+[INFO 01:28:33] my_main t_env: 5292600 / 20000000.0
+[INFO 01:28:33] my_main Estimated time left: 13 hours, 42 minutes, 37 seconds. Time passed: 4 hours, 56 minutes, 57 seconds
+[INFO 01:28:34] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/5292600
+[INFO 01:31:19] my_main t_env: 5343000 / 20000000.0
+[INFO 01:31:19] my_main Estimated time left: 13 hours, 26 minutes, 0 seconds. Time passed: 4 hours, 59 minutes, 43 seconds
+[INFO 01:31:20] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/5343000
+[INFO 01:34:07] my_main t_env: 5393400 / 20000000.0
+[INFO 01:34:07] my_main Estimated time left: 13 hours, 30 minutes, 16 seconds. Time passed: 5 hours, 2 minutes, 31 seconds
+[INFO 01:34:08] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/5393400
+[INFO 01:36:57] my_main t_env: 5443800 / 20000000.0
+[INFO 01:36:57] my_main Estimated time left: 13 hours, 37 minutes, 58 seconds. Time passed: 5 hours, 5 minutes, 21 seconds
+[INFO 01:36:58] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/5443800
+[INFO 01:39:47] my_main t_env: 5494200 / 20000000.0
+[INFO 01:39:47] my_main Estimated time left: 13 hours, 38 minutes, 1 seconds. Time passed: 5 hours, 8 minutes, 11 seconds
+[INFO 01:39:48] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/5494200
+[INFO 01:42:37] my_main t_env: 5544600 / 20000000.0
+[INFO 01:42:37] my_main Estimated time left: 13 hours, 30 minutes, 11 seconds. Time passed: 5 hours, 11 minutes, 1 seconds
+[INFO 01:42:38] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/5544600
+[INFO 01:45:27] my_main t_env: 5595000 / 20000000.0
+[INFO 01:45:27] my_main Estimated time left: 13 hours, 32 minutes, 18 seconds. Time passed: 5 hours, 13 minutes, 51 seconds
+[INFO 01:45:28] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/5595000
+[INFO 01:48:17] my_main t_env: 5645400 / 20000000.0
+[INFO 01:48:17] my_main Estimated time left: 13 hours, 23 minutes, 28 seconds. Time passed: 5 hours, 16 minutes, 41 seconds
+[INFO 01:48:17] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/5645400
+[INFO 01:51:05] my_main t_env: 5695800 / 20000000.0
+[INFO 01:51:05] my_main Estimated time left: 13 hours, 16 minutes, 11 seconds. Time passed: 5 hours, 19 minutes, 29 seconds
+[INFO 01:51:06] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/5695800
+[INFO 01:53:55] my_main t_env: 5746200 / 20000000.0
+[INFO 01:53:55] my_main Estimated time left: 13 hours, 21 minutes, 18 seconds. Time passed: 5 hours, 22 minutes, 19 seconds
+[INFO 01:53:56] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/5746200
+[INFO 01:56:45] my_main t_env: 5796600 / 20000000.0
+[INFO 01:56:45] my_main Estimated time left: 13 hours, 16 minutes, 50 seconds. Time passed: 5 hours, 25 minutes, 9 seconds
+[INFO 01:56:46] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/5796600
+[INFO 01:59:32] my_main t_env: 5847000 / 20000000.0
+[INFO 01:59:32] my_main Estimated time left: 13 hours, 2 minutes, 56 seconds. Time passed: 5 hours, 27 minutes, 56 seconds
+[INFO 01:59:33] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/5847000
+[INFO 02:02:20] my_main t_env: 5897400 / 20000000.0
+[INFO 02:02:20] my_main Estimated time left: 13 hours, 5 minutes, 25 seconds. Time passed: 5 hours, 30 minutes, 44 seconds
+[INFO 02:02:21] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/5897400
+[INFO 02:05:06] my_main t_env: 5947800 / 20000000.0
+[INFO 02:05:06] my_main Estimated time left: 12 hours, 51 minutes, 12 seconds. Time passed: 5 hours, 33 minutes, 30 seconds
+[INFO 02:05:07] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/5947800
+[INFO 02:07:50] my_main t_env: 5998200 / 20000000.0
+[INFO 02:07:50] my_main Estimated time left: 12 hours, 39 minutes, 43 seconds. Time passed: 5 hours, 36 minutes, 14 seconds
+[INFO 02:07:51] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/5998200
+[INFO 02:10:35] my_main t_env: 6048600 / 20000000.0
+[INFO 02:10:35] my_main Estimated time left: 12 hours, 40 minutes, 12 seconds. Time passed: 5 hours, 38 minutes, 59 seconds
+[INFO 02:10:36] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/6048600
+[INFO 02:13:21] my_main t_env: 6099000 / 20000000.0
+[INFO 02:13:21] my_main Estimated time left: 12 hours, 44 minutes, 12 seconds. Time passed: 5 hours, 41 minutes, 45 seconds
+[INFO 02:13:22] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/6099000
+[INFO 02:16:05] my_main t_env: 6149400 / 20000000.0
+[INFO 02:16:05] my_main Estimated time left: 12 hours, 30 minutes, 51 seconds. Time passed: 5 hours, 44 minutes, 29 seconds
+[INFO 02:16:06] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/6149400
+[INFO 02:18:50] my_main t_env: 6199800 / 20000000.0
+[INFO 02:18:50] my_main Estimated time left: 12 hours, 33 minutes, 19 seconds. Time passed: 5 hours, 47 minutes, 14 seconds
+[INFO 02:18:51] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/6199800
+[INFO 02:21:36] my_main t_env: 6250200 / 20000000.0
+[INFO 02:21:36] my_main Estimated time left: 12 hours, 33 minutes, 5 seconds. Time passed: 5 hours, 50 minutes, 0 seconds
+[INFO 02:21:37] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/6250200
+[INFO 02:24:20] my_main t_env: 6300600 / 20000000.0
+[INFO 02:24:20] my_main Estimated time left: 12 hours, 21 minutes, 36 seconds. Time passed: 5 hours, 52 minutes, 44 seconds
+[INFO 02:24:21] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/6300600
+[INFO 02:27:01] my_main t_env: 6351000 / 20000000.0
+[INFO 02:27:01] my_main Estimated time left: 12 hours, 10 minutes, 31 seconds. Time passed: 5 hours, 55 minutes, 26 seconds
+[INFO 02:27:02] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/6351000
+[INFO 02:29:44] my_main t_env: 6401400 / 20000000.0
+[INFO 02:29:44] my_main Estimated time left: 12 hours, 11 minutes, 53 seconds. Time passed: 5 hours, 58 minutes, 8 seconds
+[INFO 02:29:45] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/6401400
+[INFO 02:32:25] my_main t_env: 6451800 / 20000000.0
+[INFO 02:32:25] my_main Estimated time left: 12 hours, 26 seconds. Time passed: 6 hours, 49 seconds
+[INFO 02:32:26] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/6451800
+[INFO 02:35:06] my_main t_env: 6502200 / 20000000.0
+[INFO 02:35:06] my_main Estimated time left: 11 hours, 56 minutes, 21 seconds. Time passed: 6 hours, 3 minutes, 30 seconds
+[INFO 02:35:07] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/6502200
+[INFO 02:37:46] my_main t_env: 6552600 / 20000000.0
+[INFO 02:37:46] my_main Estimated time left: 11 hours, 52 minutes, 30 seconds. Time passed: 6 hours, 6 minutes, 10 seconds
+[INFO 02:37:47] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/6552600
+[INFO 02:40:27] my_main t_env: 6603000 / 20000000.0
+[INFO 02:40:27] my_main Estimated time left: 11 hours, 53 minutes, 19 seconds. Time passed: 6 hours, 8 minutes, 51 seconds
+[INFO 02:40:28] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/6603000
+[INFO 02:43:08] my_main t_env: 6653400 / 20000000.0
+[INFO 02:43:08] my_main Estimated time left: 11 hours, 50 minutes, 10 seconds. Time passed: 6 hours, 11 minutes, 32 seconds
+[INFO 02:43:09] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/6653400
+[INFO 02:45:49] my_main t_env: 6703800 / 20000000.0
+[INFO 02:45:49] my_main Estimated time left: 11 hours, 49 minutes, 41 seconds. Time passed: 6 hours, 14 minutes, 13 seconds
+[INFO 02:45:50] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/6703800
+[INFO 02:48:30] my_main t_env: 6754200 / 20000000.0
+[INFO 02:48:30] my_main Estimated time left: 11 hours, 46 minutes, 23 seconds. Time passed: 6 hours, 16 minutes, 54 seconds
+[INFO 02:48:31] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/6754200
+[INFO 02:51:12] my_main t_env: 6804600 / 20000000.0
+[INFO 02:51:12] my_main Estimated time left: 11 hours, 44 minutes, 29 seconds. Time passed: 6 hours, 19 minutes, 36 seconds
+[INFO 02:51:13] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/6804600
+[INFO 02:53:53] my_main t_env: 6855000 / 20000000.0
+[INFO 02:53:53] my_main Estimated time left: 11 hours, 40 minutes, 21 seconds. Time passed: 6 hours, 22 minutes, 17 seconds
+[INFO 02:53:54] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/6855000
+[INFO 02:56:34] my_main t_env: 6905400 / 20000000.0
+[INFO 02:56:34] my_main Estimated time left: 11 hours, 38 minutes, 12 seconds. Time passed: 6 hours, 24 minutes, 58 seconds
+[INFO 02:56:35] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/6905400
+[INFO 02:59:15] my_main t_env: 6955800 / 20000000.0
+[INFO 02:59:15] my_main Estimated time left: 11 hours, 35 minutes, 24 seconds. Time passed: 6 hours, 27 minutes, 39 seconds
+[INFO 02:59:16] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/6955800
+[INFO 03:01:57] my_main t_env: 7006200 / 20000000.0
+[INFO 03:01:57] my_main Estimated time left: 11 hours, 33 minutes, 41 seconds. Time passed: 6 hours, 30 minutes, 21 seconds
+[INFO 03:01:58] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/7006200
+[INFO 03:04:38] my_main t_env: 7056600 / 20000000.0
+[INFO 03:04:38] my_main Estimated time left: 11 hours, 31 minutes, 52 seconds. Time passed: 6 hours, 33 minutes, 3 seconds
+[INFO 03:04:39] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/7056600
+[INFO 03:07:21] my_main t_env: 7107000 / 20000000.0
+[INFO 03:07:21] my_main Estimated time left: 11 hours, 31 minutes, 27 seconds. Time passed: 6 hours, 35 minutes, 45 seconds
+[INFO 03:07:22] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/7107000
+[INFO 03:10:03] my_main t_env: 7157400 / 20000000.0
+[INFO 03:10:03] my_main Estimated time left: 11 hours, 31 minutes, 37 seconds. Time passed: 6 hours, 38 minutes, 28 seconds
+[INFO 03:10:04] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/7157400
+[INFO 03:12:46] my_main t_env: 7207800 / 20000000.0
+[INFO 03:12:46] my_main Estimated time left: 11 hours, 27 minutes, 39 seconds. Time passed: 6 hours, 41 minutes, 10 seconds
+[INFO 03:12:47] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/7207800
+[INFO 03:15:27] my_main t_env: 7258200 / 20000000.0
+[INFO 03:15:27] my_main Estimated time left: 11 hours, 20 minutes, 2 seconds. Time passed: 6 hours, 43 minutes, 52 seconds
+[INFO 03:15:28] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/7258200
+[INFO 03:18:08] my_main t_env: 7308600 / 20000000.0
+[INFO 03:18:08] my_main Estimated time left: 11 hours, 12 minutes, 56 seconds. Time passed: 6 hours, 46 minutes, 32 seconds
+[INFO 03:18:09] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/7308600
+[INFO 03:20:48] my_main t_env: 7359000 / 20000000.0
+[INFO 03:20:48] my_main Estimated time left: 11 hours, 11 minutes, 33 seconds. Time passed: 6 hours, 49 minutes, 13 seconds
+[INFO 03:20:49] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/7359000
+[INFO 03:23:32] my_main t_env: 7409400 / 20000000.0
+[INFO 03:23:32] my_main Estimated time left: 11 hours, 20 minutes, 38 seconds. Time passed: 6 hours, 51 minutes, 56 seconds
+[INFO 03:23:33] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/7409400
+[INFO 03:26:15] my_main t_env: 7459800 / 20000000.0
+[INFO 03:26:15] my_main Estimated time left: 11 hours, 17 minutes, 2 seconds. Time passed: 6 hours, 54 minutes, 39 seconds
+[INFO 03:26:16] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/7459800
+[INFO 03:28:58] my_main t_env: 7510200 / 20000000.0
+[INFO 03:28:58] my_main Estimated time left: 11 hours, 10 minutes, 28 seconds. Time passed: 6 hours, 57 minutes, 22 seconds
+[INFO 03:28:58] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/7510200
+[INFO 03:31:40] my_main t_env: 7560600 / 20000000.0
+[INFO 03:31:40] my_main Estimated time left: 11 hours, 8 minutes, 25 seconds. Time passed: 7 hours, 4 seconds
+[INFO 03:31:41] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/7560600
+[INFO 03:34:22] my_main t_env: 7611000 / 20000000.0
+[INFO 03:34:22] my_main Estimated time left: 11 hours, 5 minutes, 40 seconds. Time passed: 7 hours, 2 minutes, 47 seconds
+[INFO 03:34:23] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/7611000
+[INFO 03:37:05] my_main t_env: 7661400 / 20000000.0
+[INFO 03:37:05] my_main Estimated time left: 11 hours, 2 minutes, 19 seconds. Time passed: 7 hours, 5 minutes, 29 seconds
+[INFO 03:37:06] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/7661400
+[INFO 03:39:46] my_main t_env: 7711800 / 20000000.0
+[INFO 03:39:46] my_main Estimated time left: 10 hours, 55 minutes, 49 seconds. Time passed: 7 hours, 8 minutes, 10 seconds
+[INFO 03:39:47] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/7711800
+[INFO 03:42:29] my_main t_env: 7762200 / 20000000.0
+[INFO 03:42:29] my_main Estimated time left: 10 hours, 58 minutes, 52 seconds. Time passed: 7 hours, 10 minutes, 53 seconds
+[INFO 03:42:30] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/7762200
+[INFO 03:45:10] my_main t_env: 7812600 / 20000000.0
+[INFO 03:45:10] my_main Estimated time left: 10 hours, 49 minutes, 49 seconds. Time passed: 7 hours, 13 minutes, 34 seconds
+[INFO 03:45:12] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/7812600
+[INFO 03:47:52] my_main t_env: 7863000 / 20000000.0
+[INFO 03:47:52] my_main Estimated time left: 10 hours, 48 minutes, 6 seconds. Time passed: 7 hours, 16 minutes, 16 seconds
+[INFO 03:47:53] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/7863000
+[INFO 03:50:34] my_main t_env: 7913400 / 20000000.0
+[INFO 03:50:34] my_main Estimated time left: 10 hours, 46 minutes, 39 seconds. Time passed: 7 hours, 18 minutes, 58 seconds
+[INFO 03:50:34] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/7913400
+[INFO 03:53:16] my_main t_env: 7963800 / 20000000.0
+[INFO 03:53:16] my_main Estimated time left: 10 hours, 45 minutes, 57 seconds. Time passed: 7 hours, 21 minutes, 40 seconds
+[INFO 03:53:17] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/7963800
+[INFO 03:55:59] my_main t_env: 8014200 / 20000000.0
+[INFO 03:55:59] my_main Estimated time left: 10 hours, 46 minutes, 24 seconds. Time passed: 7 hours, 24 minutes, 23 seconds
+[INFO 03:56:00] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/8014200
+[INFO 03:58:43] my_main t_env: 8064600 / 20000000.0
+[INFO 03:58:43] my_main Estimated time left: 10 hours, 48 minutes, 7 seconds. Time passed: 7 hours, 27 minutes, 7 seconds
+[INFO 03:58:44] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/8064600
+[INFO 04:01:26] my_main t_env: 8115000 / 20000000.0
+[INFO 04:01:26] my_main Estimated time left: 10 hours, 41 minutes, 21 seconds. Time passed: 7 hours, 29 minutes, 50 seconds
+[INFO 04:01:27] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/8115000
+[INFO 04:04:09] my_main t_env: 8165400 / 20000000.0
+[INFO 04:04:09] my_main Estimated time left: 10 hours, 35 minutes, 8 seconds. Time passed: 7 hours, 32 minutes, 33 seconds
+[INFO 04:04:10] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/8165400
+[INFO 04:06:51] my_main t_env: 8215800 / 20000000.0
+[INFO 04:06:51] my_main Estimated time left: 10 hours, 31 minutes, 17 seconds. Time passed: 7 hours, 35 minutes, 15 seconds
+[INFO 04:06:51] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/8215800
+[INFO 04:09:34] my_main t_env: 8266200 / 20000000.0
+[INFO 04:09:34] my_main Estimated time left: 10 hours, 33 minutes, 56 seconds. Time passed: 7 hours, 37 minutes, 58 seconds
+[INFO 04:09:35] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/8266200
+[INFO 04:12:17] my_main t_env: 8316600 / 20000000.0
+[INFO 04:12:17] my_main Estimated time left: 10 hours, 31 minutes, 0 seconds. Time passed: 7 hours, 40 minutes, 41 seconds
+[INFO 04:12:18] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/8316600
+[INFO 04:15:00] my_main t_env: 8367000 / 20000000.0
+[INFO 04:15:00] my_main Estimated time left: 10 hours, 24 minutes, 33 seconds. Time passed: 7 hours, 43 minutes, 24 seconds
+[INFO 04:15:01] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/8367000
+[INFO 04:17:42] my_main t_env: 8417400 / 20000000.0
+[INFO 04:17:42] my_main Estimated time left: 10 hours, 22 minutes, 50 seconds. Time passed: 7 hours, 46 minutes, 6 seconds
+[INFO 04:17:43] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/8417400
+[INFO 04:20:24] my_main t_env: 8467800 / 20000000.0
+[INFO 04:20:24] my_main Estimated time left: 10 hours, 15 minutes, 30 seconds. Time passed: 7 hours, 48 minutes, 48 seconds
+[INFO 04:20:25] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/8467800
+[INFO 04:23:08] my_main t_env: 8518200 / 20000000.0
+[INFO 04:23:08] my_main Estimated time left: 10 hours, 22 minutes, 18 seconds. Time passed: 7 hours, 51 minutes, 32 seconds
+[INFO 04:23:08] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/8518200
+[INFO 04:25:51] my_main t_env: 8568600 / 20000000.0
+[INFO 04:25:51] my_main Estimated time left: 10 hours, 19 minutes, 25 seconds. Time passed: 7 hours, 54 minutes, 15 seconds
+[INFO 04:25:52] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/8568600
+[INFO 04:28:34] my_main t_env: 8619000 / 20000000.0
+[INFO 04:28:34] my_main Estimated time left: 10 hours, 11 minutes, 25 seconds. Time passed: 7 hours, 56 minutes, 58 seconds
+[INFO 04:28:35] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/8619000
+[INFO 04:31:16] my_main t_env: 8669400 / 20000000.0
+[INFO 04:31:16] my_main Estimated time left: 10 hours, 7 minutes, 22 seconds. Time passed: 7 hours, 59 minutes, 40 seconds
+[INFO 04:31:17] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/8669400
+[INFO 04:33:58] my_main t_env: 8719800 / 20000000.0
+[INFO 04:33:58] my_main Estimated time left: 10 hours, 5 minutes, 27 seconds. Time passed: 8 hours, 2 minutes, 22 seconds
+[INFO 04:33:59] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/8719800
+[INFO 04:36:40] my_main t_env: 8770200 / 20000000.0
+[INFO 04:36:40] my_main Estimated time left: 10 hours, 2 minutes, 7 seconds. Time passed: 8 hours, 5 minutes, 5 seconds
+[INFO 04:36:41] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/8770200
+[INFO 04:39:23] my_main t_env: 8820600 / 20000000.0
+[INFO 04:39:23] my_main Estimated time left: 9 hours, 59 minutes, 30 seconds. Time passed: 8 hours, 7 minutes, 47 seconds
+[INFO 04:39:23] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/8820600
+[INFO 04:42:04] my_main t_env: 8871000 / 20000000.0
+[INFO 04:42:04] my_main Estimated time left: 9 hours, 55 minutes, 26 seconds. Time passed: 8 hours, 10 minutes, 28 seconds
+[INFO 04:42:05] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/8871000
+[INFO 04:44:46] my_main t_env: 8921400 / 20000000.0
+[INFO 04:44:46] my_main Estimated time left: 9 hours, 53 minutes, 50 seconds. Time passed: 8 hours, 13 minutes, 11 seconds
+[INFO 04:44:47] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/8921400
+[INFO 04:47:28] my_main t_env: 8971800 / 20000000.0
+[INFO 04:47:28] my_main Estimated time left: 9 hours, 50 minutes, 38 seconds. Time passed: 8 hours, 15 minutes, 53 seconds
+[INFO 04:47:30] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/8971800
+[INFO 04:50:11] my_main t_env: 9022200 / 20000000.0
+[INFO 04:50:11] my_main Estimated time left: 9 hours, 49 minutes, 21 seconds. Time passed: 8 hours, 18 minutes, 35 seconds
+[INFO 04:50:12] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/9022200
+[INFO 04:52:53] my_main t_env: 9072600 / 20000000.0
+[INFO 04:52:53] my_main Estimated time left: 9 hours, 45 minutes, 46 seconds. Time passed: 8 hours, 21 minutes, 17 seconds
+[INFO 04:52:54] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/9072600
+[INFO 04:55:35] my_main t_env: 9123000 / 20000000.0
+[INFO 04:55:35] my_main Estimated time left: 9 hours, 42 minutes, 39 seconds. Time passed: 8 hours, 23 minutes, 59 seconds
+[INFO 04:55:36] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/9123000
+[INFO 04:58:18] my_main t_env: 9173400 / 20000000.0
+[INFO 04:58:18] my_main Estimated time left: 9 hours, 44 minutes, 4 seconds. Time passed: 8 hours, 26 minutes, 42 seconds
+[INFO 04:58:19] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/9173400
+[INFO 05:01:00] my_main t_env: 9223800 / 20000000.0
+[INFO 05:01:00] my_main Estimated time left: 9 hours, 38 minutes, 49 seconds. Time passed: 8 hours, 29 minutes, 25 seconds
+[INFO 05:01:02] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/9223800
+[INFO 05:03:44] my_main t_env: 9274200 / 20000000.0
+[INFO 05:03:44] my_main Estimated time left: 9 hours, 39 minutes, 51 seconds. Time passed: 8 hours, 32 minutes, 8 seconds
+[INFO 05:03:45] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/9274200
+[INFO 05:06:28] my_main t_env: 9324600 / 20000000.0
+[INFO 05:06:28] my_main Estimated time left: 9 hours, 37 minutes, 43 seconds. Time passed: 8 hours, 34 minutes, 52 seconds
+[INFO 05:06:29] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/9324600
+[INFO 05:09:11] my_main t_env: 9375000 / 20000000.0
+[INFO 05:09:11] my_main Estimated time left: 9 hours, 33 minutes, 13 seconds. Time passed: 8 hours, 37 minutes, 35 seconds
+[INFO 05:09:12] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/9375000
+[INFO 05:11:53] my_main t_env: 9425400 / 20000000.0
+[INFO 05:11:53] my_main Estimated time left: 9 hours, 25 minutes, 50 seconds. Time passed: 8 hours, 40 minutes, 17 seconds
+[INFO 05:11:53] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/9425400
+[INFO 05:14:36] my_main t_env: 9475800 / 20000000.0
+[INFO 05:14:36] my_main Estimated time left: 9 hours, 27 minutes, 8 seconds. Time passed: 8 hours, 43 minutes, 0 seconds
+[INFO 05:14:36] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/9475800
+[INFO 05:17:19] my_main t_env: 9526200 / 20000000.0
+[INFO 05:17:19] my_main Estimated time left: 9 hours, 26 minutes, 58 seconds. Time passed: 8 hours, 45 minutes, 43 seconds
+[INFO 05:17:20] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/9526200
+[INFO 05:20:03] my_main t_env: 9576600 / 20000000.0
+[INFO 05:20:03] my_main Estimated time left: 9 hours, 24 minutes, 22 seconds. Time passed: 8 hours, 48 minutes, 27 seconds
+[INFO 05:20:04] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/9576600
+[INFO 05:22:47] my_main t_env: 9627000 / 20000000.0
+[INFO 05:22:47] my_main Estimated time left: 9 hours, 21 minutes, 32 seconds. Time passed: 8 hours, 51 minutes, 11 seconds
+[INFO 05:22:48] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/9627000
+[INFO 05:25:29] my_main t_env: 9677400 / 20000000.0
+[INFO 05:25:29] my_main Estimated time left: 9 hours, 14 minutes, 18 seconds. Time passed: 8 hours, 53 minutes, 53 seconds
+[INFO 05:25:30] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/9677400
+[INFO 05:28:12] my_main t_env: 9727800 / 20000000.0
+[INFO 05:28:12] my_main Estimated time left: 9 hours, 13 minutes, 49 seconds. Time passed: 8 hours, 56 minutes, 36 seconds
+[INFO 05:28:13] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/9727800
+[INFO 05:30:56] my_main t_env: 9778200 / 20000000.0
+[INFO 05:30:56] my_main Estimated time left: 9 hours, 14 minutes, 49 seconds. Time passed: 8 hours, 59 minutes, 20 seconds
+[INFO 05:30:57] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/9778200
+[INFO 05:33:39] my_main t_env: 9828600 / 20000000.0
+[INFO 05:33:39] my_main Estimated time left: 9 hours, 7 minutes, 40 seconds. Time passed: 9 hours, 2 minutes, 3 seconds
+[INFO 05:33:40] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/9828600
+[INFO 05:36:23] my_main t_env: 9879000 / 20000000.0
+[INFO 05:36:23] my_main Estimated time left: 9 hours, 8 minutes, 58 seconds. Time passed: 9 hours, 4 minutes, 47 seconds
+[INFO 05:36:24] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/9879000
+[INFO 05:39:05] my_main t_env: 9929400 / 20000000.0
+[INFO 05:39:05] my_main Estimated time left: 8 hours, 58 minutes, 25 seconds. Time passed: 9 hours, 7 minutes, 29 seconds
+[INFO 05:39:06] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/9929400
+[INFO 05:41:49] my_main t_env: 9979800 / 20000000.0
+[INFO 05:41:49] my_main Estimated time left: 9 hours, 3 minutes, 59 seconds. Time passed: 9 hours, 10 minutes, 13 seconds
+[INFO 05:41:50] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/9979800
+[INFO 05:44:32] my_main t_env: 10030200 / 20000000.0
+[INFO 05:44:32] my_main Estimated time left: 8 hours, 58 minutes, 58 seconds. Time passed: 9 hours, 12 minutes, 56 seconds
+[INFO 05:44:33] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/10030200
+[INFO 05:47:15] my_main t_env: 10080600 / 20000000.0
+[INFO 05:47:15] my_main Estimated time left: 8 hours, 54 minutes, 0 seconds. Time passed: 9 hours, 15 minutes, 39 seconds
+[INFO 05:47:16] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/10080600
+[INFO 05:49:58] my_main t_env: 10131000 / 20000000.0
+[INFO 05:49:58] my_main Estimated time left: 8 hours, 51 minutes, 8 seconds. Time passed: 9 hours, 18 minutes, 22 seconds
+[INFO 05:49:59] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/10131000
+[INFO 05:52:41] my_main t_env: 10181400 / 20000000.0
+[INFO 05:52:41] my_main Estimated time left: 8 hours, 51 minutes, 1 seconds. Time passed: 9 hours, 21 minutes, 6 seconds
+[INFO 05:52:42] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/10181400
+[INFO 05:55:24] my_main t_env: 10231800 / 20000000.0
+[INFO 05:55:24] my_main Estimated time left: 8 hours, 44 minutes, 16 seconds. Time passed: 9 hours, 23 minutes, 48 seconds
+[INFO 05:55:25] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/10231800
+[INFO 05:58:07] my_main t_env: 10282200 / 20000000.0
+[INFO 05:58:07] my_main Estimated time left: 8 hours, 45 minutes, 35 seconds. Time passed: 9 hours, 26 minutes, 31 seconds
+[INFO 05:58:08] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/10282200
+[INFO 06:00:49] my_main t_env: 10332600 / 20000000.0
+[INFO 06:00:49] my_main Estimated time left: 8 hours, 36 minutes, 26 seconds. Time passed: 9 hours, 29 minutes, 13 seconds
+[INFO 06:00:50] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/10332600
+[INFO 06:03:32] my_main t_env: 10383000 / 20000000.0
+[INFO 06:03:32] my_main Estimated time left: 8 hours, 38 minutes, 4 seconds. Time passed: 9 hours, 31 minutes, 56 seconds
+[INFO 06:03:33] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/10383000
+[INFO 06:06:14] my_main t_env: 10433400 / 20000000.0
+[INFO 06:06:14] my_main Estimated time left: 8 hours, 31 minutes, 43 seconds. Time passed: 9 hours, 34 minutes, 38 seconds
+[INFO 06:06:14] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/10433400
+[INFO 06:08:59] my_main t_env: 10483800 / 20000000.0
+[INFO 06:08:59] my_main Estimated time left: 8 hours, 39 minutes, 8 seconds. Time passed: 9 hours, 37 minutes, 23 seconds
+[INFO 06:08:59] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/10483800
+[INFO 06:11:42] my_main t_env: 10534200 / 20000000.0
+[INFO 06:11:42] my_main Estimated time left: 8 hours, 32 minutes, 57 seconds. Time passed: 9 hours, 40 minutes, 6 seconds
+[INFO 06:11:43] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/10534200
+[INFO 06:14:24] my_main t_env: 10584600 / 20000000.0
+[INFO 06:14:24] my_main Estimated time left: 8 hours, 23 minutes, 41 seconds. Time passed: 9 hours, 42 minutes, 48 seconds
+[INFO 06:14:25] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/10584600
+[INFO 06:17:09] my_main t_env: 10635000 / 20000000.0
+[INFO 06:17:09] my_main Estimated time left: 8 hours, 29 minutes, 30 seconds. Time passed: 9 hours, 45 minutes, 33 seconds
+[INFO 06:17:10] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/10635000
+[INFO 06:19:52] my_main t_env: 10685400 / 20000000.0
+[INFO 06:19:52] my_main Estimated time left: 8 hours, 22 minutes, 6 seconds. Time passed: 9 hours, 48 minutes, 16 seconds
+[INFO 06:19:53] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/10685400
+[INFO 06:22:35] my_main t_env: 10735800 / 20000000.0
+[INFO 06:22:35] my_main Estimated time left: 8 hours, 21 minutes, 44 seconds. Time passed: 9 hours, 51 minutes, 0 seconds
+[INFO 06:22:36] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/10735800
+[INFO 06:25:19] my_main t_env: 10786200 / 20000000.0
+[INFO 06:25:19] my_main Estimated time left: 8 hours, 18 minutes, 53 seconds. Time passed: 9 hours, 53 minutes, 43 seconds
+[INFO 06:25:20] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/10786200
+[INFO 06:28:02] my_main t_env: 10836600 / 20000000.0
+[INFO 06:28:02] my_main Estimated time left: 8 hours, 13 minutes, 44 seconds. Time passed: 9 hours, 56 minutes, 26 seconds
+[INFO 06:28:03] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/10836600
+[INFO 06:30:46] my_main t_env: 10887000 / 20000000.0
+[INFO 06:30:46] my_main Estimated time left: 8 hours, 12 minutes, 56 seconds. Time passed: 9 hours, 59 minutes, 10 seconds
+[INFO 06:30:47] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/10887000
+[INFO 06:33:29] my_main t_env: 10937400 / 20000000.0
+[INFO 06:33:29] my_main Estimated time left: 8 hours, 9 minutes, 37 seconds. Time passed: 10 hours, 1 minutes, 53 seconds
+[INFO 06:33:30] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/10937400
+[INFO 06:36:12] my_main t_env: 10987800 / 20000000.0
+[INFO 06:36:12] my_main Estimated time left: 8 hours, 6 minutes, 14 seconds. Time passed: 10 hours, 4 minutes, 36 seconds
+[INFO 06:36:13] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/10987800
+[INFO 06:38:55] my_main t_env: 11038200 / 20000000.0
+[INFO 06:38:55] my_main Estimated time left: 8 hours, 2 minutes, 15 seconds. Time passed: 10 hours, 7 minutes, 19 seconds
+[INFO 06:38:56] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/11038200
+[INFO 06:41:39] my_main t_env: 11088600 / 20000000.0
+[INFO 06:41:39] my_main Estimated time left: 8 hours, 2 minutes, 33 seconds. Time passed: 10 hours, 10 minutes, 3 seconds
+[INFO 06:41:40] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/11088600
+[INFO 06:44:22] my_main t_env: 11139000 / 20000000.0
+[INFO 06:44:22] my_main Estimated time left: 7 hours, 58 minutes, 12 seconds. Time passed: 10 hours, 12 minutes, 46 seconds
+[INFO 06:44:23] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/11139000
+[INFO 06:47:07] my_main t_env: 11189400 / 20000000.0
+[INFO 06:47:07] my_main Estimated time left: 7 hours, 59 minutes, 27 seconds. Time passed: 10 hours, 15 minutes, 31 seconds
+[INFO 06:47:07] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/11189400
+[INFO 06:49:50] my_main t_env: 11239800 / 20000000.0
+[INFO 06:49:50] my_main Estimated time left: 7 hours, 53 minutes, 36 seconds. Time passed: 10 hours, 18 minutes, 14 seconds
+[INFO 06:49:51] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/11239800
+[INFO 06:52:34] my_main t_env: 11290200 / 20000000.0
+[INFO 06:52:34] my_main Estimated time left: 7 hours, 52 minutes, 59 seconds. Time passed: 10 hours, 20 minutes, 58 seconds
+[INFO 06:52:35] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/11290200
+[INFO 06:55:19] my_main t_env: 11340600 / 20000000.0
+[INFO 06:55:19] my_main Estimated time left: 7 hours, 52 minutes, 18 seconds. Time passed: 10 hours, 23 minutes, 43 seconds
+[INFO 06:55:20] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/11340600
+[INFO 06:58:02] my_main t_env: 11391000 / 20000000.0
+[INFO 06:58:02] my_main Estimated time left: 7 hours, 44 minutes, 59 seconds. Time passed: 10 hours, 26 minutes, 27 seconds
+[INFO 06:58:03] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/11391000
+[INFO 07:00:45] my_main t_env: 11441400 / 20000000.0
+[INFO 07:00:45] my_main Estimated time left: 7 hours, 40 minutes, 33 seconds. Time passed: 10 hours, 29 minutes, 9 seconds
+[INFO 07:00:46] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/11441400
+[INFO 07:03:29] my_main t_env: 11491800 / 20000000.0
+[INFO 07:03:29] my_main Estimated time left: 7 hours, 41 minutes, 19 seconds. Time passed: 10 hours, 31 minutes, 53 seconds
+[INFO 07:03:30] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/11491800
+[INFO 07:06:13] my_main t_env: 11542200 / 20000000.0
+[INFO 07:06:13] my_main Estimated time left: 7 hours, 39 minutes, 33 seconds. Time passed: 10 hours, 34 minutes, 38 seconds
+[INFO 07:06:14] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/11542200
+[INFO 07:08:58] my_main t_env: 11592600 / 20000000.0
+[INFO 07:08:58] my_main Estimated time left: 7 hours, 36 minutes, 10 seconds. Time passed: 10 hours, 37 minutes, 22 seconds
+[INFO 07:08:59] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/11592600
+[INFO 07:11:42] my_main t_env: 11643000 / 20000000.0
+[INFO 07:11:42] my_main Estimated time left: 7 hours, 35 minutes, 14 seconds. Time passed: 10 hours, 40 minutes, 6 seconds
+[INFO 07:11:43] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/11643000
+[INFO 07:14:27] my_main t_env: 11693400 / 20000000.0
+[INFO 07:14:27] my_main Estimated time left: 7 hours, 32 minutes, 34 seconds. Time passed: 10 hours, 42 minutes, 51 seconds
+[INFO 07:14:28] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/11693400
+[INFO 07:17:12] my_main t_env: 11743800 / 20000000.0
+[INFO 07:17:12] my_main Estimated time left: 7 hours, 30 minutes, 7 seconds. Time passed: 10 hours, 45 minutes, 36 seconds
+[INFO 07:17:13] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/11743800
+[INFO 07:19:57] my_main t_env: 11794200 / 20000000.0
+[INFO 07:19:57] my_main Estimated time left: 7 hours, 28 minutes, 15 seconds. Time passed: 10 hours, 48 minutes, 21 seconds
+[INFO 07:19:58] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/11794200
+[INFO 07:22:42] my_main t_env: 11844600 / 20000000.0
+[INFO 07:22:42] my_main Estimated time left: 7 hours, 23 minutes, 50 seconds. Time passed: 10 hours, 51 minutes, 6 seconds
+[INFO 07:22:43] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/11844600
+[INFO 07:25:25] my_main t_env: 11895000 / 20000000.0
+[INFO 07:25:25] my_main Estimated time left: 7 hours, 17 minutes, 39 seconds. Time passed: 10 hours, 53 minutes, 49 seconds
+[INFO 07:25:26] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/11895000
+[INFO 07:28:09] my_main t_env: 11945400 / 20000000.0
+[INFO 07:28:09] my_main Estimated time left: 7 hours, 16 minutes, 9 seconds. Time passed: 10 hours, 56 minutes, 33 seconds
+[INFO 07:28:10] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/11945400
+[INFO 07:30:52] my_main t_env: 11995800 / 20000000.0
+[INFO 07:30:52] my_main Estimated time left: 7 hours, 13 minutes, 22 seconds. Time passed: 10 hours, 59 minutes, 17 seconds
+[INFO 07:30:53] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/11995800
+[INFO 07:33:36] my_main t_env: 12046200 / 20000000.0
+[INFO 07:33:36] my_main Estimated time left: 7 hours, 11 minutes, 5 seconds. Time passed: 11 hours, 2 minutes, 0 seconds
+[INFO 07:33:37] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/12046200
+[INFO 07:36:22] my_main t_env: 12096600 / 20000000.0
+[INFO 07:36:22] my_main Estimated time left: 7 hours, 12 minutes, 56 seconds. Time passed: 11 hours, 4 minutes, 46 seconds
+[INFO 07:36:23] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/12096600
+[INFO 07:39:07] my_main t_env: 12147000 / 20000000.0
+[INFO 07:39:07] my_main Estimated time left: 7 hours, 7 minutes, 15 seconds. Time passed: 11 hours, 7 minutes, 31 seconds
+[INFO 07:39:07] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/12147000
+[INFO 07:41:52] my_main t_env: 12197400 / 20000000.0
+[INFO 07:41:52] my_main Estimated time left: 7 hours, 6 minutes, 0 seconds. Time passed: 11 hours, 10 minutes, 16 seconds
+[INFO 07:41:53] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/12197400
+[INFO 07:44:37] my_main t_env: 12247800 / 20000000.0
+[INFO 07:44:37] my_main Estimated time left: 7 hours, 5 minutes, 6 seconds. Time passed: 11 hours, 13 minutes, 2 seconds
+[INFO 07:44:38] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/12247800
+[INFO 07:47:22] my_main t_env: 12298200 / 20000000.0
+[INFO 07:47:22] my_main Estimated time left: 6 hours, 59 minutes, 42 seconds. Time passed: 11 hours, 15 minutes, 46 seconds
+[INFO 07:47:23] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/12298200
+[INFO 07:50:06] my_main t_env: 12348600 / 20000000.0
+[INFO 07:50:06] my_main Estimated time left: 6 hours, 54 minutes, 44 seconds. Time passed: 11 hours, 18 minutes, 30 seconds
+[INFO 07:50:07] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/12348600
+[INFO 07:52:52] my_main t_env: 12399000 / 20000000.0
+[INFO 07:52:52] my_main Estimated time left: 6 hours, 56 minutes, 4 seconds. Time passed: 11 hours, 21 minutes, 16 seconds
+[INFO 07:52:53] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/12399000
+[INFO 07:55:36] my_main t_env: 12449400 / 20000000.0
+[INFO 07:55:36] my_main Estimated time left: 6 hours, 50 minutes, 52 seconds. Time passed: 11 hours, 24 minutes, 0 seconds
+[INFO 07:55:37] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/12449400
+[INFO 07:58:21] my_main t_env: 12499800 / 20000000.0
+[INFO 07:58:21] my_main Estimated time left: 6 hours, 48 minutes, 7 seconds. Time passed: 11 hours, 26 minutes, 45 seconds
+[INFO 07:58:22] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/12499800
+[INFO 08:01:05] my_main t_env: 12550200 / 20000000.0
+[INFO 08:01:05] my_main Estimated time left: 6 hours, 44 minutes, 36 seconds. Time passed: 11 hours, 29 minutes, 29 seconds
+[INFO 08:01:06] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/12550200
+[INFO 08:03:51] my_main t_env: 12600600 / 20000000.0
+[INFO 08:03:51] my_main Estimated time left: 6 hours, 45 minutes, 16 seconds. Time passed: 11 hours, 32 minutes, 15 seconds
+[INFO 08:03:52] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/12600600
+[INFO 08:06:36] my_main t_env: 12651000 / 20000000.0
+[INFO 08:06:36] my_main Estimated time left: 6 hours, 42 minutes, 23 seconds. Time passed: 11 hours, 35 minutes, 0 seconds
+[INFO 08:06:37] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/12651000
+[INFO 08:09:21] my_main t_env: 12701400 / 20000000.0
+[INFO 08:09:21] my_main Estimated time left: 6 hours, 37 minutes, 7 seconds. Time passed: 11 hours, 37 minutes, 45 seconds
+[INFO 08:09:22] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/12701400
+[INFO 08:12:06] my_main t_env: 12751800 / 20000000.0
+[INFO 08:12:06] my_main Estimated time left: 6 hours, 35 minutes, 38 seconds. Time passed: 11 hours, 40 minutes, 30 seconds
+[INFO 08:12:07] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/12751800
+[INFO 08:14:51] my_main t_env: 12802200 / 20000000.0
+[INFO 08:14:51] my_main Estimated time left: 6 hours, 32 minutes, 9 seconds. Time passed: 11 hours, 43 minutes, 15 seconds
+[INFO 08:14:52] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/12802200
+[INFO 08:17:35] my_main t_env: 12852600 / 20000000.0
+[INFO 08:17:35] my_main Estimated time left: 6 hours, 27 minutes, 49 seconds. Time passed: 11 hours, 45 minutes, 59 seconds
+[INFO 08:17:36] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/12852600
+[INFO 08:20:19] my_main t_env: 12903000 / 20000000.0
+[INFO 08:20:19] my_main Estimated time left: 6 hours, 25 minutes, 47 seconds. Time passed: 11 hours, 48 minutes, 43 seconds
+[INFO 08:20:20] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/12903000
+[INFO 08:23:03] my_main t_env: 12953400 / 20000000.0
+[INFO 08:23:03] my_main Estimated time left: 6 hours, 21 minutes, 50 seconds. Time passed: 11 hours, 51 minutes, 27 seconds
+[INFO 08:23:04] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/12953400
+[INFO 08:25:48] my_main t_env: 13003800 / 20000000.0
+[INFO 08:25:48] my_main Estimated time left: 6 hours, 22 minutes, 14 seconds. Time passed: 11 hours, 54 minutes, 12 seconds
+[INFO 08:25:49] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/13003800
+[INFO 08:28:34] my_main t_env: 13054200 / 20000000.0
+[INFO 08:28:34] my_main Estimated time left: 6 hours, 19 minutes, 44 seconds. Time passed: 11 hours, 56 minutes, 58 seconds
+[INFO 08:28:34] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/13054200
+[INFO 08:31:18] my_main t_env: 13104600 / 20000000.0
+[INFO 08:31:18] my_main Estimated time left: 6 hours, 14 minutes, 43 seconds. Time passed: 11 hours, 59 minutes, 42 seconds
+[INFO 08:31:19] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/13104600
+[INFO 08:34:04] my_main t_env: 13155000 / 20000000.0
+[INFO 08:34:04] my_main Estimated time left: 6 hours, 16 minutes, 7 seconds. Time passed: 12 hours, 2 minutes, 28 seconds
+[INFO 08:34:05] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/13155000
+[INFO 08:36:47] my_main t_env: 13205400 / 20000000.0
+[INFO 08:36:47] my_main Estimated time left: 6 hours, 7 minutes, 8 seconds. Time passed: 12 hours, 5 minutes, 11 seconds
+[INFO 08:36:48] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/13205400
+[INFO 08:39:32] my_main t_env: 13255800 / 20000000.0
+[INFO 08:39:33] my_main Estimated time left: 6 hours, 8 minutes, 10 seconds. Time passed: 12 hours, 7 minutes, 57 seconds
+[INFO 08:39:33] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/13255800
+[INFO 08:42:18] my_main t_env: 13306200 / 20000000.0
+[INFO 08:42:18] my_main Estimated time left: 6 hours, 7 minutes, 12 seconds. Time passed: 12 hours, 10 minutes, 42 seconds
+[INFO 08:42:19] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/13306200
+[INFO 08:45:03] my_main t_env: 13356600 / 20000000.0
+[INFO 08:45:03] my_main Estimated time left: 6 hours, 1 minutes, 7 seconds. Time passed: 12 hours, 13 minutes, 27 seconds
+[INFO 08:45:04] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/13356600
+[INFO 08:47:48] my_main t_env: 13407000 / 20000000.0
+[INFO 08:47:48] my_main Estimated time left: 5 hours, 59 minutes, 47 seconds. Time passed: 12 hours, 16 minutes, 12 seconds
+[INFO 08:47:49] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/13407000
+[INFO 08:50:33] my_main t_env: 13457400 / 20000000.0
+[INFO 08:50:33] my_main Estimated time left: 5 hours, 56 minutes, 22 seconds. Time passed: 12 hours, 18 minutes, 57 seconds
+[INFO 08:50:33] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/13457400
+[INFO 08:53:19] my_main t_env: 13507800 / 20000000.0
+[INFO 08:53:19] my_main Estimated time left: 5 hours, 58 minutes, 29 seconds. Time passed: 12 hours, 21 minutes, 44 seconds
+[INFO 08:53:20] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/13507800
+[INFO 08:56:06] my_main t_env: 13558200 / 20000000.0
+[INFO 08:56:06] my_main Estimated time left: 5 hours, 55 minutes, 5 seconds. Time passed: 12 hours, 24 minutes, 30 seconds
+[INFO 08:56:07] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/13558200
+[INFO 08:58:53] my_main t_env: 13608600 / 20000000.0
+[INFO 08:58:53] my_main Estimated time left: 5 hours, 52 minutes, 28 seconds. Time passed: 12 hours, 27 minutes, 17 seconds
+[INFO 08:58:54] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/13608600
+[INFO 09:01:39] my_main t_env: 13659000 / 20000000.0
+[INFO 09:01:39] my_main Estimated time left: 5 hours, 47 minutes, 59 seconds. Time passed: 12 hours, 30 minutes, 3 seconds
+[INFO 09:01:40] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/13659000
+[INFO 09:04:25] my_main t_env: 13709400 / 20000000.0
+[INFO 09:04:25] my_main Estimated time left: 5 hours, 45 minutes, 44 seconds. Time passed: 12 hours, 32 minutes, 49 seconds
+[INFO 09:04:26] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/13709400
+[INFO 09:07:11] my_main t_env: 13759800 / 20000000.0
+[INFO 09:07:11] my_main Estimated time left: 5 hours, 42 minutes, 20 seconds. Time passed: 12 hours, 35 minutes, 35 seconds
+[INFO 09:07:12] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/13759800
+[INFO 09:09:57] my_main t_env: 13810200 / 20000000.0
+[INFO 09:09:57] my_main Estimated time left: 5 hours, 39 minutes, 34 seconds. Time passed: 12 hours, 38 minutes, 21 seconds
+[INFO 09:09:59] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/13810200
+[INFO 09:12:43] my_main t_env: 13860600 / 20000000.0
+[INFO 09:12:43] my_main Estimated time left: 5 hours, 36 minutes, 11 seconds. Time passed: 12 hours, 41 minutes, 7 seconds
+[INFO 09:12:43] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/13860600
+[INFO 09:15:27] my_main t_env: 13911000 / 20000000.0
+[INFO 09:15:27] my_main Estimated time left: 5 hours, 32 minutes, 9 seconds. Time passed: 12 hours, 43 minutes, 52 seconds
+[INFO 09:15:28] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/13911000
+[INFO 09:18:13] my_main t_env: 13961400 / 20000000.0
+[INFO 09:18:13] my_main Estimated time left: 5 hours, 30 minutes, 29 seconds. Time passed: 12 hours, 46 minutes, 37 seconds
+[INFO 09:18:14] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/13961400
+[INFO 09:20:59] my_main t_env: 14011800 / 20000000.0
+[INFO 09:20:59] my_main Estimated time left: 5 hours, 27 minutes, 58 seconds. Time passed: 12 hours, 49 minutes, 23 seconds
+[INFO 09:20:59] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/14011800
+[INFO 09:23:45] my_main t_env: 14062200 / 20000000.0
+[INFO 09:23:45] my_main Estimated time left: 5 hours, 25 minutes, 59 seconds. Time passed: 12 hours, 52 minutes, 9 seconds
+[INFO 09:23:46] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/14062200
+[INFO 09:26:29] my_main t_env: 14112600 / 20000000.0
+[INFO 09:26:29] my_main Estimated time left: 5 hours, 20 minutes, 19 seconds. Time passed: 12 hours, 54 minutes, 53 seconds
+[INFO 09:26:30] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/14112600
+[INFO 09:29:15] my_main t_env: 14163000 / 20000000.0
+[INFO 09:29:15] my_main Estimated time left: 5 hours, 21 minutes, 5 seconds. Time passed: 12 hours, 57 minutes, 40 seconds
+[INFO 09:29:16] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/14163000
+[INFO 09:32:01] my_main t_env: 14213400 / 20000000.0
+[INFO 09:32:01] my_main Estimated time left: 5 hours, 17 minutes, 34 seconds. Time passed: 13 hours, 26 seconds
+[INFO 09:32:03] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/14213400
+[INFO 09:34:47] my_main t_env: 14263800 / 20000000.0
+[INFO 09:34:47] my_main Estimated time left: 5 hours, 13 minutes, 13 seconds. Time passed: 13 hours, 3 minutes, 11 seconds
+[INFO 09:34:47] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/14263800
+[INFO 09:37:33] my_main t_env: 14314200 / 20000000.0
+[INFO 09:37:33] my_main Estimated time left: 5 hours, 12 minutes, 29 seconds. Time passed: 13 hours, 5 minutes, 57 seconds
+[INFO 09:37:34] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/14314200
+[INFO 09:40:20] my_main t_env: 14364600 / 20000000.0
+[INFO 09:40:20] my_main Estimated time left: 5 hours, 11 minutes, 40 seconds. Time passed: 13 hours, 8 minutes, 44 seconds
+[INFO 09:40:22] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/14364600
+[INFO 09:43:06] my_main t_env: 14415000 / 20000000.0
+[INFO 09:43:06] my_main Estimated time left: 5 hours, 6 minutes, 56 seconds. Time passed: 13 hours, 11 minutes, 30 seconds
+[INFO 09:43:07] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/14415000
+[INFO 09:45:52] my_main t_env: 14465400 / 20000000.0
+[INFO 09:45:52] my_main Estimated time left: 5 hours, 2 minutes, 39 seconds. Time passed: 13 hours, 14 minutes, 16 seconds
+[INFO 09:45:53] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/14465400
+[INFO 09:48:37] my_main t_env: 14515800 / 20000000.0
+[INFO 09:48:37] my_main Estimated time left: 4 hours, 59 minutes, 41 seconds. Time passed: 13 hours, 17 minutes, 1 seconds
+[INFO 09:48:38] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/14515800
+[INFO 09:51:21] my_main t_env: 14566200 / 20000000.0
+[INFO 09:51:21] my_main Estimated time left: 4 hours, 55 minutes, 40 seconds. Time passed: 13 hours, 19 minutes, 45 seconds
+[INFO 09:51:22] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/14566200
+[INFO 09:54:12] my_main t_env: 14616600 / 20000000.0
+[INFO 09:54:12] my_main Estimated time left: 5 hours, 3 minutes, 42 seconds. Time passed: 13 hours, 22 minutes, 36 seconds
+[INFO 09:54:13] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/14616600
+[INFO 09:57:02] my_main t_env: 14667000 / 20000000.0
+[INFO 09:57:02] my_main Estimated time left: 5 hours, 4 seconds. Time passed: 13 hours, 25 minutes, 26 seconds
+[INFO 09:57:03] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/14667000
+[INFO 09:59:51] my_main t_env: 14717400 / 20000000.0
+[INFO 09:59:51] my_main Estimated time left: 4 hours, 55 minutes, 36 seconds. Time passed: 13 hours, 28 minutes, 15 seconds
+[INFO 09:59:52] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/14717400
+[INFO 10:02:42] my_main t_env: 14767800 / 20000000.0
+[INFO 10:02:42] my_main Estimated time left: 4 hours, 54 minutes, 24 seconds. Time passed: 13 hours, 31 minutes, 6 seconds
+[INFO 10:02:42] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/14767800
+[INFO 10:05:33] my_main t_env: 14818200 / 20000000.0
+[INFO 10:05:33] my_main Estimated time left: 4 hours, 54 minutes, 38 seconds. Time passed: 13 hours, 33 minutes, 58 seconds
+[INFO 10:05:34] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/14818200
+[INFO 10:08:26] my_main t_env: 14868600 / 20000000.0
+[INFO 10:08:26] my_main Estimated time left: 4 hours, 52 minutes, 11 seconds. Time passed: 13 hours, 36 minutes, 50 seconds
+[INFO 10:08:27] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/14868600
+[INFO 10:11:16] my_main t_env: 14919000 / 20000000.0
+[INFO 10:11:16] my_main Estimated time left: 4 hours, 46 minutes, 33 seconds. Time passed: 13 hours, 39 minutes, 40 seconds
+[INFO 10:11:17] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/14919000
+[INFO 10:14:07] my_main t_env: 14969400 / 20000000.0
+[INFO 10:14:07] my_main Estimated time left: 4 hours, 44 minutes, 4 seconds. Time passed: 13 hours, 42 minutes, 31 seconds
+[INFO 10:14:08] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/14969400
+[INFO 10:16:56] my_main t_env: 15019800 / 20000000.0
+[INFO 10:16:56] my_main Estimated time left: 4 hours, 39 minutes, 1 seconds. Time passed: 13 hours, 45 minutes, 20 seconds
+[INFO 10:16:57] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/15019800
+[INFO 10:19:46] my_main t_env: 15070200 / 20000000.0
+[INFO 10:19:46] my_main Estimated time left: 4 hours, 36 minutes, 16 seconds. Time passed: 13 hours, 48 minutes, 10 seconds
+[INFO 10:19:47] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/15070200
+[INFO 10:22:36] my_main t_env: 15120600 / 20000000.0
+[INFO 10:22:36] my_main Estimated time left: 4 hours, 33 minutes, 57 seconds. Time passed: 13 hours, 51 minutes, 0 seconds
+[INFO 10:22:37] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/15120600
+[INFO 10:25:26] my_main t_env: 15171000 / 20000000.0
+[INFO 10:25:26] my_main Estimated time left: 4 hours, 31 minutes, 22 seconds. Time passed: 13 hours, 53 minutes, 50 seconds
+[INFO 10:25:27] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/15171000
+[INFO 10:28:16] my_main t_env: 15221400 / 20000000.0
+[INFO 10:28:16] my_main Estimated time left: 4 hours, 29 minutes, 32 seconds. Time passed: 13 hours, 56 minutes, 40 seconds
+[INFO 10:28:17] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/15221400
+[INFO 10:31:08] my_main t_env: 15271800 / 20000000.0
+[INFO 10:31:08] my_main Estimated time left: 4 hours, 28 minutes, 28 seconds. Time passed: 13 hours, 59 minutes, 32 seconds
+[INFO 10:31:09] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/15271800
+[INFO 10:33:57] my_main t_env: 15322200 / 20000000.0
+[INFO 10:33:57] my_main Estimated time left: 4 hours, 21 minutes, 13 seconds. Time passed: 14 hours, 2 minutes, 21 seconds
+[INFO 10:33:58] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/15322200
+[INFO 10:36:47] my_main t_env: 15372600 / 20000000.0
+[INFO 10:36:47] my_main Estimated time left: 4 hours, 20 minutes, 21 seconds. Time passed: 14 hours, 5 minutes, 11 seconds
+[INFO 10:36:48] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/15372600
+[INFO 10:39:38] my_main t_env: 15423000 / 20000000.0
+[INFO 10:39:38] my_main Estimated time left: 4 hours, 18 minutes, 57 seconds. Time passed: 14 hours, 8 minutes, 2 seconds
+[INFO 10:39:39] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/15423000
+[INFO 10:42:32] my_main t_env: 15473400 / 20000000.0
+[INFO 10:42:32] my_main Estimated time left: 4 hours, 20 minutes, 30 seconds. Time passed: 14 hours, 10 minutes, 56 seconds
+[INFO 10:42:33] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/15473400
+[INFO 10:45:29] my_main t_env: 15523800 / 20000000.0
+[INFO 10:45:29] my_main Estimated time left: 4 hours, 22 minutes, 10 seconds. Time passed: 14 hours, 13 minutes, 53 seconds
+[INFO 10:45:30] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/15523800
+[INFO 10:48:22] my_main t_env: 15574200 / 20000000.0
+[INFO 10:48:22] my_main Estimated time left: 4 hours, 12 minutes, 16 seconds. Time passed: 14 hours, 16 minutes, 46 seconds
+[INFO 10:48:22] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/15574200
+[INFO 10:51:13] my_main t_env: 15624600 / 20000000.0
+[INFO 10:51:13] my_main Estimated time left: 4 hours, 7 minutes, 56 seconds. Time passed: 14 hours, 19 minutes, 37 seconds
+[INFO 10:51:14] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/15624600
+[INFO 10:54:03] my_main t_env: 15675000 / 20000000.0
+[INFO 10:54:03] my_main Estimated time left: 4 hours, 3 minutes, 58 seconds. Time passed: 14 hours, 22 minutes, 28 seconds
+[INFO 10:54:04] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/15675000
+[INFO 10:56:54] my_main t_env: 15725400 / 20000000.0
+[INFO 10:56:54] my_main Estimated time left: 4 hours, 34 seconds. Time passed: 14 hours, 25 minutes, 18 seconds
+[INFO 10:56:55] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/15725400
+[INFO 10:59:44] my_main t_env: 15775800 / 20000000.0
+[INFO 10:59:44] my_main Estimated time left: 3 hours, 57 minutes, 34 seconds. Time passed: 14 hours, 28 minutes, 8 seconds
+[INFO 10:59:45] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/15775800
+[INFO 11:02:34] my_main t_env: 15826200 / 20000000.0
+[INFO 11:02:34] my_main Estimated time left: 3 hours, 55 minutes, 15 seconds. Time passed: 14 hours, 30 minutes, 58 seconds
+[INFO 11:02:35] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/15826200
+[INFO 11:05:29] my_main t_env: 15876600 / 20000000.0
+[INFO 11:05:29] my_main Estimated time left: 3 hours, 58 minutes, 10 seconds. Time passed: 14 hours, 33 minutes, 53 seconds
+[INFO 11:05:30] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/15876600
+[INFO 11:08:21] my_main t_env: 15927000 / 20000000.0
+[INFO 11:08:21] my_main Estimated time left: 3 hours, 51 minutes, 18 seconds. Time passed: 14 hours, 36 minutes, 45 seconds
+[INFO 11:08:22] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/15927000
+[INFO 11:11:10] my_main t_env: 15977400 / 20000000.0
+[INFO 11:11:10] my_main Estimated time left: 3 hours, 45 minutes, 27 seconds. Time passed: 14 hours, 39 minutes, 34 seconds
+[INFO 11:11:11] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/15977400
+[INFO 11:14:00] my_main t_env: 16027800 / 20000000.0
+[INFO 11:14:00] my_main Estimated time left: 3 hours, 43 minutes, 7 seconds. Time passed: 14 hours, 42 minutes, 24 seconds
+[INFO 11:14:01] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/16027800
+[INFO 11:16:51] my_main t_env: 16078200 / 20000000.0
+[INFO 11:16:51] my_main Estimated time left: 3 hours, 41 minutes, 56 seconds. Time passed: 14 hours, 45 minutes, 15 seconds
+[INFO 11:16:52] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/16078200
+[INFO 11:19:45] my_main t_env: 16128600 / 20000000.0
+[INFO 11:19:45] my_main Estimated time left: 3 hours, 42 minutes, 6 seconds. Time passed: 14 hours, 48 minutes, 9 seconds
+[INFO 11:19:46] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/16128600
+[INFO 11:22:38] my_main t_env: 16179000 / 20000000.0
+[INFO 11:22:38] my_main Estimated time left: 3 hours, 38 minutes, 46 seconds. Time passed: 14 hours, 51 minutes, 2 seconds
+[INFO 11:22:39] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/16179000
+[INFO 11:25:27] my_main t_env: 16229400 / 20000000.0
+[INFO 11:25:27] my_main Estimated time left: 3 hours, 31 minutes, 35 seconds. Time passed: 14 hours, 53 minutes, 52 seconds
+[INFO 11:25:28] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/16229400
+[INFO 11:28:19] my_main t_env: 16279800 / 20000000.0
+[INFO 11:28:19] my_main Estimated time left: 3 hours, 31 minutes, 0 seconds. Time passed: 14 hours, 56 minutes, 43 seconds
+[INFO 11:28:20] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/16279800
+[INFO 11:31:07] my_main t_env: 16330200 / 20000000.0
+[INFO 11:31:07] my_main Estimated time left: 3 hours, 23 minutes, 48 seconds. Time passed: 14 hours, 59 minutes, 31 seconds
+[INFO 11:31:08] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/16330200
+[INFO 11:33:56] my_main t_env: 16380600 / 20000000.0
+[INFO 11:33:56] my_main Estimated time left: 3 hours, 22 minutes, 35 seconds. Time passed: 15 hours, 2 minutes, 20 seconds
+[INFO 11:33:57] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/16380600
+[INFO 11:36:47] my_main t_env: 16431000 / 20000000.0
+[INFO 11:36:47] my_main Estimated time left: 3 hours, 21 minutes, 50 seconds. Time passed: 15 hours, 5 minutes, 11 seconds
+[INFO 11:36:48] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/16431000
+[INFO 11:39:43] my_main t_env: 16481400 / 20000000.0
+[INFO 11:39:43] my_main Estimated time left: 3 hours, 24 minutes, 37 seconds. Time passed: 15 hours, 8 minutes, 7 seconds
+[INFO 11:39:44] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/16481400
+[INFO 11:42:36] my_main t_env: 16531800 / 20000000.0
+[INFO 11:42:36] my_main Estimated time left: 3 hours, 17 minutes, 54 seconds. Time passed: 15 hours, 11 minutes, 0 seconds
+[INFO 11:42:37] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/16531800
+[INFO 11:45:26] my_main t_env: 16582200 / 20000000.0
+[INFO 11:45:26] my_main Estimated time left: 3 hours, 12 minutes, 12 seconds. Time passed: 15 hours, 13 minutes, 50 seconds
+[INFO 11:45:27] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/16582200
+[INFO 11:48:15] my_main t_env: 16632600 / 20000000.0
+[INFO 11:48:15] my_main Estimated time left: 3 hours, 8 minutes, 15 seconds. Time passed: 15 hours, 16 minutes, 39 seconds
+[INFO 11:48:16] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/16632600
+[INFO 11:51:10] my_main t_env: 16683000 / 20000000.0
+[INFO 11:51:10] my_main Estimated time left: 3 hours, 12 minutes, 17 seconds. Time passed: 15 hours, 19 minutes, 34 seconds
+[INFO 11:51:11] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/16683000
+[INFO 11:54:04] my_main t_env: 16733400 / 20000000.0
+[INFO 11:54:04] my_main Estimated time left: 3 hours, 8 minutes, 28 seconds. Time passed: 15 hours, 22 minutes, 29 seconds
+[INFO 11:54:05] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/16733400
+[INFO 11:56:59] my_main t_env: 16783800 / 20000000.0
+[INFO 11:56:59] my_main Estimated time left: 3 hours, 5 minutes, 15 seconds. Time passed: 15 hours, 25 minutes, 23 seconds
+[INFO 11:57:00] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/16783800
+[INFO 11:59:49] my_main t_env: 16834200 / 20000000.0
+[INFO 11:59:49] my_main Estimated time left: 2 hours, 58 minutes, 46 seconds. Time passed: 15 hours, 28 minutes, 14 seconds
+[INFO 11:59:50] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/16834200
+[INFO 12:02:39] my_main t_env: 16884600 / 20000000.0
+[INFO 12:02:39] my_main Estimated time left: 2 hours, 55 minutes, 4 seconds. Time passed: 15 hours, 31 minutes, 3 seconds
+[INFO 12:02:40] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/16884600
+[INFO 12:05:29] my_main t_env: 16935000 / 20000000.0
+[INFO 12:05:29] my_main Estimated time left: 2 hours, 52 minutes, 4 seconds. Time passed: 15 hours, 33 minutes, 53 seconds
+[INFO 12:05:30] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/16935000
+[INFO 12:08:20] my_main t_env: 16985400 / 20000000.0
+[INFO 12:08:20] my_main Estimated time left: 2 hours, 50 minutes, 17 seconds. Time passed: 15 hours, 36 minutes, 44 seconds
+[INFO 12:08:21] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/16985400
+[INFO 12:11:10] my_main t_env: 17035800 / 20000000.0
+[INFO 12:11:10] my_main Estimated time left: 2 hours, 46 minutes, 59 seconds. Time passed: 15 hours, 39 minutes, 34 seconds
+[INFO 12:11:11] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/17035800
+[INFO 12:14:02] my_main t_env: 17086200 / 20000000.0
+[INFO 12:14:02] my_main Estimated time left: 2 hours, 45 minutes, 43 seconds. Time passed: 15 hours, 42 minutes, 26 seconds
+[INFO 12:14:03] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/17086200
+[INFO 12:16:56] my_main t_env: 17136600 / 20000000.0
+[INFO 12:16:56] my_main Estimated time left: 2 hours, 44 minutes, 10 seconds. Time passed: 15 hours, 45 minutes, 20 seconds
+[INFO 12:16:57] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/17136600
+[INFO 12:19:47] my_main t_env: 17187000 / 20000000.0
+[INFO 12:19:47] my_main Estimated time left: 2 hours, 39 minutes, 27 seconds. Time passed: 15 hours, 48 minutes, 11 seconds
+[INFO 12:19:48] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/17187000
+[INFO 12:22:41] my_main t_env: 17237400 / 20000000.0
+[INFO 12:22:41] my_main Estimated time left: 2 hours, 38 minutes, 38 seconds. Time passed: 15 hours, 51 minutes, 5 seconds
+[INFO 12:22:42] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/17237400
+[INFO 12:25:35] my_main t_env: 17287800 / 20000000.0
+[INFO 12:25:35] my_main Estimated time left: 2 hours, 36 minutes, 33 seconds. Time passed: 15 hours, 53 minutes, 59 seconds
+[INFO 12:25:36] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/17287800
+[INFO 12:28:26] my_main t_env: 17338200 / 20000000.0
+[INFO 12:28:26] my_main Estimated time left: 2 hours, 30 minutes, 6 seconds. Time passed: 15 hours, 56 minutes, 50 seconds
+[INFO 12:28:28] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/17338200
+[INFO 12:31:17] my_main t_env: 17388600 / 20000000.0
+[INFO 12:31:17] my_main Estimated time left: 2 hours, 27 minutes, 54 seconds. Time passed: 15 hours, 59 minutes, 41 seconds
+[INFO 12:31:19] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/17388600
+[INFO 12:34:09] my_main t_env: 17439000 / 20000000.0
+[INFO 12:34:09] my_main Estimated time left: 2 hours, 25 minutes, 15 seconds. Time passed: 16 hours, 2 minutes, 33 seconds
+[INFO 12:34:10] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/17439000
+[INFO 12:37:00] my_main t_env: 17489400 / 20000000.0
+[INFO 12:37:00] my_main Estimated time left: 2 hours, 22 minutes, 30 seconds. Time passed: 16 hours, 5 minutes, 24 seconds
+[INFO 12:37:02] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/17489400
+[INFO 12:39:54] my_main t_env: 17539800 / 20000000.0
+[INFO 12:39:54] my_main Estimated time left: 2 hours, 20 minutes, 58 seconds. Time passed: 16 hours, 8 minutes, 18 seconds
+[INFO 12:39:55] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/17539800
+[INFO 12:42:47] my_main t_env: 17590200 / 20000000.0
+[INFO 12:42:47] my_main Estimated time left: 2 hours, 18 minutes, 10 seconds. Time passed: 16 hours, 11 minutes, 11 seconds
+[INFO 12:42:48] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/17590200
+[INFO 12:45:40] my_main t_env: 17640600 / 20000000.0
+[INFO 12:45:40] my_main Estimated time left: 2 hours, 14 minutes, 45 seconds. Time passed: 16 hours, 14 minutes, 4 seconds
+[INFO 12:45:41] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/17640600
+[INFO 12:48:36] my_main t_env: 17691000 / 20000000.0
+[INFO 12:48:36] my_main Estimated time left: 2 hours, 14 minutes, 39 seconds. Time passed: 16 hours, 17 minutes, 0 seconds
+[INFO 12:48:37] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/17691000
+[INFO 12:51:31] my_main t_env: 17741400 / 20000000.0
+[INFO 12:51:31] my_main Estimated time left: 2 hours, 10 minutes, 49 seconds. Time passed: 16 hours, 19 minutes, 55 seconds
+[INFO 12:51:33] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/17741400
+[INFO 12:54:27] my_main t_env: 17791800 / 20000000.0
+[INFO 12:54:27] my_main Estimated time left: 2 hours, 8 minutes, 40 seconds. Time passed: 16 hours, 22 minutes, 52 seconds
+[INFO 12:54:28] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/17791800
+[INFO 12:57:22] my_main t_env: 17842200 / 20000000.0
+[INFO 12:57:22] my_main Estimated time left: 2 hours, 4 minutes, 25 seconds. Time passed: 16 hours, 25 minutes, 46 seconds
+[INFO 12:57:23] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/17842200
+[INFO 13:00:17] my_main t_env: 17892600 / 20000000.0
+[INFO 13:00:17] my_main Estimated time left: 2 hours, 2 minutes, 15 seconds. Time passed: 16 hours, 28 minutes, 41 seconds
+[INFO 13:00:19] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/17892600
+[INFO 13:03:14] my_main t_env: 17943000 / 20000000.0
+[INFO 13:03:14] my_main Estimated time left: 2 hours, 11 seconds. Time passed: 16 hours, 31 minutes, 38 seconds
+[INFO 13:03:15] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/17943000
+[INFO 13:06:09] my_main t_env: 17993400 / 20000000.0
+[INFO 13:06:09] my_main Estimated time left: 1 hours, 56 minutes, 23 seconds. Time passed: 16 hours, 34 minutes, 33 seconds
+[INFO 13:06:10] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/17993400
+[INFO 13:09:03] my_main t_env: 18043800 / 20000000.0
+[INFO 13:09:03] my_main Estimated time left: 1 hours, 52 minutes, 9 seconds. Time passed: 16 hours, 37 minutes, 27 seconds
+[INFO 13:09:04] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/18043800
+[INFO 13:11:55] my_main t_env: 18094200 / 20000000.0
+[INFO 13:11:55] my_main Estimated time left: 1 hours, 48 minutes, 16 seconds. Time passed: 16 hours, 40 minutes, 19 seconds
+[INFO 13:11:55] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/18094200
+[INFO 13:14:46] my_main t_env: 18144600 / 20000000.0
+[INFO 13:14:46] my_main Estimated time left: 1 hours, 45 minutes, 13 seconds. Time passed: 16 hours, 43 minutes, 10 seconds
+[INFO 13:14:47] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/18144600
+[INFO 13:17:38] my_main t_env: 18195000 / 20000000.0
+[INFO 13:17:38] my_main Estimated time left: 1 hours, 42 minutes, 54 seconds. Time passed: 16 hours, 46 minutes, 3 seconds
+[INFO 13:17:39] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/18195000
+[INFO 13:20:31] my_main t_env: 18245400 / 20000000.0
+[INFO 13:20:31] my_main Estimated time left: 1 hours, 40 minutes, 8 seconds. Time passed: 16 hours, 48 minutes, 55 seconds
+[INFO 13:20:32] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/18245400
+[INFO 13:23:22] my_main t_env: 18295800 / 20000000.0
+[INFO 13:23:22] my_main Estimated time left: 1 hours, 36 minutes, 14 seconds. Time passed: 16 hours, 51 minutes, 46 seconds
+[INFO 13:23:23] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/18295800
+[INFO 13:26:13] my_main t_env: 18346200 / 20000000.0
+[INFO 13:26:13] my_main Estimated time left: 1 hours, 33 minutes, 23 seconds. Time passed: 16 hours, 54 minutes, 37 seconds
+[INFO 13:26:14] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/18346200
+[INFO 13:29:02] my_main t_env: 18396600 / 20000000.0
+[INFO 13:29:02] my_main Estimated time left: 1 hours, 29 minutes, 36 seconds. Time passed: 16 hours, 57 minutes, 26 seconds
+[INFO 13:29:03] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/18396600
+[INFO 13:31:53] my_main t_env: 18447000 / 20000000.0
+[INFO 13:31:53] my_main Estimated time left: 1 hours, 28 minutes, 11 seconds. Time passed: 17 hours, 17 seconds
+[INFO 13:31:54] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/18447000
+[INFO 13:34:44] my_main t_env: 18497400 / 20000000.0
+[INFO 13:34:44] my_main Estimated time left: 1 hours, 24 minutes, 55 seconds. Time passed: 17 hours, 3 minutes, 8 seconds
+[INFO 13:34:45] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/18497400
+[INFO 13:37:34] my_main t_env: 18547800 / 20000000.0
+[INFO 13:37:34] my_main Estimated time left: 1 hours, 21 minutes, 20 seconds. Time passed: 17 hours, 5 minutes, 58 seconds
+[INFO 13:37:35] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/18547800
+[INFO 13:40:25] my_main t_env: 18598200 / 20000000.0
+[INFO 13:40:25] my_main Estimated time left: 1 hours, 19 minutes, 38 seconds. Time passed: 17 hours, 8 minutes, 50 seconds
+[INFO 13:40:26] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/18598200
+[INFO 13:43:17] my_main t_env: 18648600 / 20000000.0
+[INFO 13:43:17] my_main Estimated time left: 1 hours, 16 minutes, 40 seconds. Time passed: 17 hours, 11 minutes, 41 seconds
+[INFO 13:43:18] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/18648600
+[INFO 13:46:07] my_main t_env: 18699000 / 20000000.0
+[INFO 13:46:07] my_main Estimated time left: 1 hours, 13 minutes, 0 seconds. Time passed: 17 hours, 14 minutes, 31 seconds
+[INFO 13:46:08] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/18699000
+[INFO 13:48:57] my_main t_env: 18749400 / 20000000.0
+[INFO 13:48:57] my_main Estimated time left: 1 hours, 10 minutes, 29 seconds. Time passed: 17 hours, 17 minutes, 21 seconds
+[INFO 13:48:58] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/18749400
+[INFO 13:51:48] my_main t_env: 18799800 / 20000000.0
+[INFO 13:51:48] my_main Estimated time left: 1 hours, 7 minutes, 43 seconds. Time passed: 17 hours, 20 minutes, 12 seconds
+[INFO 13:51:49] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/18799800
+[INFO 13:54:40] my_main t_env: 18850200 / 20000000.0
+[INFO 13:54:40] my_main Estimated time left: 1 hours, 5 minutes, 29 seconds. Time passed: 17 hours, 23 minutes, 4 seconds
+[INFO 13:54:41] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/18850200
+[INFO 13:57:30] my_main t_env: 18900600 / 20000000.0
+[INFO 13:57:30] my_main Estimated time left: 1 hours, 1 minutes, 54 seconds. Time passed: 17 hours, 25 minutes, 54 seconds
+[INFO 13:57:32] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/18900600
+[INFO 14:00:22] my_main t_env: 18951000 / 20000000.0
+[INFO 14:00:22] my_main Estimated time left: 59 minutes, 25 seconds. Time passed: 17 hours, 28 minutes, 46 seconds
+[INFO 14:00:23] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/18951000
+[INFO 14:03:11] my_main t_env: 19001400 / 20000000.0
+[INFO 14:03:11] my_main Estimated time left: 56 minutes, 5 seconds. Time passed: 17 hours, 31 minutes, 36 seconds
+[INFO 14:03:12] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/19001400
+[INFO 14:06:03] my_main t_env: 19051800 / 20000000.0
+[INFO 14:06:03] my_main Estimated time left: 53 minutes, 40 seconds. Time passed: 17 hours, 34 minutes, 27 seconds
+[INFO 14:06:04] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/19051800
+[INFO 14:08:54] my_main t_env: 19102200 / 20000000.0
+[INFO 14:08:54] my_main Estimated time left: 50 minutes, 55 seconds. Time passed: 17 hours, 37 minutes, 18 seconds
+[INFO 14:08:55] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/19102200
+[INFO 14:11:45] my_main t_env: 19152600 / 20000000.0
+[INFO 14:11:45] my_main Estimated time left: 47 minutes, 51 seconds. Time passed: 17 hours, 40 minutes, 9 seconds
+[INFO 14:11:46] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/19152600
+[INFO 14:14:39] my_main t_env: 19203000 / 20000000.0
+[INFO 14:14:39] my_main Estimated time left: 45 minutes, 53 seconds. Time passed: 17 hours, 43 minutes, 3 seconds
+[INFO 14:14:40] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/19203000
+[INFO 14:17:35] my_main t_env: 19253400 / 20000000.0
+[INFO 14:17:35] my_main Estimated time left: 43 minutes, 22 seconds. Time passed: 17 hours, 45 minutes, 59 seconds
+[INFO 14:17:36] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/19253400
+[INFO 14:20:26] my_main t_env: 19303800 / 20000000.0
+[INFO 14:20:26] my_main Estimated time left: 39 minutes, 25 seconds. Time passed: 17 hours, 48 minutes, 50 seconds
+[INFO 14:20:27] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/19303800
+[INFO 14:23:17] my_main t_env: 19354200 / 20000000.0
+[INFO 14:23:17] my_main Estimated time left: 36 minutes, 35 seconds. Time passed: 17 hours, 51 minutes, 41 seconds
+[INFO 14:23:18] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/19354200
+[INFO 14:26:09] my_main t_env: 19404600 / 20000000.0
+[INFO 14:26:09] my_main Estimated time left: 33 minutes, 45 seconds. Time passed: 17 hours, 54 minutes, 33 seconds
+[INFO 14:26:10] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/19404600
+[INFO 14:28:57] my_main t_env: 19455000 / 20000000.0
+[INFO 14:28:57] my_main Estimated time left: 30 minutes, 15 seconds. Time passed: 17 hours, 57 minutes, 21 seconds
+[INFO 14:28:58] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/19455000
+[INFO 14:31:45] my_main t_env: 19505400 / 20000000.0
+[INFO 14:31:45] my_main Estimated time left: 27 minutes, 33 seconds. Time passed: 18 hours, 9 seconds
+[INFO 14:31:46] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/19505400
+[INFO 14:34:33] my_main t_env: 19555800 / 20000000.0
+[INFO 14:34:33] my_main Estimated time left: 24 minutes, 35 seconds. Time passed: 18 hours, 2 minutes, 57 seconds
+[INFO 14:34:34] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/19555800
+[INFO 14:37:21] my_main t_env: 19606200 / 20000000.0
+[INFO 14:37:21] my_main Estimated time left: 21 minutes, 55 seconds. Time passed: 18 hours, 5 minutes, 45 seconds
+[INFO 14:37:22] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/19606200
+[INFO 14:40:08] my_main t_env: 19656600 / 20000000.0
+[INFO 14:40:08] my_main Estimated time left: 18 minutes, 58 seconds. Time passed: 18 hours, 8 minutes, 32 seconds
+[INFO 14:40:09] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/19656600
+[INFO 14:42:56] my_main t_env: 19707000 / 20000000.0
+[INFO 14:42:56] my_main Estimated time left: 16 minutes, 17 seconds. Time passed: 18 hours, 11 minutes, 20 seconds
+[INFO 14:42:57] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/19707000
+[INFO 14:45:43] my_main t_env: 19757400 / 20000000.0
+[INFO 14:45:43] my_main Estimated time left: 13 minutes, 20 seconds. Time passed: 18 hours, 14 minutes, 7 seconds
+[INFO 14:45:43] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/19757400
+[INFO 14:48:31] my_main t_env: 19807800 / 20000000.0
+[INFO 14:48:31] my_main Estimated time left: 10 minutes, 41 seconds. Time passed: 18 hours, 16 minutes, 55 seconds
+[INFO 14:48:32] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/19807800
+[INFO 14:51:18] my_main t_env: 19858200 / 20000000.0
+[INFO 14:51:18] my_main Estimated time left: 7 minutes, 51 seconds. Time passed: 18 hours, 19 minutes, 42 seconds
+[INFO 14:51:19] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/19858200
+[INFO 14:54:06] my_main t_env: 19908600 / 20000000.0
+[INFO 14:54:06] my_main Estimated time left: 5 minutes, 4 seconds. Time passed: 18 hours, 22 minutes, 30 seconds
+[INFO 14:54:07] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/19908600
+[INFO 14:56:53] my_main t_env: 19959000 / 20000000.0
+[INFO 14:56:53] my_main Estimated time left: 2 minutes, 15 seconds. Time passed: 18 hours, 25 minutes, 17 seconds
+[INFO 14:56:54] my_main Saving models to results/models/iql_seed3_2playerhard_2025-01-13 20:31:32.007854/19959000
+[INFO 14:59:10] my_main Finished Training
+wandb: uploading wandb-summary.json; uploading config.yaml; uploading output.log
+wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:                AClemoncookedfish_mean ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:      ACtomatocookedbeefhamburger_mean ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▂▁▂▄▃▆▅▇▆▅▇▇▆▇▅▇▇▆█▆▇▇█▆█
+wandb:                     cooked_count_mean ▁▂▁▂▃▂▃▃▅▄▆▅▃▃▃▄▅▂▄▃▃▇▆▇▇▇▅▆▅▇▄▅▆█▅▆▄▄▅▆
+wandb:              cookedbeefhamburger_mean ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▂▃▅▄▅▅▅▄▇█▆▆▆███▇▇▇██▄▆█
+wandb:                       cookedfish_mean ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                     cutted_count_mean ▁▂▂▂▁▂▁▁▁▃▂▃▆█▇▃▄▂▄▂▂▂▃▂▂▃▂▃▃▂▃▂▂▃▂▂▃▂▃▂
+wandb:                        ep_length_mean ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                               episode ▁▁▁▂▂▂▂▂▃▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇█████
+wandb:                               epsilon █▇▆▅▄▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                             grad_norm ▁▁▁▁▂▁▂▁▁▂▁▂▂▁▂▁▁▁▂▂▂▂▂▂▇▄▃▃▂▃▂█▂▃▇▆▃▃▂█
+wandb:                                  loss ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▂▂▂▂▃▃▃▃▄▅▄▅▅▅▅▆▆▆▆▇▆█▇
+wandb:                                    lr ████▇▇▇▇▇▇▆▆▆▆▆▆▆▆▅▅▄▄▄▄▄▃▃▃▃▃▂▂▂▂▂▂▁▁▁▁
+wandb:                          q_taken_mean ▁▁▁▂▂▂▃▃▃▃▃▃▃▃▃▄▄▄▄▅▅▅▅▅▆▇▆▇▆▆▇▇▇▇▇▇█▇█▇
+wandb:                           return_mean ▁▁▁▁▁▁▁▁▁▁▂▁▂▂▂▃▃▃▃▃▄▆▅▆▆▆▇▄▄▆▇▅▆█▅██▇▆▇
+wandb:                            return_std ▁▁▁▁▂▃▂▂▂▂▃▃▂▂▂▇█▅▃▆▆▄▇▆▇▅▆▃▆▇▆▄▅▇▆█▇██▇
+wandb:                  synthesis_count_mean ▁▁▁▁▁▁▁▁▁▁▁▂▂▂▂▃▂▃▄▅▄▅▄▅█▇▆▆▆▇▇▆▅█▇▇█▅█▇
+wandb:                           target_mean ▁▁▁▂▂▃▃▃▃▃▃▃▃▃▄▄▄▄▄▅▅▅▆▆▆▆▇▇▇███▇▇███▇▇█
+wandb:                          td_error_abs ▁▁▁▂▃▃▃▂▃▃▂▃▃▃▃▃▃▃▅▅▅▆▇▆███▇▇▇▇▇▇▇▇▇▆▆▇▆
+wandb:           test_AClemoncookedfish_mean ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: test_ACtomatocookedbeefhamburger_mean ▁▁▁▁▁▁▁▁▁▁▁▂▁▂▁▁▃▁▂▂▂█▁▁▃▄▁▁▃▃▅▄▃▇▄▁▄█▄▂
+wandb:                test_cooked_count_mean ▁▁▂▂▁▁▁▂▁▁▁▁▃▁▂▃▁▁▂▂▂▁▃█▂▂▅▆▄▃▁▁▄▁▂▂▂▃▆▁
+wandb:         test_cookedbeefhamburger_mean ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▁▁▁▂▁▂▁▂▇▇▂▂▄██▂▁▄█▄▅▄▂▅
+wandb:                  test_cookedfish_mean ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                test_cutted_count_mean ▁▁▁▁▁▁▁▁▁▂▁▁▇▅█▇▁▁█▁▂▁▂▁▂▃▁▂▂▁▂▁▂▁▁▁▁▂▂▁
+wandb:                   test_ep_length_mean ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                      test_return_mean ▁▁▁▁▁▁▁▁▁▁▁▁▂▁▂▃▁▁▂▁▅▄▃▁▅▂█▂▃▄▂▃▅▃▄▅▆▄▆▅
+wandb:                       test_return_std ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:             test_synthesis_count_mean ▁▁▁▁▁▁▁▁▁▁▁▁▃▁▁▃▁▁▁▃▄▂▃▂▂▇▃▃▁▃▃█▆▇▃▃▆▂▇█
+wandb: 
+wandb: Run summary:
+wandb:                AClemoncookedfish_mean 0
+wandb:      ACtomatocookedbeefhamburger_mean 2.7
+wandb:                     cooked_count_mean 6.5
+wandb:              cookedbeefhamburger_mean 3.1
+wandb:                       cookedfish_mean 0
+wandb:                     cutted_count_mean 2.6
+wandb:                        ep_length_mean 600
+wandb:                               episode 33330
+wandb:                               epsilon 0.05
+wandb:                             grad_norm 5.04775
+wandb:                                  loss 2.22139
+wandb:                                    lr 0.0001
+wandb:                          q_taken_mean 8.33096
+wandb:                           return_mean 127.5
+wandb:                            return_std 78.58912
+wandb:                  synthesis_count_mean 17.4
+wandb:                           target_mean 8.33029
+wandb:                          td_error_abs 0.35378
+wandb:           test_AClemoncookedfish_mean 0
+wandb: test_ACtomatocookedbeefhamburger_mean 1
+wandb:                test_cooked_count_mean 1
+wandb:         test_cookedbeefhamburger_mean 2
+wandb:                  test_cookedfish_mean 0
+wandb:                test_cutted_count_mean 0
+wandb:                   test_ep_length_mean 600
+wandb:                      test_return_mean 60
+wandb:                       test_return_std 0
+wandb:             test_synthesis_count_mean 8
+wandb: 
+wandb: 🚀 View run mild-bird-346 at: https://wandb.ai/wanghm/epymarl_overcooked2/runs/1ncatq4f
+wandb: ⭐️ View project at: https://wandb.ai/wanghm/epymarl_overcooked2
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20250113_203133-1ncatq4f/logs
+[DEBUG 14:59:15] my_main Finished after 18:27:43.
+[INFO 14:59:15] pymarl Completed after 18:27:43
+shape of state: 131
+shape of observation: 131
+任务冲突，以新任务为准,这条不应该会出现
+任务冲突，以新任务为准,这条不应该会出现
+任务冲突，以新任务为准,这条不应该会出现
+任务冲突，以新任务为准,这条不应该会出现
+任务冲突，以新任务为准,这条不应该会出现
+Exiting Main
+Stopping all threads
+Thread Thread-1 is alive! Is daemon: False
+Thread joined
+Exiting script

@@ -113,7 +113,7 @@ class LlmMediumLevelAgent():
 				if obj_type == "pot":
 					self.pot_id_to_pos.append(obj_pos)
 		layout_prompt = layout_prompt[:-1] + ".\n"
-		print("layout_prompt:", layout_prompt)
+		# print("layout_prompt:", layout_prompt)
 		return layout_prompt
 	  
 	def action(self, env:OvercookPygameEnv):
@@ -139,7 +139,7 @@ class LlmMediumLevelAgent():
 				# generate a new ml action
 				self.generate_success_feedback()  # 在大模型上下文中加入ml_action成功的反馈
 				self.current_ml_action = self.generate_ml_action(state)
-				print("llm generated current_ml_action:", self.current_ml_action)
+				# print("llm generated current_ml_action:", self.current_ml_action)
 
 		count = 0
 		while not self.validate_current_ml_action(state):
@@ -171,7 +171,7 @@ class LlmMediumLevelAgent():
 			)
 			# print("008")
 			if current_motion_goal == None:
-				print("sdasdsada")
+				print("current_motion_goal为空")
 		self.prev_state = state
 		if chosen_action is None:
 			self.current_ml_action = "wait(1)"
@@ -259,7 +259,7 @@ class LlmMediumLevelAgent():
 		counter_objects, counter_objects_pos = self.mdp.get_counter_objects_dict()
 		synthesis_objects = [obj for obj in counter_objects if obj not in ["dish", "BClemon", "rawfish"]]
         # ss = [obj for obj in counter]
-		print("Current state:", state)
+		# print("Current state:", state)
 		ego = f"player_{self.agent_index}"
 		teammate = f"player_{1-self.agent_index}"
 		time_prompt = f"Scene {state['timestep']}: "
@@ -404,7 +404,7 @@ class LlmMediumLevelAgent():
 		# ipdb.set_trace()
 
 		print(f"\n\n### Observation module to GPT\n")   
-		print(f"state_prompt: {state_prompt}")
+		# print(f"state_prompt: {state_prompt}")
 		
 
 		state_message = {"role": "user", "content": state_prompt}
@@ -583,7 +583,7 @@ class LlmMediumLevelAgent():
 	
 	def generate_success_feedback(self):
 		success_feedback = f"### Controller Validation\nPlayer {self.agent_index} succeeded at {self.current_ml_action}. \n"
-		print("success_feedback:", success_feedback)  
+		# print("success_feedback:", success_feedback)  
 		if 'wait' not in success_feedback:
 			self.add_msg_to_dialog_history({"role": "user", "content": f'Player {self.agent_index} succeeded at {self.current_ml_action}.'})
 

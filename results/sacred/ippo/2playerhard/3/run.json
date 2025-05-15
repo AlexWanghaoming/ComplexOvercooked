@@ -1,0 +1,113 @@
+{
+  "artifacts": [],
+  "command": "my_main",
+  "experiment": {
+    "base_dir": "/alpha/my_marl/src",
+    "dependencies": [
+      "numpy==2.2.1",
+      "PyYAML==6.0.2",
+      "sacred==0.8.7",
+      "torch==2.5.1"
+    ],
+    "mainfile": "main.py",
+    "name": "pymarl",
+    "repositories": [
+      {
+        "commit": "3579b288097621f4da99fd3f0a04dff090fafd6f",
+        "dirty": true,
+        "url": "git@github.com:AlexWanghaoming/my_marl.git"
+      },
+      {
+        "commit": "3579b288097621f4da99fd3f0a04dff090fafd6f",
+        "dirty": true,
+        "url": "git@github.com:AlexWanghaoming/my_marl.git"
+      },
+      {
+        "commit": "3579b288097621f4da99fd3f0a04dff090fafd6f",
+        "dirty": true,
+        "url": "git@github.com:AlexWanghaoming/my_marl.git"
+      }
+    ],
+    "sources": [
+      [
+        "main.py",
+        "_sources/main_e34aa0de7b6d6ad74e526da86f636421.py"
+      ],
+      [
+        "run.py",
+        "_sources/run_18b6cff1f978547a80706a9a46217ba9.py"
+      ],
+      [
+        "utils/logging.py",
+        "_sources/logging_987a6549f2515dae5d883771d25ca8af.py"
+      ]
+    ]
+  },
+  "heartbeat": "2025-01-14T07:42:24.885473",
+  "host": {
+    "ENV": {},
+    "cpu": "11th Gen Intel(R) Core(TM) i9-11900K @ 3.50GHz",
+    "gpus": {
+      "driver_version": "535.86.05",
+      "gpus": [
+        {
+          "model": "NVIDIA GeForce RTX 3080",
+          "persistence_mode": false,
+          "total_memory": 10240
+        }
+      ]
+    },
+    "hostname": "wanghm",
+    "os": [
+      "Linux",
+      "Linux-6.5.0-18-generic-x86_64-with-glibc2.35"
+    ],
+    "python_version": "3.10.16"
+  },
+  "meta": {
+    "command": "my_main",
+    "config_updates": {
+      "env_args": {
+        "map_name": "2playerhard"
+      },
+      "hidden_dim": 128,
+      "seed": 2
+    },
+    "named_configs": [],
+    "options": {
+      "--beat-interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--id": null,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print-config": false,
+      "--priority": null,
+      "--queue": false,
+      "--s3": null,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [
+        "env_args.map_name=2playerhard",
+        "seed=2",
+        "hidden_dim=128"
+      ],
+      "help": false,
+      "with": true
+    }
+  },
+  "resources": [],
+  "result": null,
+  "start_time": "2025-01-14T03:21:19.775020",
+  "status": "COMPLETED",
+  "stop_time": "2025-01-14T07:42:22.873879"
+}

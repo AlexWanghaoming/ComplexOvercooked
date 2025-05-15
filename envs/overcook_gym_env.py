@@ -402,6 +402,7 @@ class OvercookPygameEnv(gym.Env):
                     self.game.NOWCOIN += 1  # 代表之前倒计时重新了
                     #tasksequence.pop()
                 tasksequence.append("Successfully delivered the required food")
+
             elif event.type == OUT_SUPPLY_EVENT:
                 self.matiral_count[event.item] += 1
                 if self.matiral_count[event.item] <= 2:
@@ -592,8 +593,8 @@ class OvercookPygameEnv(gym.Env):
                 player_i_position (length 2)
         """
 
-        def concat_dicts(a:Dict, b:Dict)->Dict:
-            return {**a, **b}
+        # def concat_dicts(a:Dict, b:Dict)->Dict:
+        #     return {**a, **b}
         
         def ManhattanDis(relativepos:Tuple[int, int])->int:
             return abs(relativepos[0]) + abs(relativepos[1])
@@ -603,11 +604,11 @@ class OvercookPygameEnv(gym.Env):
             return [(p.rect.x-obj.rect.x)/80, 
                     (p.rect.y-obj.rect.y)/80]  
         
-        assert(isinstance(self.game.task_sprites, pygame.sprite.Group))
-        assert(isinstance(self.game.playergroup, list))
-        assert(isinstance(self.game.pots, pygame.sprite.Group))
-        assert(isinstance(self.game.cuttingtables, pygame.sprite.Group))
-        assert(isinstance(self.game.tables, pygame.sprite.Group))
+        # assert(isinstance(self.game.task_sprites, pygame.sprite.Group))
+        # assert(isinstance(self.game.playergroup, list))
+        # assert(isinstance(self.game.pots, pygame.sprite.Group))
+        # assert(isinstance(self.game.cuttingtables, pygame.sprite.Group))
+        # assert(isinstance(self.game.tables, pygame.sprite.Group))
 
         # sparse_r, shaped_r, tasksequence = self._calculate_rew()
         players:List[pygame.sprite.Sprite] = self.game.playergroup
@@ -932,5 +933,4 @@ class OvercookPygameEnv(gym.Env):
     def seed(self, seed=None):
         # 设置随机数生成器的种子
         return np.random(seed=seed)
-
 

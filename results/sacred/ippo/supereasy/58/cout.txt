@@ -1,0 +1,570 @@
+[INFO 10:07:15] pymarl Running command 'my_main'
+[INFO 10:07:15] pymarl Started run with ID "58"
+[DEBUG 10:07:15] pymarl Starting Heartbeat
+[DEBUG 10:07:15] my_main Started
+[INFO 10:07:15] my_main Experiment Parameters:
+[INFO 10:07:15] my_main 
+
+{   'action_selector': 'soft_policies',
+    'add_value_last_step': True,
+    'agent': 'rnn',
+    'agent_output_type': 'pi_logits',
+    'batch_size': 10,
+    'batch_size_run': 10,
+    'buffer_cpu_only': True,
+    'buffer_size': 10,
+    'checkpoint_path': '',
+    'common_reward': True,
+    'critic_type': 'ac_critic',
+    'entropy_coef': 0.01,
+    'env': 'overcooked2',
+    'env_args': {   'ifrender': False,
+                    'map_name': 'supereasy',
+                    'seed': 7},
+    'epochs': 8,
+    'eps_clip': 0.1,
+    'evaluate': False,
+    'gamma': 0.99,
+    'grad_norm_clip': 10,
+    'hidden_dim': 128,
+    'hypergroup': None,
+    'label': 'default_label',
+    'learner': 'ppo_learner',
+    'learner_log_interval': 6000,
+    'load_step': 0,
+    'local_results_path': 'results',
+    'log_interval': 6000,
+    'lr': 0.001,
+    'lr_decay': True,
+    'mac': 'basic_mac',
+    'mask_before_softmax': True,
+    'name': 'ippo',
+    'obs_agent_id': True,
+    'obs_individual_obs': False,
+    'obs_last_action': False,
+    'optim_alpha': 0.99,
+    'optim_eps': 1e-05,
+    'q_nstep': 5,
+    'render': False,
+    'repeat_id': 1,
+    'reward_scalarisation': 'mean',
+    'reward_shaping_horizon': 10000000.0,
+    'runner': 'parallel',
+    'runner_log_interval': 6000,
+    'save_model': True,
+    'save_model_interval': 100000,
+    'save_replay': False,
+    'seed': 7,
+    'standardise_returns': False,
+    'standardise_rewards': False,
+    't_max': 10000000,
+    'target_update_interval_or_tau': 0.01,
+    'test_greedy': True,
+    'test_interval': 50000,
+    'test_nepisode': 10,
+    'use_cuda': False,
+    'use_rnn': True,
+    'use_tensorboard': False,
+    'use_wandb': True,
+    'wandb_mode': 'online',
+    'wandb_project': 'epymarl_overcooked2',
+    'wandb_save_model': False,
+    'wandb_team': 'wanghm'}
+
+[DEBUG 10:07:16] wandb.docker.auth Trying paths: ['/home/wanghm/.docker/config.json', '/home/wanghm/.dockercfg']
+[DEBUG 10:07:16] wandb.docker.auth Found file at path: /home/wanghm/.docker/config.json
+[DEBUG 10:07:16] wandb.docker.auth Found 'auths' section
+[DEBUG 10:07:16] wandb.docker.auth Auth data for https://index.docker.io/v1/ is absent. Client might be using a credentials store instead.
+[DEBUG 10:07:16] wandb.docker.auth Found 'credsStore' section
+[DEBUG 10:07:16] sentry_sdk.errors Setting up integrations (with default = False)
+[DEBUG 10:07:16] sentry_sdk.errors Setting SDK name to 'sentry.python'
+[DEBUG 10:07:16] sentry_sdk.errors [Profiling] Setting up continuous profiler in thread mode
+[DEBUG 10:07:16] git.cmd Popen(['git', 'rev-parse', '--show-toplevel'], cwd=/alpha/ComplexOvercooked, stdin=None, shell=False, universal_newlines=False)
+wandb: Using wandb-core as the SDK backend.  Please refer to https://wandb.me/wandb-core for more information.
+[DEBUG 10:07:16] urllib3.connectionpool Starting new HTTPS connection (1): api.wandb.ai:443
+[DEBUG 10:07:17] urllib3.connectionpool https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+[DEBUG 10:07:17] urllib3.connectionpool https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+wandb: Currently logged in as: wanghm to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+[DEBUG 10:07:17] git.cmd Popen(['git', 'cat-file', '--batch-check'], cwd=/alpha/ComplexOvercooked, stdin=<valid stream>, shell=False, universal_newlines=False)
+[DEBUG 10:07:18] asyncio Using selector: EpollSelector
+wandb: Tracking run with wandb version 0.19.9
+wandb: Run data is saved locally in /alpha/ComplexOvercooked/wandb/run-20250410_100717-gm0b3093
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run honest-sun-437
+wandb: ⭐️ View project at https://wandb.ai/wanghm/epymarl_overcooked2
+wandb: 🚀 View run at https://wandb.ai/wanghm/epymarl_overcooked2/runs/gm0b3093
+[INFO 10:07:18] my_main *******************
+[INFO 10:07:18] my_main WANDB RUN ID:
+[INFO 10:07:18] my_main gm0b3093
+[INFO 10:07:18] my_main *******************
+shape of state: 73
+shape of observation: 73
+[INFO 10:07:20] my_main Beginning training for 10000000 timesteps
+[INFO 10:07:24] my_main t_env: 6000 / 10000000
+[INFO 10:07:24] my_main Estimated time left: 13 minutes, 9 seconds. Time passed: 4 seconds
+[INFO 10:07:26] my_main New best model saved with performance: 2.0
+[INFO 10:08:09] my_main t_env: 60000 / 10000000
+[INFO 10:08:09] my_main Estimated time left: 2 hours, 16 minutes, 13 seconds. Time passed: 48 seconds
+[INFO 10:08:56] my_main t_env: 114000 / 10000000
+[INFO 10:08:56] my_main Estimated time left: 2 hours, 25 minutes, 13 seconds. Time passed: 1 minutes, 36 seconds
+[INFO 10:09:41] my_main t_env: 168000 / 10000000
+[INFO 10:09:41] my_main Estimated time left: 2 hours, 15 minutes, 57 seconds. Time passed: 2 minutes, 21 seconds
+[INFO 10:10:26] my_main t_env: 222000 / 10000000
+[INFO 10:10:26] my_main Estimated time left: 2 hours, 14 minutes, 30 seconds. Time passed: 3 minutes, 5 seconds
+[INFO 10:10:27] my_main New best model saved with performance: 4.0
+[INFO 10:11:10] my_main t_env: 276000 / 10000000
+[INFO 10:11:10] my_main Estimated time left: 2 hours, 13 minutes, 14 seconds. Time passed: 3 minutes, 50 seconds
+[INFO 10:11:55] my_main t_env: 330000 / 10000000
+[INFO 10:11:55] my_main Estimated time left: 2 hours, 12 minutes, 40 seconds. Time passed: 4 minutes, 34 seconds
+[INFO 10:12:39] my_main t_env: 384000 / 10000000
+[INFO 10:12:39] my_main Estimated time left: 2 hours, 10 minutes, 57 seconds. Time passed: 5 minutes, 18 seconds
+[INFO 10:12:40] my_main New best model saved with performance: 6.0
+[INFO 10:13:23] my_main t_env: 438000 / 10000000
+[INFO 10:13:23] my_main Estimated time left: 2 hours, 11 minutes, 41 seconds. Time passed: 6 minutes, 3 seconds
+[INFO 10:14:08] my_main t_env: 492000 / 10000000
+[INFO 10:14:08] my_main Estimated time left: 2 hours, 10 minutes, 44 seconds. Time passed: 6 minutes, 47 seconds
+[INFO 10:14:53] my_main t_env: 546000 / 10000000
+[INFO 10:14:53] my_main Estimated time left: 2 hours, 10 minutes, 8 seconds. Time passed: 7 minutes, 32 seconds
+[INFO 10:15:37] my_main t_env: 600000 / 10000000
+[INFO 10:15:37] my_main Estimated time left: 2 hours, 10 minutes, 22 seconds. Time passed: 8 minutes, 17 seconds
+[INFO 10:16:22] my_main t_env: 654000 / 10000000
+[INFO 10:16:22] my_main Estimated time left: 2 hours, 7 minutes, 42 seconds. Time passed: 9 minutes, 1 seconds
+[INFO 10:17:06] my_main t_env: 708000 / 10000000
+[INFO 10:17:06] my_main Estimated time left: 2 hours, 8 minutes, 19 seconds. Time passed: 9 minutes, 46 seconds
+[INFO 10:17:08] my_main New best model saved with performance: 14.0
+[INFO 10:17:51] my_main t_env: 762000 / 10000000
+[INFO 10:17:51] my_main Estimated time left: 2 hours, 7 minutes, 9 seconds. Time passed: 10 minutes, 31 seconds
+[INFO 10:17:53] my_main New best model saved with performance: 18.0
+[INFO 10:18:36] my_main t_env: 816000 / 10000000
+[INFO 10:18:36] my_main Estimated time left: 2 hours, 6 minutes, 44 seconds. Time passed: 11 minutes, 15 seconds
+[INFO 10:19:20] my_main t_env: 870000 / 10000000
+[INFO 10:19:20] my_main Estimated time left: 2 hours, 3 minutes, 10 seconds. Time passed: 11 minutes, 59 seconds
+[INFO 10:19:21] my_main New best model saved with performance: 24.0
+[INFO 10:20:04] my_main t_env: 924000 / 10000000
+[INFO 10:20:04] my_main Estimated time left: 2 hours, 4 minutes, 54 seconds. Time passed: 12 minutes, 44 seconds
+[INFO 10:20:49] my_main t_env: 978000 / 10000000
+[INFO 10:20:49] my_main Estimated time left: 2 hours, 3 minutes, 43 seconds. Time passed: 13 minutes, 28 seconds
+[INFO 10:21:33] my_main t_env: 1032000 / 10000000
+[INFO 10:21:33] my_main Estimated time left: 2 hours, 2 minutes, 10 seconds. Time passed: 14 minutes, 12 seconds
+[INFO 10:22:17] my_main t_env: 1086000 / 10000000
+[INFO 10:22:17] my_main Estimated time left: 2 hours, 1 minutes, 38 seconds. Time passed: 14 minutes, 56 seconds
+[INFO 10:23:01] my_main t_env: 1140000 / 10000000
+[INFO 10:23:01] my_main Estimated time left: 2 hours, 1 minutes, 25 seconds. Time passed: 15 minutes, 41 seconds
+[INFO 10:23:46] my_main t_env: 1194000 / 10000000
+[INFO 10:23:46] my_main Estimated time left: 2 hours, 41 seconds. Time passed: 16 minutes, 25 seconds
+[INFO 10:24:30] my_main t_env: 1248000 / 10000000
+[INFO 10:24:30] my_main Estimated time left: 2 hours, 6 seconds. Time passed: 17 minutes, 10 seconds
+[INFO 10:25:14] my_main t_env: 1302000 / 10000000
+[INFO 10:25:14] my_main Estimated time left: 1 hours, 58 minutes, 14 seconds. Time passed: 17 minutes, 54 seconds
+[INFO 10:25:59] my_main t_env: 1356000 / 10000000
+[INFO 10:25:59] my_main Estimated time left: 1 hours, 59 minutes, 6 seconds. Time passed: 18 minutes, 38 seconds
+[INFO 10:26:43] my_main t_env: 1410000 / 10000000
+[INFO 10:26:43] my_main Estimated time left: 1 hours, 57 minutes, 41 seconds. Time passed: 19 minutes, 23 seconds
+[INFO 10:27:27] my_main t_env: 1464000 / 10000000
+[INFO 10:27:27] my_main Estimated time left: 1 hours, 55 minutes, 57 seconds. Time passed: 20 minutes, 7 seconds
+[INFO 10:28:12] my_main t_env: 1518000 / 10000000
+[INFO 10:28:12] my_main Estimated time left: 1 hours, 55 minutes, 50 seconds. Time passed: 20 minutes, 51 seconds
+[INFO 10:28:56] my_main t_env: 1572000 / 10000000
+[INFO 10:28:56] my_main Estimated time left: 1 hours, 56 minutes, 44 seconds. Time passed: 21 minutes, 36 seconds
+[INFO 10:29:41] my_main t_env: 1626000 / 10000000
+[INFO 10:29:41] my_main Estimated time left: 1 hours, 54 minutes, 49 seconds. Time passed: 22 minutes, 20 seconds
+[INFO 10:30:25] my_main t_env: 1680000 / 10000000
+[INFO 10:30:25] my_main Estimated time left: 1 hours, 54 minutes, 45 seconds. Time passed: 23 minutes, 5 seconds
+[INFO 10:31:10] my_main t_env: 1734000 / 10000000
+[INFO 10:31:10] my_main Estimated time left: 1 hours, 52 minutes, 30 seconds. Time passed: 23 minutes, 49 seconds
+[INFO 10:31:54] my_main t_env: 1788000 / 10000000
+[INFO 10:31:54] my_main Estimated time left: 1 hours, 51 minutes, 50 seconds. Time passed: 24 minutes, 33 seconds
+[INFO 10:31:55] my_main New best model saved with performance: 26.0
+[INFO 10:32:38] my_main t_env: 1842000 / 10000000
+[INFO 10:32:38] my_main Estimated time left: 1 hours, 51 minutes, 11 seconds. Time passed: 25 minutes, 17 seconds
+[INFO 10:33:22] my_main t_env: 1896000 / 10000000
+[INFO 10:33:22] my_main Estimated time left: 1 hours, 50 minutes, 53 seconds. Time passed: 26 minutes, 2 seconds
+[INFO 10:34:07] my_main t_env: 1950000 / 10000000
+[INFO 10:34:07] my_main Estimated time left: 1 hours, 50 minutes, 20 seconds. Time passed: 26 minutes, 46 seconds
+[INFO 10:34:51] my_main t_env: 2004000 / 10000000
+[INFO 10:34:51] my_main Estimated time left: 1 hours, 48 minutes, 58 seconds. Time passed: 27 minutes, 30 seconds
+[INFO 10:35:35] my_main t_env: 2058000 / 10000000
+[INFO 10:35:35] my_main Estimated time left: 1 hours, 48 minutes, 5 seconds. Time passed: 28 minutes, 14 seconds
+[INFO 10:36:19] my_main t_env: 2112000 / 10000000
+[INFO 10:36:19] my_main Estimated time left: 1 hours, 47 minutes, 53 seconds. Time passed: 28 minutes, 59 seconds
+[INFO 10:37:04] my_main t_env: 2166000 / 10000000
+[INFO 10:37:04] my_main Estimated time left: 1 hours, 47 minutes, 35 seconds. Time passed: 29 minutes, 43 seconds
+[INFO 10:37:48] my_main t_env: 2220000 / 10000000
+[INFO 10:37:48] my_main Estimated time left: 1 hours, 47 minutes, 2 seconds. Time passed: 30 minutes, 28 seconds
+[INFO 10:38:33] my_main t_env: 2274000 / 10000000
+[INFO 10:38:33] my_main Estimated time left: 1 hours, 45 minutes, 41 seconds. Time passed: 31 minutes, 12 seconds
+[INFO 10:39:18] my_main t_env: 2328000 / 10000000
+[INFO 10:39:18] my_main Estimated time left: 1 hours, 47 minutes, 9 seconds. Time passed: 31 minutes, 57 seconds
+[INFO 10:40:02] my_main t_env: 2382000 / 10000000
+[INFO 10:40:02] my_main Estimated time left: 1 hours, 44 minutes, 45 seconds. Time passed: 32 minutes, 42 seconds
+[INFO 10:40:04] my_main New best model saved with performance: 32.0
+[INFO 10:40:47] my_main t_env: 2436000 / 10000000
+[INFO 10:40:47] my_main Estimated time left: 1 hours, 44 minutes, 8 seconds. Time passed: 33 minutes, 27 seconds
+[INFO 10:40:49] my_main New best model saved with performance: 42.0
+[INFO 10:41:32] my_main t_env: 2490000 / 10000000
+[INFO 10:41:32] my_main Estimated time left: 1 hours, 44 minutes, 34 seconds. Time passed: 34 minutes, 12 seconds
+[INFO 10:42:17] my_main t_env: 2544000 / 10000000
+[INFO 10:42:17] my_main Estimated time left: 1 hours, 42 minutes, 41 seconds. Time passed: 34 minutes, 56 seconds
+[INFO 10:43:02] my_main t_env: 2598000 / 10000000
+[INFO 10:43:02] my_main Estimated time left: 1 hours, 42 minutes, 58 seconds. Time passed: 35 minutes, 41 seconds
+[INFO 10:43:03] my_main New best model saved with performance: 52.0
+[INFO 10:43:47] my_main t_env: 2652000 / 10000000
+[INFO 10:43:47] my_main Estimated time left: 1 hours, 42 minutes, 4 seconds. Time passed: 36 minutes, 26 seconds
+[INFO 10:44:32] my_main t_env: 2706000 / 10000000
+[INFO 10:44:32] my_main Estimated time left: 1 hours, 41 minutes, 41 seconds. Time passed: 37 minutes, 12 seconds
+[INFO 10:45:17] my_main t_env: 2760000 / 10000000
+[INFO 10:45:17] my_main Estimated time left: 1 hours, 39 minutes, 48 seconds. Time passed: 37 minutes, 56 seconds
+[INFO 10:46:01] my_main t_env: 2814000 / 10000000
+[INFO 10:46:01] my_main Estimated time left: 1 hours, 38 minutes, 35 seconds. Time passed: 38 minutes, 41 seconds
+[INFO 10:46:46] my_main t_env: 2868000 / 10000000
+[INFO 10:46:46] my_main Estimated time left: 1 hours, 38 minutes, 27 seconds. Time passed: 39 minutes, 25 seconds
+[INFO 10:47:31] my_main t_env: 2922000 / 10000000
+[INFO 10:47:31] my_main Estimated time left: 1 hours, 37 minutes, 56 seconds. Time passed: 40 minutes, 10 seconds
+[INFO 10:48:15] my_main t_env: 2976000 / 10000000
+[INFO 10:48:15] my_main Estimated time left: 1 hours, 37 minutes, 4 seconds. Time passed: 40 minutes, 55 seconds
+[INFO 10:49:00] my_main t_env: 3030000 / 10000000
+[INFO 10:49:00] my_main Estimated time left: 1 hours, 36 minutes, 8 seconds. Time passed: 41 minutes, 40 seconds
+[INFO 10:49:02] my_main New best model saved with performance: 54.0
+[INFO 10:49:45] my_main t_env: 3084000 / 10000000
+[INFO 10:49:45] my_main Estimated time left: 1 hours, 34 minutes, 45 seconds. Time passed: 42 minutes, 24 seconds
+[INFO 10:49:46] my_main New best model saved with performance: 60.0
+[INFO 10:50:29] my_main t_env: 3138000 / 10000000
+[INFO 10:50:29] my_main Estimated time left: 1 hours, 34 minutes, 57 seconds. Time passed: 43 minutes, 9 seconds
+[INFO 10:51:14] my_main t_env: 3192000 / 10000000
+[INFO 10:51:14] my_main Estimated time left: 1 hours, 33 minutes, 39 seconds. Time passed: 43 minutes, 53 seconds
+[INFO 10:51:59] my_main t_env: 3246000 / 10000000
+[INFO 10:51:59] my_main Estimated time left: 1 hours, 33 minutes, 19 seconds. Time passed: 44 minutes, 38 seconds
+[INFO 10:52:43] my_main t_env: 3300000 / 10000000
+[INFO 10:52:43] my_main Estimated time left: 1 hours, 31 minutes, 56 seconds. Time passed: 45 minutes, 23 seconds
+[INFO 10:53:28] my_main t_env: 3354000 / 10000000
+[INFO 10:53:28] my_main Estimated time left: 1 hours, 31 minutes, 43 seconds. Time passed: 46 minutes, 7 seconds
+[INFO 10:53:30] my_main New best model saved with performance: 74.0
+[INFO 10:54:13] my_main t_env: 3408000 / 10000000
+[INFO 10:54:13] my_main Estimated time left: 1 hours, 32 minutes, 5 seconds. Time passed: 46 minutes, 53 seconds
+[INFO 10:54:59] my_main t_env: 3462000 / 10000000
+[INFO 10:54:59] my_main Estimated time left: 1 hours, 31 minutes, 38 seconds. Time passed: 47 minutes, 38 seconds
+[INFO 10:55:43] my_main t_env: 3516000 / 10000000
+[INFO 10:55:43] my_main Estimated time left: 1 hours, 28 minutes, 32 seconds. Time passed: 48 minutes, 22 seconds
+[INFO 10:56:28] my_main t_env: 3570000 / 10000000
+[INFO 10:56:28] my_main Estimated time left: 1 hours, 29 minutes, 3 seconds. Time passed: 49 minutes, 7 seconds
+[INFO 10:57:12] my_main t_env: 3624000 / 10000000
+[INFO 10:57:12] my_main Estimated time left: 1 hours, 27 minutes, 31 seconds. Time passed: 49 minutes, 52 seconds
+[INFO 10:57:57] my_main t_env: 3678000 / 10000000
+[INFO 10:57:57] my_main Estimated time left: 1 hours, 26 minutes, 42 seconds. Time passed: 50 minutes, 36 seconds
+[INFO 10:58:41] my_main t_env: 3732000 / 10000000
+[INFO 10:58:41] my_main Estimated time left: 1 hours, 25 minutes, 30 seconds. Time passed: 51 minutes, 20 seconds
+[INFO 10:59:25] my_main t_env: 3786000 / 10000000
+[INFO 10:59:25] my_main Estimated time left: 1 hours, 25 minutes, 39 seconds. Time passed: 52 minutes, 5 seconds
+[INFO 11:00:10] my_main t_env: 3840000 / 10000000
+[INFO 11:00:10] my_main Estimated time left: 1 hours, 25 minutes, 30 seconds. Time passed: 52 minutes, 50 seconds
+[INFO 11:00:55] my_main t_env: 3894000 / 10000000
+[INFO 11:00:55] my_main Estimated time left: 1 hours, 24 minutes, 41 seconds. Time passed: 53 minutes, 35 seconds
+[INFO 11:01:41] my_main t_env: 3948000 / 10000000
+[INFO 11:01:41] my_main Estimated time left: 1 hours, 24 minutes, 24 seconds. Time passed: 54 minutes, 20 seconds
+[INFO 11:01:42] my_main New best model saved with performance: 86.0
+[INFO 11:02:26] my_main t_env: 4002000 / 10000000
+[INFO 11:02:26] my_main Estimated time left: 1 hours, 23 minutes, 12 seconds. Time passed: 55 minutes, 5 seconds
+[INFO 11:02:27] my_main New best model saved with performance: 102.0
+[INFO 11:03:10] my_main t_env: 4056000 / 10000000
+[INFO 11:03:10] my_main Estimated time left: 1 hours, 22 minutes, 13 seconds. Time passed: 55 minutes, 50 seconds
+[INFO 11:03:55] my_main t_env: 4110000 / 10000000
+[INFO 11:03:55] my_main Estimated time left: 1 hours, 21 minutes, 4 seconds. Time passed: 56 minutes, 34 seconds
+[INFO 11:03:57] my_main New best model saved with performance: 128.0
+[INFO 11:04:40] my_main t_env: 4164000 / 10000000
+[INFO 11:04:40] my_main Estimated time left: 1 hours, 21 minutes, 10 seconds. Time passed: 57 minutes, 20 seconds
+[INFO 11:05:25] my_main t_env: 4218000 / 10000000
+[INFO 11:05:25] my_main Estimated time left: 1 hours, 19 minutes, 21 seconds. Time passed: 58 minutes, 4 seconds
+[INFO 11:06:09] my_main t_env: 4272000 / 10000000
+[INFO 11:06:09] my_main Estimated time left: 1 hours, 19 minutes, 14 seconds. Time passed: 58 minutes, 49 seconds
+[INFO 11:06:11] my_main New best model saved with performance: 148.0
+[INFO 11:06:55] my_main t_env: 4326000 / 10000000
+[INFO 11:06:55] my_main Estimated time left: 1 hours, 19 minutes, 33 seconds. Time passed: 59 minutes, 34 seconds
+[INFO 11:06:56] my_main New best model saved with performance: 182.0
+[INFO 11:07:39] my_main t_env: 4380000 / 10000000
+[INFO 11:07:39] my_main Estimated time left: 1 hours, 17 minutes, 23 seconds. Time passed: 1 hours, 19 seconds
+[INFO 11:08:24] my_main t_env: 4434000 / 10000000
+[INFO 11:08:24] my_main Estimated time left: 1 hours, 16 minutes, 46 seconds. Time passed: 1 hours, 1 minutes, 4 seconds
+[INFO 11:08:25] my_main New best model saved with performance: 188.0
+[INFO 11:09:09] my_main t_env: 4488000 / 10000000
+[INFO 11:09:09] my_main Estimated time left: 1 hours, 15 minutes, 44 seconds. Time passed: 1 hours, 1 minutes, 48 seconds
+[INFO 11:09:55] my_main t_env: 4542000 / 10000000
+[INFO 11:09:55] my_main Estimated time left: 1 hours, 17 minutes, 23 seconds. Time passed: 1 hours, 2 minutes, 34 seconds
+[INFO 11:10:39] my_main t_env: 4596000 / 10000000
+[INFO 11:10:39] my_main Estimated time left: 1 hours, 14 minutes, 22 seconds. Time passed: 1 hours, 3 minutes, 19 seconds
+[INFO 11:11:24] my_main t_env: 4650000 / 10000000
+[INFO 11:11:24] my_main Estimated time left: 1 hours, 14 minutes, 1 seconds. Time passed: 1 hours, 4 minutes, 3 seconds
+[INFO 11:12:09] my_main t_env: 4704000 / 10000000
+[INFO 11:12:09] my_main Estimated time left: 1 hours, 12 minutes, 53 seconds. Time passed: 1 hours, 4 minutes, 48 seconds
+[INFO 11:12:10] my_main New best model saved with performance: 212.0
+[INFO 11:12:53] my_main t_env: 4758000 / 10000000
+[INFO 11:12:53] my_main Estimated time left: 1 hours, 12 minutes, 13 seconds. Time passed: 1 hours, 5 minutes, 33 seconds
+[INFO 11:13:39] my_main t_env: 4812000 / 10000000
+[INFO 11:13:39] my_main Estimated time left: 1 hours, 12 minutes, 38 seconds. Time passed: 1 hours, 6 minutes, 18 seconds
+[INFO 11:13:40] my_main New best model saved with performance: 216.0
+[INFO 11:14:24] my_main t_env: 4866000 / 10000000
+[INFO 11:14:24] my_main Estimated time left: 1 hours, 11 minutes, 24 seconds. Time passed: 1 hours, 7 minutes, 3 seconds
+[INFO 11:15:09] my_main t_env: 4920000 / 10000000
+[INFO 11:15:09] my_main Estimated time left: 1 hours, 11 minutes, 23 seconds. Time passed: 1 hours, 7 minutes, 49 seconds
+[INFO 11:15:11] my_main New best model saved with performance: 256.0
+[INFO 11:15:54] my_main t_env: 4974000 / 10000000
+[INFO 11:15:54] my_main Estimated time left: 1 hours, 9 minutes, 36 seconds. Time passed: 1 hours, 8 minutes, 34 seconds
+[INFO 11:16:39] my_main t_env: 5028000 / 10000000
+[INFO 11:16:39] my_main Estimated time left: 1 hours, 9 minutes, 37 seconds. Time passed: 1 hours, 9 minutes, 19 seconds
+[INFO 11:17:25] my_main t_env: 5082000 / 10000000
+[INFO 11:17:25] my_main Estimated time left: 1 hours, 8 minutes, 59 seconds. Time passed: 1 hours, 10 minutes, 4 seconds
+[INFO 11:18:11] my_main t_env: 5136000 / 10000000
+[INFO 11:18:11] my_main Estimated time left: 1 hours, 8 minutes, 37 seconds. Time passed: 1 hours, 10 minutes, 50 seconds
+[INFO 11:18:56] my_main t_env: 5190000 / 10000000
+[INFO 11:18:56] my_main Estimated time left: 1 hours, 6 minutes, 45 seconds. Time passed: 1 hours, 11 minutes, 35 seconds
+[INFO 11:18:57] my_main New best model saved with performance: 262.0
+[INFO 11:19:41] my_main t_env: 5244000 / 10000000
+[INFO 11:19:41] my_main Estimated time left: 1 hours, 6 minutes, 8 seconds. Time passed: 1 hours, 12 minutes, 20 seconds
+[INFO 11:19:42] my_main New best model saved with performance: 272.0
+[INFO 11:20:25] my_main t_env: 5298000 / 10000000
+[INFO 11:20:25] my_main Estimated time left: 1 hours, 4 minutes, 48 seconds. Time passed: 1 hours, 13 minutes, 5 seconds
+[INFO 11:21:11] my_main t_env: 5352000 / 10000000
+[INFO 11:21:11] my_main Estimated time left: 1 hours, 5 minutes, 34 seconds. Time passed: 1 hours, 13 minutes, 50 seconds
+[INFO 11:21:12] my_main New best model saved with performance: 298.0
+[INFO 11:21:56] my_main t_env: 5406000 / 10000000
+[INFO 11:21:56] my_main Estimated time left: 1 hours, 3 minutes, 53 seconds. Time passed: 1 hours, 14 minutes, 36 seconds
+[INFO 11:21:58] my_main New best model saved with performance: 304.0
+[INFO 11:22:41] my_main t_env: 5460000 / 10000000
+[INFO 11:22:41] my_main Estimated time left: 1 hours, 2 minutes, 35 seconds. Time passed: 1 hours, 15 minutes, 20 seconds
+[INFO 11:22:42] my_main New best model saved with performance: 324.0
+[INFO 11:23:26] my_main t_env: 5514000 / 10000000
+[INFO 11:23:26] my_main Estimated time left: 1 hours, 2 minutes, 52 seconds. Time passed: 1 hours, 16 minutes, 6 seconds
+[INFO 11:24:11] my_main t_env: 5568000 / 10000000
+[INFO 11:24:11] my_main Estimated time left: 1 hours, 1 minutes, 36 seconds. Time passed: 1 hours, 16 minutes, 51 seconds
+[INFO 11:24:57] my_main t_env: 5622000 / 10000000
+[INFO 11:24:57] my_main Estimated time left: 1 hours, 1 minutes, 26 seconds. Time passed: 1 hours, 17 minutes, 36 seconds
+[INFO 11:24:58] my_main New best model saved with performance: 330.0
+[INFO 11:25:42] my_main t_env: 5676000 / 10000000
+[INFO 11:25:42] my_main Estimated time left: 1 hours, 4 seconds. Time passed: 1 hours, 18 minutes, 21 seconds
+[INFO 11:25:43] my_main New best model saved with performance: 358.0
+[INFO 11:26:27] my_main t_env: 5730000 / 10000000
+[INFO 11:26:27] my_main Estimated time left: 59 minutes, 50 seconds. Time passed: 1 hours, 19 minutes, 7 seconds
+[INFO 11:27:12] my_main t_env: 5784000 / 10000000
+[INFO 11:27:12] my_main Estimated time left: 58 minutes, 28 seconds. Time passed: 1 hours, 19 minutes, 52 seconds
+[INFO 11:27:58] my_main t_env: 5838000 / 10000000
+[INFO 11:27:58] my_main Estimated time left: 58 minutes, 28 seconds. Time passed: 1 hours, 20 minutes, 37 seconds
+[INFO 11:28:43] my_main t_env: 5892000 / 10000000
+[INFO 11:28:43] my_main Estimated time left: 57 minutes, 44 seconds. Time passed: 1 hours, 21 minutes, 23 seconds
+[INFO 11:29:29] my_main t_env: 5946000 / 10000000
+[INFO 11:29:29] my_main Estimated time left: 57 minutes, 0 seconds. Time passed: 1 hours, 22 minutes, 8 seconds
+[INFO 11:30:14] my_main t_env: 6000000 / 10000000
+[INFO 11:30:14] my_main Estimated time left: 56 minutes, 35 seconds. Time passed: 1 hours, 22 minutes, 54 seconds
+[INFO 11:30:59] my_main t_env: 6054000 / 10000000
+[INFO 11:30:59] my_main Estimated time left: 54 minutes, 46 seconds. Time passed: 1 hours, 23 minutes, 39 seconds
+[INFO 11:31:44] my_main t_env: 6108000 / 10000000
+[INFO 11:31:44] my_main Estimated time left: 54 minutes, 5 seconds. Time passed: 1 hours, 24 minutes, 24 seconds
+[INFO 11:32:30] my_main t_env: 6162000 / 10000000
+[INFO 11:32:30] my_main Estimated time left: 54 minutes, 8 seconds. Time passed: 1 hours, 25 minutes, 10 seconds
+[INFO 11:33:16] my_main t_env: 6216000 / 10000000
+[INFO 11:33:16] my_main Estimated time left: 53 minutes, 5 seconds. Time passed: 1 hours, 25 minutes, 55 seconds
+[INFO 11:33:17] my_main New best model saved with performance: 364.0
+[INFO 11:34:01] my_main t_env: 6270000 / 10000000
+[INFO 11:34:01] my_main Estimated time left: 51 minutes, 59 seconds. Time passed: 1 hours, 26 minutes, 40 seconds
+[INFO 11:34:46] my_main t_env: 6324000 / 10000000
+[INFO 11:34:46] my_main Estimated time left: 51 minutes, 6 seconds. Time passed: 1 hours, 27 minutes, 25 seconds
+[INFO 11:34:47] my_main New best model saved with performance: 368.0
+[INFO 11:35:31] my_main t_env: 6378000 / 10000000
+[INFO 11:35:31] my_main Estimated time left: 50 minutes, 47 seconds. Time passed: 1 hours, 28 minutes, 11 seconds
+[INFO 11:36:17] my_main t_env: 6432000 / 10000000
+[INFO 11:36:17] my_main Estimated time left: 50 minutes, 23 seconds. Time passed: 1 hours, 28 minutes, 57 seconds
+[INFO 11:36:19] my_main New best model saved with performance: 374.0
+[INFO 11:37:03] my_main t_env: 6486000 / 10000000
+[INFO 11:37:03] my_main Estimated time left: 49 minutes, 25 seconds. Time passed: 1 hours, 29 minutes, 42 seconds
+[INFO 11:37:04] my_main New best model saved with performance: 376.0
+[INFO 11:37:48] my_main t_env: 6540000 / 10000000
+[INFO 11:37:48] my_main Estimated time left: 48 minutes, 21 seconds. Time passed: 1 hours, 30 minutes, 27 seconds
+[INFO 11:38:34] my_main t_env: 6594000 / 10000000
+[INFO 11:38:34] my_main Estimated time left: 47 minutes, 58 seconds. Time passed: 1 hours, 31 minutes, 13 seconds
+[INFO 11:38:35] my_main New best model saved with performance: 392.0
+[INFO 11:39:19] my_main t_env: 6648000 / 10000000
+[INFO 11:39:19] my_main Estimated time left: 47 minutes, 4 seconds. Time passed: 1 hours, 31 minutes, 59 seconds
+[INFO 11:40:05] my_main t_env: 6702000 / 10000000
+[INFO 11:40:05] my_main Estimated time left: 46 minutes, 26 seconds. Time passed: 1 hours, 32 minutes, 44 seconds
+[INFO 11:40:06] my_main New best model saved with performance: 398.0
+[INFO 11:40:50] my_main t_env: 6756000 / 10000000
+[INFO 11:40:50] my_main Estimated time left: 45 minutes, 50 seconds. Time passed: 1 hours, 33 minutes, 30 seconds
+[INFO 11:40:52] my_main New best model saved with performance: 418.0
+[INFO 11:41:37] my_main t_env: 6810000 / 10000000
+[INFO 11:41:37] my_main Estimated time left: 45 minutes, 23 seconds. Time passed: 1 hours, 34 minutes, 16 seconds
+[INFO 11:42:22] my_main t_env: 6864000 / 10000000
+[INFO 11:42:22] my_main Estimated time left: 43 minutes, 52 seconds. Time passed: 1 hours, 35 minutes, 1 seconds
+[INFO 11:43:07] my_main t_env: 6918000 / 10000000
+[INFO 11:43:07] my_main Estimated time left: 43 minutes, 10 seconds. Time passed: 1 hours, 35 minutes, 47 seconds
+[INFO 11:43:52] my_main t_env: 6972000 / 10000000
+[INFO 11:43:52] my_main Estimated time left: 42 minutes, 7 seconds. Time passed: 1 hours, 36 minutes, 32 seconds
+[INFO 11:44:38] my_main t_env: 7026000 / 10000000
+[INFO 11:44:38] my_main Estimated time left: 42 minutes, 3 seconds. Time passed: 1 hours, 37 minutes, 18 seconds
+[INFO 11:44:40] my_main New best model saved with performance: 420.0
+[INFO 11:45:24] my_main t_env: 7080000 / 10000000
+[INFO 11:45:24] my_main Estimated time left: 41 minutes, 15 seconds. Time passed: 1 hours, 38 minutes, 3 seconds
+[INFO 11:46:10] my_main t_env: 7134000 / 10000000
+[INFO 11:46:10] my_main Estimated time left: 41 minutes, 5 seconds. Time passed: 1 hours, 38 minutes, 50 seconds
+[INFO 11:46:56] my_main t_env: 7188000 / 10000000
+[INFO 11:46:56] my_main Estimated time left: 39 minutes, 43 seconds. Time passed: 1 hours, 39 minutes, 36 seconds
+[INFO 11:47:42] my_main t_env: 7242000 / 10000000
+[INFO 11:47:42] my_main Estimated time left: 39 minutes, 28 seconds. Time passed: 1 hours, 40 minutes, 22 seconds
+[INFO 11:48:27] my_main t_env: 7296000 / 10000000
+[INFO 11:48:27] my_main Estimated time left: 37 minutes, 29 seconds. Time passed: 1 hours, 41 minutes, 7 seconds
+[INFO 11:49:13] my_main t_env: 7350000 / 10000000
+[INFO 11:49:13] my_main Estimated time left: 37 minutes, 24 seconds. Time passed: 1 hours, 41 minutes, 53 seconds
+[INFO 11:49:59] my_main t_env: 7404000 / 10000000
+[INFO 11:49:59] my_main Estimated time left: 36 minutes, 40 seconds. Time passed: 1 hours, 42 minutes, 38 seconds
+[INFO 11:50:44] my_main t_env: 7458000 / 10000000
+[INFO 11:50:44] my_main Estimated time left: 35 minutes, 41 seconds. Time passed: 1 hours, 43 minutes, 24 seconds
+[INFO 11:51:30] my_main t_env: 7512000 / 10000000
+[INFO 11:51:30] my_main Estimated time left: 35 minutes, 7 seconds. Time passed: 1 hours, 44 minutes, 10 seconds
+[INFO 11:52:15] my_main t_env: 7566000 / 10000000
+[INFO 11:52:15] my_main Estimated time left: 33 minutes, 59 seconds. Time passed: 1 hours, 44 minutes, 55 seconds
+[INFO 11:53:01] my_main t_env: 7620000 / 10000000
+[INFO 11:53:01] my_main Estimated time left: 33 minutes, 9 seconds. Time passed: 1 hours, 45 minutes, 40 seconds
+[INFO 11:53:45] my_main t_env: 7674000 / 10000000
+[INFO 11:53:45] my_main Estimated time left: 32 minutes, 12 seconds. Time passed: 1 hours, 46 minutes, 25 seconds
+[INFO 11:54:31] my_main t_env: 7728000 / 10000000
+[INFO 11:54:31] my_main Estimated time left: 31 minutes, 57 seconds. Time passed: 1 hours, 47 minutes, 10 seconds
+[INFO 11:54:33] my_main New best model saved with performance: 422.0
+[INFO 11:55:17] my_main t_env: 7782000 / 10000000
+[INFO 11:55:17] my_main Estimated time left: 31 minutes, 35 seconds. Time passed: 1 hours, 47 minutes, 57 seconds
+[INFO 11:56:02] my_main t_env: 7836000 / 10000000
+[INFO 11:56:02] my_main Estimated time left: 30 minutes, 6 seconds. Time passed: 1 hours, 48 minutes, 42 seconds
+[INFO 11:56:47] my_main t_env: 7890000 / 10000000
+[INFO 11:56:47] my_main Estimated time left: 29 minutes, 16 seconds. Time passed: 1 hours, 49 minutes, 27 seconds
+[INFO 11:57:33] my_main t_env: 7944000 / 10000000
+[INFO 11:57:33] my_main Estimated time left: 28 minutes, 48 seconds. Time passed: 1 hours, 50 minutes, 12 seconds
+[INFO 11:58:18] my_main t_env: 7998000 / 10000000
+[INFO 11:58:18] my_main Estimated time left: 28 minutes, 3 seconds. Time passed: 1 hours, 50 minutes, 57 seconds
+[INFO 11:59:03] my_main t_env: 8052000 / 10000000
+[INFO 11:59:03] my_main Estimated time left: 27 minutes, 12 seconds. Time passed: 1 hours, 51 minutes, 43 seconds
+[INFO 11:59:48] my_main t_env: 8106000 / 10000000
+[INFO 11:59:48] my_main Estimated time left: 26 minutes, 21 seconds. Time passed: 1 hours, 52 minutes, 28 seconds
+[INFO 12:00:34] my_main t_env: 8160000 / 10000000
+[INFO 12:00:34] my_main Estimated time left: 26 minutes, 1 seconds. Time passed: 1 hours, 53 minutes, 14 seconds
+[INFO 12:01:20] my_main t_env: 8214000 / 10000000
+[INFO 12:01:20] my_main Estimated time left: 25 minutes, 8 seconds. Time passed: 1 hours, 53 minutes, 59 seconds
+[INFO 12:02:05] my_main t_env: 8268000 / 10000000
+[INFO 12:02:05] my_main Estimated time left: 24 minutes, 24 seconds. Time passed: 1 hours, 54 minutes, 45 seconds
+[INFO 12:02:51] my_main t_env: 8322000 / 10000000
+[INFO 12:02:51] my_main Estimated time left: 23 minutes, 34 seconds. Time passed: 1 hours, 55 minutes, 30 seconds
+[INFO 12:03:37] my_main t_env: 8376000 / 10000000
+[INFO 12:03:37] my_main Estimated time left: 22 minutes, 55 seconds. Time passed: 1 hours, 56 minutes, 16 seconds
+[INFO 12:04:22] my_main t_env: 8430000 / 10000000
+[INFO 12:04:22] my_main Estimated time left: 22 minutes, 6 seconds. Time passed: 1 hours, 57 minutes, 2 seconds
+[INFO 12:05:09] my_main t_env: 8484000 / 10000000
+[INFO 12:05:09] my_main Estimated time left: 21 minutes, 42 seconds. Time passed: 1 hours, 57 minutes, 48 seconds
+[INFO 12:05:54] my_main t_env: 8538000 / 10000000
+[INFO 12:05:54] my_main Estimated time left: 20 minutes, 20 seconds. Time passed: 1 hours, 58 minutes, 33 seconds
+[INFO 12:06:39] my_main t_env: 8592000 / 10000000
+[INFO 12:06:39] my_main Estimated time left: 19 minutes, 49 seconds. Time passed: 1 hours, 59 minutes, 19 seconds
+[INFO 12:07:25] my_main t_env: 8646000 / 10000000
+[INFO 12:07:25] my_main Estimated time left: 18 minutes, 53 seconds. Time passed: 2 hours, 4 seconds
+[INFO 12:08:10] my_main t_env: 8700000 / 10000000
+[INFO 12:08:10] my_main Estimated time left: 18 minutes, 10 seconds. Time passed: 2 hours, 49 seconds
+[INFO 12:08:55] my_main t_env: 8754000 / 10000000
+[INFO 12:08:55] my_main Estimated time left: 17 minutes, 27 seconds. Time passed: 2 hours, 1 minutes, 35 seconds
+[INFO 12:09:41] my_main t_env: 8808000 / 10000000
+[INFO 12:09:41] my_main Estimated time left: 16 minutes, 55 seconds. Time passed: 2 hours, 2 minutes, 21 seconds
+[INFO 12:10:28] my_main t_env: 8862000 / 10000000
+[INFO 12:10:28] my_main Estimated time left: 16 minutes, 25 seconds. Time passed: 2 hours, 3 minutes, 8 seconds
+[INFO 12:11:14] my_main t_env: 8916000 / 10000000
+[INFO 12:11:14] my_main Estimated time left: 15 minutes, 26 seconds. Time passed: 2 hours, 3 minutes, 54 seconds
+[INFO 12:12:00] my_main t_env: 8970000 / 10000000
+[INFO 12:12:00] my_main Estimated time left: 14 minutes, 27 seconds. Time passed: 2 hours, 4 minutes, 39 seconds
+[INFO 12:12:46] my_main t_env: 9024000 / 10000000
+[INFO 12:12:46] my_main Estimated time left: 13 minutes, 49 seconds. Time passed: 2 hours, 5 minutes, 25 seconds
+[INFO 12:13:31] my_main t_env: 9078000 / 10000000
+[INFO 12:13:31] my_main Estimated time left: 13 minutes, 2 seconds. Time passed: 2 hours, 6 minutes, 11 seconds
+[INFO 12:14:17] my_main t_env: 9132000 / 10000000
+[INFO 12:14:17] my_main Estimated time left: 12 minutes, 11 seconds. Time passed: 2 hours, 6 minutes, 56 seconds
+[INFO 12:15:03] my_main t_env: 9186000 / 10000000
+[INFO 12:15:03] my_main Estimated time left: 11 minutes, 27 seconds. Time passed: 2 hours, 7 minutes, 42 seconds
+[INFO 12:15:49] my_main t_env: 9240000 / 10000000
+[INFO 12:15:49] my_main Estimated time left: 10 minutes, 47 seconds. Time passed: 2 hours, 8 minutes, 28 seconds
+[INFO 12:16:35] my_main t_env: 9294000 / 10000000
+[INFO 12:16:35] my_main Estimated time left: 10 minutes, 0 seconds. Time passed: 2 hours, 9 minutes, 14 seconds
+[INFO 12:17:21] my_main t_env: 9348000 / 10000000
+[INFO 12:17:21] my_main Estimated time left: 9 minutes, 17 seconds. Time passed: 2 hours, 10 minutes, 0 seconds
+[INFO 12:17:22] my_main New best model saved with performance: 428.0
+[INFO 12:18:06] my_main t_env: 9402000 / 10000000
+[INFO 12:18:06] my_main Estimated time left: 8 minutes, 23 seconds. Time passed: 2 hours, 10 minutes, 46 seconds
+[INFO 12:18:52] my_main t_env: 9456000 / 10000000
+[INFO 12:18:52] my_main Estimated time left: 7 minutes, 36 seconds. Time passed: 2 hours, 11 minutes, 31 seconds
+[INFO 12:19:37] my_main t_env: 9510000 / 10000000
+[INFO 12:19:37] my_main Estimated time left: 6 minutes, 56 seconds. Time passed: 2 hours, 12 minutes, 17 seconds
+[INFO 12:20:23] my_main t_env: 9564000 / 10000000
+[INFO 12:20:23] my_main Estimated time left: 6 minutes, 11 seconds. Time passed: 2 hours, 13 minutes, 3 seconds
+[INFO 12:21:09] my_main t_env: 9618000 / 10000000
+[INFO 12:21:09] my_main Estimated time left: 5 minutes, 19 seconds. Time passed: 2 hours, 13 minutes, 48 seconds
+[INFO 12:21:54] my_main t_env: 9672000 / 10000000
+[INFO 12:21:54] my_main Estimated time left: 4 minutes, 36 seconds. Time passed: 2 hours, 14 minutes, 34 seconds
+[INFO 12:22:40] my_main t_env: 9726000 / 10000000
+[INFO 12:22:40] my_main Estimated time left: 3 minutes, 50 seconds. Time passed: 2 hours, 15 minutes, 19 seconds
+[INFO 12:23:26] my_main t_env: 9780000 / 10000000
+[INFO 12:23:26] my_main Estimated time left: 3 minutes, 9 seconds. Time passed: 2 hours, 16 minutes, 6 seconds
+[INFO 12:24:12] my_main t_env: 9834000 / 10000000
+[INFO 12:24:12] my_main Estimated time left: 2 minutes, 21 seconds. Time passed: 2 hours, 16 minutes, 52 seconds
+[INFO 12:24:59] my_main t_env: 9888000 / 10000000
+[INFO 12:24:59] my_main Estimated time left: 1 minutes, 37 seconds. Time passed: 2 hours, 17 minutes, 38 seconds
+[INFO 12:25:44] my_main t_env: 9942000 / 10000000
+[INFO 12:25:44] my_main Estimated time left: 48 seconds. Time passed: 2 hours, 18 minutes, 24 seconds
+[INFO 12:26:30] my_main t_env: 9996000 / 10000000
+[INFO 12:26:30] my_main Estimated time left: 3 seconds. Time passed: 2 hours, 19 minutes, 10 seconds
+[INFO 12:26:37] my_main Finished Training
+[DEBUG 12:26:38] asyncio Using selector: EpollSelector
+wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: uploading history steps 1663-1666, summary, console lines 414-416
+wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:      advantage_mean ▅▄▅▅▄▅▅▅▅▅█▅▃▅▄▆▅▄▄▅▅▅▄▅▅▅▅▅▅▅▄▅▅▄▅▄▄▅▃▁
+wandb:     agent_grad_norm ▁▁▂▁▁▂▂▆█▅▅▃▃▃▃▆▄▂▂▃▂▃▂▂▂▃▃▂▂▃▂▂▂▅▆▆▄▂▆▇
+wandb:    critic_grad_norm ▁▂▃▁▁▁▁▁▃▃▅▆▂▂▄▃▅▂▂▃▂▃▃▃▂▃▂▂▂▁▄▂▃▄▆▅▃▇█▃
+wandb:         critic_loss ▁▃▁▂▁▂▂▂▃▆█▅▄▅▅▆▅▄▂▂▂▂▁▂▂▁▁▁▁▁▁▁▁▁▂▁▂▄▂▂
+wandb:      ep_length_mean ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:             episode ▁▁▁▁▁▂▂▂▂▃▃▃▃▃▄▄▄▄▅▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇▇████
+wandb:                  lr ███████▇▇▇▇▇▆▆▆▆▅▅▅▅▅▅▅▄▄▃▃▃▃▃▃▃▂▂▂▁▁▁▁▁
+wandb:             pg_loss ▃▂▅▂▂▃█▂▁▂▂▃▃▂▃▃▃▃▃▃▂▃▃▃▃▃▃▃▃▃▃▃▁▃▃▁▂▃▃▄
+wandb:              pi_max ▁▁▁▂▃▃▂▃▂▂▂▂▂▂▃▃▄▄▄▄▅▄▅▆▆▇▇▇▇██████▇▇▇▇█
+wandb:        q_taken_mean ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▂▃▃▃▄▄▄▅▅▅▆▆▇▇▇▇▇▇▇▇█████
+wandb:         return_mean ▁▁▁▁▁▁▁▁▁▁▂▂▂▂▂▂▂▂▄▅▆▇▇█████████▆▅▆▆▆▇▇▇
+wandb:          return_std ▁▁▁▂▂▂▁▁▁▂▂▂▂▂▂▂▂▃▄▄▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▇▂▁█▆
+wandb:         target_mean ▁▁▁▁▁▁▁▁▁▁▁▁▁▂▂▂▃▃▂▂▃▃▃▃▃▅▅▅▆▆▆▆▆▆▇▇████
+wandb:        td_error_abs ▁▁▁▂▁▁▂▂▂▁▅▄▄▄▄▅▄▅█▆▆▅▆▅▅▅▃▃▂▃▃▂▂▁▃▃▃▂▅▂
+wandb: test_ep_length_mean ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:    test_return_mean ▁▁▁▁▁▁▁▁▁▁▁▁▁▂▂▂▂▂▂▂▃▃▄▃▄▆▇▆▇▇█████▇▇█▇▇
+wandb:     test_return_std ▁▁▁▁▁▂▂▂▂▂▂▂▂▃▂▂▂▂▂▂▁▂▁▂▃▁▂▁██▇▅▅▅▆▃▆▁▅▇
+wandb: 
+wandb: Run summary:
+wandb:      advantage_mean -0.00998
+wandb:     agent_grad_norm 0.07795
+wandb:    critic_grad_norm 6.35509
+wandb:         critic_loss 0.49743
+wandb:      ep_length_mean 600
+wandb:             episode 16670
+wandb:                  lr 0.0001
+wandb:             pg_loss 0.0062
+wandb:              pi_max 0.88551
+wandb:        q_taken_mean 36.58166
+wandb:         return_mean 422.09672
+wandb:          return_std 6.00043
+wandb:         target_mean 36.57169
+wandb:        td_error_abs 0.34588
+wandb: test_ep_length_mean 600
+wandb:    test_return_mean 364
+wandb:     test_return_std 130.78226
+wandb: 
+wandb: 🚀 View run honest-sun-437 at: https://wandb.ai/wanghm/epymarl_overcooked2/runs/gm0b3093
+wandb: ⭐️ View project at: https://wandb.ai/wanghm/epymarl_overcooked2
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20250410_100717-gm0b3093/logs
+Exiting Main
+Stopping all threads
+Thread Thread-1 is alive! Is daemon: False
+Thread joined
+Thread MsgRouterThr is alive! Is daemon: True
+Thread joined
+Exiting script
+[DEBUG 12:26:41] my_main Finished after 2:19:26.
+[INFO 12:26:41] pymarl Completed after 2:19:26

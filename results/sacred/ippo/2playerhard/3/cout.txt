@@ -1,0 +1,1264 @@
+[INFO 11:21:19] pymarl Running command 'my_main'
+[INFO 11:21:19] pymarl Started run with ID "3"
+[DEBUG 11:21:19] pymarl Starting Heartbeat
+[DEBUG 11:21:19] my_main Started
+[INFO 11:21:19] my_main Experiment Parameters:
+[INFO 11:21:19] my_main 
+
+{   'action_selector': 'soft_policies',
+    'add_value_last_step': True,
+    'agent': 'rnn',
+    'agent_output_type': 'pi_logits',
+    'batch_size': 10,
+    'batch_size_run': 10,
+    'buffer_cpu_only': True,
+    'buffer_size': 10,
+    'checkpoint_path': '',
+    'common_reward': True,
+    'critic_type': 'ac_critic',
+    'entropy_coef': 0.01,
+    'env': 'overcooked2',
+    'env_args': {   'ifrender': False,
+                    'map_name': '2playerhard',
+                    'seed': 2},
+    'epochs': 8,
+    'eps_clip': 0.1,
+    'evaluate': False,
+    'gamma': 0.99,
+    'grad_norm_clip': 10,
+    'hidden_dim': 128,
+    'hypergroup': None,
+    'label': 'default_label',
+    'learner': 'ppo_learner',
+    'learner_log_interval': 6000,
+    'load_step': 0,
+    'local_results_path': 'results',
+    'log_interval': 6000,
+    'lr': 0.001,
+    'lr_decay': True,
+    'mac': 'basic_mac',
+    'mask_before_softmax': True,
+    'name': 'ippo',
+    'obs_agent_id': True,
+    'obs_individual_obs': False,
+    'obs_last_action': False,
+    'optim_alpha': 0.99,
+    'optim_eps': 1e-05,
+    'q_nstep': 5,
+    'render': False,
+    'repeat_id': 1,
+    'reward_scalarisation': 'mean',
+    'reward_shaping_horizon': 10000000.0,
+    'runner': 'parallel',
+    'runner_log_interval': 6000,
+    'save_model': True,
+    'save_model_interval': 50000,
+    'save_replay': False,
+    'seed': 2,
+    'standardise_returns': False,
+    'standardise_rewards': False,
+    't_max': 20000000.0,
+    'target_update_interval_or_tau': 0.01,
+    'test_greedy': True,
+    'test_interval': 50000,
+    'test_nepisode': 10,
+    'use_cuda': False,
+    'use_rnn': True,
+    'use_tensorboard': False,
+    'use_wandb': True,
+    'wandb_mode': 'online',
+    'wandb_project': 'epymarl_overcooked2',
+    'wandb_save_model': False,
+    'wandb_team': 'wanghm'}
+
+[DEBUG 11:21:19] wandb.docker.auth Trying paths: ['/home/wanghm/.docker/config.json', '/home/wanghm/.dockercfg']
+[DEBUG 11:21:19] wandb.docker.auth Found file at path: /home/wanghm/.docker/config.json
+[DEBUG 11:21:19] wandb.docker.auth Found 'auths' section
+[DEBUG 11:21:19] wandb.docker.auth Auth data for https://index.docker.io/v1/ is absent. Client might be using a credentials store instead.
+[DEBUG 11:21:19] wandb.docker.auth Found 'credsStore' section
+[DEBUG 11:21:20] git.cmd Popen(['git', 'rev-parse', '--show-toplevel'], cwd=/alpha/my_marl, stdin=None, shell=False, universal_newlines=False)
+wandb: Using wandb-core as the SDK backend.  Please refer to https://wandb.me/wandb-core for more information.
+[DEBUG 11:21:20] urllib3.connectionpool Starting new HTTPS connection (1): api.wandb.ai:443
+[DEBUG 11:21:20] urllib3.connectionpool https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+[DEBUG 11:21:20] urllib3.connectionpool https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+wandb: Currently logged in as: wanghm. Use `wandb login --relogin` to force relogin
+[DEBUG 11:21:20] git.cmd Popen(['git', 'cat-file', '--batch-check'], cwd=/alpha/my_marl, stdin=<valid stream>, shell=False, universal_newlines=False)
+wandb: Tracking run with wandb version 0.19.1
+wandb: Run data is saved locally in /alpha/my_marl/wandb/run-20250114_112120-9aitbral
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run rare-feather-361
+wandb: ⭐️ View project at https://wandb.ai/wanghm/epymarl_overcooked2
+wandb: 🚀 View run at https://wandb.ai/wanghm/epymarl_overcooked2/runs/9aitbral
+[INFO 11:21:21] my_main *******************
+[INFO 11:21:21] my_main WANDB RUN ID:
+[INFO 11:21:21] my_main 9aitbral
+[INFO 11:21:21] my_main *******************
+shape of state: 131
+shape of observation: 131
+[INFO 11:21:22] my_main Beginning training for 20000000.0 timesteps
+[INFO 11:21:26] my_main t_env: 6000 / 20000000.0
+[INFO 11:21:26] my_main Estimated time left: 26 minutes, 14 seconds. Time passed: 4 seconds
+[INFO 11:21:27] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/6000
+[INFO 11:22:07] my_main t_env: 60000 / 20000000.0
+[INFO 11:22:07] my_main Estimated time left: 4 hours, 10 minutes, 0 seconds. Time passed: 45 seconds
+[INFO 11:22:08] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/60000
+[INFO 11:22:48] my_main t_env: 114000 / 20000000.0
+[INFO 11:22:48] my_main Estimated time left: 4 hours, 10 minutes, 16 seconds. Time passed: 1 minutes, 25 seconds
+[INFO 11:22:49] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/114000
+[INFO 11:23:28] my_main t_env: 168000 / 20000000.0
+[INFO 11:23:28] my_main Estimated time left: 4 hours, 9 minutes, 8 seconds. Time passed: 2 minutes, 6 seconds
+[INFO 11:23:29] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/168000
+[INFO 11:24:09] my_main t_env: 222000 / 20000000.0
+[INFO 11:24:09] my_main Estimated time left: 4 hours, 8 minutes, 44 seconds. Time passed: 2 minutes, 47 seconds
+[INFO 11:24:10] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/222000
+[INFO 11:24:50] my_main t_env: 276000 / 20000000.0
+[INFO 11:24:50] my_main Estimated time left: 4 hours, 8 minutes, 41 seconds. Time passed: 3 minutes, 28 seconds
+[INFO 11:24:51] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/276000
+[INFO 11:25:31] my_main t_env: 330000 / 20000000.0
+[INFO 11:25:31] my_main Estimated time left: 4 hours, 7 minutes, 14 seconds. Time passed: 4 minutes, 8 seconds
+[INFO 11:25:32] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/330000
+[INFO 11:26:11] my_main t_env: 384000 / 20000000.0
+[INFO 11:26:11] my_main Estimated time left: 4 hours, 6 minutes, 28 seconds. Time passed: 4 minutes, 49 seconds
+[INFO 11:26:12] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/384000
+[INFO 11:26:52] my_main t_env: 438000 / 20000000.0
+[INFO 11:26:52] my_main Estimated time left: 4 hours, 6 minutes, 16 seconds. Time passed: 5 minutes, 30 seconds
+[INFO 11:26:53] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/438000
+[INFO 11:27:33] my_main t_env: 492000 / 20000000.0
+[INFO 11:27:33] my_main Estimated time left: 4 hours, 6 minutes, 8 seconds. Time passed: 6 minutes, 11 seconds
+[INFO 11:27:34] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/492000
+[INFO 11:28:14] my_main t_env: 546000 / 20000000.0
+[INFO 11:28:14] my_main Estimated time left: 4 hours, 4 minutes, 54 seconds. Time passed: 6 minutes, 52 seconds
+[INFO 11:28:15] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/546000
+[INFO 11:28:55] my_main t_env: 600000 / 20000000.0
+[INFO 11:28:55] my_main Estimated time left: 4 hours, 4 minutes, 44 seconds. Time passed: 7 minutes, 32 seconds
+[INFO 11:28:56] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/600000
+[INFO 11:29:36] my_main t_env: 654000 / 20000000.0
+[INFO 11:29:36] my_main Estimated time left: 4 hours, 4 minutes, 17 seconds. Time passed: 8 minutes, 13 seconds
+[INFO 11:29:37] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/654000
+[INFO 11:30:16] my_main t_env: 708000 / 20000000.0
+[INFO 11:30:16] my_main Estimated time left: 4 hours, 3 minutes, 4 seconds. Time passed: 8 minutes, 54 seconds
+[INFO 11:30:18] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/708000
+[INFO 11:30:57] my_main t_env: 762000 / 20000000.0
+[INFO 11:30:57] my_main Estimated time left: 4 hours, 2 minutes, 13 seconds. Time passed: 9 minutes, 35 seconds
+[INFO 11:30:58] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/762000
+[INFO 11:31:38] my_main t_env: 816000 / 20000000.0
+[INFO 11:31:38] my_main Estimated time left: 4 hours, 2 minutes, 26 seconds. Time passed: 10 minutes, 16 seconds
+[INFO 11:31:39] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/816000
+[INFO 11:32:19] my_main t_env: 870000 / 20000000.0
+[INFO 11:32:19] my_main Estimated time left: 4 hours, 1 minutes, 18 seconds. Time passed: 10 minutes, 57 seconds
+[INFO 11:32:20] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/870000
+[INFO 11:33:00] my_main t_env: 924000 / 20000000.0
+[INFO 11:33:00] my_main Estimated time left: 4 hours, 22 seconds. Time passed: 11 minutes, 38 seconds
+[INFO 11:33:01] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/924000
+[INFO 11:33:41] my_main t_env: 978000 / 20000000.0
+[INFO 11:33:41] my_main Estimated time left: 3 hours, 59 minutes, 55 seconds. Time passed: 12 minutes, 18 seconds
+[INFO 11:33:42] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/978000
+[INFO 11:34:22] my_main t_env: 1032000 / 20000000.0
+[INFO 11:34:22] my_main Estimated time left: 3 hours, 59 minutes, 59 seconds. Time passed: 12 minutes, 59 seconds
+[INFO 11:34:23] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/1032000
+[INFO 11:35:03] my_main t_env: 1086000 / 20000000.0
+[INFO 11:35:03] my_main Estimated time left: 3 hours, 58 minutes, 48 seconds. Time passed: 13 minutes, 40 seconds
+[INFO 11:35:04] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/1086000
+[INFO 11:35:44] my_main t_env: 1140000 / 20000000.0
+[INFO 11:35:44] my_main Estimated time left: 3 hours, 58 minutes, 47 seconds. Time passed: 14 minutes, 21 seconds
+[INFO 11:35:45] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/1140000
+[INFO 11:36:25] my_main t_env: 1194000 / 20000000.0
+[INFO 11:36:25] my_main Estimated time left: 3 hours, 58 minutes, 10 seconds. Time passed: 15 minutes, 2 seconds
+[INFO 11:36:26] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/1194000
+[INFO 11:37:06] my_main t_env: 1248000 / 20000000.0
+[INFO 11:37:06] my_main Estimated time left: 3 hours, 57 minutes, 48 seconds. Time passed: 15 minutes, 43 seconds
+[INFO 11:37:07] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/1248000
+[INFO 11:37:47] my_main t_env: 1302000 / 20000000.0
+[INFO 11:37:47] my_main Estimated time left: 3 hours, 56 minutes, 49 seconds. Time passed: 16 minutes, 25 seconds
+[INFO 11:37:48] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/1302000
+[INFO 11:38:28] my_main t_env: 1356000 / 20000000.0
+[INFO 11:38:28] my_main Estimated time left: 3 hours, 56 minutes, 14 seconds. Time passed: 17 minutes, 6 seconds
+[INFO 11:38:29] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/1356000
+[INFO 11:39:09] my_main t_env: 1410000 / 20000000.0
+[INFO 11:39:09] my_main Estimated time left: 3 hours, 55 minutes, 49 seconds. Time passed: 17 minutes, 47 seconds
+[INFO 11:39:10] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/1410000
+[INFO 11:39:50] my_main t_env: 1464000 / 20000000.0
+[INFO 11:39:50] my_main Estimated time left: 3 hours, 55 minutes, 0 seconds. Time passed: 18 minutes, 28 seconds
+[INFO 11:39:51] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/1464000
+[INFO 11:40:31] my_main t_env: 1518000 / 20000000.0
+[INFO 11:40:31] my_main Estimated time left: 3 hours, 54 minutes, 25 seconds. Time passed: 19 minutes, 9 seconds
+[INFO 11:40:32] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/1518000
+[INFO 11:41:12] my_main t_env: 1572000 / 20000000.0
+[INFO 11:41:12] my_main Estimated time left: 3 hours, 53 minutes, 23 seconds. Time passed: 19 minutes, 50 seconds
+[INFO 11:41:13] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/1572000
+[INFO 11:41:53] my_main t_env: 1626000 / 20000000.0
+[INFO 11:41:53] my_main Estimated time left: 3 hours, 52 minutes, 59 seconds. Time passed: 20 minutes, 31 seconds
+[INFO 11:41:54] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/1626000
+[INFO 11:42:34] my_main t_env: 1680000 / 20000000.0
+[INFO 11:42:34] my_main Estimated time left: 3 hours, 53 minutes, 13 seconds. Time passed: 21 minutes, 12 seconds
+[INFO 11:42:36] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/1680000
+[INFO 11:43:16] my_main t_env: 1734000 / 20000000.0
+[INFO 11:43:16] my_main Estimated time left: 3 hours, 52 minutes, 54 seconds. Time passed: 21 minutes, 54 seconds
+[INFO 11:43:17] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/1734000
+[INFO 11:43:57] my_main t_env: 1788000 / 20000000.0
+[INFO 11:43:57] my_main Estimated time left: 3 hours, 51 minutes, 58 seconds. Time passed: 22 minutes, 35 seconds
+[INFO 11:43:58] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/1788000
+[INFO 11:44:38] my_main t_env: 1842000 / 20000000.0
+[INFO 11:44:38] my_main Estimated time left: 3 hours, 51 minutes, 51 seconds. Time passed: 23 minutes, 16 seconds
+[INFO 11:44:40] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/1842000
+[INFO 11:45:20] my_main t_env: 1896000 / 20000000.0
+[INFO 11:45:20] my_main Estimated time left: 3 hours, 50 minutes, 35 seconds. Time passed: 23 minutes, 57 seconds
+[INFO 11:45:21] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/1896000
+[INFO 11:46:01] my_main t_env: 1950000 / 20000000.0
+[INFO 11:46:01] my_main Estimated time left: 3 hours, 50 minutes, 48 seconds. Time passed: 24 minutes, 39 seconds
+[INFO 11:46:02] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/1950000
+[INFO 11:46:43] my_main t_env: 2004000 / 20000000.0
+[INFO 11:46:43] my_main Estimated time left: 3 hours, 50 minutes, 3 seconds. Time passed: 25 minutes, 20 seconds
+[INFO 11:46:44] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/2004000
+[INFO 11:47:24] my_main t_env: 2058000 / 20000000.0
+[INFO 11:47:24] my_main Estimated time left: 3 hours, 49 minutes, 39 seconds. Time passed: 26 minutes, 2 seconds
+[INFO 11:47:25] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/2058000
+[INFO 11:48:05] my_main t_env: 2112000 / 20000000.0
+[INFO 11:48:05] my_main Estimated time left: 3 hours, 48 minutes, 53 seconds. Time passed: 26 minutes, 43 seconds
+[INFO 11:48:07] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/2112000
+[INFO 11:48:47] my_main t_env: 2166000 / 20000000.0
+[INFO 11:48:47] my_main Estimated time left: 3 hours, 47 minutes, 53 seconds. Time passed: 27 minutes, 25 seconds
+[INFO 11:48:48] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/2166000
+[INFO 11:49:28] my_main t_env: 2220000 / 20000000.0
+[INFO 11:49:28] my_main Estimated time left: 3 hours, 47 minutes, 47 seconds. Time passed: 28 minutes, 6 seconds
+[INFO 11:49:30] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/2220000
+[INFO 11:50:10] my_main t_env: 2274000 / 20000000.0
+[INFO 11:50:10] my_main Estimated time left: 3 hours, 47 minutes, 32 seconds. Time passed: 28 minutes, 48 seconds
+[INFO 11:50:11] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/2274000
+[INFO 11:50:51] my_main t_env: 2328000 / 20000000.0
+[INFO 11:50:51] my_main Estimated time left: 3 hours, 45 minutes, 58 seconds. Time passed: 29 minutes, 29 seconds
+[INFO 11:50:53] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/2328000
+[INFO 11:51:33] my_main t_env: 2382000 / 20000000.0
+[INFO 11:51:33] my_main Estimated time left: 3 hours, 45 minutes, 33 seconds. Time passed: 30 minutes, 11 seconds
+[INFO 11:51:34] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/2382000
+[INFO 11:52:14] my_main t_env: 2436000 / 20000000.0
+[INFO 11:52:14] my_main Estimated time left: 3 hours, 45 minutes, 0 seconds. Time passed: 30 minutes, 52 seconds
+[INFO 11:52:16] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/2436000
+[INFO 11:52:56] my_main t_env: 2490000 / 20000000.0
+[INFO 11:52:56] my_main Estimated time left: 3 hours, 46 minutes, 21 seconds. Time passed: 31 minutes, 34 seconds
+[INFO 11:52:58] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/2490000
+[INFO 11:53:46] my_main t_env: 2544000 / 20000000.0
+[INFO 11:53:46] my_main Estimated time left: 4 hours, 25 minutes, 26 seconds. Time passed: 32 minutes, 23 seconds
+[INFO 11:53:47] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/2544000
+[INFO 11:54:32] my_main t_env: 2598000 / 20000000.0
+[INFO 11:54:32] my_main Estimated time left: 4 hours, 8 minutes, 26 seconds. Time passed: 33 minutes, 10 seconds
+[INFO 11:54:35] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/2598000
+[INFO 11:55:35] my_main t_env: 2652000 / 20000000.0
+[INFO 11:55:35] my_main Estimated time left: 5 hours, 40 minutes, 34 seconds. Time passed: 34 minutes, 13 seconds
+[INFO 11:55:39] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/2652000
+[INFO 11:56:27] my_main t_env: 2706000 / 20000000.0
+[INFO 11:56:27] my_main Estimated time left: 4 hours, 37 minutes, 21 seconds. Time passed: 35 minutes, 5 seconds
+[INFO 11:56:29] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/2706000
+[INFO 11:57:12] my_main t_env: 2760000 / 20000000.0
+[INFO 11:57:12] my_main Estimated time left: 3 hours, 55 minutes, 20 seconds. Time passed: 35 minutes, 49 seconds
+[INFO 11:57:13] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/2760000
+[INFO 11:57:56] my_main t_env: 2814000 / 20000000.0
+[INFO 11:57:56] my_main Estimated time left: 3 hours, 52 minutes, 57 seconds. Time passed: 36 minutes, 33 seconds
+[INFO 11:57:57] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/2814000
+[INFO 11:58:42] my_main t_env: 2868000 / 20000000.0
+[INFO 11:58:42] my_main Estimated time left: 4 hours, 3 minutes, 23 seconds. Time passed: 37 minutes, 19 seconds
+[INFO 11:58:43] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/2868000
+[INFO 11:59:26] my_main t_env: 2922000 / 20000000.0
+[INFO 11:59:26] my_main Estimated time left: 3 hours, 54 minutes, 52 seconds. Time passed: 38 minutes, 4 seconds
+[INFO 11:59:27] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/2922000
+[INFO 12:00:11] my_main t_env: 2976000 / 20000000.0
+[INFO 12:00:11] my_main Estimated time left: 3 hours, 54 minutes, 40 seconds. Time passed: 38 minutes, 49 seconds
+[INFO 12:00:13] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/2976000
+[INFO 12:00:55] my_main t_env: 3030000 / 20000000.0
+[INFO 12:00:55] my_main Estimated time left: 3 hours, 53 minutes, 43 seconds. Time passed: 39 minutes, 33 seconds
+[INFO 12:00:57] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/3030000
+[INFO 12:01:40] my_main t_env: 3084000 / 20000000.0
+[INFO 12:01:40] my_main Estimated time left: 3 hours, 54 minutes, 31 seconds. Time passed: 40 minutes, 18 seconds
+[INFO 12:01:42] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/3084000
+[INFO 12:02:24] my_main t_env: 3138000 / 20000000.0
+[INFO 12:02:24] my_main Estimated time left: 3 hours, 47 minutes, 7 seconds. Time passed: 41 minutes, 2 seconds
+[INFO 12:02:25] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/3138000
+[INFO 12:03:07] my_main t_env: 3192000 / 20000000.0
+[INFO 12:03:07] my_main Estimated time left: 3 hours, 45 minutes, 27 seconds. Time passed: 41 minutes, 45 seconds
+[INFO 12:03:09] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/3192000
+[INFO 12:03:51] my_main t_env: 3246000 / 20000000.0
+[INFO 12:03:51] my_main Estimated time left: 3 hours, 45 minutes, 24 seconds. Time passed: 42 minutes, 29 seconds
+[INFO 12:03:52] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/3246000
+[INFO 12:04:34] my_main t_env: 3300000 / 20000000.0
+[INFO 12:04:34] my_main Estimated time left: 3 hours, 43 minutes, 20 seconds. Time passed: 43 minutes, 12 seconds
+[INFO 12:04:37] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/3300000
+[INFO 12:05:20] my_main t_env: 3354000 / 20000000.0
+[INFO 12:05:20] my_main Estimated time left: 3 hours, 53 minutes, 54 seconds. Time passed: 43 minutes, 58 seconds
+[INFO 12:05:21] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/3354000
+[INFO 12:06:03] my_main t_env: 3408000 / 20000000.0
+[INFO 12:06:03] my_main Estimated time left: 3 hours, 42 minutes, 50 seconds. Time passed: 44 minutes, 41 seconds
+[INFO 12:06:05] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/3408000
+[INFO 12:06:47] my_main t_env: 3462000 / 20000000.0
+[INFO 12:06:47] my_main Estimated time left: 3 hours, 43 minutes, 42 seconds. Time passed: 45 minutes, 25 seconds
+[INFO 12:06:48] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/3462000
+[INFO 12:07:30] my_main t_env: 3516000 / 20000000.0
+[INFO 12:07:30] my_main Estimated time left: 3 hours, 36 minutes, 56 seconds. Time passed: 46 minutes, 8 seconds
+[INFO 12:07:31] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/3516000
+[INFO 12:08:15] my_main t_env: 3570000 / 20000000.0
+[INFO 12:08:15] my_main Estimated time left: 3 hours, 49 minutes, 18 seconds. Time passed: 46 minutes, 53 seconds
+[INFO 12:08:16] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/3570000
+[INFO 12:08:59] my_main t_env: 3624000 / 20000000.0
+[INFO 12:08:59] my_main Estimated time left: 3 hours, 41 minutes, 32 seconds. Time passed: 47 minutes, 37 seconds
+[INFO 12:09:00] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/3624000
+[INFO 12:09:42] my_main t_env: 3678000 / 20000000.0
+[INFO 12:09:42] my_main Estimated time left: 3 hours, 39 minutes, 24 seconds. Time passed: 48 minutes, 20 seconds
+[INFO 12:09:44] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/3678000
+[INFO 12:10:25] my_main t_env: 3732000 / 20000000.0
+[INFO 12:10:25] my_main Estimated time left: 3 hours, 35 minutes, 57 seconds. Time passed: 49 minutes, 3 seconds
+[INFO 12:10:27] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/3732000
+[INFO 12:11:11] my_main t_env: 3786000 / 20000000.0
+[INFO 12:11:11] my_main Estimated time left: 3 hours, 45 minutes, 42 seconds. Time passed: 49 minutes, 48 seconds
+[INFO 12:11:12] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/3786000
+[INFO 12:11:54] my_main t_env: 3840000 / 20000000.0
+[INFO 12:11:54] my_main Estimated time left: 3 hours, 37 minutes, 54 seconds. Time passed: 50 minutes, 32 seconds
+[INFO 12:11:56] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/3840000
+[INFO 12:12:38] my_main t_env: 3894000 / 20000000.0
+[INFO 12:12:38] my_main Estimated time left: 3 hours, 38 minutes, 29 seconds. Time passed: 51 minutes, 16 seconds
+[INFO 12:12:39] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/3894000
+[INFO 12:13:21] my_main t_env: 3948000 / 20000000.0
+[INFO 12:13:21] my_main Estimated time left: 3 hours, 31 minutes, 11 seconds. Time passed: 51 minutes, 59 seconds
+[INFO 12:13:22] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/3948000
+[INFO 12:14:04] my_main t_env: 4002000 / 20000000.0
+[INFO 12:14:04] my_main Estimated time left: 3 hours, 34 minutes, 39 seconds. Time passed: 52 minutes, 42 seconds
+[INFO 12:14:07] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/4002000
+[INFO 12:14:50] my_main t_env: 4056000 / 20000000.0
+[INFO 12:14:50] my_main Estimated time left: 3 hours, 45 minutes, 5 seconds. Time passed: 53 minutes, 28 seconds
+[INFO 12:14:51] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/4056000
+[INFO 12:15:34] my_main t_env: 4110000 / 20000000.0
+[INFO 12:15:34] my_main Estimated time left: 3 hours, 34 minutes, 48 seconds. Time passed: 54 minutes, 12 seconds
+[INFO 12:15:37] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/4110000
+[INFO 12:16:20] my_main t_env: 4164000 / 20000000.0
+[INFO 12:16:20] my_main Estimated time left: 3 hours, 43 minutes, 18 seconds. Time passed: 54 minutes, 57 seconds
+[INFO 12:16:21] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/4164000
+[INFO 12:17:03] my_main t_env: 4218000 / 20000000.0
+[INFO 12:17:03] my_main Estimated time left: 3 hours, 33 minutes, 7 seconds. Time passed: 55 minutes, 41 seconds
+[INFO 12:17:05] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/4218000
+[INFO 12:17:47] my_main t_env: 4272000 / 20000000.0
+[INFO 12:17:47] my_main Estimated time left: 3 hours, 32 minutes, 42 seconds. Time passed: 56 minutes, 25 seconds
+[INFO 12:17:48] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/4272000
+[INFO 12:18:30] my_main t_env: 4326000 / 20000000.0
+[INFO 12:18:30] my_main Estimated time left: 3 hours, 26 minutes, 14 seconds. Time passed: 57 minutes, 7 seconds
+[INFO 12:18:31] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/4326000
+[INFO 12:19:15] my_main t_env: 4380000 / 20000000.0
+[INFO 12:19:15] my_main Estimated time left: 3 hours, 38 minutes, 23 seconds. Time passed: 57 minutes, 53 seconds
+[INFO 12:19:16] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/4380000
+[INFO 12:19:59] my_main t_env: 4434000 / 20000000.0
+[INFO 12:19:59] my_main Estimated time left: 3 hours, 31 minutes, 17 seconds. Time passed: 58 minutes, 37 seconds
+[INFO 12:20:00] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/4434000
+[INFO 12:20:43] my_main t_env: 4488000 / 20000000.0
+[INFO 12:20:43] my_main Estimated time left: 3 hours, 29 minutes, 17 seconds. Time passed: 59 minutes, 20 seconds
+[INFO 12:20:44] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/4488000
+[INFO 12:21:25] my_main t_env: 4542000 / 20000000.0
+[INFO 12:21:25] my_main Estimated time left: 3 hours, 23 minutes, 21 seconds. Time passed: 1 hours, 3 seconds
+[INFO 12:21:27] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/4542000
+[INFO 12:22:11] my_main t_env: 4596000 / 20000000.0
+[INFO 12:22:11] my_main Estimated time left: 3 hours, 35 minutes, 49 seconds. Time passed: 1 hours, 49 seconds
+[INFO 12:22:12] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/4596000
+[INFO 12:22:54] my_main t_env: 4650000 / 20000000.0
+[INFO 12:22:54] my_main Estimated time left: 3 hours, 26 minutes, 56 seconds. Time passed: 1 hours, 1 minutes, 32 seconds
+[INFO 12:22:56] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/4650000
+[INFO 12:23:39] my_main t_env: 4704000 / 20000000.0
+[INFO 12:23:39] my_main Estimated time left: 3 hours, 31 minutes, 30 seconds. Time passed: 1 hours, 2 minutes, 17 seconds
+[INFO 12:23:41] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/4704000
+[INFO 12:24:21] my_main t_env: 4758000 / 20000000.0
+[INFO 12:24:21] my_main Estimated time left: 3 hours, 16 minutes, 42 seconds. Time passed: 1 hours, 2 minutes, 59 seconds
+[INFO 12:24:22] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/4758000
+[INFO 12:25:04] my_main t_env: 4812000 / 20000000.0
+[INFO 12:25:04] my_main Estimated time left: 3 hours, 22 minutes, 3 seconds. Time passed: 1 hours, 3 minutes, 42 seconds
+[INFO 12:25:07] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/4812000
+[INFO 12:25:50] my_main t_env: 4866000 / 20000000.0
+[INFO 12:25:50] my_main Estimated time left: 3 hours, 33 minutes, 28 seconds. Time passed: 1 hours, 4 minutes, 28 seconds
+[INFO 12:25:51] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/4866000
+[INFO 12:26:34] my_main t_env: 4920000 / 20000000.0
+[INFO 12:26:34] my_main Estimated time left: 3 hours, 23 minutes, 20 seconds. Time passed: 1 hours, 5 minutes, 11 seconds
+[INFO 12:26:35] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/4920000
+[INFO 12:27:17] my_main t_env: 4974000 / 20000000.0
+[INFO 12:27:17] my_main Estimated time left: 3 hours, 22 minutes, 20 seconds. Time passed: 1 hours, 5 minutes, 55 seconds
+[INFO 12:27:18] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/4974000
+[INFO 12:28:00] my_main t_env: 5028000 / 20000000.0
+[INFO 12:28:00] my_main Estimated time left: 3 hours, 16 minutes, 35 seconds. Time passed: 1 hours, 6 minutes, 37 seconds
+[INFO 12:28:01] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/5028000
+[INFO 12:28:45] my_main t_env: 5082000 / 20000000.0
+[INFO 12:28:45] my_main Estimated time left: 3 hours, 29 minutes, 7 seconds. Time passed: 1 hours, 7 minutes, 23 seconds
+[INFO 12:28:46] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/5082000
+[INFO 12:29:29] my_main t_env: 5136000 / 20000000.0
+[INFO 12:29:29] my_main Estimated time left: 3 hours, 19 minutes, 18 seconds. Time passed: 1 hours, 8 minutes, 6 seconds
+[INFO 12:29:30] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/5136000
+[INFO 12:30:14] my_main t_env: 5190000 / 20000000.0
+[INFO 12:30:14] my_main Estimated time left: 3 hours, 29 minutes, 15 seconds. Time passed: 1 hours, 8 minutes, 52 seconds
+[INFO 12:30:16] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/5190000
+[INFO 12:30:56] my_main t_env: 5244000 / 20000000.0
+[INFO 12:30:56] my_main Estimated time left: 3 hours, 11 minutes, 40 seconds. Time passed: 1 hours, 9 minutes, 34 seconds
+[INFO 12:30:58] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/5244000
+[INFO 12:31:38] my_main t_env: 5298000 / 20000000.0
+[INFO 12:31:38] my_main Estimated time left: 3 hours, 9 minutes, 39 seconds. Time passed: 1 hours, 10 minutes, 16 seconds
+[INFO 12:31:39] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/5298000
+[INFO 12:32:20] my_main t_env: 5352000 / 20000000.0
+[INFO 12:32:20] my_main Estimated time left: 3 hours, 9 minutes, 2 seconds. Time passed: 1 hours, 10 minutes, 58 seconds
+[INFO 12:32:21] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/5352000
+[INFO 12:33:02] my_main t_env: 5406000 / 20000000.0
+[INFO 12:33:02] my_main Estimated time left: 3 hours, 8 minutes, 14 seconds. Time passed: 1 hours, 11 minutes, 40 seconds
+[INFO 12:33:03] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/5406000
+[INFO 12:33:44] my_main t_env: 5460000 / 20000000.0
+[INFO 12:33:44] my_main Estimated time left: 3 hours, 7 minutes, 56 seconds. Time passed: 1 hours, 12 minutes, 21 seconds
+[INFO 12:33:45] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/5460000
+[INFO 12:34:26] my_main t_env: 5514000 / 20000000.0
+[INFO 12:34:26] my_main Estimated time left: 3 hours, 7 minutes, 5 seconds. Time passed: 1 hours, 13 minutes, 3 seconds
+[INFO 12:34:27] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/5514000
+[INFO 12:35:07] my_main t_env: 5568000 / 20000000.0
+[INFO 12:35:07] my_main Estimated time left: 3 hours, 6 minutes, 12 seconds. Time passed: 1 hours, 13 minutes, 45 seconds
+[INFO 12:35:09] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/5568000
+[INFO 12:35:49] my_main t_env: 5622000 / 20000000.0
+[INFO 12:35:49] my_main Estimated time left: 3 hours, 5 minutes, 20 seconds. Time passed: 1 hours, 14 minutes, 27 seconds
+[INFO 12:35:50] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/5622000
+[INFO 12:36:31] my_main t_env: 5676000 / 20000000.0
+[INFO 12:36:31] my_main Estimated time left: 3 hours, 4 minutes, 29 seconds. Time passed: 1 hours, 15 minutes, 9 seconds
+[INFO 12:36:32] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/5676000
+[INFO 12:37:13] my_main t_env: 5730000 / 20000000.0
+[INFO 12:37:13] my_main Estimated time left: 3 hours, 3 minutes, 29 seconds. Time passed: 1 hours, 15 minutes, 50 seconds
+[INFO 12:37:14] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/5730000
+[INFO 12:37:54] my_main t_env: 5784000 / 20000000.0
+[INFO 12:37:54] my_main Estimated time left: 3 hours, 3 minutes, 3 seconds. Time passed: 1 hours, 16 minutes, 32 seconds
+[INFO 12:37:56] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/5784000
+[INFO 12:38:36] my_main t_env: 5838000 / 20000000.0
+[INFO 12:38:36] my_main Estimated time left: 3 hours, 2 minutes, 42 seconds. Time passed: 1 hours, 17 minutes, 14 seconds
+[INFO 12:38:37] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/5838000
+[INFO 12:39:18] my_main t_env: 5892000 / 20000000.0
+[INFO 12:39:18] my_main Estimated time left: 3 hours, 2 minutes, 18 seconds. Time passed: 1 hours, 17 minutes, 56 seconds
+[INFO 12:39:19] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/5892000
+[INFO 12:40:00] my_main t_env: 5946000 / 20000000.0
+[INFO 12:40:00] my_main Estimated time left: 3 hours, 1 minutes, 52 seconds. Time passed: 1 hours, 18 minutes, 38 seconds
+[INFO 12:40:01] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/5946000
+[INFO 12:40:42] my_main t_env: 6000000 / 20000000.0
+[INFO 12:40:42] my_main Estimated time left: 3 hours, 10 seconds. Time passed: 1 hours, 19 minutes, 19 seconds
+[INFO 12:40:43] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/6000000
+[INFO 12:41:23] my_main t_env: 6054000 / 20000000.0
+[INFO 12:41:23] my_main Estimated time left: 3 hours, 12 seconds. Time passed: 1 hours, 20 minutes, 1 seconds
+[INFO 12:41:25] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/6054000
+[INFO 12:42:05] my_main t_env: 6108000 / 20000000.0
+[INFO 12:42:05] my_main Estimated time left: 2 hours, 59 minutes, 48 seconds. Time passed: 1 hours, 20 minutes, 43 seconds
+[INFO 12:42:07] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/6108000
+[INFO 12:42:47] my_main t_env: 6162000 / 20000000.0
+[INFO 12:42:47] my_main Estimated time left: 2 hours, 59 minutes, 37 seconds. Time passed: 1 hours, 21 minutes, 25 seconds
+[INFO 12:42:49] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/6162000
+[INFO 12:43:29] my_main t_env: 6216000 / 20000000.0
+[INFO 12:43:29] my_main Estimated time left: 2 hours, 58 minutes, 37 seconds. Time passed: 1 hours, 22 minutes, 7 seconds
+[INFO 12:43:31] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/6216000
+[INFO 12:44:12] my_main t_env: 6270000 / 20000000.0
+[INFO 12:44:12] my_main Estimated time left: 2 hours, 58 minutes, 25 seconds. Time passed: 1 hours, 22 minutes, 49 seconds
+[INFO 12:44:13] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/6270000
+[INFO 12:44:54] my_main t_env: 6324000 / 20000000.0
+[INFO 12:44:54] my_main Estimated time left: 2 hours, 57 minutes, 14 seconds. Time passed: 1 hours, 23 minutes, 31 seconds
+[INFO 12:44:55] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/6324000
+[INFO 12:45:36] my_main t_env: 6378000 / 20000000.0
+[INFO 12:45:36] my_main Estimated time left: 2 hours, 56 minutes, 49 seconds. Time passed: 1 hours, 24 minutes, 13 seconds
+[INFO 12:45:39] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/6378000
+[INFO 12:46:19] my_main t_env: 6432000 / 20000000.0
+[INFO 12:46:19] my_main Estimated time left: 3 hours, 3 minutes, 6 seconds. Time passed: 1 hours, 24 minutes, 57 seconds
+[INFO 12:46:21] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/6432000
+[INFO 12:47:01] my_main t_env: 6486000 / 20000000.0
+[INFO 12:47:01] my_main Estimated time left: 2 hours, 55 minutes, 0 seconds. Time passed: 1 hours, 25 minutes, 39 seconds
+[INFO 12:47:03] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/6486000
+[INFO 12:47:43] my_main t_env: 6540000 / 20000000.0
+[INFO 12:47:43] my_main Estimated time left: 2 hours, 54 minutes, 56 seconds. Time passed: 1 hours, 26 minutes, 21 seconds
+[INFO 12:47:45] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/6540000
+[INFO 12:48:25] my_main t_env: 6594000 / 20000000.0
+[INFO 12:48:25] my_main Estimated time left: 2 hours, 53 minutes, 55 seconds. Time passed: 1 hours, 27 minutes, 3 seconds
+[INFO 12:48:27] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/6594000
+[INFO 12:49:07] my_main t_env: 6648000 / 20000000.0
+[INFO 12:49:07] my_main Estimated time left: 2 hours, 53 minutes, 8 seconds. Time passed: 1 hours, 27 minutes, 45 seconds
+[INFO 12:49:09] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/6648000
+[INFO 12:49:49] my_main t_env: 6702000 / 20000000.0
+[INFO 12:49:49] my_main Estimated time left: 2 hours, 52 minutes, 35 seconds. Time passed: 1 hours, 28 minutes, 27 seconds
+[INFO 12:49:51] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/6702000
+[INFO 12:50:31] my_main t_env: 6756000 / 20000000.0
+[INFO 12:50:31] my_main Estimated time left: 2 hours, 51 minutes, 21 seconds. Time passed: 1 hours, 29 minutes, 9 seconds
+[INFO 12:50:33] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/6756000
+[INFO 12:51:14] my_main t_env: 6810000 / 20000000.0
+[INFO 12:51:14] my_main Estimated time left: 2 hours, 51 minutes, 36 seconds. Time passed: 1 hours, 29 minutes, 51 seconds
+[INFO 12:51:15] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/6810000
+[INFO 12:51:56] my_main t_env: 6864000 / 20000000.0
+[INFO 12:51:56] my_main Estimated time left: 2 hours, 50 minutes, 5 seconds. Time passed: 1 hours, 30 minutes, 33 seconds
+[INFO 12:51:57] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/6864000
+[INFO 12:52:38] my_main t_env: 6918000 / 20000000.0
+[INFO 12:52:38] my_main Estimated time left: 2 hours, 50 minutes, 4 seconds. Time passed: 1 hours, 31 minutes, 15 seconds
+[INFO 12:52:39] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/6918000
+[INFO 12:53:20] my_main t_env: 6972000 / 20000000.0
+[INFO 12:53:20] my_main Estimated time left: 2 hours, 49 minutes, 43 seconds. Time passed: 1 hours, 31 minutes, 58 seconds
+[INFO 12:53:21] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/6972000
+[INFO 12:54:02] my_main t_env: 7026000 / 20000000.0
+[INFO 12:54:02] my_main Estimated time left: 2 hours, 47 minutes, 21 seconds. Time passed: 1 hours, 32 minutes, 39 seconds
+[INFO 12:54:03] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/7026000
+[INFO 12:54:43] my_main t_env: 7080000 / 20000000.0
+[INFO 12:54:43] my_main Estimated time left: 2 hours, 46 minutes, 46 seconds. Time passed: 1 hours, 33 minutes, 21 seconds
+[INFO 12:54:45] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/7080000
+[INFO 12:55:25] my_main t_env: 7134000 / 20000000.0
+[INFO 12:55:25] my_main Estimated time left: 2 hours, 46 minutes, 45 seconds. Time passed: 1 hours, 34 minutes, 3 seconds
+[INFO 12:55:27] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/7134000
+[INFO 12:56:08] my_main t_env: 7188000 / 20000000.0
+[INFO 12:56:08] my_main Estimated time left: 2 hours, 46 minutes, 45 seconds. Time passed: 1 hours, 34 minutes, 45 seconds
+[INFO 12:56:09] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/7188000
+[INFO 12:56:50] my_main t_env: 7242000 / 20000000.0
+[INFO 12:56:50] my_main Estimated time left: 2 hours, 45 minutes, 44 seconds. Time passed: 1 hours, 35 minutes, 27 seconds
+[INFO 12:56:51] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/7242000
+[INFO 12:57:32] my_main t_env: 7296000 / 20000000.0
+[INFO 12:57:32] my_main Estimated time left: 2 hours, 45 minutes, 51 seconds. Time passed: 1 hours, 36 minutes, 10 seconds
+[INFO 12:57:33] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/7296000
+[INFO 12:58:14] my_main t_env: 7350000 / 20000000.0
+[INFO 12:58:14] my_main Estimated time left: 2 hours, 44 minutes, 2 seconds. Time passed: 1 hours, 36 minutes, 52 seconds
+[INFO 12:58:15] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/7350000
+[INFO 12:58:56] my_main t_env: 7404000 / 20000000.0
+[INFO 12:58:56] my_main Estimated time left: 2 hours, 43 minutes, 29 seconds. Time passed: 1 hours, 37 minutes, 34 seconds
+[INFO 12:58:57] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/7404000
+[INFO 12:59:38] my_main t_env: 7458000 / 20000000.0
+[INFO 12:59:38] my_main Estimated time left: 2 hours, 43 minutes, 5 seconds. Time passed: 1 hours, 38 minutes, 16 seconds
+[INFO 12:59:39] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/7458000
+[INFO 13:00:20] my_main t_env: 7512000 / 20000000.0
+[INFO 13:00:20] my_main Estimated time left: 2 hours, 42 minutes, 37 seconds. Time passed: 1 hours, 38 minutes, 58 seconds
+[INFO 13:00:22] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/7512000
+[INFO 13:01:05] my_main t_env: 7566000 / 20000000.0
+[INFO 13:01:05] my_main Estimated time left: 2 hours, 49 minutes, 30 seconds. Time passed: 1 hours, 39 minutes, 42 seconds
+[INFO 13:01:06] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/7566000
+[INFO 13:01:47] my_main t_env: 7620000 / 20000000.0
+[INFO 13:01:47] my_main Estimated time left: 2 hours, 40 minutes, 50 seconds. Time passed: 1 hours, 40 minutes, 24 seconds
+[INFO 13:01:48] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/7620000
+[INFO 13:02:29] my_main t_env: 7674000 / 20000000.0
+[INFO 13:02:29] my_main Estimated time left: 2 hours, 40 minutes, 4 seconds. Time passed: 1 hours, 41 minutes, 6 seconds
+[INFO 13:02:30] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/7674000
+[INFO 13:03:11] my_main t_env: 7728000 / 20000000.0
+[INFO 13:03:11] my_main Estimated time left: 2 hours, 39 minutes, 14 seconds. Time passed: 1 hours, 41 minutes, 49 seconds
+[INFO 13:03:12] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/7728000
+[INFO 13:03:53] my_main t_env: 7782000 / 20000000.0
+[INFO 13:03:53] my_main Estimated time left: 2 hours, 39 minutes, 10 seconds. Time passed: 1 hours, 42 minutes, 31 seconds
+[INFO 13:03:54] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/7782000
+[INFO 13:04:35] my_main t_env: 7836000 / 20000000.0
+[INFO 13:04:35] my_main Estimated time left: 2 hours, 38 minutes, 10 seconds. Time passed: 1 hours, 43 minutes, 13 seconds
+[INFO 13:04:36] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/7836000
+[INFO 13:05:17] my_main t_env: 7890000 / 20000000.0
+[INFO 13:05:17] my_main Estimated time left: 2 hours, 37 minutes, 2 seconds. Time passed: 1 hours, 43 minutes, 55 seconds
+[INFO 13:05:19] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/7890000
+[INFO 13:05:59] my_main t_env: 7944000 / 20000000.0
+[INFO 13:05:59] my_main Estimated time left: 2 hours, 37 minutes, 21 seconds. Time passed: 1 hours, 44 minutes, 37 seconds
+[INFO 13:06:01] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/7944000
+[INFO 13:06:42] my_main t_env: 7998000 / 20000000.0
+[INFO 13:06:42] my_main Estimated time left: 2 hours, 36 minutes, 3 seconds. Time passed: 1 hours, 45 minutes, 19 seconds
+[INFO 13:06:43] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/7998000
+[INFO 13:07:24] my_main t_env: 8052000 / 20000000.0
+[INFO 13:07:24] my_main Estimated time left: 2 hours, 34 minutes, 38 seconds. Time passed: 1 hours, 46 minutes, 1 seconds
+[INFO 13:07:25] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/8052000
+[INFO 13:08:05] my_main t_env: 8106000 / 20000000.0
+[INFO 13:08:05] my_main Estimated time left: 2 hours, 33 minutes, 59 seconds. Time passed: 1 hours, 46 minutes, 43 seconds
+[INFO 13:08:07] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/8106000
+[INFO 13:08:47] my_main t_env: 8160000 / 20000000.0
+[INFO 13:08:47] my_main Estimated time left: 2 hours, 32 minutes, 44 seconds. Time passed: 1 hours, 47 minutes, 25 seconds
+[INFO 13:08:48] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/8160000
+[INFO 13:09:29] my_main t_env: 8214000 / 20000000.0
+[INFO 13:09:29] my_main Estimated time left: 2 hours, 33 minutes, 18 seconds. Time passed: 1 hours, 48 minutes, 7 seconds
+[INFO 13:09:31] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/8214000
+[INFO 13:10:11] my_main t_env: 8268000 / 20000000.0
+[INFO 13:10:11] my_main Estimated time left: 2 hours, 32 minutes, 18 seconds. Time passed: 1 hours, 48 minutes, 49 seconds
+[INFO 13:10:13] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/8268000
+[INFO 13:10:54] my_main t_env: 8322000 / 20000000.0
+[INFO 13:10:54] my_main Estimated time left: 2 hours, 32 minutes, 23 seconds. Time passed: 1 hours, 49 minutes, 31 seconds
+[INFO 13:10:55] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/8322000
+[INFO 13:11:36] my_main t_env: 8376000 / 20000000.0
+[INFO 13:11:36] my_main Estimated time left: 2 hours, 30 minutes, 39 seconds. Time passed: 1 hours, 50 minutes, 13 seconds
+[INFO 13:11:37] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/8376000
+[INFO 13:12:18] my_main t_env: 8430000 / 20000000.0
+[INFO 13:12:18] my_main Estimated time left: 2 hours, 30 minutes, 3 seconds. Time passed: 1 hours, 50 minutes, 55 seconds
+[INFO 13:12:19] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/8430000
+[INFO 13:13:00] my_main t_env: 8484000 / 20000000.0
+[INFO 13:13:00] my_main Estimated time left: 2 hours, 29 minutes, 48 seconds. Time passed: 1 hours, 51 minutes, 38 seconds
+[INFO 13:13:01] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/8484000
+[INFO 13:13:42] my_main t_env: 8538000 / 20000000.0
+[INFO 13:13:42] my_main Estimated time left: 2 hours, 28 minutes, 58 seconds. Time passed: 1 hours, 52 minutes, 20 seconds
+[INFO 13:13:43] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/8538000
+[INFO 13:14:24] my_main t_env: 8592000 / 20000000.0
+[INFO 13:14:24] my_main Estimated time left: 2 hours, 28 minutes, 9 seconds. Time passed: 1 hours, 53 minutes, 2 seconds
+[INFO 13:14:25] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/8592000
+[INFO 13:15:06] my_main t_env: 8646000 / 20000000.0
+[INFO 13:15:06] my_main Estimated time left: 2 hours, 27 minutes, 55 seconds. Time passed: 1 hours, 53 minutes, 44 seconds
+[INFO 13:15:08] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/8646000
+[INFO 13:15:51] my_main t_env: 8700000 / 20000000.0
+[INFO 13:15:51] my_main Estimated time left: 2 hours, 34 minutes, 31 seconds. Time passed: 1 hours, 54 minutes, 28 seconds
+[INFO 13:15:52] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/8700000
+[INFO 13:16:33] my_main t_env: 8754000 / 20000000.0
+[INFO 13:16:33] my_main Estimated time left: 2 hours, 25 minutes, 35 seconds. Time passed: 1 hours, 55 minutes, 10 seconds
+[INFO 13:16:34] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/8754000
+[INFO 13:17:15] my_main t_env: 8808000 / 20000000.0
+[INFO 13:17:15] my_main Estimated time left: 2 hours, 25 minutes, 26 seconds. Time passed: 1 hours, 55 minutes, 52 seconds
+[INFO 13:17:16] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/8808000
+[INFO 13:17:57] my_main t_env: 8862000 / 20000000.0
+[INFO 13:17:57] my_main Estimated time left: 2 hours, 25 minutes, 8 seconds. Time passed: 1 hours, 56 minutes, 35 seconds
+[INFO 13:17:58] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/8862000
+[INFO 13:18:39] my_main t_env: 8916000 / 20000000.0
+[INFO 13:18:39] my_main Estimated time left: 2 hours, 24 minutes, 21 seconds. Time passed: 1 hours, 57 minutes, 17 seconds
+[INFO 13:18:40] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/8916000
+[INFO 13:19:21] my_main t_env: 8970000 / 20000000.0
+[INFO 13:19:21] my_main Estimated time left: 2 hours, 23 minutes, 51 seconds. Time passed: 1 hours, 57 minutes, 59 seconds
+[INFO 13:19:23] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/8970000
+[INFO 13:20:03] my_main t_env: 9024000 / 20000000.0
+[INFO 13:20:03] my_main Estimated time left: 2 hours, 22 minutes, 28 seconds. Time passed: 1 hours, 58 minutes, 41 seconds
+[INFO 13:20:05] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/9024000
+[INFO 13:20:45] my_main t_env: 9078000 / 20000000.0
+[INFO 13:20:45] my_main Estimated time left: 2 hours, 21 minutes, 42 seconds. Time passed: 1 hours, 59 minutes, 23 seconds
+[INFO 13:20:47] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/9078000
+[INFO 13:21:27] my_main t_env: 9132000 / 20000000.0
+[INFO 13:21:27] my_main Estimated time left: 2 hours, 21 minutes, 3 seconds. Time passed: 2 hours, 5 seconds
+[INFO 13:21:29] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/9132000
+[INFO 13:22:10] my_main t_env: 9186000 / 20000000.0
+[INFO 13:22:10] my_main Estimated time left: 2 hours, 20 minutes, 46 seconds. Time passed: 2 hours, 47 seconds
+[INFO 13:22:11] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/9186000
+[INFO 13:22:52] my_main t_env: 9240000 / 20000000.0
+[INFO 13:22:52] my_main Estimated time left: 2 hours, 19 minutes, 58 seconds. Time passed: 2 hours, 1 minutes, 30 seconds
+[INFO 13:22:53] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/9240000
+[INFO 13:23:34] my_main t_env: 9294000 / 20000000.0
+[INFO 13:23:34] my_main Estimated time left: 2 hours, 19 minutes, 10 seconds. Time passed: 2 hours, 2 minutes, 12 seconds
+[INFO 13:23:35] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/9294000
+[INFO 13:24:16] my_main t_env: 9348000 / 20000000.0
+[INFO 13:24:16] my_main Estimated time left: 2 hours, 19 minutes, 19 seconds. Time passed: 2 hours, 2 minutes, 54 seconds
+[INFO 13:24:17] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/9348000
+[INFO 13:24:58] my_main t_env: 9402000 / 20000000.0
+[INFO 13:24:58] my_main Estimated time left: 2 hours, 17 minutes, 9 seconds. Time passed: 2 hours, 3 minutes, 36 seconds
+[INFO 13:24:59] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/9402000
+[INFO 13:25:40] my_main t_env: 9456000 / 20000000.0
+[INFO 13:25:40] my_main Estimated time left: 2 hours, 17 minutes, 0 seconds. Time passed: 2 hours, 4 minutes, 18 seconds
+[INFO 13:25:42] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/9456000
+[INFO 13:26:22] my_main t_env: 9510000 / 20000000.0
+[INFO 13:26:22] my_main Estimated time left: 2 hours, 16 minutes, 28 seconds. Time passed: 2 hours, 5 minutes, 0 seconds
+[INFO 13:26:24] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/9510000
+[INFO 13:27:04] my_main t_env: 9564000 / 20000000.0
+[INFO 13:27:04] my_main Estimated time left: 2 hours, 14 minutes, 49 seconds. Time passed: 2 hours, 5 minutes, 42 seconds
+[INFO 13:27:06] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/9564000
+[INFO 13:27:46] my_main t_env: 9618000 / 20000000.0
+[INFO 13:27:46] my_main Estimated time left: 2 hours, 14 minutes, 14 seconds. Time passed: 2 hours, 6 minutes, 24 seconds
+[INFO 13:27:47] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/9618000
+[INFO 13:28:28] my_main t_env: 9672000 / 20000000.0
+[INFO 13:28:28] my_main Estimated time left: 2 hours, 13 minutes, 28 seconds. Time passed: 2 hours, 7 minutes, 6 seconds
+[INFO 13:28:29] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/9672000
+[INFO 13:29:10] my_main t_env: 9726000 / 20000000.0
+[INFO 13:29:10] my_main Estimated time left: 2 hours, 12 minutes, 53 seconds. Time passed: 2 hours, 7 minutes, 48 seconds
+[INFO 13:29:11] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/9726000
+[INFO 13:29:52] my_main t_env: 9780000 / 20000000.0
+[INFO 13:29:52] my_main Estimated time left: 2 hours, 12 minutes, 5 seconds. Time passed: 2 hours, 8 minutes, 30 seconds
+[INFO 13:29:53] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/9780000
+[INFO 13:30:34] my_main t_env: 9834000 / 20000000.0
+[INFO 13:30:34] my_main Estimated time left: 2 hours, 12 minutes, 33 seconds. Time passed: 2 hours, 9 minutes, 12 seconds
+[INFO 13:30:37] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/9834000
+[INFO 13:31:18] my_main t_env: 9888000 / 20000000.0
+[INFO 13:31:18] my_main Estimated time left: 2 hours, 17 minutes, 29 seconds. Time passed: 2 hours, 9 minutes, 56 seconds
+[INFO 13:31:19] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/9888000
+[INFO 13:32:00] my_main t_env: 9942000 / 20000000.0
+[INFO 13:32:00] my_main Estimated time left: 2 hours, 9 minutes, 58 seconds. Time passed: 2 hours, 10 minutes, 38 seconds
+[INFO 13:32:01] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/9942000
+[INFO 13:32:42] my_main t_env: 9996000 / 20000000.0
+[INFO 13:32:42] my_main Estimated time left: 2 hours, 9 minutes, 25 seconds. Time passed: 2 hours, 11 minutes, 20 seconds
+[INFO 13:32:43] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/9996000
+[INFO 13:33:24] my_main t_env: 10050000 / 20000000.0
+[INFO 13:33:24] my_main Estimated time left: 2 hours, 8 minutes, 19 seconds. Time passed: 2 hours, 12 minutes, 2 seconds
+[INFO 13:33:25] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/10050000
+[INFO 13:34:06] my_main t_env: 10104000 / 20000000.0
+[INFO 13:34:06] my_main Estimated time left: 2 hours, 7 minutes, 47 seconds. Time passed: 2 hours, 12 minutes, 43 seconds
+[INFO 13:34:07] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/10104000
+[INFO 13:34:47] my_main t_env: 10158000 / 20000000.0
+[INFO 13:34:47] my_main Estimated time left: 2 hours, 6 minutes, 32 seconds. Time passed: 2 hours, 13 minutes, 25 seconds
+[INFO 13:34:49] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/10158000
+[INFO 13:35:29] my_main t_env: 10212000 / 20000000.0
+[INFO 13:35:29] my_main Estimated time left: 2 hours, 6 minutes, 33 seconds. Time passed: 2 hours, 14 minutes, 7 seconds
+[INFO 13:35:30] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/10212000
+[INFO 13:36:11] my_main t_env: 10266000 / 20000000.0
+[INFO 13:36:11] my_main Estimated time left: 2 hours, 5 minutes, 20 seconds. Time passed: 2 hours, 14 minutes, 49 seconds
+[INFO 13:36:12] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/10266000
+[INFO 13:36:52] my_main t_env: 10320000 / 20000000.0
+[INFO 13:36:52] my_main Estimated time left: 2 hours, 4 minutes, 13 seconds. Time passed: 2 hours, 15 minutes, 30 seconds
+[INFO 13:36:54] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/10320000
+[INFO 13:37:34] my_main t_env: 10374000 / 20000000.0
+[INFO 13:37:34] my_main Estimated time left: 2 hours, 3 minutes, 42 seconds. Time passed: 2 hours, 16 minutes, 12 seconds
+[INFO 13:37:35] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/10374000
+[INFO 13:38:16] my_main t_env: 10428000 / 20000000.0
+[INFO 13:38:16] my_main Estimated time left: 2 hours, 3 minutes, 10 seconds. Time passed: 2 hours, 16 minutes, 54 seconds
+[INFO 13:38:17] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/10428000
+[INFO 13:38:57] my_main t_env: 10482000 / 20000000.0
+[INFO 13:38:57] my_main Estimated time left: 2 hours, 2 minutes, 27 seconds. Time passed: 2 hours, 17 minutes, 35 seconds
+[INFO 13:38:59] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/10482000
+[INFO 13:39:39] my_main t_env: 10536000 / 20000000.0
+[INFO 13:39:39] my_main Estimated time left: 2 hours, 1 minutes, 36 seconds. Time passed: 2 hours, 18 minutes, 17 seconds
+[INFO 13:39:40] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/10536000
+[INFO 13:40:21] my_main t_env: 10590000 / 20000000.0
+[INFO 13:40:21] my_main Estimated time left: 2 hours, 1 minutes, 6 seconds. Time passed: 2 hours, 18 minutes, 59 seconds
+[INFO 13:40:22] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/10590000
+[INFO 13:41:02] my_main t_env: 10644000 / 20000000.0
+[INFO 13:41:02] my_main Estimated time left: 2 hours, 8 seconds. Time passed: 2 hours, 19 minutes, 40 seconds
+[INFO 13:41:04] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/10644000
+[INFO 13:41:44] my_main t_env: 10698000 / 20000000.0
+[INFO 13:41:44] my_main Estimated time left: 1 hours, 59 minutes, 11 seconds. Time passed: 2 hours, 20 minutes, 22 seconds
+[INFO 13:41:45] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/10698000
+[INFO 13:42:26] my_main t_env: 10752000 / 20000000.0
+[INFO 13:42:26] my_main Estimated time left: 1 hours, 58 minutes, 45 seconds. Time passed: 2 hours, 21 minutes, 3 seconds
+[INFO 13:42:27] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/10752000
+[INFO 13:43:07] my_main t_env: 10806000 / 20000000.0
+[INFO 13:43:07] my_main Estimated time left: 1 hours, 58 minutes, 4 seconds. Time passed: 2 hours, 21 minutes, 45 seconds
+[INFO 13:43:09] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/10806000
+[INFO 13:43:49] my_main t_env: 10860000 / 20000000.0
+[INFO 13:43:49] my_main Estimated time left: 1 hours, 58 minutes, 0 seconds. Time passed: 2 hours, 22 minutes, 27 seconds
+[INFO 13:43:50] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/10860000
+[INFO 13:44:31] my_main t_env: 10914000 / 20000000.0
+[INFO 13:44:31] my_main Estimated time left: 1 hours, 56 minutes, 44 seconds. Time passed: 2 hours, 23 minutes, 8 seconds
+[INFO 13:44:32] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/10914000
+[INFO 13:45:12] my_main t_env: 10968000 / 20000000.0
+[INFO 13:45:12] my_main Estimated time left: 1 hours, 56 minutes, 11 seconds. Time passed: 2 hours, 23 minutes, 50 seconds
+[INFO 13:45:13] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/10968000
+[INFO 13:45:56] my_main t_env: 11022000 / 20000000.0
+[INFO 13:45:56] my_main Estimated time left: 2 hours, 31 seconds. Time passed: 2 hours, 24 minutes, 34 seconds
+[INFO 13:45:57] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/11022000
+[INFO 13:46:37] my_main t_env: 11076000 / 20000000.0
+[INFO 13:46:37] my_main Estimated time left: 1 hours, 54 minutes, 17 seconds. Time passed: 2 hours, 25 minutes, 15 seconds
+[INFO 13:46:38] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/11076000
+[INFO 13:47:19] my_main t_env: 11130000 / 20000000.0
+[INFO 13:47:19] my_main Estimated time left: 1 hours, 53 minutes, 55 seconds. Time passed: 2 hours, 25 minutes, 57 seconds
+[INFO 13:47:20] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/11130000
+[INFO 13:48:00] my_main t_env: 11184000 / 20000000.0
+[INFO 13:48:00] my_main Estimated time left: 1 hours, 53 minutes, 2 seconds. Time passed: 2 hours, 26 minutes, 38 seconds
+[INFO 13:48:02] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/11184000
+[INFO 13:48:42] my_main t_env: 11238000 / 20000000.0
+[INFO 13:48:42] my_main Estimated time left: 1 hours, 52 minutes, 21 seconds. Time passed: 2 hours, 27 minutes, 20 seconds
+[INFO 13:48:43] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/11238000
+[INFO 13:49:24] my_main t_env: 11292000 / 20000000.0
+[INFO 13:49:24] my_main Estimated time left: 1 hours, 51 minutes, 34 seconds. Time passed: 2 hours, 28 minutes, 1 seconds
+[INFO 13:49:25] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/11292000
+[INFO 13:50:05] my_main t_env: 11346000 / 20000000.0
+[INFO 13:50:05] my_main Estimated time left: 1 hours, 51 minutes, 3 seconds. Time passed: 2 hours, 28 minutes, 43 seconds
+[INFO 13:50:06] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/11346000
+[INFO 13:50:47] my_main t_env: 11400000 / 20000000.0
+[INFO 13:50:47] my_main Estimated time left: 1 hours, 50 minutes, 27 seconds. Time passed: 2 hours, 29 minutes, 24 seconds
+[INFO 13:50:48] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/11400000
+[INFO 13:51:29] my_main t_env: 11454000 / 20000000.0
+[INFO 13:51:29] my_main Estimated time left: 1 hours, 50 minutes, 25 seconds. Time passed: 2 hours, 30 minutes, 6 seconds
+[INFO 13:51:30] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/11454000
+[INFO 13:52:10] my_main t_env: 11508000 / 20000000.0
+[INFO 13:52:10] my_main Estimated time left: 1 hours, 49 minutes, 5 seconds. Time passed: 2 hours, 30 minutes, 48 seconds
+[INFO 13:52:11] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/11508000
+[INFO 13:52:52] my_main t_env: 11562000 / 20000000.0
+[INFO 13:52:52] my_main Estimated time left: 1 hours, 48 minutes, 14 seconds. Time passed: 2 hours, 31 minutes, 29 seconds
+[INFO 13:52:53] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/11562000
+[INFO 13:53:33] my_main t_env: 11616000 / 20000000.0
+[INFO 13:53:33] my_main Estimated time left: 1 hours, 47 minutes, 31 seconds. Time passed: 2 hours, 32 minutes, 11 seconds
+[INFO 13:53:34] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/11616000
+[INFO 13:54:15] my_main t_env: 11670000 / 20000000.0
+[INFO 13:54:15] my_main Estimated time left: 1 hours, 46 minutes, 56 seconds. Time passed: 2 hours, 32 minutes, 53 seconds
+[INFO 13:54:16] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/11670000
+[INFO 13:54:57] my_main t_env: 11724000 / 20000000.0
+[INFO 13:54:57] my_main Estimated time left: 1 hours, 46 minutes, 28 seconds. Time passed: 2 hours, 33 minutes, 34 seconds
+[INFO 13:54:58] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/11724000
+[INFO 13:55:38] my_main t_env: 11778000 / 20000000.0
+[INFO 13:55:38] my_main Estimated time left: 1 hours, 45 minutes, 38 seconds. Time passed: 2 hours, 34 minutes, 16 seconds
+[INFO 13:55:39] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/11778000
+[INFO 13:56:20] my_main t_env: 11832000 / 20000000.0
+[INFO 13:56:20] my_main Estimated time left: 1 hours, 44 minutes, 38 seconds. Time passed: 2 hours, 34 minutes, 57 seconds
+[INFO 13:56:21] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/11832000
+[INFO 13:57:01] my_main t_env: 11886000 / 20000000.0
+[INFO 13:57:01] my_main Estimated time left: 1 hours, 44 minutes, 11 seconds. Time passed: 2 hours, 35 minutes, 39 seconds
+[INFO 13:57:02] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/11886000
+[INFO 13:57:43] my_main t_env: 11940000 / 20000000.0
+[INFO 13:57:43] my_main Estimated time left: 1 hours, 43 minutes, 25 seconds. Time passed: 2 hours, 36 minutes, 21 seconds
+[INFO 13:57:44] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/11940000
+[INFO 13:58:25] my_main t_env: 11994000 / 20000000.0
+[INFO 13:58:25] my_main Estimated time left: 1 hours, 43 minutes, 9 seconds. Time passed: 2 hours, 37 minutes, 2 seconds
+[INFO 13:58:26] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/11994000
+[INFO 13:59:06] my_main t_env: 12048000 / 20000000.0
+[INFO 13:59:06] my_main Estimated time left: 1 hours, 42 minutes, 13 seconds. Time passed: 2 hours, 37 minutes, 44 seconds
+[INFO 13:59:07] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/12048000
+[INFO 13:59:48] my_main t_env: 12102000 / 20000000.0
+[INFO 13:59:48] my_main Estimated time left: 1 hours, 41 minutes, 39 seconds. Time passed: 2 hours, 38 minutes, 26 seconds
+[INFO 13:59:49] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/12102000
+[INFO 14:00:30] my_main t_env: 12156000 / 20000000.0
+[INFO 14:00:30] my_main Estimated time left: 1 hours, 40 minutes, 46 seconds. Time passed: 2 hours, 39 minutes, 7 seconds
+[INFO 14:00:31] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/12156000
+[INFO 14:01:13] my_main t_env: 12210000 / 20000000.0
+[INFO 14:01:13] my_main Estimated time left: 1 hours, 45 minutes, 12 seconds. Time passed: 2 hours, 39 minutes, 51 seconds
+[INFO 14:01:15] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/12210000
+[INFO 14:01:55] my_main t_env: 12264000 / 20000000.0
+[INFO 14:01:55] my_main Estimated time left: 1 hours, 39 minutes, 59 seconds. Time passed: 2 hours, 40 minutes, 33 seconds
+[INFO 14:01:56] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/12264000
+[INFO 14:02:37] my_main t_env: 12318000 / 20000000.0
+[INFO 14:02:37] my_main Estimated time left: 1 hours, 39 minutes, 4 seconds. Time passed: 2 hours, 41 minutes, 15 seconds
+[INFO 14:02:38] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/12318000
+[INFO 14:03:19] my_main t_env: 12372000 / 20000000.0
+[INFO 14:03:19] my_main Estimated time left: 1 hours, 38 minutes, 3 seconds. Time passed: 2 hours, 41 minutes, 56 seconds
+[INFO 14:03:20] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/12372000
+[INFO 14:04:00] my_main t_env: 12426000 / 20000000.0
+[INFO 14:04:00] my_main Estimated time left: 1 hours, 37 minutes, 31 seconds. Time passed: 2 hours, 42 minutes, 38 seconds
+[INFO 14:04:02] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/12426000
+[INFO 14:04:42] my_main t_env: 12480000 / 20000000.0
+[INFO 14:04:42] my_main Estimated time left: 1 hours, 36 minutes, 40 seconds. Time passed: 2 hours, 43 minutes, 20 seconds
+[INFO 14:04:43] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/12480000
+[INFO 14:05:24] my_main t_env: 12534000 / 20000000.0
+[INFO 14:05:24] my_main Estimated time left: 1 hours, 36 minutes, 7 seconds. Time passed: 2 hours, 44 minutes, 2 seconds
+[INFO 14:05:25] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/12534000
+[INFO 14:06:06] my_main t_env: 12588000 / 20000000.0
+[INFO 14:06:06] my_main Estimated time left: 1 hours, 35 minutes, 23 seconds. Time passed: 2 hours, 44 minutes, 43 seconds
+[INFO 14:06:07] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/12588000
+[INFO 14:06:47] my_main t_env: 12642000 / 20000000.0
+[INFO 14:06:47] my_main Estimated time left: 1 hours, 34 minutes, 43 seconds. Time passed: 2 hours, 45 minutes, 25 seconds
+[INFO 14:06:48] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/12642000
+[INFO 14:07:29] my_main t_env: 12696000 / 20000000.0
+[INFO 14:07:29] my_main Estimated time left: 1 hours, 34 minutes, 18 seconds. Time passed: 2 hours, 46 minutes, 7 seconds
+[INFO 14:07:30] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/12696000
+[INFO 14:08:11] my_main t_env: 12750000 / 20000000.0
+[INFO 14:08:11] my_main Estimated time left: 1 hours, 33 minutes, 58 seconds. Time passed: 2 hours, 46 minutes, 49 seconds
+[INFO 14:08:12] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/12750000
+[INFO 14:08:53] my_main t_env: 12804000 / 20000000.0
+[INFO 14:08:53] my_main Estimated time left: 1 hours, 32 minutes, 33 seconds. Time passed: 2 hours, 47 minutes, 30 seconds
+[INFO 14:08:54] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/12804000
+[INFO 14:09:35] my_main t_env: 12858000 / 20000000.0
+[INFO 14:09:35] my_main Estimated time left: 1 hours, 32 minutes, 8 seconds. Time passed: 2 hours, 48 minutes, 12 seconds
+[INFO 14:09:36] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/12858000
+[INFO 14:10:16] my_main t_env: 12912000 / 20000000.0
+[INFO 14:10:16] my_main Estimated time left: 1 hours, 31 minutes, 27 seconds. Time passed: 2 hours, 48 minutes, 54 seconds
+[INFO 14:10:17] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/12912000
+[INFO 14:10:58] my_main t_env: 12966000 / 20000000.0
+[INFO 14:10:58] my_main Estimated time left: 1 hours, 30 minutes, 40 seconds. Time passed: 2 hours, 49 minutes, 36 seconds
+[INFO 14:10:59] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/12966000
+[INFO 14:11:40] my_main t_env: 13020000 / 20000000.0
+[INFO 14:11:40] my_main Estimated time left: 1 hours, 30 minutes, 11 seconds. Time passed: 2 hours, 50 minutes, 18 seconds
+[INFO 14:11:41] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/13020000
+[INFO 14:12:22] my_main t_env: 13074000 / 20000000.0
+[INFO 14:12:22] my_main Estimated time left: 1 hours, 28 minutes, 56 seconds. Time passed: 2 hours, 50 minutes, 59 seconds
+[INFO 14:12:23] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/13074000
+[INFO 14:13:03] my_main t_env: 13128000 / 20000000.0
+[INFO 14:13:03] my_main Estimated time left: 1 hours, 28 minutes, 27 seconds. Time passed: 2 hours, 51 minutes, 41 seconds
+[INFO 14:13:04] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/13128000
+[INFO 14:13:45] my_main t_env: 13182000 / 20000000.0
+[INFO 14:13:45] my_main Estimated time left: 1 hours, 27 minutes, 35 seconds. Time passed: 2 hours, 52 minutes, 23 seconds
+[INFO 14:13:46] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/13182000
+[INFO 14:14:27] my_main t_env: 13236000 / 20000000.0
+[INFO 14:14:27] my_main Estimated time left: 1 hours, 27 minutes, 22 seconds. Time passed: 2 hours, 53 minutes, 4 seconds
+[INFO 14:14:28] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/13236000
+[INFO 14:15:09] my_main t_env: 13290000 / 20000000.0
+[INFO 14:15:09] my_main Estimated time left: 1 hours, 26 minutes, 31 seconds. Time passed: 2 hours, 53 minutes, 46 seconds
+[INFO 14:15:10] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/13290000
+[INFO 14:15:51] my_main t_env: 13344000 / 20000000.0
+[INFO 14:15:51] my_main Estimated time left: 1 hours, 27 minutes, 19 seconds. Time passed: 2 hours, 54 minutes, 29 seconds
+[INFO 14:15:53] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/13344000
+[INFO 14:16:33] my_main t_env: 13398000 / 20000000.0
+[INFO 14:16:33] my_main Estimated time left: 1 hours, 25 minutes, 36 seconds. Time passed: 2 hours, 55 minutes, 11 seconds
+[INFO 14:16:34] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/13398000
+[INFO 14:17:15] my_main t_env: 13452000 / 20000000.0
+[INFO 14:17:15] my_main Estimated time left: 1 hours, 24 minutes, 24 seconds. Time passed: 2 hours, 55 minutes, 53 seconds
+[INFO 14:17:16] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/13452000
+[INFO 14:17:57] my_main t_env: 13506000 / 20000000.0
+[INFO 14:17:57] my_main Estimated time left: 1 hours, 23 minutes, 36 seconds. Time passed: 2 hours, 56 minutes, 34 seconds
+[INFO 14:17:58] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/13506000
+[INFO 14:18:38] my_main t_env: 13560000 / 20000000.0
+[INFO 14:18:38] my_main Estimated time left: 1 hours, 23 minutes, 5 seconds. Time passed: 2 hours, 57 minutes, 16 seconds
+[INFO 14:18:39] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/13560000
+[INFO 14:19:20] my_main t_env: 13614000 / 20000000.0
+[INFO 14:19:20] my_main Estimated time left: 1 hours, 22 minutes, 8 seconds. Time passed: 2 hours, 57 minutes, 58 seconds
+[INFO 14:19:21] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/13614000
+[INFO 14:20:02] my_main t_env: 13668000 / 20000000.0
+[INFO 14:20:02] my_main Estimated time left: 1 hours, 21 minutes, 35 seconds. Time passed: 2 hours, 58 minutes, 39 seconds
+[INFO 14:20:03] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/13668000
+[INFO 14:20:43] my_main t_env: 13722000 / 20000000.0
+[INFO 14:20:43] my_main Estimated time left: 1 hours, 20 minutes, 42 seconds. Time passed: 2 hours, 59 minutes, 21 seconds
+[INFO 14:20:45] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/13722000
+[INFO 14:21:25] my_main t_env: 13776000 / 20000000.0
+[INFO 14:21:25] my_main Estimated time left: 1 hours, 20 minutes, 5 seconds. Time passed: 3 hours, 3 seconds
+[INFO 14:21:26] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/13776000
+[INFO 14:22:07] my_main t_env: 13830000 / 20000000.0
+[INFO 14:22:07] my_main Estimated time left: 1 hours, 19 minutes, 16 seconds. Time passed: 3 hours, 44 seconds
+[INFO 14:22:08] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/13830000
+[INFO 14:22:48] my_main t_env: 13884000 / 20000000.0
+[INFO 14:22:48] my_main Estimated time left: 1 hours, 18 minutes, 41 seconds. Time passed: 3 hours, 1 minutes, 26 seconds
+[INFO 14:22:50] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/13884000
+[INFO 14:23:30] my_main t_env: 13938000 / 20000000.0
+[INFO 14:23:30] my_main Estimated time left: 1 hours, 18 minutes, 10 seconds. Time passed: 3 hours, 2 minutes, 8 seconds
+[INFO 14:23:31] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/13938000
+[INFO 14:24:12] my_main t_env: 13992000 / 20000000.0
+[INFO 14:24:12] my_main Estimated time left: 1 hours, 17 minutes, 23 seconds. Time passed: 3 hours, 2 minutes, 50 seconds
+[INFO 14:24:13] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/13992000
+[INFO 14:24:54] my_main t_env: 14046000 / 20000000.0
+[INFO 14:24:54] my_main Estimated time left: 1 hours, 16 minutes, 53 seconds. Time passed: 3 hours, 3 minutes, 32 seconds
+[INFO 14:24:55] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/14046000
+[INFO 14:25:35] my_main t_env: 14100000 / 20000000.0
+[INFO 14:25:35] my_main Estimated time left: 1 hours, 15 minutes, 42 seconds. Time passed: 3 hours, 4 minutes, 13 seconds
+[INFO 14:25:37] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/14100000
+[INFO 14:26:17] my_main t_env: 14154000 / 20000000.0
+[INFO 14:26:17] my_main Estimated time left: 1 hours, 15 minutes, 14 seconds. Time passed: 3 hours, 4 minutes, 55 seconds
+[INFO 14:26:18] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/14154000
+[INFO 14:26:59] my_main t_env: 14208000 / 20000000.0
+[INFO 14:26:59] my_main Estimated time left: 1 hours, 14 minutes, 21 seconds. Time passed: 3 hours, 5 minutes, 36 seconds
+[INFO 14:27:00] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/14208000
+[INFO 14:27:41] my_main t_env: 14262000 / 20000000.0
+[INFO 14:27:41] my_main Estimated time left: 1 hours, 14 minutes, 31 seconds. Time passed: 3 hours, 6 minutes, 18 seconds
+[INFO 14:27:42] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/14262000
+[INFO 14:28:22] my_main t_env: 14316000 / 20000000.0
+[INFO 14:28:22] my_main Estimated time left: 1 hours, 13 minutes, 8 seconds. Time passed: 3 hours, 7 minutes, 0 seconds
+[INFO 14:28:24] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/14316000
+[INFO 14:29:04] my_main t_env: 14370000 / 20000000.0
+[INFO 14:29:04] my_main Estimated time left: 1 hours, 12 minutes, 47 seconds. Time passed: 3 hours, 7 minutes, 42 seconds
+[INFO 14:29:05] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/14370000
+[INFO 14:29:46] my_main t_env: 14424000 / 20000000.0
+[INFO 14:29:46] my_main Estimated time left: 1 hours, 11 minutes, 55 seconds. Time passed: 3 hours, 8 minutes, 24 seconds
+[INFO 14:29:47] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/14424000
+[INFO 14:30:28] my_main t_env: 14478000 / 20000000.0
+[INFO 14:30:28] my_main Estimated time left: 1 hours, 11 minutes, 19 seconds. Time passed: 3 hours, 9 minutes, 6 seconds
+[INFO 14:30:29] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/14478000
+[INFO 14:31:10] my_main t_env: 14532000 / 20000000.0
+[INFO 14:31:10] my_main Estimated time left: 1 hours, 10 minutes, 56 seconds. Time passed: 3 hours, 9 minutes, 48 seconds
+[INFO 14:31:11] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/14532000
+[INFO 14:31:52] my_main t_env: 14586000 / 20000000.0
+[INFO 14:31:52] my_main Estimated time left: 1 hours, 9 minutes, 41 seconds. Time passed: 3 hours, 10 minutes, 29 seconds
+[INFO 14:31:53] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/14586000
+[INFO 14:32:34] my_main t_env: 14640000 / 20000000.0
+[INFO 14:32:34] my_main Estimated time left: 1 hours, 9 minutes, 12 seconds. Time passed: 3 hours, 11 minutes, 11 seconds
+[INFO 14:32:35] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/14640000
+[INFO 14:33:15] my_main t_env: 14694000 / 20000000.0
+[INFO 14:33:15] my_main Estimated time left: 1 hours, 8 minutes, 27 seconds. Time passed: 3 hours, 11 minutes, 53 seconds
+[INFO 14:33:17] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/14694000
+[INFO 14:33:57] my_main t_env: 14748000 / 20000000.0
+[INFO 14:33:57] my_main Estimated time left: 1 hours, 7 minutes, 54 seconds. Time passed: 3 hours, 12 minutes, 35 seconds
+[INFO 14:33:58] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/14748000
+[INFO 14:34:39] my_main t_env: 14802000 / 20000000.0
+[INFO 14:34:39] my_main Estimated time left: 1 hours, 7 minutes, 11 seconds. Time passed: 3 hours, 13 minutes, 17 seconds
+[INFO 14:34:40] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/14802000
+[INFO 14:35:21] my_main t_env: 14856000 / 20000000.0
+[INFO 14:35:21] my_main Estimated time left: 1 hours, 6 minutes, 17 seconds. Time passed: 3 hours, 13 minutes, 59 seconds
+[INFO 14:35:22] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/14856000
+[INFO 14:36:03] my_main t_env: 14910000 / 20000000.0
+[INFO 14:36:03] my_main Estimated time left: 1 hours, 5 minutes, 35 seconds. Time passed: 3 hours, 14 minutes, 40 seconds
+[INFO 14:36:04] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/14910000
+[INFO 14:36:44] my_main t_env: 14964000 / 20000000.0
+[INFO 14:36:44] my_main Estimated time left: 1 hours, 4 minutes, 49 seconds. Time passed: 3 hours, 15 minutes, 22 seconds
+[INFO 14:36:46] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/14964000
+[INFO 14:37:26] my_main t_env: 15018000 / 20000000.0
+[INFO 14:37:26] my_main Estimated time left: 1 hours, 4 minutes, 42 seconds. Time passed: 3 hours, 16 minutes, 4 seconds
+[INFO 14:37:28] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/15018000
+[INFO 14:38:08] my_main t_env: 15072000 / 20000000.0
+[INFO 14:38:08] my_main Estimated time left: 1 hours, 3 minutes, 53 seconds. Time passed: 3 hours, 16 minutes, 46 seconds
+[INFO 14:38:10] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/15072000
+[INFO 14:38:50] my_main t_env: 15126000 / 20000000.0
+[INFO 14:38:50] my_main Estimated time left: 1 hours, 2 minutes, 58 seconds. Time passed: 3 hours, 17 minutes, 28 seconds
+[INFO 14:38:51] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/15126000
+[INFO 14:39:32] my_main t_env: 15180000 / 20000000.0
+[INFO 14:39:32] my_main Estimated time left: 1 hours, 2 minutes, 27 seconds. Time passed: 3 hours, 18 minutes, 10 seconds
+[INFO 14:39:33] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/15180000
+[INFO 14:40:14] my_main t_env: 15234000 / 20000000.0
+[INFO 14:40:14] my_main Estimated time left: 1 hours, 1 minutes, 56 seconds. Time passed: 3 hours, 18 minutes, 52 seconds
+[INFO 14:40:16] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/15234000
+[INFO 14:40:56] my_main t_env: 15288000 / 20000000.0
+[INFO 14:40:56] my_main Estimated time left: 1 hours, 49 seconds. Time passed: 3 hours, 19 minutes, 34 seconds
+[INFO 14:40:57] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/15288000
+[INFO 14:41:38] my_main t_env: 15342000 / 20000000.0
+[INFO 14:41:38] my_main Estimated time left: 1 hours, 1 seconds. Time passed: 3 hours, 20 minutes, 16 seconds
+[INFO 14:41:39] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/15342000
+[INFO 14:42:20] my_main t_env: 15396000 / 20000000.0
+[INFO 14:42:20] my_main Estimated time left: 59 minutes, 23 seconds. Time passed: 3 hours, 20 minutes, 57 seconds
+[INFO 14:42:21] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/15396000
+[INFO 14:43:02] my_main t_env: 15450000 / 20000000.0
+[INFO 14:43:02] my_main Estimated time left: 58 minutes, 47 seconds. Time passed: 3 hours, 21 minutes, 39 seconds
+[INFO 14:43:03] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/15450000
+[INFO 14:43:43] my_main t_env: 15504000 / 20000000.0
+[INFO 14:43:43] my_main Estimated time left: 57 minutes, 56 seconds. Time passed: 3 hours, 22 minutes, 21 seconds
+[INFO 14:43:45] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/15504000
+[INFO 14:44:25] my_main t_env: 15558000 / 20000000.0
+[INFO 14:44:25] my_main Estimated time left: 57 minutes, 16 seconds. Time passed: 3 hours, 23 minutes, 3 seconds
+[INFO 14:44:26] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/15558000
+[INFO 14:45:07] my_main t_env: 15612000 / 20000000.0
+[INFO 14:45:07] my_main Estimated time left: 56 minutes, 42 seconds. Time passed: 3 hours, 23 minutes, 45 seconds
+[INFO 14:45:08] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/15612000
+[INFO 14:45:51] my_main t_env: 15666000 / 20000000.0
+[INFO 14:45:51] my_main Estimated time left: 58 minutes, 52 seconds. Time passed: 3 hours, 24 minutes, 29 seconds
+[INFO 14:45:52] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/15666000
+[INFO 14:46:33] my_main t_env: 15720000 / 20000000.0
+[INFO 14:46:33] my_main Estimated time left: 55 minutes, 24 seconds. Time passed: 3 hours, 25 minutes, 11 seconds
+[INFO 14:46:34] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/15720000
+[INFO 14:47:15] my_main t_env: 15774000 / 20000000.0
+[INFO 14:47:15] my_main Estimated time left: 54 minutes, 38 seconds. Time passed: 3 hours, 25 minutes, 53 seconds
+[INFO 14:47:16] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/15774000
+[INFO 14:47:57] my_main t_env: 15828000 / 20000000.0
+[INFO 14:47:57] my_main Estimated time left: 53 minutes, 52 seconds. Time passed: 3 hours, 26 minutes, 34 seconds
+[INFO 14:47:58] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/15828000
+[INFO 14:48:39] my_main t_env: 15882000 / 20000000.0
+[INFO 14:48:39] my_main Estimated time left: 53 minutes, 17 seconds. Time passed: 3 hours, 27 minutes, 16 seconds
+[INFO 14:48:40] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/15882000
+[INFO 14:49:21] my_main t_env: 15936000 / 20000000.0
+[INFO 14:49:21] my_main Estimated time left: 52 minutes, 36 seconds. Time passed: 3 hours, 27 minutes, 58 seconds
+[INFO 14:49:22] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/15936000
+[INFO 14:50:02] my_main t_env: 15990000 / 20000000.0
+[INFO 14:50:02] my_main Estimated time left: 51 minutes, 47 seconds. Time passed: 3 hours, 28 minutes, 40 seconds
+[INFO 14:50:04] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/15990000
+[INFO 14:50:44] my_main t_env: 16044000 / 20000000.0
+[INFO 14:50:44] my_main Estimated time left: 51 minutes, 6 seconds. Time passed: 3 hours, 29 minutes, 22 seconds
+[INFO 14:50:45] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/16044000
+[INFO 14:51:26] my_main t_env: 16098000 / 20000000.0
+[INFO 14:51:26] my_main Estimated time left: 50 minutes, 23 seconds. Time passed: 3 hours, 30 minutes, 4 seconds
+[INFO 14:51:27] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/16098000
+[INFO 14:52:08] my_main t_env: 16152000 / 20000000.0
+[INFO 14:52:08] my_main Estimated time left: 49 minutes, 43 seconds. Time passed: 3 hours, 30 minutes, 46 seconds
+[INFO 14:52:09] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/16152000
+[INFO 14:52:50] my_main t_env: 16206000 / 20000000.0
+[INFO 14:52:50] my_main Estimated time left: 49 minutes, 4 seconds. Time passed: 3 hours, 31 minutes, 28 seconds
+[INFO 14:52:51] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/16206000
+[INFO 14:53:32] my_main t_env: 16260000 / 20000000.0
+[INFO 14:53:32] my_main Estimated time left: 48 minutes, 21 seconds. Time passed: 3 hours, 32 minutes, 10 seconds
+[INFO 14:53:33] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/16260000
+[INFO 14:54:14] my_main t_env: 16314000 / 20000000.0
+[INFO 14:54:14] my_main Estimated time left: 47 minutes, 53 seconds. Time passed: 3 hours, 32 minutes, 52 seconds
+[INFO 14:54:15] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/16314000
+[INFO 14:54:56] my_main t_env: 16368000 / 20000000.0
+[INFO 14:54:56] my_main Estimated time left: 47 minutes, 5 seconds. Time passed: 3 hours, 33 minutes, 34 seconds
+[INFO 14:54:57] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/16368000
+[INFO 14:55:38] my_main t_env: 16422000 / 20000000.0
+[INFO 14:55:38] my_main Estimated time left: 46 minutes, 49 seconds. Time passed: 3 hours, 34 minutes, 16 seconds
+[INFO 14:55:39] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/16422000
+[INFO 14:56:20] my_main t_env: 16476000 / 20000000.0
+[INFO 14:56:20] my_main Estimated time left: 45 minutes, 39 seconds. Time passed: 3 hours, 34 minutes, 58 seconds
+[INFO 14:56:21] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/16476000
+[INFO 14:57:02] my_main t_env: 16530000 / 20000000.0
+[INFO 14:57:02] my_main Estimated time left: 45 minutes, 4 seconds. Time passed: 3 hours, 35 minutes, 40 seconds
+[INFO 14:57:04] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/16530000
+[INFO 14:57:44] my_main t_env: 16584000 / 20000000.0
+[INFO 14:57:44] my_main Estimated time left: 44 minutes, 17 seconds. Time passed: 3 hours, 36 minutes, 22 seconds
+[INFO 14:57:46] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/16584000
+[INFO 14:58:27] my_main t_env: 16638000 / 20000000.0
+[INFO 14:58:27] my_main Estimated time left: 43 minutes, 40 seconds. Time passed: 3 hours, 37 minutes, 4 seconds
+[INFO 14:58:28] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/16638000
+[INFO 14:59:08] my_main t_env: 16692000 / 20000000.0
+[INFO 14:59:08] my_main Estimated time left: 42 minutes, 50 seconds. Time passed: 3 hours, 37 minutes, 46 seconds
+[INFO 14:59:10] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/16692000
+[INFO 14:59:50] my_main t_env: 16746000 / 20000000.0
+[INFO 14:59:50] my_main Estimated time left: 42 minutes, 6 seconds. Time passed: 3 hours, 38 minutes, 28 seconds
+[INFO 14:59:52] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/16746000
+[INFO 15:00:32] my_main t_env: 16800000 / 20000000.0
+[INFO 15:00:32] my_main Estimated time left: 41 minutes, 26 seconds. Time passed: 3 hours, 39 minutes, 10 seconds
+[INFO 15:00:33] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/16800000
+[INFO 15:01:14] my_main t_env: 16854000 / 20000000.0
+[INFO 15:01:14] my_main Estimated time left: 40 minutes, 53 seconds. Time passed: 3 hours, 39 minutes, 52 seconds
+[INFO 15:01:16] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/16854000
+[INFO 15:01:56] my_main t_env: 16908000 / 20000000.0
+[INFO 15:01:56] my_main Estimated time left: 40 minutes, 1 seconds. Time passed: 3 hours, 40 minutes, 34 seconds
+[INFO 15:01:58] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/16908000
+[INFO 15:02:38] my_main t_env: 16962000 / 20000000.0
+[INFO 15:02:38] my_main Estimated time left: 39 minutes, 18 seconds. Time passed: 3 hours, 41 minutes, 16 seconds
+[INFO 15:02:39] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/16962000
+[INFO 15:03:20] my_main t_env: 17016000 / 20000000.0
+[INFO 15:03:20] my_main Estimated time left: 38 minutes, 32 seconds. Time passed: 3 hours, 41 minutes, 58 seconds
+[INFO 15:03:21] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/17016000
+[INFO 15:04:02] my_main t_env: 17070000 / 20000000.0
+[INFO 15:04:02] my_main Estimated time left: 38 minutes, 8 seconds. Time passed: 3 hours, 42 minutes, 40 seconds
+[INFO 15:04:04] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/17070000
+[INFO 15:04:44] my_main t_env: 17124000 / 20000000.0
+[INFO 15:04:44] my_main Estimated time left: 37 minutes, 17 seconds. Time passed: 3 hours, 43 minutes, 22 seconds
+[INFO 15:04:46] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/17124000
+[INFO 15:05:27] my_main t_env: 17178000 / 20000000.0
+[INFO 15:05:27] my_main Estimated time left: 36 minutes, 48 seconds. Time passed: 3 hours, 44 minutes, 4 seconds
+[INFO 15:05:28] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/17178000
+[INFO 15:06:09] my_main t_env: 17232000 / 20000000.0
+[INFO 15:06:09] my_main Estimated time left: 35 minutes, 53 seconds. Time passed: 3 hours, 44 minutes, 46 seconds
+[INFO 15:06:10] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/17232000
+[INFO 15:06:51] my_main t_env: 17286000 / 20000000.0
+[INFO 15:06:51] my_main Estimated time left: 35 minutes, 9 seconds. Time passed: 3 hours, 45 minutes, 28 seconds
+[INFO 15:06:52] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/17286000
+[INFO 15:07:33] my_main t_env: 17340000 / 20000000.0
+[INFO 15:07:33] my_main Estimated time left: 34 minutes, 30 seconds. Time passed: 3 hours, 46 minutes, 10 seconds
+[INFO 15:07:34] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/17340000
+[INFO 15:08:15] my_main t_env: 17394000 / 20000000.0
+[INFO 15:08:15] my_main Estimated time left: 33 minutes, 43 seconds. Time passed: 3 hours, 46 minutes, 52 seconds
+[INFO 15:08:16] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/17394000
+[INFO 15:08:57] my_main t_env: 17448000 / 20000000.0
+[INFO 15:08:57] my_main Estimated time left: 33 minutes, 6 seconds. Time passed: 3 hours, 47 minutes, 34 seconds
+[INFO 15:08:58] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/17448000
+[INFO 15:09:39] my_main t_env: 17502000 / 20000000.0
+[INFO 15:09:39] my_main Estimated time left: 32 minutes, 25 seconds. Time passed: 3 hours, 48 minutes, 16 seconds
+[INFO 15:09:40] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/17502000
+[INFO 15:10:21] my_main t_env: 17556000 / 20000000.0
+[INFO 15:10:21] my_main Estimated time left: 31 minutes, 44 seconds. Time passed: 3 hours, 48 minutes, 59 seconds
+[INFO 15:10:22] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/17556000
+[INFO 15:11:03] my_main t_env: 17610000 / 20000000.0
+[INFO 15:11:03] my_main Estimated time left: 31 minutes, 4 seconds. Time passed: 3 hours, 49 minutes, 41 seconds
+[INFO 15:11:04] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/17610000
+[INFO 15:11:45] my_main t_env: 17664000 / 20000000.0
+[INFO 15:11:45] my_main Estimated time left: 30 minutes, 24 seconds. Time passed: 3 hours, 50 minutes, 23 seconds
+[INFO 15:11:46] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/17664000
+[INFO 15:12:27] my_main t_env: 17718000 / 20000000.0
+[INFO 15:12:27] my_main Estimated time left: 29 minutes, 36 seconds. Time passed: 3 hours, 51 minutes, 5 seconds
+[INFO 15:12:28] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/17718000
+[INFO 15:13:09] my_main t_env: 17772000 / 20000000.0
+[INFO 15:13:09] my_main Estimated time left: 28 minutes, 57 seconds. Time passed: 3 hours, 51 minutes, 47 seconds
+[INFO 15:13:10] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/17772000
+[INFO 15:13:51] my_main t_env: 17826000 / 20000000.0
+[INFO 15:13:51] my_main Estimated time left: 28 minutes, 10 seconds. Time passed: 3 hours, 52 minutes, 29 seconds
+[INFO 15:13:53] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/17826000
+[INFO 15:14:33] my_main t_env: 17880000 / 20000000.0
+[INFO 15:14:33] my_main Estimated time left: 27 minutes, 35 seconds. Time passed: 3 hours, 53 minutes, 11 seconds
+[INFO 15:14:35] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/17880000
+[INFO 15:15:16] my_main t_env: 17934000 / 20000000.0
+[INFO 15:15:16] my_main Estimated time left: 27 minutes, 4 seconds. Time passed: 3 hours, 53 minutes, 54 seconds
+[INFO 15:15:17] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/17934000
+[INFO 15:16:00] my_main t_env: 17988000 / 20000000.0
+[INFO 15:16:00] my_main Estimated time left: 27 minutes, 9 seconds. Time passed: 3 hours, 54 minutes, 37 seconds
+[INFO 15:16:01] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/17988000
+[INFO 15:16:42] my_main t_env: 18042000 / 20000000.0
+[INFO 15:16:42] my_main Estimated time left: 25 minutes, 28 seconds. Time passed: 3 hours, 55 minutes, 19 seconds
+[INFO 15:16:43] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/18042000
+[INFO 15:17:24] my_main t_env: 18096000 / 20000000.0
+[INFO 15:17:24] my_main Estimated time left: 24 minutes, 43 seconds. Time passed: 3 hours, 56 minutes, 2 seconds
+[INFO 15:17:25] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/18096000
+[INFO 15:18:06] my_main t_env: 18150000 / 20000000.0
+[INFO 15:18:06] my_main Estimated time left: 23 minutes, 58 seconds. Time passed: 3 hours, 56 minutes, 43 seconds
+[INFO 15:18:07] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/18150000
+[INFO 15:18:48] my_main t_env: 18204000 / 20000000.0
+[INFO 15:18:48] my_main Estimated time left: 23 minutes, 22 seconds. Time passed: 3 hours, 57 minutes, 26 seconds
+[INFO 15:18:49] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/18204000
+[INFO 15:19:30] my_main t_env: 18258000 / 20000000.0
+[INFO 15:19:30] my_main Estimated time left: 22 minutes, 40 seconds. Time passed: 3 hours, 58 minutes, 8 seconds
+[INFO 15:19:31] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/18258000
+[INFO 15:20:12] my_main t_env: 18312000 / 20000000.0
+[INFO 15:20:12] my_main Estimated time left: 21 minutes, 56 seconds. Time passed: 3 hours, 58 minutes, 50 seconds
+[INFO 15:20:13] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/18312000
+[INFO 15:20:54] my_main t_env: 18366000 / 20000000.0
+[INFO 15:20:54] my_main Estimated time left: 21 minutes, 15 seconds. Time passed: 3 hours, 59 minutes, 32 seconds
+[INFO 15:20:56] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/18366000
+[INFO 15:21:37] my_main t_env: 18420000 / 20000000.0
+[INFO 15:21:37] my_main Estimated time left: 20 minutes, 33 seconds. Time passed: 4 hours, 14 seconds
+[INFO 15:21:38] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/18420000
+[INFO 15:22:19] my_main t_env: 18474000 / 20000000.0
+[INFO 15:22:19] my_main Estimated time left: 19 minutes, 52 seconds. Time passed: 4 hours, 56 seconds
+[INFO 15:22:20] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/18474000
+[INFO 15:23:01] my_main t_env: 18528000 / 20000000.0
+[INFO 15:23:01] my_main Estimated time left: 19 minutes, 17 seconds. Time passed: 4 hours, 1 minutes, 39 seconds
+[INFO 15:23:02] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/18528000
+[INFO 15:23:43] my_main t_env: 18582000 / 20000000.0
+[INFO 15:23:43] my_main Estimated time left: 18 minutes, 24 seconds. Time passed: 4 hours, 2 minutes, 21 seconds
+[INFO 15:23:44] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/18582000
+[INFO 15:24:25] my_main t_env: 18636000 / 20000000.0
+[INFO 15:24:25] my_main Estimated time left: 17 minutes, 43 seconds. Time passed: 4 hours, 3 minutes, 3 seconds
+[INFO 15:24:27] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/18636000
+[INFO 15:25:08] my_main t_env: 18690000 / 20000000.0
+[INFO 15:25:08] my_main Estimated time left: 17 minutes, 7 seconds. Time passed: 4 hours, 3 minutes, 45 seconds
+[INFO 15:25:09] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/18690000
+[INFO 15:25:50] my_main t_env: 18744000 / 20000000.0
+[INFO 15:25:50] my_main Estimated time left: 16 minutes, 22 seconds. Time passed: 4 hours, 4 minutes, 28 seconds
+[INFO 15:25:51] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/18744000
+[INFO 15:26:32] my_main t_env: 18798000 / 20000000.0
+[INFO 15:26:32] my_main Estimated time left: 15 minutes, 38 seconds. Time passed: 4 hours, 5 minutes, 10 seconds
+[INFO 15:26:33] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/18798000
+[INFO 15:27:14] my_main t_env: 18852000 / 20000000.0
+[INFO 15:27:14] my_main Estimated time left: 14 minutes, 56 seconds. Time passed: 4 hours, 5 minutes, 52 seconds
+[INFO 15:27:15] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/18852000
+[INFO 15:27:56] my_main t_env: 18906000 / 20000000.0
+[INFO 15:27:56] my_main Estimated time left: 14 minutes, 15 seconds. Time passed: 4 hours, 6 minutes, 34 seconds
+[INFO 15:27:58] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/18906000
+[INFO 15:28:39] my_main t_env: 18960000 / 20000000.0
+[INFO 15:28:39] my_main Estimated time left: 13 minutes, 34 seconds. Time passed: 4 hours, 7 minutes, 16 seconds
+[INFO 15:28:40] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/18960000
+[INFO 15:29:21] my_main t_env: 19014000 / 20000000.0
+[INFO 15:29:21] my_main Estimated time left: 12 minutes, 50 seconds. Time passed: 4 hours, 7 minutes, 59 seconds
+[INFO 15:29:22] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/19014000
+[INFO 15:30:03] my_main t_env: 19068000 / 20000000.0
+[INFO 15:30:03] my_main Estimated time left: 12 minutes, 8 seconds. Time passed: 4 hours, 8 minutes, 41 seconds
+[INFO 15:30:04] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/19068000
+[INFO 15:30:47] my_main t_env: 19122000 / 20000000.0
+[INFO 15:30:47] my_main Estimated time left: 11 minutes, 45 seconds. Time passed: 4 hours, 9 minutes, 24 seconds
+[INFO 15:30:48] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/19122000
+[INFO 15:31:29] my_main t_env: 19176000 / 20000000.0
+[INFO 15:31:29] my_main Estimated time left: 10 minutes, 46 seconds. Time passed: 4 hours, 10 minutes, 7 seconds
+[INFO 15:31:30] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/19176000
+[INFO 15:32:11] my_main t_env: 19230000 / 20000000.0
+[INFO 15:32:11] my_main Estimated time left: 10 minutes, 3 seconds. Time passed: 4 hours, 10 minutes, 49 seconds
+[INFO 15:32:12] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/19230000
+[INFO 15:32:54] my_main t_env: 19284000 / 20000000.0
+[INFO 15:32:54] my_main Estimated time left: 9 minutes, 20 seconds. Time passed: 4 hours, 11 minutes, 31 seconds
+[INFO 15:32:55] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/19284000
+[INFO 15:33:36] my_main t_env: 19338000 / 20000000.0
+[INFO 15:33:36] my_main Estimated time left: 8 minutes, 36 seconds. Time passed: 4 hours, 12 minutes, 13 seconds
+[INFO 15:33:37] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/19338000
+[INFO 15:34:18] my_main t_env: 19392000 / 20000000.0
+[INFO 15:34:18] my_main Estimated time left: 7 minutes, 56 seconds. Time passed: 4 hours, 12 minutes, 56 seconds
+[INFO 15:34:19] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/19392000
+[INFO 15:35:00] my_main t_env: 19446000 / 20000000.0
+[INFO 15:35:00] my_main Estimated time left: 7 minutes, 13 seconds. Time passed: 4 hours, 13 minutes, 38 seconds
+[INFO 15:35:02] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/19446000
+[INFO 15:35:43] my_main t_env: 19500000 / 20000000.0
+[INFO 15:35:43] my_main Estimated time left: 6 minutes, 31 seconds. Time passed: 4 hours, 14 minutes, 20 seconds
+[INFO 15:35:44] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/19500000
+[INFO 15:36:25] my_main t_env: 19554000 / 20000000.0
+[INFO 15:36:25] my_main Estimated time left: 5 minutes, 48 seconds. Time passed: 4 hours, 15 minutes, 3 seconds
+[INFO 15:36:26] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/19554000
+[INFO 15:37:07] my_main t_env: 19608000 / 20000000.0
+[INFO 15:37:07] my_main Estimated time left: 5 minutes, 4 seconds. Time passed: 4 hours, 15 minutes, 45 seconds
+[INFO 15:37:08] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/19608000
+[INFO 15:37:49] my_main t_env: 19662000 / 20000000.0
+[INFO 15:37:49] my_main Estimated time left: 4 minutes, 24 seconds. Time passed: 4 hours, 16 minutes, 27 seconds
+[INFO 15:37:50] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/19662000
+[INFO 15:38:31] my_main t_env: 19716000 / 20000000.0
+[INFO 15:38:31] my_main Estimated time left: 3 minutes, 42 seconds. Time passed: 4 hours, 17 minutes, 9 seconds
+[INFO 15:38:33] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/19716000
+[INFO 15:39:14] my_main t_env: 19770000 / 20000000.0
+[INFO 15:39:14] my_main Estimated time left: 2 minutes, 59 seconds. Time passed: 4 hours, 17 minutes, 51 seconds
+[INFO 15:39:15] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/19770000
+[INFO 15:39:56] my_main t_env: 19824000 / 20000000.0
+[INFO 15:39:56] my_main Estimated time left: 2 minutes, 17 seconds. Time passed: 4 hours, 18 minutes, 33 seconds
+[INFO 15:39:57] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/19824000
+[INFO 15:40:38] my_main t_env: 19878000 / 20000000.0
+[INFO 15:40:38] my_main Estimated time left: 1 minutes, 36 seconds. Time passed: 4 hours, 19 minutes, 16 seconds
+[INFO 15:40:39] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/19878000
+[INFO 15:41:21] my_main t_env: 19932000 / 20000000.0
+[INFO 15:41:21] my_main Estimated time left: 53 seconds. Time passed: 4 hours, 19 minutes, 58 seconds
+[INFO 15:41:22] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/19932000
+[INFO 15:42:03] my_main t_env: 19986000 / 20000000.0
+[INFO 15:42:03] my_main Estimated time left: 10 seconds. Time passed: 4 hours, 20 minutes, 41 seconds
+[INFO 15:42:04] my_main Saving models to results/models/ippo_seed2_2playerhard_2025-01-14 11:21:19.776908/19986000
+[INFO 15:42:18] my_main Finished Training
+wandb: uploading wandb-summary.json; uploading config.yaml; uploading output.log
+wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:      advantage_mean ▅▄▃█▄▅▇▅▆▄▄▅▁▆▂█▅▂▆▃▆▁▅▄▄▄▅▆▅▂▄▄▆▅▄▄▅▅▃▅
+wandb:     agent_grad_norm ▁▁▃▇█▃▂▂▂▂▃▃▂▂▃▃▃▃▂▃▂▃▃▂▂▂▂▂▃▂▂▁▂▁▂▁▂▂▁▁
+wandb:    critic_grad_norm ▂▁▁▂▂▇█▇▄▃▄▅▄▄▄▄▃▂▄▅▂▃▂▃▂▂▂▃▂▂▂▂▁▁▁▂▁▂▁▁
+wandb:         critic_loss ▁▁▂▅▆▄▃▄▃▃▆▃▄▄█▅▃▃▅▄▅▄▄▄▃▂▃▃▂▂▂▂▂▂▂▂▂▂▁▁
+wandb:      ep_length_mean ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:             episode ▁▁▁▁▂▂▂▂▃▃▃▃▃▃▃▃▃▄▄▄▄▄▄▄▅▅▅▆▆▆▆▆▇▇▇▇▇▇▇█
+wandb:                  lr █████▇▇▇▇▆▆▆▆▆▅▅▅▅▅▅▄▄▄▄▄▃▃▃▃▃▃▃▂▂▂▂▂▁▁▁
+wandb:             pg_loss ▄▁▄▃▄▆▃█▃▃▂▄▃▄▄▃▄▅▄▄▂▂▃▄▃▃▃▃▂▄▃▃▃▃▃▄▃▃▃▃
+wandb:              pi_max ▁▁▂▂▄▇▇██▇▇▇█▇▇▇▇▇▇▆▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁
+wandb:        q_taken_mean ▁▁▁▁▁▁▂▄▅▆▆▅▆▆▆▇▆▇▇▇█▇▆▆▆▅▅▅▅▆▅▅▅▅▅▄▄▄▃▃
+wandb:         return_mean ▁▁▁▂▃▅▄▇▇█▆▆▇▆▅▃▃▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:          return_std ▁▂▂▂▃▅█▅▅▆▄▄▄▂▃▃▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         target_mean ▁▁▁▁▁▂▃▄▇▆█▇▇██▇▇█▇▇█▇▆▅▆▆▅▆▅▅▅▄▄▄▄▄▄▄▄▄
+wandb:        td_error_abs ▃▂▁▃▃▃█▇▇▆▆▇▆▆▆▆▅▅▆▅▄▄▃▄▄▄▃▃▃▃▃▂▂▂▂▂▂▂▂▂
+wandb: test_ep_length_mean ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:    test_return_mean ▁▁█▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     test_return_std ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: 
+wandb: Run summary:
+wandb:      advantage_mean -0.00647
+wandb:     agent_grad_norm 0.0102
+wandb:    critic_grad_norm 0.10577
+wandb:         critic_loss 0.02725
+wandb:      ep_length_mean 600
+wandb:             episode 33340
+wandb:                  lr 0.0001
+wandb:             pg_loss -0.00874
+wandb:              pi_max 0.2858
+wandb:        q_taken_mean 1.78618
+wandb:         return_mean 0
+wandb:          return_std 0
+wandb:         target_mean 1.77972
+wandb:        td_error_abs 0.04148
+wandb: test_ep_length_mean 600
+wandb:    test_return_mean 0
+wandb:     test_return_std 0
+wandb: 
+wandb: 🚀 View run rare-feather-361 at: https://wandb.ai/wanghm/epymarl_overcooked2/runs/9aitbral
+wandb: ⭐️ View project at: https://wandb.ai/wanghm/epymarl_overcooked2
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20250114_112120-9aitbral/logs
+Exiting Main
+Stopping all threads
+Thread Thread-1 is alive! Is daemon: False
+Thread joined
+Exiting script
+[DEBUG 15:42:22] my_main Finished after 4:21:03.
+[INFO 15:42:22] pymarl Completed after 4:21:03

@@ -1,0 +1,90 @@
+{
+  "episode": {
+    "steps": [
+      19770000
+    ],
+    "timestamps": [
+      "2025-04-10T00:54:08.877220"
+    ],
+    "values": [
+      19770000
+    ]
+  },
+  "test_AClemoncookedfish_mean": {
+    "steps": [
+      19770000
+    ],
+    "timestamps": [
+      "2025-04-10T00:54:08.856757"
+    ],
+    "values": [
+      0.35
+    ]
+  },
+  "test_cooked_count_mean": {
+    "steps": [
+      19770000
+    ],
+    "timestamps": [
+      "2025-04-10T00:54:08.856750"
+    ],
+    "values": [
+      1.5
+    ]
+  },
+  "test_cutted_count_mean": {
+    "steps": [
+      19770000
+    ],
+    "timestamps": [
+      "2025-04-10T00:54:08.856752"
+    ],
+    "values": [
+      2.4
+    ]
+  },
+  "test_ep_length_mean": {
+    "steps": [
+      19770000
+    ],
+    "timestamps": [
+      "2025-04-10T00:54:08.856747"
+    ],
+    "values": [
+      600.0
+    ]
+  },
+  "test_return_mean": {
+    "steps": [
+      19770000
+    ],
+    "timestamps": [
+      "2025-04-10T00:54:08.856671"
+    ],
+    "values": [
+      7.0
+    ]
+  },
+  "test_return_std": {
+    "steps": [
+      19770000
+    ],
+    "timestamps": [
+      "2025-04-10T00:54:08.856739"
+    ],
+    "values": [
+      11.445523142259598
+    ]
+  },
+  "test_synthesis_count_mean": {
+    "steps": [
+      19770000
+    ],
+    "timestamps": [
+      "2025-04-10T00:54:08.856755"
+    ],
+    "values": [
+      0.35
+    ]
+  }
+}

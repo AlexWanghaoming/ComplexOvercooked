@@ -1,0 +1,46 @@
+{
+  "episode": {
+    "steps": [
+      18582000
+    ],
+    "timestamps": [
+      "2025-04-09T19:02:59.823921"
+    ],
+    "values": [
+      18582000
+    ]
+  },
+  "test_ep_length_mean": {
+    "steps": [
+      18582000
+    ],
+    "timestamps": [
+      "2025-04-09T19:02:59.823895"
+    ],
+    "values": [
+      600.0
+    ]
+  },
+  "test_return_mean": {
+    "steps": [
+      18582000
+    ],
+    "timestamps": [
+      "2025-04-09T19:02:59.823806"
+    ],
+    "values": [
+      0.0
+    ]
+  },
+  "test_return_std": {
+    "steps": [
+      18582000
+    ],
+    "timestamps": [
+      "2025-04-09T19:02:59.823887"
+    ],
+    "values": [
+      0.0
+    ]
+  }
+}

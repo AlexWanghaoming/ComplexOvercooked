@@ -1,0 +1,58 @@
+{
+  "AClemoncookedfish_mean": [
+    0.0
+  ],
+  "AClemoncookedfish_mean_T": [
+    600
+  ],
+  "cooked_count_mean": [
+    3.0
+  ],
+  "cooked_count_mean_T": [
+    600
+  ],
+  "cutted_count_mean": [
+    1.0
+  ],
+  "cutted_count_mean_T": [
+    600
+  ],
+  "ep_length_mean": [
+    600.0
+  ],
+  "ep_length_mean_T": [
+    600
+  ],
+  "epsilon": [
+    1.0
+  ],
+  "epsilon_T": [
+    600
+  ],
+  "return_mean": [
+    {
+      "dtype": "float64",
+      "py/object": "numpy.float64",
+      "value": 12.0
+    }
+  ],
+  "return_mean_T": [
+    600
+  ],
+  "return_std": [
+    {
+      "dtype": "float64",
+      "py/object": "numpy.float64",
+      "value": 0.0
+    }
+  ],
+  "return_std_T": [
+    600
+  ],
+  "synthesis_count_mean": [
+    0.0
+  ],
+  "synthesis_count_mean_T": [
+    600
+  ]
+}

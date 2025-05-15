@@ -1,0 +1,103 @@
+{
+  "artifacts": [],
+  "command": "my_main",
+  "experiment": {
+    "base_dir": "/alpha/ComplexOvercooked/src",
+    "dependencies": [
+      "numpy==2.0.2",
+      "PyYAML==6.0.2",
+      "sacred==0.8.7",
+      "torch==2.6.0"
+    ],
+    "mainfile": "evaluate.py",
+    "name": "pymarl",
+    "repositories": [
+      {
+        "commit": "be25a825d777f0de8915b1a3d31f1c0103edbc04",
+        "dirty": true,
+        "url": "git@github.com:AlexWanghaoming/ComplexOvercooked.git"
+      },
+      {
+        "commit": "be25a825d777f0de8915b1a3d31f1c0103edbc04",
+        "dirty": true,
+        "url": "git@github.com:AlexWanghaoming/ComplexOvercooked.git"
+      },
+      {
+        "commit": "be25a825d777f0de8915b1a3d31f1c0103edbc04",
+        "dirty": true,
+        "url": "git@github.com:AlexWanghaoming/ComplexOvercooked.git"
+      }
+    ],
+    "sources": [
+      [
+        "evaluate.py",
+        "_sources/evaluate_14952164267f097653a5801bab3064a8.py"
+      ],
+      [
+        "run.py",
+        "_sources/run_18b6cff1f978547a80706a9a46217ba9.py"
+      ],
+      [
+        "utils/logging.py",
+        "_sources/logging_987a6549f2515dae5d883771d25ca8af.py"
+      ]
+    ]
+  },
+  "heartbeat": "2025-04-09T18:38:23.842008",
+  "host": {
+    "ENV": {},
+    "cpu": "11th Gen Intel(R) Core(TM) i9-11900K @ 3.50GHz",
+    "gpus": {
+      "driver_version": "535.86.05",
+      "gpus": [
+        {
+          "model": "NVIDIA GeForce RTX 3080",
+          "persistence_mode": false,
+          "total_memory": 10240
+        }
+      ]
+    },
+    "hostname": "wanghm",
+    "os": [
+      "Linux",
+      "Linux-6.5.0-18-generic-x86_64-with-glibc2.35"
+    ],
+    "python_version": "3.9.21"
+  },
+  "meta": {
+    "command": "my_main",
+    "config_updates": {},
+    "named_configs": [],
+    "options": {
+      "--beat-interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--id": null,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print-config": false,
+      "--priority": null,
+      "--queue": false,
+      "--s3": null,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [],
+      "help": false,
+      "with": false
+    }
+  },
+  "resources": [],
+  "result": null,
+  "start_time": "2025-04-09T18:38:09.001133",
+  "status": "INTERRUPTED",
+  "stop_time": "2025-04-09T18:38:23.844613"
+}

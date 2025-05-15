@@ -1,0 +1,114 @@
+{
+  "artifacts": [],
+  "command": "my_main",
+  "experiment": {
+    "base_dir": "/alpha/ComplexOvercooked/src",
+    "dependencies": [
+      "numpy==2.0.2",
+      "PyYAML==6.0.2",
+      "sacred==0.8.7",
+      "torch==2.6.0"
+    ],
+    "mainfile": "evaluate.py",
+    "name": "pymarl",
+    "repositories": [
+      {
+        "commit": "be25a825d777f0de8915b1a3d31f1c0103edbc04",
+        "dirty": true,
+        "url": "git@github.com:AlexWanghaoming/ComplexOvercooked.git"
+      },
+      {
+        "commit": "be25a825d777f0de8915b1a3d31f1c0103edbc04",
+        "dirty": true,
+        "url": "git@github.com:AlexWanghaoming/ComplexOvercooked.git"
+      },
+      {
+        "commit": "be25a825d777f0de8915b1a3d31f1c0103edbc04",
+        "dirty": true,
+        "url": "git@github.com:AlexWanghaoming/ComplexOvercooked.git"
+      }
+    ],
+    "sources": [
+      [
+        "evaluate.py",
+        "_sources/evaluate_72dcb3c72e118582147ddda472d9d110.py"
+      ],
+      [
+        "run.py",
+        "_sources/run_18b6cff1f978547a80706a9a46217ba9.py"
+      ],
+      [
+        "utils/logging.py",
+        "_sources/logging_987a6549f2515dae5d883771d25ca8af.py"
+      ]
+    ]
+  },
+  "fail_trace": [
+    "Traceback (most recent call last):\n",
+    "  File \"/home/wanghm/anaconda3/envs/proagent/lib/python3.9/site-packages/sacred/config/captured_function.py\", line 42, in captured_function\n    result = wrapped(*args, **kwargs)\n",
+    "  File \"/alpha/ComplexOvercooked/src/evaluate.py\", line 44, in my_main\n    run(_run, config, _log)\n",
+    "  File \"/alpha/ComplexOvercooked/src/run.py\", line 78, in run\n    run_sequential(args=args, logger=logger)\n",
+    "  File \"/alpha/ComplexOvercooked/src/run.py\", line 187, in run_sequential\n    learner.load_models(model_path)\n",
+    "  File \"/alpha/ComplexOvercooked/src/learners/ppo_learner.py\", line 267, in load_models\n    self.mac.load_models(path)\n",
+    "  File \"/alpha/ComplexOvercooked/src/controllers/basic_controller.py\", line 56, in load_models\n    self.agent.load_state_dict(th.load(\"{}/agent.th\".format(path), map_location=lambda storage, loc: storage))\n",
+    "  File \"/home/wanghm/anaconda3/envs/proagent/lib/python3.9/site-packages/torch/nn/modules/module.py\", line 2581, in load_state_dict\n    raise RuntimeError(\n",
+    "RuntimeError: Error(s) in loading state_dict for RNNAgent:\n\tMissing key(s) in state_dict: \"rnn.weight\", \"rnn.bias\". \n\tUnexpected key(s) in state_dict: \"rnn.weight_ih\", \"rnn.weight_hh\", \"rnn.bias_ih\", \"rnn.bias_hh\". \n"
+  ],
+  "heartbeat": "2025-04-09T18:28:03.816856",
+  "host": {
+    "ENV": {},
+    "cpu": "11th Gen Intel(R) Core(TM) i9-11900K @ 3.50GHz",
+    "gpus": {
+      "driver_version": "535.86.05",
+      "gpus": [
+        {
+          "model": "NVIDIA GeForce RTX 3080",
+          "persistence_mode": false,
+          "total_memory": 10240
+        }
+      ]
+    },
+    "hostname": "wanghm",
+    "os": [
+      "Linux",
+      "Linux-6.5.0-18-generic-x86_64-with-glibc2.35"
+    ],
+    "python_version": "3.9.21"
+  },
+  "meta": {
+    "command": "my_main",
+    "config_updates": {},
+    "named_configs": [],
+    "options": {
+      "--beat-interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--id": null,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print-config": false,
+      "--priority": null,
+      "--queue": false,
+      "--s3": null,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [],
+      "help": false,
+      "with": false
+    }
+  },
+  "resources": [],
+  "result": null,
+  "start_time": "2025-04-09T18:28:00.382631",
+  "status": "FAILED",
+  "stop_time": "2025-04-09T18:28:03.817465"
+}

@@ -1,0 +1,347 @@
+[INFO 09:42:17] pymarl Running command 'my_main'
+[INFO 09:42:17] pymarl Started run with ID "55"
+[DEBUG 09:42:17] pymarl Starting Heartbeat
+[DEBUG 09:42:17] my_main Started
+[INFO 09:42:17] my_main Experiment Parameters:
+[INFO 09:42:17] my_main 
+
+{   'action_selector': 'soft_policies',
+    'add_value_last_step': True,
+    'agent': 'rnn',
+    'agent_output_type': 'pi_logits',
+    'batch_size': 10,
+    'batch_size_run': 10,
+    'buffer_cpu_only': True,
+    'buffer_size': 10,
+    'checkpoint_path': '',
+    'common_reward': True,
+    'critic_type': 'ac_critic',
+    'entropy_coef': 0.01,
+    'env': 'overcooked2',
+    'env_args': {   'ifrender': False,
+                    'map_name': 'supereasy',
+                    'seed': 416922788},
+    'epochs': 8,
+    'eps_clip': 0.1,
+    'evaluate': False,
+    'gamma': 0.99,
+    'grad_norm_clip': 10,
+    'hidden_dim': 64,
+    'hypergroup': None,
+    'label': 'default_label',
+    'learner': 'ppo_learner',
+    'learner_log_interval': 6000,
+    'load_step': 0,
+    'local_results_path': 'results',
+    'log_interval': 6000,
+    'lr': 0.001,
+    'lr_decay': True,
+    'mac': 'basic_mac',
+    'mask_before_softmax': True,
+    'name': 'ippo',
+    'obs_agent_id': True,
+    'obs_individual_obs': False,
+    'obs_last_action': False,
+    'optim_alpha': 0.99,
+    'optim_eps': 1e-05,
+    'q_nstep': 5,
+    'render': False,
+    'repeat_id': 1,
+    'reward_scalarisation': 'mean',
+    'reward_shaping_horizon': 10000000.0,
+    'runner': 'parallel',
+    'runner_log_interval': 6000,
+    'save_model': True,
+    'save_model_interval': 100000,
+    'save_replay': False,
+    'seed': 416922788,
+    'standardise_returns': False,
+    'standardise_rewards': False,
+    't_max': 20000000.0,
+    'target_update_interval_or_tau': 0.01,
+    'test_greedy': True,
+    'test_interval': 5,
+    'test_nepisode': 10,
+    'use_cuda': False,
+    'use_rnn': True,
+    'use_tensorboard': False,
+    'use_wandb': True,
+    'wandb_mode': 'online',
+    'wandb_project': 'epymarl_overcooked2',
+    'wandb_save_model': False,
+    'wandb_team': 'wanghm'}
+
+[DEBUG 09:42:17] wandb.docker.auth Trying paths: ['/home/wanghm/.docker/config.json', '/home/wanghm/.dockercfg']
+[DEBUG 09:42:17] wandb.docker.auth Found file at path: /home/wanghm/.docker/config.json
+[DEBUG 09:42:17] wandb.docker.auth Found 'auths' section
+[DEBUG 09:42:17] wandb.docker.auth Auth data for https://index.docker.io/v1/ is absent. Client might be using a credentials store instead.
+[DEBUG 09:42:17] wandb.docker.auth Found 'credsStore' section
+[DEBUG 09:42:18] sentry_sdk.errors Setting up integrations (with default = False)
+[DEBUG 09:42:18] sentry_sdk.errors Setting SDK name to 'sentry.python'
+[DEBUG 09:42:18] sentry_sdk.errors [Profiling] Setting up continuous profiler in thread mode
+[DEBUG 09:42:18] git.cmd Popen(['git', 'rev-parse', '--show-toplevel'], cwd=/alpha/ComplexOvercooked, stdin=None, shell=False, universal_newlines=False)
+wandb: Using wandb-core as the SDK backend.  Please refer to https://wandb.me/wandb-core for more information.
+[DEBUG 09:42:18] urllib3.connectionpool Starting new HTTPS connection (1): api.wandb.ai:443
+[DEBUG 09:42:18] urllib3.connectionpool https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+[DEBUG 09:42:19] urllib3.connectionpool https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+wandb: Currently logged in as: wanghm to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+[DEBUG 09:42:19] git.cmd Popen(['git', 'cat-file', '--batch-check'], cwd=/alpha/ComplexOvercooked, stdin=<valid stream>, shell=False, universal_newlines=False)
+wandb: Tracking run with wandb version 0.19.9
+wandb: Run data is saved locally in /alpha/ComplexOvercooked/wandb/run-20250410_094219-fs8jefon
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run dainty-totem-436
+wandb: ⭐️ View project at https://wandb.ai/wanghm/epymarl_overcooked2
+wandb: 🚀 View run at https://wandb.ai/wanghm/epymarl_overcooked2/runs/fs8jefon
+[INFO 09:42:20] my_main *******************
+[INFO 09:42:20] my_main WANDB RUN ID:
+[INFO 09:42:20] my_main fs8jefon
+[INFO 09:42:20] my_main *******************
+shape of state: 73
+shape of observation: 73
+[INFO 09:42:22] my_main Beginning training for 20000000.0 timesteps
+[INFO 09:42:31] my_main t_env: 6000 / 20000000.0
+[INFO 09:42:31] my_main Estimated time left: 7 hours, 50 minutes, 13 seconds. Time passed: 8 seconds
+[INFO 09:43:28] my_main New best model saved with performance: 0.0
+[INFO 09:43:34] my_main t_env: 12000 / 20000000.0
+[INFO 09:43:34] my_main Estimated time left: 2 days, 10 hours, 1 minutes, 57 seconds. Time passed: 1 minutes, 11 seconds
+[INFO 09:43:45] my_main t_env: 18000 / 20000000.0
+[INFO 09:43:45] my_main Estimated time left: 10 hours, 33 minutes, 13 seconds. Time passed: 1 minutes, 22 seconds
+[INFO 09:43:47] my_main New best model saved with performance: 2.0
+[INFO 09:43:52] my_main t_env: 24000 / 20000000.0
+[INFO 09:43:52] my_main Estimated time left: 6 hours, 40 minutes, 4 seconds. Time passed: 1 minutes, 29 seconds
+[INFO 09:43:59] my_main t_env: 30000 / 20000000.0
+[INFO 09:43:59] my_main Estimated time left: 6 hours, 42 minutes, 0 seconds. Time passed: 1 minutes, 37 seconds
+[INFO 09:44:07] my_main t_env: 36000 / 20000000.0
+[INFO 09:44:07] my_main Estimated time left: 7 hours, 21 seconds. Time passed: 1 minutes, 44 seconds
+[INFO 09:44:14] my_main t_env: 42000 / 20000000.0
+[INFO 09:44:14] my_main Estimated time left: 6 hours, 49 minutes, 28 seconds. Time passed: 1 minutes, 52 seconds
+[INFO 09:44:22] my_main t_env: 48000 / 20000000.0
+[INFO 09:44:22] my_main Estimated time left: 6 hours, 34 minutes, 49 seconds. Time passed: 1 minutes, 59 seconds
+[INFO 09:44:29] my_main t_env: 54000 / 20000000.0
+[INFO 09:44:29] my_main Estimated time left: 6 hours, 44 minutes, 8 seconds. Time passed: 2 minutes, 6 seconds
+[INFO 09:44:36] my_main t_env: 60000 / 20000000.0
+[INFO 09:44:36] my_main Estimated time left: 6 hours, 45 minutes, 52 seconds. Time passed: 2 minutes, 13 seconds
+[INFO 09:44:44] my_main t_env: 66000 / 20000000.0
+[INFO 09:44:44] my_main Estimated time left: 6 hours, 53 minutes, 13 seconds. Time passed: 2 minutes, 21 seconds
+[INFO 09:44:51] my_main t_env: 72000 / 20000000.0
+[INFO 09:44:51] my_main Estimated time left: 6 hours, 34 minutes, 55 seconds. Time passed: 2 minutes, 28 seconds
+[INFO 09:44:58] my_main t_env: 78000 / 20000000.0
+[INFO 09:44:58] my_main Estimated time left: 7 hours, 1 minutes, 53 seconds. Time passed: 2 minutes, 35 seconds
+[INFO 09:45:06] my_main t_env: 84000 / 20000000.0
+[INFO 09:45:06] my_main Estimated time left: 6 hours, 32 minutes, 59 seconds. Time passed: 2 minutes, 43 seconds
+[INFO 09:46:12] my_main New best model saved with performance: 4.0
+[INFO 09:47:27] my_main t_env: 90000 / 20000000.0
+[INFO 09:47:27] my_main Estimated time left: 5 days, 10 hours, 26 minutes, 31 seconds. Time passed: 5 minutes, 4 seconds
+[INFO 09:47:34] my_main t_env: 96000 / 20000000.0
+[INFO 09:47:34] my_main Estimated time left: 6 hours, 22 minutes, 12 seconds. Time passed: 5 minutes, 11 seconds
+[INFO 09:47:41] my_main t_env: 102000 / 20000000.0
+[INFO 09:47:41] my_main Estimated time left: 6 hours, 37 minutes, 13 seconds. Time passed: 5 minutes, 18 seconds
+[INFO 09:47:48] my_main t_env: 108000 / 20000000.0
+[INFO 09:47:48] my_main Estimated time left: 6 hours, 35 minutes, 46 seconds. Time passed: 5 minutes, 25 seconds
+[INFO 09:47:56] my_main t_env: 114000 / 20000000.0
+[INFO 09:47:56] my_main Estimated time left: 6 hours, 47 minutes, 56 seconds. Time passed: 5 minutes, 33 seconds
+[INFO 09:48:03] my_main t_env: 120000 / 20000000.0
+[INFO 09:48:03] my_main Estimated time left: 6 hours, 42 minutes, 56 seconds. Time passed: 5 minutes, 40 seconds
+[INFO 09:48:10] my_main t_env: 126000 / 20000000.0
+[INFO 09:48:10] my_main Estimated time left: 6 hours, 33 minutes, 46 seconds. Time passed: 5 minutes, 47 seconds
+[INFO 09:48:18] my_main t_env: 132000 / 20000000.0
+[INFO 09:48:18] my_main Estimated time left: 6 hours, 58 minutes, 21 seconds. Time passed: 5 minutes, 55 seconds
+[INFO 09:48:25] my_main t_env: 138000 / 20000000.0
+[INFO 09:48:25] my_main Estimated time left: 6 hours, 24 minutes, 41 seconds. Time passed: 6 minutes, 2 seconds
+[INFO 09:48:32] my_main t_env: 144000 / 20000000.0
+[INFO 09:48:32] my_main Estimated time left: 6 hours, 47 minutes, 29 seconds. Time passed: 6 minutes, 9 seconds
+[INFO 09:48:39] my_main t_env: 150000 / 20000000.0
+[INFO 09:48:39] my_main Estimated time left: 6 hours, 34 minutes, 40 seconds. Time passed: 6 minutes, 16 seconds
+[INFO 09:48:46] my_main t_env: 156000 / 20000000.0
+[INFO 09:48:46] my_main Estimated time left: 6 hours, 29 minutes, 48 seconds. Time passed: 6 minutes, 23 seconds
+[INFO 09:48:54] my_main t_env: 162000 / 20000000.0
+[INFO 09:48:54] my_main Estimated time left: 6 hours, 49 minutes, 11 seconds. Time passed: 6 minutes, 31 seconds
+[INFO 09:49:01] my_main t_env: 168000 / 20000000.0
+[INFO 09:49:01] my_main Estimated time left: 6 hours, 50 minutes, 57 seconds. Time passed: 6 minutes, 38 seconds
+[INFO 09:49:09] my_main t_env: 174000 / 20000000.0
+[INFO 09:49:09] my_main Estimated time left: 6 hours, 58 minutes, 15 seconds. Time passed: 6 minutes, 46 seconds
+[INFO 09:49:16] my_main t_env: 180000 / 20000000.0
+[INFO 09:49:16] my_main Estimated time left: 6 hours, 37 minutes, 48 seconds. Time passed: 6 minutes, 53 seconds
+[INFO 09:49:23] my_main t_env: 186000 / 20000000.0
+[INFO 09:49:23] my_main Estimated time left: 6 hours, 44 minutes, 44 seconds. Time passed: 7 minutes, 0 seconds
+[INFO 09:49:31] my_main t_env: 192000 / 20000000.0
+[INFO 09:49:31] my_main Estimated time left: 6 hours, 37 minutes, 29 seconds. Time passed: 7 minutes, 8 seconds
+[INFO 09:49:38] my_main t_env: 198000 / 20000000.0
+[INFO 09:49:38] my_main Estimated time left: 6 hours, 52 minutes, 5 seconds. Time passed: 7 minutes, 15 seconds
+[INFO 09:49:45] my_main t_env: 204000 / 20000000.0
+[INFO 09:49:45] my_main Estimated time left: 6 hours, 26 minutes, 14 seconds. Time passed: 7 minutes, 22 seconds
+[INFO 09:51:04] my_main New best model saved with performance: 8.0
+[INFO 09:51:09] my_main t_env: 210000 / 20000000.0
+[INFO 09:51:09] my_main Estimated time left: 3 days, 5 hours, 2 minutes, 36 seconds. Time passed: 8 minutes, 46 seconds
+[INFO 09:51:16] my_main t_env: 216000 / 20000000.0
+[INFO 09:51:16] my_main Estimated time left: 6 hours, 33 minutes, 16 seconds. Time passed: 8 minutes, 53 seconds
+[INFO 09:51:24] my_main t_env: 222000 / 20000000.0
+[INFO 09:51:24] my_main Estimated time left: 6 hours, 47 minutes, 20 seconds. Time passed: 9 minutes, 1 seconds
+[INFO 09:51:31] my_main t_env: 228000 / 20000000.0
+[INFO 09:51:31] my_main Estimated time left: 7 hours, 3 minutes, 34 seconds. Time passed: 9 minutes, 9 seconds
+[INFO 09:51:39] my_main t_env: 234000 / 20000000.0
+[INFO 09:51:39] my_main Estimated time left: 7 hours, 34 seconds. Time passed: 9 minutes, 16 seconds
+[INFO 09:51:47] my_main t_env: 240000 / 20000000.0
+[INFO 09:51:47] my_main Estimated time left: 6 hours, 49 minutes, 30 seconds. Time passed: 9 minutes, 24 seconds
+[INFO 09:51:54] my_main t_env: 246000 / 20000000.0
+[INFO 09:51:54] my_main Estimated time left: 7 hours, 6 minutes, 12 seconds. Time passed: 9 minutes, 31 seconds
+[INFO 09:52:03] my_main t_env: 252000 / 20000000.0
+[INFO 09:52:03] my_main Estimated time left: 7 hours, 31 minutes, 22 seconds. Time passed: 9 minutes, 40 seconds
+[INFO 09:52:10] my_main t_env: 258000 / 20000000.0
+[INFO 09:52:10] my_main Estimated time left: 7 hours, 4 minutes, 28 seconds. Time passed: 9 minutes, 47 seconds
+[INFO 09:52:18] my_main t_env: 264000 / 20000000.0
+[INFO 09:52:18] my_main Estimated time left: 7 hours, 2 minutes, 11 seconds. Time passed: 9 minutes, 55 seconds
+[INFO 09:52:25] my_main t_env: 270000 / 20000000.0
+[INFO 09:52:25] my_main Estimated time left: 6 hours, 47 minutes, 56 seconds. Time passed: 10 minutes, 3 seconds
+[INFO 09:52:33] my_main t_env: 276000 / 20000000.0
+[INFO 09:52:33] my_main Estimated time left: 6 hours, 53 minutes, 14 seconds. Time passed: 10 minutes, 10 seconds
+Process Process-8:
+Process Process-3:
+Process Process-4:
+Process Process-9:
+Process Process-1:
+Process Process-6:
+Process Process-2:
+Process Process-10:
+Process Process-7:
+Process Process-5:
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+Traceback (most recent call last):
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+Traceback (most recent call last):
+  File "/alpha/ComplexOvercooked/src/runners/parallel_runner.py", line 301, in env_worker
+    cmd, data = remote.recv()
+  File "/alpha/ComplexOvercooked/src/runners/parallel_runner.py", line 301, in env_worker
+    cmd, data = remote.recv()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/alpha/ComplexOvercooked/src/runners/parallel_runner.py", line 301, in env_worker
+    cmd, data = remote.recv()
+  File "/alpha/ComplexOvercooked/src/runners/parallel_runner.py", line 301, in env_worker
+    cmd, data = remote.recv()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 414, in _recv_bytes
+    buf = self._recv(4)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 414, in _recv_bytes
+    buf = self._recv(4)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 414, in _recv_bytes
+    buf = self._recv(4)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 414, in _recv_bytes
+    buf = self._recv(4)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/alpha/ComplexOvercooked/src/runners/parallel_runner.py", line 301, in env_worker
+    cmd, data = remote.recv()
+  File "/alpha/ComplexOvercooked/src/runners/parallel_runner.py", line 301, in env_worker
+    cmd, data = remote.recv()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 379, in _recv
+    chunk = read(handle, remaining)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 379, in _recv
+    chunk = read(handle, remaining)
+  File "/alpha/ComplexOvercooked/src/runners/parallel_runner.py", line 301, in env_worker
+    cmd, data = remote.recv()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 379, in _recv
+    chunk = read(handle, remaining)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 379, in _recv
+    chunk = read(handle, remaining)
+  File "/alpha/ComplexOvercooked/src/runners/parallel_runner.py", line 301, in env_worker
+    cmd, data = remote.recv()
+  File "/alpha/ComplexOvercooked/src/runners/parallel_runner.py", line 301, in env_worker
+    cmd, data = remote.recv()
+  File "/alpha/ComplexOvercooked/src/runners/parallel_runner.py", line 301, in env_worker
+    cmd, data = remote.recv()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+KeyboardInterrupt
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 414, in _recv_bytes
+    buf = self._recv(4)
+KeyboardInterrupt
+KeyboardInterrupt
+KeyboardInterrupt
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 414, in _recv_bytes
+    buf = self._recv(4)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 414, in _recv_bytes
+    buf = self._recv(4)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 414, in _recv_bytes
+    buf = self._recv(4)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 414, in _recv_bytes
+    buf = self._recv(4)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 414, in _recv_bytes
+    buf = self._recv(4)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 379, in _recv
+    chunk = read(handle, remaining)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 379, in _recv
+    chunk = read(handle, remaining)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 379, in _recv
+    chunk = read(handle, remaining)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 379, in _recv
+    chunk = read(handle, remaining)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 379, in _recv
+    chunk = read(handle, remaining)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/connection.py", line 379, in _recv
+    chunk = read(handle, remaining)
+KeyboardInterrupt
+KeyboardInterrupt
+KeyboardInterrupt
+KeyboardInterrupt
+KeyboardInterrupt
+KeyboardInterrupt

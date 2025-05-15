@@ -1,0 +1,1281 @@
+[INFO 16:07:59] pymarl Running command 'my_main'
+[INFO 16:07:59] pymarl Started run with ID "5"
+[DEBUG 16:07:59] pymarl Starting Heartbeat
+[DEBUG 16:07:59] my_main Started
+[INFO 16:07:59] my_main Experiment Parameters:
+[INFO 16:07:59] my_main 
+
+{   'action_selector': 'epsilon_greedy',
+    'add_value_last_step': True,
+    'agent': 'rnn',
+    'agent_output_type': 'q',
+    'batch_size': 32,
+    'batch_size_run': 1,
+    'buffer_cpu_only': True,
+    'buffer_size': 5000,
+    'checkpoint_path': '',
+    'common_reward': True,
+    'double_q': True,
+    'env': 'overcooked2',
+    'env_args': {   'ifrender': False,
+                    'map_name': '4playereasy',
+                    'seed': 4},
+    'epsilon_anneal_time': 5000000,
+    'epsilon_finish': 0.1,
+    'epsilon_start': 1.0,
+    'evaluate': False,
+    'evaluation_epsilon': 0.0,
+    'gamma': 0.99,
+    'grad_norm_clip': 10,
+    'hidden_dim': 256,
+    'hypergroup': None,
+    'label': 'default_label',
+    'learner': 'q_learner',
+    'learner_log_interval': 6000,
+    'load_step': 0,
+    'local_results_path': 'results',
+    'log_interval': 6000,
+    'lr': 0.001,
+    'lr_decay': True,
+    'mac': 'basic_mac',
+    'mixer': 'vdn',
+    'name': 'vdn',
+    'obs_agent_id': True,
+    'obs_individual_obs': False,
+    'obs_last_action': False,
+    'optim_alpha': 0.99,
+    'optim_eps': 1e-05,
+    'render': False,
+    'repeat_id': 1,
+    'reward_scalarisation': 'mean',
+    'reward_shaping_horizon': 10000000.0,
+    'runner': 'episode',
+    'runner_log_interval': 6000,
+    'save_model': True,
+    'save_model_interval': 50000,
+    'save_replay': False,
+    'seed': 4,
+    'standardise_returns': False,
+    'standardise_rewards': False,
+    't_max': 20000000.0,
+    'target_update_interval_or_tau': 100,
+    'test_greedy': True,
+    'test_interval': 50000,
+    'test_nepisode': 1,
+    'use_cuda': True,
+    'use_rnn': True,
+    'use_tensorboard': False,
+    'use_wandb': True,
+    'wandb_mode': 'online',
+    'wandb_project': 'epymarl_overcooked2',
+    'wandb_save_model': False,
+    'wandb_team': 'wanghm'}
+
+[DEBUG 16:07:59] wandb.docker.auth Trying paths: ['/data/home/pssun/.docker/config.json', '/data/home/pssun/.dockercfg']
+[DEBUG 16:07:59] wandb.docker.auth No config file found
+[DEBUG 16:08:00] git.cmd Popen(['git', 'rev-parse', '--show-toplevel'], cwd=/data/home/pssun/my_marl_old, stdin=None, shell=False, universal_newlines=False)
+wandb: Using wandb-core as the SDK backend.  Please refer to https://wandb.me/wandb-core for more information.
+[DEBUG 16:08:00] urllib3.connectionpool Starting new HTTPS connection (1): api.wandb.ai:443
+[DEBUG 16:08:00] urllib3.connectionpool https://api.wandb.ai:443 "POST /graphql HTTP/11" 200 None
+[DEBUG 16:08:01] urllib3.connectionpool https://api.wandb.ai:443 "POST /graphql HTTP/11" 200 None
+wandb: Currently logged in as: wanghm. Use `wandb login --relogin` to force relogin
+[DEBUG 16:08:01] git.cmd Popen(['git', 'cat-file', '--batch-check'], cwd=/data/home/pssun/my_marl_old, stdin=<valid stream>, shell=False, universal_newlines=False)
+wandb: Tracking run with wandb version 0.19.1
+wandb: Run data is saved locally in /data/home/pssun/my_marl_old/wandb/run-20250114_160801-etduxlij
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run sage-hill-372
+wandb: ⭐️ View project at https://wandb.ai/wanghm/epymarl_overcooked2
+wandb: 🚀 View run at https://wandb.ai/wanghm/epymarl_overcooked2/runs/etduxlij
+[INFO 16:08:01] my_main *******************
+[INFO 16:08:01] my_main WANDB RUN ID:
+[INFO 16:08:01] my_main etduxlij
+[INFO 16:08:01] my_main *******************
+[INFO 16:08:05] my_main Beginning training for 20000000.0 timesteps
+[INFO 16:08:09] my_main t_env: 600 / 20000000.0
+[INFO 16:08:09] my_main Estimated time left: 29 minutes, 36 seconds. Time passed: 4 seconds
+[INFO 16:08:13] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/600
+[INFO 16:14:42] my_main t_env: 51000 / 20000000.0
+[INFO 16:14:42] my_main Estimated time left: 1 days, 19 hours, 6 minutes, 53 seconds. Time passed: 6 minutes, 36 seconds
+[INFO 16:14:45] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/51000
+[INFO 16:21:36] my_main t_env: 101400 / 20000000.0
+[INFO 16:21:36] my_main Estimated time left: 1 days, 21 hours, 28 minutes, 31 seconds. Time passed: 13 minutes, 31 seconds
+[INFO 16:21:40] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/101400
+[INFO 16:28:42] my_main t_env: 151800 / 20000000.0
+[INFO 16:28:42] my_main Estimated time left: 1 days, 22 hours, 34 minutes, 37 seconds. Time passed: 20 minutes, 37 seconds
+[INFO 16:28:47] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/151800
+[INFO 16:35:44] my_main t_env: 202200 / 20000000.0
+[INFO 16:35:44] my_main Estimated time left: 1 days, 21 hours, 59 minutes, 58 seconds. Time passed: 27 minutes, 38 seconds
+[INFO 16:35:47] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/202200
+[INFO 16:42:43] my_main t_env: 252600 / 20000000.0
+[INFO 16:42:43] my_main Estimated time left: 1 days, 21 hours, 37 minutes, 31 seconds. Time passed: 34 minutes, 37 seconds
+[INFO 16:42:47] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/252600
+[INFO 16:49:43] my_main t_env: 303000 / 20000000.0
+[INFO 16:49:43] my_main Estimated time left: 1 days, 21 hours, 37 minutes, 3 seconds. Time passed: 41 minutes, 38 seconds
+[INFO 16:49:47] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/303000
+[INFO 16:56:48] my_main t_env: 353400 / 20000000.0
+[INFO 16:56:48] my_main Estimated time left: 1 days, 22 hours, 1 minutes, 55 seconds. Time passed: 48 minutes, 43 seconds
+[INFO 16:56:53] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/353400
+[INFO 17:03:43] my_main t_env: 403800 / 20000000.0
+[INFO 17:03:43] my_main Estimated time left: 1 days, 20 hours, 48 minutes, 22 seconds. Time passed: 55 minutes, 38 seconds
+[INFO 17:03:47] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/403800
+[INFO 17:10:46] my_main t_env: 454200 / 20000000.0
+[INFO 17:10:46] my_main Estimated time left: 1 days, 21 hours, 33 minutes, 59 seconds. Time passed: 1 hours, 2 minutes, 41 seconds
+[INFO 17:10:50] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/454200
+[INFO 17:17:44] my_main t_env: 504600 / 20000000.0
+[INFO 17:17:44] my_main Estimated time left: 1 days, 20 hours, 57 minutes, 3 seconds. Time passed: 1 hours, 9 minutes, 39 seconds
+[INFO 17:17:48] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/504600
+[INFO 17:24:44] my_main t_env: 555000 / 20000000.0
+[INFO 17:24:44] my_main Estimated time left: 1 days, 20 hours, 58 minutes, 44 seconds. Time passed: 1 hours, 16 minutes, 39 seconds
+[INFO 17:24:49] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/555000
+[INFO 17:31:58] my_main t_env: 605400 / 20000000.0
+[INFO 17:31:58] my_main Estimated time left: 1 days, 22 hours, 24 minutes, 30 seconds. Time passed: 1 hours, 23 minutes, 53 seconds
+[INFO 17:32:02] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/605400
+[INFO 17:39:07] my_main t_env: 655800 / 20000000.0
+[INFO 17:39:07] my_main Estimated time left: 1 days, 21 hours, 43 minutes, 47 seconds. Time passed: 1 hours, 31 minutes, 2 seconds
+[INFO 17:39:12] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/655800
+[INFO 17:46:12] my_main t_env: 706200 / 20000000.0
+[INFO 17:46:12] my_main Estimated time left: 1 days, 21 hours, 8 minutes, 31 seconds. Time passed: 1 hours, 38 minutes, 6 seconds
+[INFO 17:46:15] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/706200
+[INFO 17:53:19] my_main t_env: 756600 / 20000000.0
+[INFO 17:53:19] my_main Estimated time left: 1 days, 21 hours, 20 minutes, 11 seconds. Time passed: 1 hours, 45 minutes, 14 seconds
+[INFO 17:53:23] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/756600
+[INFO 18:00:34] my_main t_env: 807000 / 20000000.0
+[INFO 18:00:34] my_main Estimated time left: 1 days, 22 hours, 28 seconds. Time passed: 1 hours, 52 minutes, 29 seconds
+[INFO 18:00:38] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/807000
+[INFO 18:07:40] my_main t_env: 857400 / 20000000.0
+[INFO 18:07:40] my_main Estimated time left: 1 days, 20 hours, 57 minutes, 42 seconds. Time passed: 1 hours, 59 minutes, 35 seconds
+[INFO 18:07:44] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/857400
+[INFO 18:14:39] my_main t_env: 907800 / 20000000.0
+[INFO 18:14:39] my_main Estimated time left: 1 days, 20 hours, 6 minutes, 33 seconds. Time passed: 2 hours, 6 minutes, 34 seconds
+[INFO 18:14:44] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/907800
+[INFO 18:21:48] my_main t_env: 958200 / 20000000.0
+[INFO 18:21:48] my_main Estimated time left: 1 days, 20 hours, 56 minutes, 34 seconds. Time passed: 2 hours, 13 minutes, 42 seconds
+[INFO 18:21:52] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/958200
+[INFO 18:28:57] my_main t_env: 1008600 / 20000000.0
+[INFO 18:28:57] my_main Estimated time left: 1 days, 20 hours, 59 minutes, 57 seconds. Time passed: 2 hours, 20 minutes, 52 seconds
+[INFO 18:29:02] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/1008600
+[INFO 18:36:04] my_main t_env: 1059000 / 20000000.0
+[INFO 18:36:04] my_main Estimated time left: 1 days, 20 hours, 34 minutes, 20 seconds. Time passed: 2 hours, 27 minutes, 59 seconds
+[INFO 18:36:09] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/1059000
+[INFO 18:43:13] my_main t_env: 1109400 / 20000000.0
+[INFO 18:43:13] my_main Estimated time left: 1 days, 20 hours, 34 minutes, 6 seconds. Time passed: 2 hours, 35 minutes, 7 seconds
+[INFO 18:43:16] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/1109400
+[INFO 18:50:22] my_main t_env: 1159800 / 20000000.0
+[INFO 18:50:22] my_main Estimated time left: 1 days, 20 hours, 36 minutes, 4 seconds. Time passed: 2 hours, 42 minutes, 17 seconds
+[INFO 18:50:27] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/1159800
+[INFO 18:57:25] my_main t_env: 1210200 / 20000000.0
+[INFO 18:57:25] my_main Estimated time left: 1 days, 19 hours, 47 minutes, 59 seconds. Time passed: 2 hours, 49 minutes, 20 seconds
+[INFO 18:57:29] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/1210200
+[INFO 19:04:51] my_main t_env: 1260600 / 20000000.0
+[INFO 19:04:51] my_main Estimated time left: 1 days, 22 hours, 6 minutes, 40 seconds. Time passed: 2 hours, 56 minutes, 46 seconds
+[INFO 19:04:56] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/1260600
+[INFO 19:12:26] my_main t_env: 1311000 / 20000000.0
+[INFO 19:12:26] my_main Estimated time left: 1 days, 22 hours, 49 minutes, 58 seconds. Time passed: 3 hours, 4 minutes, 21 seconds
+[INFO 19:12:31] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/1311000
+[INFO 19:19:58] my_main t_env: 1361400 / 20000000.0
+[INFO 19:19:58] my_main Estimated time left: 1 days, 22 hours, 27 minutes, 32 seconds. Time passed: 3 hours, 11 minutes, 53 seconds
+[INFO 19:20:03] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/1361400
+[INFO 19:27:30] my_main t_env: 1411800 / 20000000.0
+[INFO 19:27:30] my_main Estimated time left: 1 days, 22 hours, 16 minutes, 26 seconds. Time passed: 3 hours, 19 minutes, 25 seconds
+[INFO 19:27:35] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/1411800
+[INFO 19:35:01] my_main t_env: 1462200 / 20000000.0
+[INFO 19:35:01] my_main Estimated time left: 1 days, 22 hours, 5 minutes, 59 seconds. Time passed: 3 hours, 26 minutes, 56 seconds
+[INFO 19:35:06] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/1462200
+[INFO 19:42:32] my_main t_env: 1512600 / 20000000.0
+[INFO 19:42:32] my_main Estimated time left: 1 days, 21 hours, 52 minutes, 34 seconds. Time passed: 3 hours, 34 minutes, 26 seconds
+[INFO 19:42:36] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/1512600
+[INFO 19:50:00] my_main t_env: 1563000 / 20000000.0
+[INFO 19:50:00] my_main Estimated time left: 1 days, 21 hours, 34 minutes, 35 seconds. Time passed: 3 hours, 41 minutes, 55 seconds
+[INFO 19:50:05] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/1563000
+[INFO 19:57:29] my_main t_env: 1613400 / 20000000.0
+[INFO 19:57:29] my_main Estimated time left: 1 days, 21 hours, 27 minutes, 39 seconds. Time passed: 3 hours, 49 minutes, 23 seconds
+[INFO 19:57:33] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/1613400
+[INFO 20:05:00] my_main t_env: 1663800 / 20000000.0
+[INFO 20:05:00] my_main Estimated time left: 1 days, 21 hours, 39 minutes, 35 seconds. Time passed: 3 hours, 56 minutes, 55 seconds
+[INFO 20:05:05] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/1663800
+[INFO 20:12:31] my_main t_env: 1714200 / 20000000.0
+[INFO 20:12:31] my_main Estimated time left: 1 days, 21 hours, 21 minutes, 38 seconds. Time passed: 4 hours, 4 minutes, 25 seconds
+[INFO 20:12:35] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/1714200
+[INFO 20:20:02] my_main t_env: 1764600 / 20000000.0
+[INFO 20:20:02] my_main Estimated time left: 1 days, 21 hours, 21 minutes, 52 seconds. Time passed: 4 hours, 11 minutes, 57 seconds
+[INFO 20:20:07] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/1764600
+[INFO 20:27:35] my_main t_env: 1815000 / 20000000.0
+[INFO 20:27:35] my_main Estimated time left: 1 days, 21 hours, 21 minutes, 52 seconds. Time passed: 4 hours, 19 minutes, 29 seconds
+[INFO 20:27:39] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/1815000
+[INFO 20:35:03] my_main t_env: 1865400 / 20000000.0
+[INFO 20:35:03] my_main Estimated time left: 1 days, 20 hours, 49 minutes, 44 seconds. Time passed: 4 hours, 26 minutes, 58 seconds
+[INFO 20:35:08] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/1865400
+[INFO 20:42:29] my_main t_env: 1915800 / 20000000.0
+[INFO 20:42:29] my_main Estimated time left: 1 days, 20 hours, 29 minutes, 44 seconds. Time passed: 4 hours, 34 minutes, 24 seconds
+[INFO 20:42:34] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/1915800
+[INFO 20:49:59] my_main t_env: 1966200 / 20000000.0
+[INFO 20:49:59] my_main Estimated time left: 1 days, 20 hours, 39 minutes, 28 seconds. Time passed: 4 hours, 41 minutes, 53 seconds
+[INFO 20:50:03] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/1966200
+[INFO 20:57:23] my_main t_env: 2016600 / 20000000.0
+[INFO 20:57:23] my_main Estimated time left: 1 days, 19 hours, 59 minutes, 3 seconds. Time passed: 4 hours, 49 minutes, 17 seconds
+[INFO 20:57:27] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/2016600
+[INFO 21:04:47] my_main t_env: 2067000 / 20000000.0
+[INFO 21:04:47] my_main Estimated time left: 1 days, 19 hours, 57 minutes, 48 seconds. Time passed: 4 hours, 56 minutes, 42 seconds
+[INFO 21:04:52] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/2067000
+[INFO 21:12:08] my_main t_env: 2117400 / 20000000.0
+[INFO 21:12:08] my_main Estimated time left: 1 days, 19 hours, 26 minutes, 42 seconds. Time passed: 5 hours, 4 minutes, 3 seconds
+[INFO 21:12:12] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/2117400
+[INFO 21:19:36] my_main t_env: 2167800 / 20000000.0
+[INFO 21:19:36] my_main Estimated time left: 1 days, 19 hours, 57 minutes, 50 seconds. Time passed: 5 hours, 11 minutes, 30 seconds
+[INFO 21:19:40] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/2167800
+[INFO 21:27:05] my_main t_env: 2218200 / 20000000.0
+[INFO 21:27:05] my_main Estimated time left: 1 days, 20 hours, 2 minutes, 23 seconds. Time passed: 5 hours, 18 minutes, 59 seconds
+[INFO 21:27:09] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/2218200
+[INFO 21:34:34] my_main t_env: 2268600 / 20000000.0
+[INFO 21:34:34] my_main Estimated time left: 1 days, 19 hours, 51 minutes, 58 seconds. Time passed: 5 hours, 26 minutes, 28 seconds
+[INFO 21:34:38] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/2268600
+[INFO 21:42:01] my_main t_env: 2319000 / 20000000.0
+[INFO 21:42:01] my_main Estimated time left: 1 days, 19 hours, 34 minutes, 52 seconds. Time passed: 5 hours, 33 minutes, 56 seconds
+[INFO 21:42:06] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/2319000
+[INFO 21:49:33] my_main t_env: 2369400 / 20000000.0
+[INFO 21:49:33] my_main Estimated time left: 1 days, 19 hours, 57 minutes, 3 seconds. Time passed: 5 hours, 41 minutes, 28 seconds
+[INFO 21:49:38] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/2369400
+[INFO 21:57:01] my_main t_env: 2419800 / 20000000.0
+[INFO 21:57:01] my_main Estimated time left: 1 days, 19 hours, 25 minutes, 28 seconds. Time passed: 5 hours, 48 minutes, 56 seconds
+[INFO 21:57:06] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/2419800
+[INFO 22:04:30] my_main t_env: 2470200 / 20000000.0
+[INFO 22:04:30] my_main Estimated time left: 1 days, 19 hours, 21 minutes, 35 seconds. Time passed: 5 hours, 56 minutes, 25 seconds
+[INFO 22:04:35] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/2470200
+[INFO 22:12:02] my_main t_env: 2520600 / 20000000.0
+[INFO 22:12:02] my_main Estimated time left: 1 days, 19 hours, 30 minutes, 29 seconds. Time passed: 6 hours, 3 minutes, 56 seconds
+[INFO 22:12:06] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/2520600
+[INFO 22:19:33] my_main t_env: 2571000 / 20000000.0
+[INFO 22:19:33] my_main Estimated time left: 1 days, 19 hours, 18 minutes, 54 seconds. Time passed: 6 hours, 11 minutes, 27 seconds
+[INFO 22:19:37] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/2571000
+[INFO 22:26:59] my_main t_env: 2621400 / 20000000.0
+[INFO 22:26:59] my_main Estimated time left: 1 days, 18 hours, 44 minutes, 47 seconds. Time passed: 6 hours, 18 minutes, 54 seconds
+[INFO 22:27:04] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/2621400
+[INFO 22:34:24] my_main t_env: 2671800 / 20000000.0
+[INFO 22:34:24] my_main Estimated time left: 1 days, 18 hours, 30 minutes, 51 seconds. Time passed: 6 hours, 26 minutes, 19 seconds
+[INFO 22:34:29] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/2671800
+[INFO 22:41:49] my_main t_env: 2722200 / 20000000.0
+[INFO 22:41:49] my_main Estimated time left: 1 days, 18 hours, 22 minutes, 9 seconds. Time passed: 6 hours, 33 minutes, 44 seconds
+[INFO 22:41:54] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/2722200
+[INFO 22:49:11] my_main t_env: 2772600 / 20000000.0
+[INFO 22:49:11] my_main Estimated time left: 1 days, 17 hours, 58 minutes, 27 seconds. Time passed: 6 hours, 41 minutes, 6 seconds
+[INFO 22:49:16] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/2772600
+[INFO 22:56:35] my_main t_env: 2823000 / 20000000.0
+[INFO 22:56:35] my_main Estimated time left: 1 days, 18 hours, 6 seconds. Time passed: 6 hours, 48 minutes, 30 seconds
+[INFO 22:56:39] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/2823000
+[INFO 23:03:58] my_main t_env: 2873400 / 20000000.0
+[INFO 23:03:58] my_main Estimated time left: 1 days, 17 hours, 51 minutes, 12 seconds. Time passed: 6 hours, 55 minutes, 53 seconds
+[INFO 23:04:03] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/2873400
+[INFO 23:11:26] my_main t_env: 2923800 / 20000000.0
+[INFO 23:11:27] my_main Estimated time left: 1 days, 18 hours, 10 minutes, 48 seconds. Time passed: 7 hours, 3 minutes, 21 seconds
+[INFO 23:11:31] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/2923800
+[INFO 23:18:51] my_main t_env: 2974200 / 20000000.0
+[INFO 23:18:51] my_main Estimated time left: 1 days, 17 hours, 44 minutes, 8 seconds. Time passed: 7 hours, 10 minutes, 46 seconds
+[INFO 23:18:56] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/2974200
+[INFO 23:26:14] my_main t_env: 3024600 / 20000000.0
+[INFO 23:26:14] my_main Estimated time left: 1 days, 17 hours, 23 minutes, 46 seconds. Time passed: 7 hours, 18 minutes, 8 seconds
+[INFO 23:26:18] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/3024600
+[INFO 23:33:38] my_main t_env: 3075000 / 20000000.0
+[INFO 23:33:38] my_main Estimated time left: 1 days, 17 hours, 26 minutes, 13 seconds. Time passed: 7 hours, 25 minutes, 33 seconds
+[INFO 23:33:42] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/3075000
+[INFO 23:40:59] my_main t_env: 3125400 / 20000000.0
+[INFO 23:40:59] my_main Estimated time left: 1 days, 17 hours, 3 minutes, 10 seconds. Time passed: 7 hours, 32 minutes, 54 seconds
+[INFO 23:41:04] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/3125400
+[INFO 23:48:23] my_main t_env: 3175800 / 20000000.0
+[INFO 23:48:23] my_main Estimated time left: 1 days, 17 hours, 6 minutes, 58 seconds. Time passed: 7 hours, 40 minutes, 17 seconds
+[INFO 23:48:27] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/3175800
+[INFO 23:55:46] my_main t_env: 3226200 / 20000000.0
+[INFO 23:55:46] my_main Estimated time left: 1 days, 16 hours, 57 minutes, 15 seconds. Time passed: 7 hours, 47 minutes, 40 seconds
+[INFO 23:55:51] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/3226200
+[INFO 00:03:11] my_main t_env: 3276600 / 20000000.0
+[INFO 00:03:11] my_main Estimated time left: 1 days, 17 hours, 27 seconds. Time passed: 7 hours, 55 minutes, 5 seconds
+[INFO 00:03:15] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/3276600
+[INFO 00:10:32] my_main t_env: 3327000 / 20000000.0
+[INFO 00:10:32] my_main Estimated time left: 1 days, 16 hours, 34 minutes, 7 seconds. Time passed: 8 hours, 2 minutes, 27 seconds
+[INFO 00:10:37] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/3327000
+[INFO 00:17:56] my_main t_env: 3377400 / 20000000.0
+[INFO 00:17:56] my_main Estimated time left: 1 days, 16 hours, 42 minutes, 0 seconds. Time passed: 8 hours, 9 minutes, 51 seconds
+[INFO 00:18:01] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/3377400
+[INFO 00:25:17] my_main t_env: 3427800 / 20000000.0
+[INFO 00:25:17] my_main Estimated time left: 1 days, 16 hours, 14 minutes, 34 seconds. Time passed: 8 hours, 17 minutes, 12 seconds
+[INFO 00:25:21] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/3427800
+[INFO 00:32:40] my_main t_env: 3478200 / 20000000.0
+[INFO 00:32:40] my_main Estimated time left: 1 days, 16 hours, 22 minutes, 56 seconds. Time passed: 8 hours, 24 minutes, 35 seconds
+[INFO 00:32:45] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/3478200
+[INFO 00:40:01] my_main t_env: 3528600 / 20000000.0
+[INFO 00:40:01] my_main Estimated time left: 1 days, 15 hours, 58 minutes, 15 seconds. Time passed: 8 hours, 31 minutes, 55 seconds
+[INFO 00:40:05] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/3528600
+[INFO 00:47:24] my_main t_env: 3579000 / 20000000.0
+[INFO 00:47:24] my_main Estimated time left: 1 days, 16 hours, 5 minutes, 20 seconds. Time passed: 8 hours, 39 minutes, 18 seconds
+[INFO 00:47:28] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/3579000
+[INFO 00:54:49] my_main t_env: 3629400 / 20000000.0
+[INFO 00:54:49] my_main Estimated time left: 1 days, 16 hours, 8 minutes, 3 seconds. Time passed: 8 hours, 46 minutes, 43 seconds
+[INFO 00:54:53] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/3629400
+[INFO 01:02:11] my_main t_env: 3679800 / 20000000.0
+[INFO 01:02:11] my_main Estimated time left: 1 days, 15 hours, 47 minutes, 24 seconds. Time passed: 8 hours, 54 minutes, 6 seconds
+[INFO 01:02:15] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/3679800
+[INFO 01:09:36] my_main t_env: 3730200 / 20000000.0
+[INFO 01:09:36] my_main Estimated time left: 1 days, 15 hours, 55 minutes, 27 seconds. Time passed: 9 hours, 1 minutes, 31 seconds
+[INFO 01:09:40] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/3730200
+[INFO 01:16:59] my_main t_env: 3780600 / 20000000.0
+[INFO 01:16:59] my_main Estimated time left: 1 days, 15 hours, 37 minutes, 20 seconds. Time passed: 9 hours, 8 minutes, 54 seconds
+[INFO 01:17:04] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/3780600
+[INFO 01:24:23] my_main t_env: 3831000 / 20000000.0
+[INFO 01:24:23] my_main Estimated time left: 1 days, 15 hours, 30 minutes, 24 seconds. Time passed: 9 hours, 16 minutes, 17 seconds
+[INFO 01:24:27] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/3831000
+[INFO 01:31:46] my_main t_env: 3881400 / 20000000.0
+[INFO 01:31:46] my_main Estimated time left: 1 days, 15 hours, 24 minutes, 58 seconds. Time passed: 9 hours, 23 minutes, 41 seconds
+[INFO 01:31:51] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/3881400
+[INFO 01:39:09] my_main t_env: 3931800 / 20000000.0
+[INFO 01:39:09] my_main Estimated time left: 1 days, 15 hours, 13 minutes, 23 seconds. Time passed: 9 hours, 31 minutes, 4 seconds
+[INFO 01:39:14] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/3931800
+[INFO 01:46:35] my_main t_env: 3982200 / 20000000.0
+[INFO 01:46:35] my_main Estimated time left: 1 days, 15 hours, 21 minutes, 12 seconds. Time passed: 9 hours, 38 minutes, 30 seconds
+[INFO 01:46:40] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/3982200
+[INFO 01:54:00] my_main t_env: 4032600 / 20000000.0
+[INFO 01:54:00] my_main Estimated time left: 1 days, 15 hours, 9 minutes, 57 seconds. Time passed: 9 hours, 45 minutes, 55 seconds
+[INFO 01:54:05] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/4032600
+[INFO 02:01:24] my_main t_env: 4083000 / 20000000.0
+[INFO 02:01:24] my_main Estimated time left: 1 days, 14 hours, 58 minutes, 5 seconds. Time passed: 9 hours, 53 minutes, 19 seconds
+[INFO 02:01:29] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/4083000
+[INFO 02:08:49] my_main t_env: 4133400 / 20000000.0
+[INFO 02:08:49] my_main Estimated time left: 1 days, 14 hours, 55 minutes, 36 seconds. Time passed: 10 hours, 44 seconds
+[INFO 02:08:54] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/4133400
+[INFO 02:16:16] my_main t_env: 4183800 / 20000000.0
+[INFO 02:16:16] my_main Estimated time left: 1 days, 14 hours, 56 minutes, 44 seconds. Time passed: 10 hours, 8 minutes, 11 seconds
+[INFO 02:16:21] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/4183800
+[INFO 02:23:38] my_main t_env: 4234200 / 20000000.0
+[INFO 02:23:38] my_main Estimated time left: 1 days, 14 hours, 21 minutes, 30 seconds. Time passed: 10 hours, 15 minutes, 32 seconds
+[INFO 02:23:42] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/4234200
+[INFO 02:31:04] my_main t_env: 4284600 / 20000000.0
+[INFO 02:31:04] my_main Estimated time left: 1 days, 14 hours, 39 minutes, 22 seconds. Time passed: 10 hours, 22 minutes, 59 seconds
+[INFO 02:31:09] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/4284600
+[INFO 02:38:30] my_main t_env: 4335000 / 20000000.0
+[INFO 02:38:30] my_main Estimated time left: 1 days, 14 hours, 29 minutes, 32 seconds. Time passed: 10 hours, 30 minutes, 24 seconds
+[INFO 02:38:34] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/4335000
+[INFO 02:45:56] my_main t_env: 4385400 / 20000000.0
+[INFO 02:45:56] my_main Estimated time left: 1 days, 14 hours, 25 minutes, 44 seconds. Time passed: 10 hours, 37 minutes, 51 seconds
+[INFO 02:46:01] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/4385400
+[INFO 02:53:22] my_main t_env: 4435800 / 20000000.0
+[INFO 02:53:22] my_main Estimated time left: 1 days, 14 hours, 12 minutes, 2 seconds. Time passed: 10 hours, 45 minutes, 16 seconds
+[INFO 02:53:26] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/4435800
+[INFO 03:00:48] my_main t_env: 4486200 / 20000000.0
+[INFO 03:00:48] my_main Estimated time left: 1 days, 14 hours, 8 minutes, 28 seconds. Time passed: 10 hours, 52 minutes, 42 seconds
+[INFO 03:00:53] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/4486200
+[INFO 03:08:15] my_main t_env: 4536600 / 20000000.0
+[INFO 03:08:15] my_main Estimated time left: 1 days, 14 hours, 4 minutes, 52 seconds. Time passed: 11 hours, 9 seconds
+[INFO 03:08:19] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/4536600
+[INFO 03:15:37] my_main t_env: 4587000 / 20000000.0
+[INFO 03:15:37] my_main Estimated time left: 1 days, 13 hours, 34 minutes, 15 seconds. Time passed: 11 hours, 7 minutes, 32 seconds
+[INFO 03:15:42] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/4587000
+[INFO 03:23:00] my_main t_env: 4637400 / 20000000.0
+[INFO 03:23:00] my_main Estimated time left: 1 days, 13 hours, 33 minutes, 12 seconds. Time passed: 11 hours, 14 minutes, 55 seconds
+[INFO 03:23:05] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/4637400
+[INFO 03:30:29] my_main t_env: 4687800 / 20000000.0
+[INFO 03:30:29] my_main Estimated time left: 1 days, 13 hours, 51 minutes, 42 seconds. Time passed: 11 hours, 22 minutes, 24 seconds
+[INFO 03:30:34] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/4687800
+[INFO 03:37:56] my_main t_env: 4738200 / 20000000.0
+[INFO 03:37:56] my_main Estimated time left: 1 days, 13 hours, 34 minutes, 39 seconds. Time passed: 11 hours, 29 minutes, 50 seconds
+[INFO 03:38:00] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/4738200
+[INFO 03:45:22] my_main t_env: 4788600 / 20000000.0
+[INFO 03:45:22] my_main Estimated time left: 1 days, 13 hours, 26 minutes, 16 seconds. Time passed: 11 hours, 37 minutes, 17 seconds
+[INFO 03:45:27] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/4788600
+[INFO 03:52:48] my_main t_env: 4839000 / 20000000.0
+[INFO 03:52:48] my_main Estimated time left: 1 days, 13 hours, 15 minutes, 19 seconds. Time passed: 11 hours, 44 minutes, 43 seconds
+[INFO 03:52:53] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/4839000
+[INFO 04:00:17] my_main t_env: 4889400 / 20000000.0
+[INFO 04:00:17] my_main Estimated time left: 1 days, 13 hours, 23 minutes, 38 seconds. Time passed: 11 hours, 52 minutes, 12 seconds
+[INFO 04:00:22] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/4889400
+[INFO 04:07:46] my_main t_env: 4939800 / 20000000.0
+[INFO 04:07:46] my_main Estimated time left: 1 days, 13 hours, 14 minutes, 12 seconds. Time passed: 11 hours, 59 minutes, 40 seconds
+[INFO 04:07:50] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/4939800
+[INFO 04:15:16] my_main t_env: 4990200 / 20000000.0
+[INFO 04:15:16] my_main Estimated time left: 1 days, 13 hours, 13 minutes, 16 seconds. Time passed: 12 hours, 7 minutes, 10 seconds
+[INFO 04:15:21] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/4990200
+[INFO 04:22:44] my_main t_env: 5040600 / 20000000.0
+[INFO 04:22:44] my_main Estimated time left: 1 days, 12 hours, 55 minutes, 58 seconds. Time passed: 12 hours, 14 minutes, 38 seconds
+[INFO 04:22:48] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/5040600
+[INFO 04:30:13] my_main t_env: 5091000 / 20000000.0
+[INFO 04:30:13] my_main Estimated time left: 1 days, 12 hours, 57 minutes, 24 seconds. Time passed: 12 hours, 22 minutes, 8 seconds
+[INFO 04:30:18] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/5091000
+[INFO 04:37:43] my_main t_env: 5141400 / 20000000.0
+[INFO 04:37:43] my_main Estimated time left: 1 days, 12 hours, 47 minutes, 50 seconds. Time passed: 12 hours, 29 minutes, 37 seconds
+[INFO 04:37:47] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/5141400
+[INFO 04:45:11] my_main t_env: 5191800 / 20000000.0
+[INFO 04:45:11] my_main Estimated time left: 1 days, 12 hours, 34 minutes, 35 seconds. Time passed: 12 hours, 37 minutes, 6 seconds
+[INFO 04:45:16] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/5191800
+[INFO 04:52:40] my_main t_env: 5242200 / 20000000.0
+[INFO 04:52:40] my_main Estimated time left: 1 days, 12 hours, 30 minutes, 46 seconds. Time passed: 12 hours, 44 minutes, 35 seconds
+[INFO 04:52:44] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/5242200
+[INFO 05:00:06] my_main t_env: 5292600 / 20000000.0
+[INFO 05:00:06] my_main Estimated time left: 1 days, 12 hours, 11 minutes, 37 seconds. Time passed: 12 hours, 52 minutes, 1 seconds
+[INFO 05:00:11] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/5292600
+[INFO 05:07:33] my_main t_env: 5343000 / 20000000.0
+[INFO 05:07:33] my_main Estimated time left: 1 days, 12 hours, 4 minutes, 30 seconds. Time passed: 12 hours, 59 minutes, 28 seconds
+[INFO 05:07:37] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/5343000
+[INFO 05:15:00] my_main t_env: 5393400 / 20000000.0
+[INFO 05:15:00] my_main Estimated time left: 1 days, 11 hours, 58 minutes, 11 seconds. Time passed: 13 hours, 6 minutes, 54 seconds
+[INFO 05:15:04] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/5393400
+[INFO 05:22:25] my_main t_env: 5443800 / 20000000.0
+[INFO 05:22:25] my_main Estimated time left: 1 days, 11 hours, 40 minutes, 37 seconds. Time passed: 13 hours, 14 minutes, 19 seconds
+[INFO 05:22:29] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/5443800
+[INFO 05:29:53] my_main t_env: 5494200 / 20000000.0
+[INFO 05:29:53] my_main Estimated time left: 1 days, 11 hours, 49 minutes, 28 seconds. Time passed: 13 hours, 21 minutes, 47 seconds
+[INFO 05:29:57] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/5494200
+[INFO 05:37:20] my_main t_env: 5544600 / 20000000.0
+[INFO 05:37:20] my_main Estimated time left: 1 days, 11 hours, 36 minutes, 56 seconds. Time passed: 13 hours, 29 minutes, 14 seconds
+[INFO 05:37:24] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/5544600
+[INFO 05:44:44] my_main t_env: 5595000 / 20000000.0
+[INFO 05:44:44] my_main Estimated time left: 1 days, 11 hours, 17 minutes, 38 seconds. Time passed: 13 hours, 36 minutes, 39 seconds
+[INFO 05:44:48] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/5595000
+[INFO 05:52:07] my_main t_env: 5645400 / 20000000.0
+[INFO 05:52:07] my_main Estimated time left: 1 days, 11 hours, 57 seconds. Time passed: 13 hours, 44 minutes, 1 seconds
+[INFO 05:52:11] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/5645400
+[INFO 05:59:34] my_main t_env: 5695800 / 20000000.0
+[INFO 05:59:34] my_main Estimated time left: 1 days, 11 hours, 13 minutes, 16 seconds. Time passed: 13 hours, 51 minutes, 28 seconds
+[INFO 05:59:38] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/5695800
+[INFO 06:06:59] my_main t_env: 5746200 / 20000000.0
+[INFO 06:06:59] my_main Estimated time left: 1 days, 10 hours, 58 minutes, 6 seconds. Time passed: 13 hours, 58 minutes, 53 seconds
+[INFO 06:07:03] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/5746200
+[INFO 06:14:17] my_main t_env: 5796600 / 20000000.0
+[INFO 06:14:17] my_main Estimated time left: 1 days, 10 hours, 20 minutes, 22 seconds. Time passed: 14 hours, 6 minutes, 12 seconds
+[INFO 06:14:22] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/5796600
+[INFO 06:21:42] my_main t_env: 5847000 / 20000000.0
+[INFO 06:21:42] my_main Estimated time left: 1 days, 10 hours, 41 minutes, 35 seconds. Time passed: 14 hours, 13 minutes, 37 seconds
+[INFO 06:21:47] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/5847000
+[INFO 06:29:07] my_main t_env: 5897400 / 20000000.0
+[INFO 06:29:07] my_main Estimated time left: 1 days, 10 hours, 33 minutes, 52 seconds. Time passed: 14 hours, 21 minutes, 1 seconds
+[INFO 06:29:11] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/5897400
+[INFO 06:36:30] my_main t_env: 5947800 / 20000000.0
+[INFO 06:36:30] my_main Estimated time left: 1 days, 10 hours, 18 minutes, 53 seconds. Time passed: 14 hours, 28 minutes, 24 seconds
+[INFO 06:36:34] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/5947800
+[INFO 06:43:53] my_main t_env: 5998200 / 20000000.0
+[INFO 06:43:53] my_main Estimated time left: 1 days, 10 hours, 10 minutes, 26 seconds. Time passed: 14 hours, 35 minutes, 47 seconds
+[INFO 06:43:57] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/5998200
+[INFO 06:51:21] my_main t_env: 6048600 / 20000000.0
+[INFO 06:51:21] my_main Estimated time left: 1 days, 10 hours, 26 minutes, 19 seconds. Time passed: 14 hours, 43 minutes, 15 seconds
+[INFO 06:51:25] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/6048600
+[INFO 06:58:48] my_main t_env: 6099000 / 20000000.0
+[INFO 06:58:48] my_main Estimated time left: 1 days, 10 hours, 15 minutes, 48 seconds. Time passed: 14 hours, 50 minutes, 42 seconds
+[INFO 06:58:52] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/6099000
+[INFO 07:06:13] my_main t_env: 6149400 / 20000000.0
+[INFO 07:06:13] my_main Estimated time left: 1 days, 9 hours, 58 minutes, 12 seconds. Time passed: 14 hours, 58 minutes, 7 seconds
+[INFO 07:06:17] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/6149400
+[INFO 07:13:39] my_main t_env: 6199800 / 20000000.0
+[INFO 07:13:39] my_main Estimated time left: 1 days, 9 hours, 56 minutes, 47 seconds. Time passed: 15 hours, 5 minutes, 34 seconds
+[INFO 07:13:44] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/6199800
+[INFO 07:21:05] my_main t_env: 6250200 / 20000000.0
+[INFO 07:21:05] my_main Estimated time left: 1 days, 9 hours, 46 minutes, 49 seconds. Time passed: 15 hours, 13 minutes, 0 seconds
+[INFO 07:21:09] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/6250200
+[INFO 07:28:29] my_main t_env: 6300600 / 20000000.0
+[INFO 07:28:29] my_main Estimated time left: 1 days, 9 hours, 31 minutes, 9 seconds. Time passed: 15 hours, 20 minutes, 23 seconds
+[INFO 07:28:34] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/6300600
+[INFO 07:35:55] my_main t_env: 6351000 / 20000000.0
+[INFO 07:35:55] my_main Estimated time left: 1 days, 9 hours, 32 minutes, 41 seconds. Time passed: 15 hours, 27 minutes, 49 seconds
+[INFO 07:36:00] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/6351000
+[INFO 07:43:21] my_main t_env: 6401400 / 20000000.0
+[INFO 07:43:21] my_main Estimated time left: 1 days, 9 hours, 27 minutes, 10 seconds. Time passed: 15 hours, 35 minutes, 16 seconds
+[INFO 07:43:26] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/6401400
+[INFO 07:50:47] my_main t_env: 6451800 / 20000000.0
+[INFO 07:50:47] my_main Estimated time left: 1 days, 9 hours, 16 minutes, 7 seconds. Time passed: 15 hours, 42 minutes, 41 seconds
+[INFO 07:50:51] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/6451800
+[INFO 07:58:14] my_main t_env: 6502200 / 20000000.0
+[INFO 07:58:14] my_main Estimated time left: 1 days, 9 hours, 15 minutes, 17 seconds. Time passed: 15 hours, 50 minutes, 8 seconds
+[INFO 07:58:19] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/6502200
+[INFO 08:05:38] my_main t_env: 6552600 / 20000000.0
+[INFO 08:05:38] my_main Estimated time left: 1 days, 8 hours, 56 minutes, 8 seconds. Time passed: 15 hours, 57 minutes, 33 seconds
+[INFO 08:05:43] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/6552600
+[INFO 08:13:04] my_main t_env: 6603000 / 20000000.0
+[INFO 08:13:04] my_main Estimated time left: 1 days, 8 hours, 57 minutes, 15 seconds. Time passed: 16 hours, 4 minutes, 59 seconds
+[INFO 08:13:09] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/6603000
+[INFO 08:20:30] my_main t_env: 6653400 / 20000000.0
+[INFO 08:20:30] my_main Estimated time left: 1 days, 8 hours, 48 minutes, 52 seconds. Time passed: 16 hours, 12 minutes, 25 seconds
+[INFO 08:20:35] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/6653400
+[INFO 08:27:55] my_main t_env: 6703800 / 20000000.0
+[INFO 08:27:55] my_main Estimated time left: 1 days, 8 hours, 34 minutes, 43 seconds. Time passed: 16 hours, 19 minutes, 50 seconds
+[INFO 08:27:59] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/6703800
+[INFO 08:35:21] my_main t_env: 6754200 / 20000000.0
+[INFO 08:35:21] my_main Estimated time left: 1 days, 8 hours, 35 minutes, 1 seconds. Time passed: 16 hours, 27 minutes, 16 seconds
+[INFO 08:35:26] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/6754200
+[INFO 08:42:48] my_main t_env: 6804600 / 20000000.0
+[INFO 08:42:48] my_main Estimated time left: 1 days, 8 hours, 30 minutes, 31 seconds. Time passed: 16 hours, 34 minutes, 43 seconds
+[INFO 08:42:53] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/6804600
+[INFO 08:50:14] my_main t_env: 6855000 / 20000000.0
+[INFO 08:50:14] my_main Estimated time left: 1 days, 8 hours, 17 minutes, 37 seconds. Time passed: 16 hours, 42 minutes, 9 seconds
+[INFO 08:50:19] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/6855000
+[INFO 08:57:42] my_main t_env: 6905400 / 20000000.0
+[INFO 08:57:42] my_main Estimated time left: 1 days, 8 hours, 21 minutes, 7 seconds. Time passed: 16 hours, 49 minutes, 37 seconds
+[INFO 08:57:47] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/6905400
+[INFO 09:05:10] my_main t_env: 6955800 / 20000000.0
+[INFO 09:05:10] my_main Estimated time left: 1 days, 8 hours, 12 minutes, 33 seconds. Time passed: 16 hours, 57 minutes, 5 seconds
+[INFO 09:05:15] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/6955800
+[INFO 09:12:37] my_main t_env: 7006200 / 20000000.0
+[INFO 09:12:37] my_main Estimated time left: 1 days, 7 hours, 57 minutes, 21 seconds. Time passed: 17 hours, 4 minutes, 31 seconds
+[INFO 09:12:41] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/7006200
+[INFO 09:20:03] my_main t_env: 7056600 / 20000000.0
+[INFO 09:20:03] my_main Estimated time left: 1 days, 7 hours, 52 minutes, 5 seconds. Time passed: 17 hours, 11 minutes, 58 seconds
+[INFO 09:20:08] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/7056600
+[INFO 09:27:32] my_main t_env: 7107000 / 20000000.0
+[INFO 09:27:32] my_main Estimated time left: 1 days, 7 hours, 52 minutes, 59 seconds. Time passed: 17 hours, 19 minutes, 27 seconds
+[INFO 09:27:37] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/7107000
+[INFO 09:35:01] my_main t_env: 7157400 / 20000000.0
+[INFO 09:35:01] my_main Estimated time left: 1 days, 7 hours, 46 minutes, 36 seconds. Time passed: 17 hours, 26 minutes, 56 seconds
+[INFO 09:35:05] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/7157400
+[INFO 09:42:28] my_main t_env: 7207800 / 20000000.0
+[INFO 09:42:28] my_main Estimated time left: 1 days, 7 hours, 30 minutes, 12 seconds. Time passed: 17 hours, 34 minutes, 22 seconds
+[INFO 09:42:32] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/7207800
+[INFO 09:49:58] my_main t_env: 7258200 / 20000000.0
+[INFO 09:49:58] my_main Estimated time left: 1 days, 7 hours, 38 minutes, 15 seconds. Time passed: 17 hours, 41 minutes, 53 seconds
+[INFO 09:50:03] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/7258200
+[INFO 09:57:25] my_main t_env: 7308600 / 20000000.0
+[INFO 09:57:25] my_main Estimated time left: 1 days, 7 hours, 16 minutes, 25 seconds. Time passed: 17 hours, 49 minutes, 20 seconds
+[INFO 09:57:30] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/7308600
+[INFO 10:04:56] my_main t_env: 7359000 / 20000000.0
+[INFO 10:04:56] my_main Estimated time left: 1 days, 7 hours, 24 minutes, 21 seconds. Time passed: 17 hours, 56 minutes, 51 seconds
+[INFO 10:05:01] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/7359000
+[INFO 10:12:24] my_main t_env: 7409400 / 20000000.0
+[INFO 10:12:24] my_main Estimated time left: 1 days, 7 hours, 4 minutes, 28 seconds. Time passed: 18 hours, 4 minutes, 19 seconds
+[INFO 10:12:29] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/7409400
+[INFO 10:19:52] my_main t_env: 7459800 / 20000000.0
+[INFO 10:19:52] my_main Estimated time left: 1 days, 6 hours, 56 minutes, 9 seconds. Time passed: 18 hours, 11 minutes, 46 seconds
+[INFO 10:19:56] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/7459800
+[INFO 10:27:22] my_main t_env: 7510200 / 20000000.0
+[INFO 10:27:22] my_main Estimated time left: 1 days, 6 hours, 58 minutes, 14 seconds. Time passed: 18 hours, 19 minutes, 16 seconds
+[INFO 10:27:26] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/7510200
+[INFO 10:34:46] my_main t_env: 7560600 / 20000000.0
+[INFO 10:34:46] my_main Estimated time left: 1 days, 6 hours, 29 minutes, 48 seconds. Time passed: 18 hours, 26 minutes, 41 seconds
+[INFO 10:34:51] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/7560600
+[INFO 10:42:13] my_main t_env: 7611000 / 20000000.0
+[INFO 10:42:13] my_main Estimated time left: 1 days, 6 hours, 30 minutes, 20 seconds. Time passed: 18 hours, 34 minutes, 8 seconds
+[INFO 10:42:18] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/7611000
+[INFO 10:49:40] my_main t_env: 7661400 / 20000000.0
+[INFO 10:49:40] my_main Estimated time left: 1 days, 6 hours, 22 minutes, 11 seconds. Time passed: 18 hours, 41 minutes, 34 seconds
+[INFO 10:49:44] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/7661400
+[INFO 10:57:06] my_main t_env: 7711800 / 20000000.0
+[INFO 10:57:06] my_main Estimated time left: 1 days, 6 hours, 15 minutes, 9 seconds. Time passed: 18 hours, 49 minutes, 1 seconds
+[INFO 10:57:11] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/7711800
+[INFO 11:04:34] my_main t_env: 7762200 / 20000000.0
+[INFO 11:04:34] my_main Estimated time left: 1 days, 6 hours, 11 minutes, 3 seconds. Time passed: 18 hours, 56 minutes, 29 seconds
+[INFO 11:04:39] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/7762200
+[INFO 11:12:04] my_main t_env: 7812600 / 20000000.0
+[INFO 11:12:04] my_main Estimated time left: 1 days, 6 hours, 12 minutes, 17 seconds. Time passed: 19 hours, 3 minutes, 58 seconds
+[INFO 11:12:08] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/7812600
+[INFO 11:19:32] my_main t_env: 7863000 / 20000000.0
+[INFO 11:19:32] my_main Estimated time left: 1 days, 5 hours, 58 minutes, 4 seconds. Time passed: 19 hours, 11 minutes, 26 seconds
+[INFO 11:19:36] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/7863000
+[INFO 11:27:00] my_main t_env: 7913400 / 20000000.0
+[INFO 11:27:00] my_main Estimated time left: 1 days, 5 hours, 53 minutes, 20 seconds. Time passed: 19 hours, 18 minutes, 55 seconds
+[INFO 11:27:05] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/7913400
+[INFO 11:34:28] my_main t_env: 7963800 / 20000000.0
+[INFO 11:34:28] my_main Estimated time left: 1 days, 5 hours, 41 minutes, 21 seconds. Time passed: 19 hours, 26 minutes, 22 seconds
+[INFO 11:34:33] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/7963800
+[INFO 11:41:53] my_main t_env: 8014200 / 20000000.0
+[INFO 11:41:53] my_main Estimated time left: 1 days, 5 hours, 24 minutes, 21 seconds. Time passed: 19 hours, 33 minutes, 48 seconds
+[INFO 11:41:57] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/8014200
+[INFO 11:49:18] my_main t_env: 8064600 / 20000000.0
+[INFO 11:49:18] my_main Estimated time left: 1 days, 5 hours, 15 minutes, 3 seconds. Time passed: 19 hours, 41 minutes, 12 seconds
+[INFO 11:49:22] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/8064600
+[INFO 11:56:44] my_main t_env: 8115000 / 20000000.0
+[INFO 11:56:44] my_main Estimated time left: 1 days, 5 hours, 16 minutes, 7 seconds. Time passed: 19 hours, 48 minutes, 39 seconds
+[INFO 11:56:49] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/8115000
+[INFO 12:04:11] my_main t_env: 8165400 / 20000000.0
+[INFO 12:04:11] my_main Estimated time left: 1 days, 5 hours, 7 minutes, 6 seconds. Time passed: 19 hours, 56 minutes, 6 seconds
+[INFO 12:04:15] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/8165400
+[INFO 12:11:37] my_main t_env: 8215800 / 20000000.0
+[INFO 12:11:37] my_main Estimated time left: 1 days, 4 hours, 57 minutes, 3 seconds. Time passed: 20 hours, 3 minutes, 31 seconds
+[INFO 12:11:41] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/8215800
+[INFO 12:19:03] my_main t_env: 8266200 / 20000000.0
+[INFO 12:19:03] my_main Estimated time left: 1 days, 4 hours, 52 minutes, 18 seconds. Time passed: 20 hours, 10 minutes, 58 seconds
+[INFO 12:19:07] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/8266200
+[INFO 12:26:28] my_main t_env: 8316600 / 20000000.0
+[INFO 12:26:28] my_main Estimated time left: 1 days, 4 hours, 38 minutes, 50 seconds. Time passed: 20 hours, 18 minutes, 23 seconds
+[INFO 12:26:32] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/8316600
+[INFO 12:33:56] my_main t_env: 8367000 / 20000000.0
+[INFO 12:33:56] my_main Estimated time left: 1 days, 4 hours, 42 minutes, 49 seconds. Time passed: 20 hours, 25 minutes, 50 seconds
+[INFO 12:34:00] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/8367000
+[INFO 12:41:25] my_main t_env: 8417400 / 20000000.0
+[INFO 12:41:25] my_main Estimated time left: 1 days, 4 hours, 38 minutes, 30 seconds. Time passed: 20 hours, 33 minutes, 19 seconds
+[INFO 12:41:29] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/8417400
+[INFO 12:48:49] my_main t_env: 8467800 / 20000000.0
+[INFO 12:48:49] my_main Estimated time left: 1 days, 4 hours, 16 minutes, 35 seconds. Time passed: 20 hours, 40 minutes, 44 seconds
+[INFO 12:48:54] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/8467800
+[INFO 12:56:17] my_main t_env: 8518200 / 20000000.0
+[INFO 12:56:17] my_main Estimated time left: 1 days, 4 hours, 17 minutes, 53 seconds. Time passed: 20 hours, 48 minutes, 11 seconds
+[INFO 12:56:21] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/8518200
+[INFO 13:03:46] my_main t_env: 8568600 / 20000000.0
+[INFO 13:03:46] my_main Estimated time left: 1 days, 4 hours, 19 minutes, 59 seconds. Time passed: 20 hours, 55 minutes, 41 seconds
+[INFO 13:03:51] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/8568600
+[INFO 13:11:13] my_main t_env: 8619000 / 20000000.0
+[INFO 13:11:13] my_main Estimated time left: 1 days, 4 hours, 2 minutes, 48 seconds. Time passed: 21 hours, 3 minutes, 8 seconds
+[INFO 13:11:18] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/8619000
+[INFO 13:18:39] my_main t_env: 8669400 / 20000000.0
+[INFO 13:18:39] my_main Estimated time left: 1 days, 3 hours, 49 minutes, 24 seconds. Time passed: 21 hours, 10 minutes, 34 seconds
+[INFO 13:18:44] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/8669400
+[INFO 13:26:08] my_main t_env: 8719800 / 20000000.0
+[INFO 13:26:08] my_main Estimated time left: 1 days, 3 hours, 55 minutes, 35 seconds. Time passed: 21 hours, 18 minutes, 3 seconds
+[INFO 13:26:13] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/8719800
+[INFO 13:33:35] my_main t_env: 8770200 / 20000000.0
+[INFO 13:33:35] my_main Estimated time left: 1 days, 3 hours, 37 minutes, 37 seconds. Time passed: 21 hours, 25 minutes, 29 seconds
+[INFO 13:33:39] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/8770200
+[INFO 13:41:03] my_main t_env: 8820600 / 20000000.0
+[INFO 13:41:03] my_main Estimated time left: 1 days, 3 hours, 39 minutes, 17 seconds. Time passed: 21 hours, 32 minutes, 58 seconds
+[INFO 13:41:08] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/8820600
+[INFO 13:48:35] my_main t_env: 8871000 / 20000000.0
+[INFO 13:48:35] my_main Estimated time left: 1 days, 3 hours, 41 minutes, 51 seconds. Time passed: 21 hours, 40 minutes, 30 seconds
+[INFO 13:48:40] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/8871000
+[INFO 13:56:03] my_main t_env: 8921400 / 20000000.0
+[INFO 13:56:03] my_main Estimated time left: 1 days, 3 hours, 23 minutes, 4 seconds. Time passed: 21 hours, 47 minutes, 58 seconds
+[INFO 13:56:08] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/8921400
+[INFO 14:03:31] my_main t_env: 8971800 / 20000000.0
+[INFO 14:03:31] my_main Estimated time left: 1 days, 3 hours, 14 minutes, 2 seconds. Time passed: 21 hours, 55 minutes, 26 seconds
+[INFO 14:03:36] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/8971800
+[INFO 14:10:58] my_main t_env: 9022200 / 20000000.0
+[INFO 14:10:58] my_main Estimated time left: 1 days, 3 hours, 59 seconds. Time passed: 22 hours, 2 minutes, 53 seconds
+[INFO 14:11:03] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/9022200
+[INFO 14:18:28] my_main t_env: 9072600 / 20000000.0
+[INFO 14:18:28] my_main Estimated time left: 1 days, 3 hours, 5 minutes, 17 seconds. Time passed: 22 hours, 10 minutes, 22 seconds
+[INFO 14:18:33] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/9072600
+[INFO 14:25:54] my_main t_env: 9123000 / 20000000.0
+[INFO 14:25:54] my_main Estimated time left: 1 days, 2 hours, 46 minutes, 29 seconds. Time passed: 22 hours, 17 minutes, 49 seconds
+[INFO 14:25:59] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/9123000
+[INFO 14:33:26] my_main t_env: 9173400 / 20000000.0
+[INFO 14:33:26] my_main Estimated time left: 1 days, 2 hours, 58 minutes, 23 seconds. Time passed: 22 hours, 25 minutes, 21 seconds
+[INFO 14:33:31] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/9173400
+[INFO 14:40:55] my_main t_env: 9223800 / 20000000.0
+[INFO 14:40:55] my_main Estimated time left: 1 days, 2 hours, 37 minutes, 14 seconds. Time passed: 22 hours, 32 minutes, 49 seconds
+[INFO 14:41:00] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/9223800
+[INFO 14:48:24] my_main t_env: 9274200 / 20000000.0
+[INFO 14:48:24] my_main Estimated time left: 1 days, 2 hours, 34 minutes, 39 seconds. Time passed: 22 hours, 40 minutes, 19 seconds
+[INFO 14:48:29] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/9274200
+[INFO 14:55:53] my_main t_env: 9324600 / 20000000.0
+[INFO 14:55:53] my_main Estimated time left: 1 days, 2 hours, 23 minutes, 32 seconds. Time passed: 22 hours, 47 minutes, 47 seconds
+[INFO 14:55:57] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/9324600
+[INFO 15:03:22] my_main t_env: 9375000 / 20000000.0
+[INFO 15:03:22] my_main Estimated time left: 1 days, 2 hours, 16 minutes, 34 seconds. Time passed: 22 hours, 55 minutes, 16 seconds
+[INFO 15:03:26] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/9375000
+[INFO 15:10:50] my_main t_env: 9425400 / 20000000.0
+[INFO 15:10:50] my_main Estimated time left: 1 days, 2 hours, 8 minutes, 34 seconds. Time passed: 23 hours, 2 minutes, 45 seconds
+[INFO 15:10:55] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/9425400
+[INFO 15:18:22] my_main t_env: 9475800 / 20000000.0
+[INFO 15:18:22] my_main Estimated time left: 1 days, 2 hours, 11 minutes, 47 seconds. Time passed: 23 hours, 10 minutes, 16 seconds
+[INFO 15:18:26] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/9475800
+[INFO 15:25:52] my_main t_env: 9526200 / 20000000.0
+[INFO 15:25:52] my_main Estimated time left: 1 days, 1 hours, 58 minutes, 6 seconds. Time passed: 23 hours, 17 minutes, 46 seconds
+[INFO 15:25:56] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/9526200
+[INFO 15:33:20] my_main t_env: 9576600 / 20000000.0
+[INFO 15:33:20] my_main Estimated time left: 1 days, 1 hours, 47 minutes, 1 seconds. Time passed: 23 hours, 25 minutes, 15 seconds
+[INFO 15:33:25] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/9576600
+[INFO 15:40:49] my_main t_env: 9627000 / 20000000.0
+[INFO 15:40:49] my_main Estimated time left: 1 days, 1 hours, 37 minutes, 6 seconds. Time passed: 23 hours, 32 minutes, 43 seconds
+[INFO 15:40:53] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/9627000
+[INFO 15:48:18] my_main t_env: 9677400 / 20000000.0
+[INFO 15:48:18] my_main Estimated time left: 1 days, 1 hours, 35 minutes, 39 seconds. Time passed: 23 hours, 40 minutes, 13 seconds
+[INFO 15:48:23] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/9677400
+[INFO 15:55:48] my_main t_env: 9727800 / 20000000.0
+[INFO 15:55:48] my_main Estimated time left: 1 days, 1 hours, 27 minutes, 26 seconds. Time passed: 23 hours, 47 minutes, 43 seconds
+[INFO 15:55:52] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/9727800
+[INFO 16:03:16] my_main t_env: 9778200 / 20000000.0
+[INFO 16:03:16] my_main Estimated time left: 1 days, 1 hours, 14 minutes, 7 seconds. Time passed: 23 hours, 55 minutes, 11 seconds
+[INFO 16:03:20] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/9778200
+[INFO 16:10:47] my_main t_env: 9828600 / 20000000.0
+[INFO 16:10:47] my_main Estimated time left: 1 days, 1 hours, 17 minutes, 12 seconds. Time passed: 1 days, 2 minutes, 42 seconds
+[INFO 16:10:51] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/9828600
+[INFO 16:18:15] my_main t_env: 9879000 / 20000000.0
+[INFO 16:18:15] my_main Estimated time left: 1 days, 1 hours, 4 seconds. Time passed: 1 days, 10 minutes, 10 seconds
+[INFO 16:18:20] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/9879000
+[INFO 16:25:43] my_main t_env: 9929400 / 20000000.0
+[INFO 16:25:43] my_main Estimated time left: 1 days, 51 minutes, 10 seconds. Time passed: 1 days, 17 minutes, 38 seconds
+[INFO 16:25:48] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/9929400
+[INFO 16:33:11] my_main t_env: 9979800 / 20000000.0
+[INFO 16:33:11] my_main Estimated time left: 1 days, 45 minutes, 47 seconds. Time passed: 1 days, 25 minutes, 6 seconds
+[INFO 16:33:16] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/9979800
+[INFO 16:40:41] my_main t_env: 10030200 / 20000000.0
+[INFO 16:40:41] my_main Estimated time left: 1 days, 43 minutes, 29 seconds. Time passed: 1 days, 32 minutes, 36 seconds
+[INFO 16:40:46] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/10030200
+[INFO 16:48:10] my_main t_env: 10080600 / 20000000.0
+[INFO 16:48:10] my_main Estimated time left: 1 days, 32 minutes, 18 seconds. Time passed: 1 days, 40 minutes, 5 seconds
+[INFO 16:48:15] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/10080600
+[INFO 16:55:40] my_main t_env: 10131000 / 20000000.0
+[INFO 16:55:40] my_main Estimated time left: 1 days, 27 minutes, 19 seconds. Time passed: 1 days, 47 minutes, 34 seconds
+[INFO 16:55:45] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/10131000
+[INFO 17:03:10] my_main t_env: 10181400 / 20000000.0
+[INFO 17:03:10] my_main Estimated time left: 1 days, 22 minutes, 13 seconds. Time passed: 1 days, 55 minutes, 5 seconds
+[INFO 17:03:15] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/10181400
+[INFO 17:10:38] my_main t_env: 10231800 / 20000000.0
+[INFO 17:10:38] my_main Estimated time left: 1 days, 5 minutes, 48 seconds. Time passed: 1 days, 1 hours, 2 minutes, 32 seconds
+[INFO 17:10:43] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/10231800
+[INFO 17:18:07] my_main t_env: 10282200 / 20000000.0
+[INFO 17:18:07] my_main Estimated time left: 1 days, 2 minutes, 39 seconds. Time passed: 1 days, 1 hours, 10 minutes, 1 seconds
+[INFO 17:18:11] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/10282200
+[INFO 17:25:38] my_main t_env: 10332600 / 20000000.0
+[INFO 17:25:38] my_main Estimated time left: 1 days, 2 minutes, 5 seconds. Time passed: 1 days, 1 hours, 17 minutes, 32 seconds
+[INFO 17:25:42] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/10332600
+[INFO 17:33:07] my_main t_env: 10383000 / 20000000.0
+[INFO 17:33:07] my_main Estimated time left: 23 hours, 49 minutes, 33 seconds. Time passed: 1 days, 1 hours, 25 minutes, 2 seconds
+[INFO 17:33:12] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/10383000
+[INFO 17:40:35] my_main t_env: 10433400 / 20000000.0
+[INFO 17:40:35] my_main Estimated time left: 23 hours, 36 minutes, 27 seconds. Time passed: 1 days, 1 hours, 32 minutes, 30 seconds
+[INFO 17:40:39] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/10433400
+[INFO 17:48:05] my_main t_env: 10483800 / 20000000.0
+[INFO 17:48:05] my_main Estimated time left: 23 hours, 34 minutes, 46 seconds. Time passed: 1 days, 1 hours, 39 minutes, 59 seconds
+[INFO 17:48:09] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/10483800
+[INFO 17:55:35] my_main t_env: 10534200 / 20000000.0
+[INFO 17:55:35] my_main Estimated time left: 23 hours, 31 minutes, 15 seconds. Time passed: 1 days, 1 hours, 47 minutes, 30 seconds
+[INFO 17:55:40] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/10534200
+[INFO 18:03:06] my_main t_env: 10584600 / 20000000.0
+[INFO 18:03:06] my_main Estimated time left: 23 hours, 24 minutes, 11 seconds. Time passed: 1 days, 1 hours, 55 minutes, 1 seconds
+[INFO 18:03:11] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/10584600
+[INFO 18:10:36] my_main t_env: 10635000 / 20000000.0
+[INFO 18:10:36] my_main Estimated time left: 23 hours, 11 minutes, 45 seconds. Time passed: 1 days, 2 hours, 2 minutes, 30 seconds
+[INFO 18:10:40] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/10635000
+[INFO 18:18:01] my_main t_env: 10685400 / 20000000.0
+[INFO 18:18:01] my_main Estimated time left: 22 hours, 49 minutes, 34 seconds. Time passed: 1 days, 2 hours, 9 minutes, 55 seconds
+[INFO 18:18:05] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/10685400
+[INFO 18:25:26] my_main t_env: 10735800 / 20000000.0
+[INFO 18:25:26] my_main Estimated time left: 22 hours, 46 minutes, 11 seconds. Time passed: 1 days, 2 hours, 17 minutes, 21 seconds
+[INFO 18:25:31] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/10735800
+[INFO 18:32:51] my_main t_env: 10786200 / 20000000.0
+[INFO 18:32:51] my_main Estimated time left: 22 hours, 34 minutes, 37 seconds. Time passed: 1 days, 2 hours, 24 minutes, 46 seconds
+[INFO 18:32:55] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/10786200
+[INFO 18:40:17] my_main t_env: 10836600 / 20000000.0
+[INFO 18:40:17] my_main Estimated time left: 22 hours, 32 minutes, 21 seconds. Time passed: 1 days, 2 hours, 32 minutes, 12 seconds
+[INFO 18:40:22] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/10836600
+[INFO 18:47:44] my_main t_env: 10887000 / 20000000.0
+[INFO 18:47:44] my_main Estimated time left: 22 hours, 26 minutes, 52 seconds. Time passed: 1 days, 2 hours, 39 minutes, 39 seconds
+[INFO 18:47:49] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/10887000
+[INFO 18:55:09] my_main t_env: 10937400 / 20000000.0
+[INFO 18:55:09] my_main Estimated time left: 22 hours, 12 minutes, 49 seconds. Time passed: 1 days, 2 hours, 47 minutes, 4 seconds
+[INFO 18:55:13] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/10937400
+[INFO 19:02:34] my_main t_env: 10987800 / 20000000.0
+[INFO 19:02:34] my_main Estimated time left: 22 hours, 5 minutes, 6 seconds. Time passed: 1 days, 2 hours, 54 minutes, 28 seconds
+[INFO 19:02:38] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/10987800
+[INFO 19:10:01] my_main t_env: 11038200 / 20000000.0
+[INFO 19:10:01] my_main Estimated time left: 22 hours, 6 minutes, 15 seconds. Time passed: 1 days, 3 hours, 1 minutes, 56 seconds
+[INFO 19:10:05] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/11038200
+[INFO 19:17:26] my_main t_env: 11088600 / 20000000.0
+[INFO 19:17:26] my_main Estimated time left: 21 hours, 51 minutes, 37 seconds. Time passed: 1 days, 3 hours, 9 minutes, 21 seconds
+[INFO 19:17:31] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/11088600
+[INFO 19:24:53] my_main t_env: 11139000 / 20000000.0
+[INFO 19:24:53] my_main Estimated time left: 21 hours, 47 minutes, 46 seconds. Time passed: 1 days, 3 hours, 16 minutes, 47 seconds
+[INFO 19:24:58] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/11139000
+[INFO 19:32:20] my_main t_env: 11189400 / 20000000.0
+[INFO 19:32:20] my_main Estimated time left: 21 hours, 42 minutes, 12 seconds. Time passed: 1 days, 3 hours, 24 minutes, 14 seconds
+[INFO 19:32:24] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/11189400
+[INFO 19:39:45] my_main t_env: 11239800 / 20000000.0
+[INFO 19:39:45] my_main Estimated time left: 21 hours, 30 minutes, 11 seconds. Time passed: 1 days, 3 hours, 31 minutes, 40 seconds
+[INFO 19:39:50] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/11239800
+[INFO 19:47:10] my_main t_env: 11290200 / 20000000.0
+[INFO 19:47:10] my_main Estimated time left: 21 hours, 20 minutes, 41 seconds. Time passed: 1 days, 3 hours, 39 minutes, 4 seconds
+[INFO 19:47:14] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/11290200
+[INFO 19:54:35] my_main t_env: 11340600 / 20000000.0
+[INFO 19:54:35] my_main Estimated time left: 21 hours, 15 minutes, 40 seconds. Time passed: 1 days, 3 hours, 46 minutes, 30 seconds
+[INFO 19:54:40] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/11340600
+[INFO 20:02:02] my_main t_env: 11391000 / 20000000.0
+[INFO 20:02:02] my_main Estimated time left: 21 hours, 11 minutes, 31 seconds. Time passed: 1 days, 3 hours, 53 minutes, 56 seconds
+[INFO 20:02:06] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/11391000
+[INFO 20:09:28] my_main t_env: 11441400 / 20000000.0
+[INFO 20:09:28] my_main Estimated time left: 21 hours, 3 minutes, 48 seconds. Time passed: 1 days, 4 hours, 1 minutes, 23 seconds
+[INFO 20:09:33] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/11441400
+[INFO 20:16:55] my_main t_env: 11491800 / 20000000.0
+[INFO 20:16:55] my_main Estimated time left: 20 hours, 56 minutes, 26 seconds. Time passed: 1 days, 4 hours, 8 minutes, 49 seconds
+[INFO 20:16:59] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/11491800
+[INFO 20:24:22] my_main t_env: 11542200 / 20000000.0
+[INFO 20:24:22] my_main Estimated time left: 20 hours, 52 minutes, 7 seconds. Time passed: 1 days, 4 hours, 16 minutes, 17 seconds
+[INFO 20:24:27] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/11542200
+[INFO 20:31:49] my_main t_env: 11592600 / 20000000.0
+[INFO 20:31:49] my_main Estimated time left: 20 hours, 40 minutes, 47 seconds. Time passed: 1 days, 4 hours, 23 minutes, 43 seconds
+[INFO 20:31:53] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/11592600
+[INFO 20:39:16] my_main t_env: 11643000 / 20000000.0
+[INFO 20:39:16] my_main Estimated time left: 20 hours, 35 minutes, 38 seconds. Time passed: 1 days, 4 hours, 31 minutes, 10 seconds
+[INFO 20:39:21] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/11643000
+[INFO 20:46:44] my_main t_env: 11693400 / 20000000.0
+[INFO 20:46:44] my_main Estimated time left: 20 hours, 29 minutes, 59 seconds. Time passed: 1 days, 4 hours, 38 minutes, 38 seconds
+[INFO 20:46:48] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/11693400
+[INFO 20:54:05] my_main t_env: 11743800 / 20000000.0
+[INFO 20:54:05] my_main Estimated time left: 20 hours, 5 minutes, 58 seconds. Time passed: 1 days, 4 hours, 46 minutes, 0 seconds
+[INFO 20:54:10] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/11743800
+[INFO 21:01:27] my_main t_env: 11794200 / 20000000.0
+[INFO 21:01:27] my_main Estimated time left: 19 hours, 58 minutes, 53 seconds. Time passed: 1 days, 4 hours, 53 minutes, 22 seconds
+[INFO 21:01:32] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/11794200
+[INFO 21:08:56] my_main t_env: 11844600 / 20000000.0
+[INFO 21:08:56] my_main Estimated time left: 20 hours, 9 minutes, 39 seconds. Time passed: 1 days, 5 hours, 50 seconds
+[INFO 21:09:01] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/11844600
+[INFO 21:16:19] my_main t_env: 11895000 / 20000000.0
+[INFO 21:16:19] my_main Estimated time left: 19 hours, 49 minutes, 7 seconds. Time passed: 1 days, 5 hours, 8 minutes, 14 seconds
+[INFO 21:16:25] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/11895000
+[INFO 21:23:44] my_main t_env: 11945400 / 20000000.0
+[INFO 21:23:44] my_main Estimated time left: 19 hours, 44 minutes, 6 seconds. Time passed: 1 days, 5 hours, 15 minutes, 39 seconds
+[INFO 21:23:48] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/11945400
+[INFO 21:31:09] my_main t_env: 11995800 / 20000000.0
+[INFO 21:31:09] my_main Estimated time left: 19 hours, 38 minutes, 19 seconds. Time passed: 1 days, 5 hours, 23 minutes, 4 seconds
+[INFO 21:31:14] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/11995800
+[INFO 21:38:34] my_main t_env: 12046200 / 20000000.0
+[INFO 21:38:34] my_main Estimated time left: 19 hours, 30 minutes, 20 seconds. Time passed: 1 days, 5 hours, 30 minutes, 29 seconds
+[INFO 21:38:39] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/12046200
+[INFO 21:46:01] my_main t_env: 12096600 / 20000000.0
+[INFO 21:46:01] my_main Estimated time left: 19 hours, 28 minutes, 52 seconds. Time passed: 1 days, 5 hours, 37 minutes, 56 seconds
+[INFO 21:46:06] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/12096600
+[INFO 21:53:25] my_main t_env: 12147000 / 20000000.0
+[INFO 21:53:25] my_main Estimated time left: 19 hours, 12 minutes, 7 seconds. Time passed: 1 days, 5 hours, 45 minutes, 20 seconds
+[INFO 21:53:29] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/12147000
+[INFO 22:00:48] my_main t_env: 12197400 / 20000000.0
+[INFO 22:00:48] my_main Estimated time left: 19 hours, 3 minutes, 58 seconds. Time passed: 1 days, 5 hours, 52 minutes, 43 seconds
+[INFO 22:00:53] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/12197400
+[INFO 22:08:15] my_main t_env: 12247800 / 20000000.0
+[INFO 22:08:15] my_main Estimated time left: 19 hours, 5 minutes, 38 seconds. Time passed: 1 days, 6 hours, 10 seconds
+[INFO 22:08:20] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/12247800
+[INFO 22:15:41] my_main t_env: 12298200 / 20000000.0
+[INFO 22:15:41] my_main Estimated time left: 18 hours, 55 minutes, 58 seconds. Time passed: 1 days, 6 hours, 7 minutes, 36 seconds
+[INFO 22:15:46] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/12298200
+[INFO 22:23:04] my_main t_env: 12348600 / 20000000.0
+[INFO 22:23:04] my_main Estimated time left: 18 hours, 40 minutes, 23 seconds. Time passed: 1 days, 6 hours, 14 minutes, 59 seconds
+[INFO 22:23:08] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/12348600
+[INFO 22:30:27] my_main t_env: 12399000 / 20000000.0
+[INFO 22:30:27] my_main Estimated time left: 18 hours, 33 minutes, 54 seconds. Time passed: 1 days, 6 hours, 22 minutes, 22 seconds
+[INFO 22:30:31] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/12399000
+[INFO 22:37:52] my_main t_env: 12449400 / 20000000.0
+[INFO 22:37:52] my_main Estimated time left: 18 hours, 30 minutes, 21 seconds. Time passed: 1 days, 6 hours, 29 minutes, 47 seconds
+[INFO 22:37:56] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/12449400
+[INFO 22:45:18] my_main t_env: 12499800 / 20000000.0
+[INFO 22:45:18] my_main Estimated time left: 18 hours, 26 minutes, 53 seconds. Time passed: 1 days, 6 hours, 37 minutes, 13 seconds
+[INFO 22:45:23] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/12499800
+[INFO 22:52:42] my_main t_env: 12550200 / 20000000.0
+[INFO 22:52:42] my_main Estimated time left: 18 hours, 13 minutes, 8 seconds. Time passed: 1 days, 6 hours, 44 minutes, 37 seconds
+[INFO 22:52:47] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/12550200
+[INFO 23:00:06] my_main t_env: 12600600 / 20000000.0
+[INFO 23:00:06] my_main Estimated time left: 18 hours, 7 minutes, 17 seconds. Time passed: 1 days, 6 hours, 52 minutes, 1 seconds
+[INFO 23:00:11] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/12600600
+[INFO 23:07:33] my_main t_env: 12651000 / 20000000.0
+[INFO 23:07:33] my_main Estimated time left: 18 hours, 6 minutes, 10 seconds. Time passed: 1 days, 6 hours, 59 minutes, 28 seconds
+[INFO 23:07:38] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/12651000
+[INFO 23:15:02] my_main t_env: 12701400 / 20000000.0
+[INFO 23:15:02] my_main Estimated time left: 18 hours, 2 minutes, 11 seconds. Time passed: 1 days, 7 hours, 6 minutes, 56 seconds
+[INFO 23:15:06] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/12701400
+[INFO 23:22:31] my_main t_env: 12751800 / 20000000.0
+[INFO 23:22:31] my_main Estimated time left: 17 hours, 57 minutes, 1 seconds. Time passed: 1 days, 7 hours, 14 minutes, 26 seconds
+[INFO 23:22:36] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/12751800
+[INFO 23:29:58] my_main t_env: 12802200 / 20000000.0
+[INFO 23:29:58] my_main Estimated time left: 17 hours, 43 minutes, 1 seconds. Time passed: 1 days, 7 hours, 21 minutes, 52 seconds
+[INFO 23:30:03] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/12802200
+[INFO 23:37:24] my_main t_env: 12852600 / 20000000.0
+[INFO 23:37:24] my_main Estimated time left: 17 hours, 34 minutes, 52 seconds. Time passed: 1 days, 7 hours, 29 minutes, 18 seconds
+[INFO 23:37:29] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/12852600
+[INFO 23:44:51] my_main t_env: 12903000 / 20000000.0
+[INFO 23:44:51] my_main Estimated time left: 17 hours, 28 minutes, 15 seconds. Time passed: 1 days, 7 hours, 36 minutes, 45 seconds
+[INFO 23:44:55] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/12903000
+[INFO 23:52:10] my_main t_env: 12953400 / 20000000.0
+[INFO 23:52:10] my_main Estimated time left: 17 hours, 5 minutes, 11 seconds. Time passed: 1 days, 7 hours, 44 minutes, 5 seconds
+[INFO 23:52:15] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/12953400
+[INFO 23:59:33] my_main t_env: 13003800 / 20000000.0
+[INFO 23:59:33] my_main Estimated time left: 17 hours, 4 minutes, 53 seconds. Time passed: 1 days, 7 hours, 51 minutes, 28 seconds
+[INFO 23:59:38] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/13003800
+[INFO 00:07:01] my_main t_env: 13054200 / 20000000.0
+[INFO 00:07:01] my_main Estimated time left: 17 hours, 7 minutes, 25 seconds. Time passed: 1 days, 7 hours, 58 minutes, 55 seconds
+[INFO 00:07:05] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/13054200
+[INFO 00:14:25] my_main t_env: 13104600 / 20000000.0
+[INFO 00:14:25] my_main Estimated time left: 16 hours, 51 minutes, 45 seconds. Time passed: 1 days, 8 hours, 6 minutes, 19 seconds
+[INFO 00:14:29] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/13104600
+[INFO 00:21:46] my_main t_env: 13155000 / 20000000.0
+[INFO 00:21:46] my_main Estimated time left: 16 hours, 39 minutes, 26 seconds. Time passed: 1 days, 8 hours, 13 minutes, 41 seconds
+[INFO 00:21:51] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/13155000
+[INFO 00:29:15] my_main t_env: 13205400 / 20000000.0
+[INFO 00:29:15] my_main Estimated time left: 16 hours, 47 minutes, 57 seconds. Time passed: 1 days, 8 hours, 21 minutes, 9 seconds
+[INFO 00:29:19] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/13205400
+[INFO 00:36:37] my_main t_env: 13255800 / 20000000.0
+[INFO 00:36:37] my_main Estimated time left: 16 hours, 27 minutes, 25 seconds. Time passed: 1 days, 8 hours, 28 minutes, 32 seconds
+[INFO 00:36:42] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/13255800
+[INFO 00:44:02] my_main t_env: 13306200 / 20000000.0
+[INFO 00:44:02] my_main Estimated time left: 16 hours, 23 minutes, 28 seconds. Time passed: 1 days, 8 hours, 35 minutes, 56 seconds
+[INFO 00:44:06] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/13306200
+[INFO 00:51:27] my_main t_env: 13356600 / 20000000.0
+[INFO 00:51:27] my_main Estimated time left: 16 hours, 18 minutes, 55 seconds. Time passed: 1 days, 8 hours, 43 minutes, 22 seconds
+[INFO 00:51:32] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/13356600
+[INFO 00:58:53] my_main t_env: 13407000 / 20000000.0
+[INFO 00:58:53] my_main Estimated time left: 16 hours, 12 minutes, 35 seconds. Time passed: 1 days, 8 hours, 50 minutes, 48 seconds
+[INFO 00:58:58] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/13407000
+[INFO 01:06:16] my_main t_env: 13457400 / 20000000.0
+[INFO 01:06:16] my_main Estimated time left: 15 hours, 58 minutes, 2 seconds. Time passed: 1 days, 8 hours, 58 minutes, 11 seconds
+[INFO 01:06:20] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/13457400
+[INFO 01:13:44] my_main t_env: 13507800 / 20000000.0
+[INFO 01:13:44] my_main Estimated time left: 16 hours, 1 minutes, 40 seconds. Time passed: 1 days, 9 hours, 5 minutes, 39 seconds
+[INFO 01:13:49] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/13507800
+[INFO 01:21:08] my_main t_env: 13558200 / 20000000.0
+[INFO 01:21:08] my_main Estimated time left: 15 hours, 46 minutes, 23 seconds. Time passed: 1 days, 9 hours, 13 minutes, 3 seconds
+[INFO 01:21:13] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/13558200
+[INFO 01:28:34] my_main t_env: 13608600 / 20000000.0
+[INFO 01:28:34] my_main Estimated time left: 15 hours, 41 minutes, 12 seconds. Time passed: 1 days, 9 hours, 20 minutes, 28 seconds
+[INFO 01:28:39] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/13608600
+[INFO 01:35:56] my_main t_env: 13659000 / 20000000.0
+[INFO 01:35:56] my_main Estimated time left: 15 hours, 27 minutes, 30 seconds. Time passed: 1 days, 9 hours, 27 minutes, 51 seconds
+[INFO 01:36:00] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/13659000
+[INFO 01:43:24] my_main t_env: 13709400 / 20000000.0
+[INFO 01:43:24] my_main Estimated time left: 15 hours, 31 minutes, 2 seconds. Time passed: 1 days, 9 hours, 35 minutes, 18 seconds
+[INFO 01:43:29] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/13709400
+[INFO 01:50:46] my_main t_env: 13759800 / 20000000.0
+[INFO 01:50:46] my_main Estimated time left: 15 hours, 12 minutes, 9 seconds. Time passed: 1 days, 9 hours, 42 minutes, 40 seconds
+[INFO 01:50:50] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/13759800
+[INFO 01:58:13] my_main t_env: 13810200 / 20000000.0
+[INFO 01:58:13] my_main Estimated time left: 15 hours, 15 minutes, 36 seconds. Time passed: 1 days, 9 hours, 50 minutes, 8 seconds
+[INFO 01:58:18] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/13810200
+[INFO 02:05:40] my_main t_env: 13860600 / 20000000.0
+[INFO 02:05:40] my_main Estimated time left: 15 hours, 6 minutes, 49 seconds. Time passed: 1 days, 9 hours, 57 minutes, 34 seconds
+[INFO 02:05:45] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/13860600
+[INFO 02:13:06] my_main t_env: 13911000 / 20000000.0
+[INFO 02:13:06] my_main Estimated time left: 14 hours, 58 minutes, 43 seconds. Time passed: 1 days, 10 hours, 5 minutes, 1 seconds
+[INFO 02:13:11] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/13911000
+[INFO 02:20:34] my_main t_env: 13961400 / 20000000.0
+[INFO 02:20:34] my_main Estimated time left: 14 hours, 55 minutes, 17 seconds. Time passed: 1 days, 10 hours, 12 minutes, 29 seconds
+[INFO 02:20:39] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/13961400
+[INFO 02:27:59] my_main t_env: 14011800 / 20000000.0
+[INFO 02:27:59] my_main Estimated time left: 14 hours, 40 minutes, 12 seconds. Time passed: 1 days, 10 hours, 19 minutes, 53 seconds
+[INFO 02:28:03] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/14011800
+[INFO 02:35:21] my_main t_env: 14062200 / 20000000.0
+[INFO 02:35:21] my_main Estimated time left: 14 hours, 28 minutes, 52 seconds. Time passed: 1 days, 10 hours, 27 minutes, 16 seconds
+[INFO 02:35:26] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/14062200
+[INFO 02:42:43] my_main t_env: 14112600 / 20000000.0
+[INFO 02:42:43] my_main Estimated time left: 14 hours, 20 minutes, 0 seconds. Time passed: 1 days, 10 hours, 34 minutes, 38 seconds
+[INFO 02:42:47] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/14112600
+[INFO 02:50:04] my_main t_env: 14163000 / 20000000.0
+[INFO 02:50:04] my_main Estimated time left: 14 hours, 11 minutes, 33 seconds. Time passed: 1 days, 10 hours, 41 minutes, 59 seconds
+[INFO 02:50:09] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/14163000
+[INFO 02:57:29] my_main t_env: 14213400 / 20000000.0
+[INFO 02:57:29] my_main Estimated time left: 14 hours, 11 minutes, 54 seconds. Time passed: 1 days, 10 hours, 49 minutes, 24 seconds
+[INFO 02:57:34] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/14213400
+[INFO 03:04:57] my_main t_env: 14263800 / 20000000.0
+[INFO 03:04:57] my_main Estimated time left: 14 hours, 8 minutes, 32 seconds. Time passed: 1 days, 10 hours, 56 minutes, 51 seconds
+[INFO 03:05:01] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/14263800
+[INFO 03:12:22] my_main t_env: 14314200 / 20000000.0
+[INFO 03:12:22] my_main Estimated time left: 13 hours, 56 minutes, 39 seconds. Time passed: 1 days, 11 hours, 4 minutes, 16 seconds
+[INFO 03:12:26] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/14314200
+[INFO 03:19:49] my_main t_env: 14364600 / 20000000.0
+[INFO 03:19:49] my_main Estimated time left: 13 hours, 52 minutes, 54 seconds. Time passed: 1 days, 11 hours, 11 minutes, 43 seconds
+[INFO 03:19:53] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/14364600
+[INFO 03:27:15] my_main t_env: 14415000 / 20000000.0
+[INFO 03:27:15] my_main Estimated time left: 13 hours, 44 minutes, 3 seconds. Time passed: 1 days, 11 hours, 19 minutes, 9 seconds
+[INFO 03:27:19] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/14415000
+[INFO 03:34:41] my_main t_env: 14465400 / 20000000.0
+[INFO 03:34:41] my_main Estimated time left: 13 hours, 36 minutes, 41 seconds. Time passed: 1 days, 11 hours, 26 minutes, 36 seconds
+[INFO 03:34:45] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/14465400
+[INFO 03:42:05] my_main t_env: 14515800 / 20000000.0
+[INFO 03:42:05] my_main Estimated time left: 13 hours, 25 minutes, 58 seconds. Time passed: 1 days, 11 hours, 34 minutes, 0 seconds
+[INFO 03:42:09] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/14515800
+[INFO 03:49:31] my_main t_env: 14566200 / 20000000.0
+[INFO 03:49:31] my_main Estimated time left: 13 hours, 21 minutes, 19 seconds. Time passed: 1 days, 11 hours, 41 minutes, 26 seconds
+[INFO 03:49:36] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/14566200
+[INFO 03:56:57] my_main t_env: 14616600 / 20000000.0
+[INFO 03:56:57] my_main Estimated time left: 13 hours, 13 minutes, 52 seconds. Time passed: 1 days, 11 hours, 48 minutes, 52 seconds
+[INFO 03:57:02] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/14616600
+[INFO 04:04:25] my_main t_env: 14667000 / 20000000.0
+[INFO 04:04:25] my_main Estimated time left: 13 hours, 8 minutes, 48 seconds. Time passed: 1 days, 11 hours, 56 minutes, 19 seconds
+[INFO 04:04:29] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/14667000
+[INFO 04:11:50] my_main t_env: 14717400 / 20000000.0
+[INFO 04:11:50] my_main Estimated time left: 12 hours, 58 minutes, 21 seconds. Time passed: 1 days, 12 hours, 3 minutes, 45 seconds
+[INFO 04:11:54] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/14717400
+[INFO 04:19:17] my_main t_env: 14767800 / 20000000.0
+[INFO 04:19:17] my_main Estimated time left: 12 hours, 52 minutes, 49 seconds. Time passed: 1 days, 12 hours, 11 minutes, 12 seconds
+[INFO 04:19:21] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/14767800
+[INFO 04:26:40] my_main t_env: 14818200 / 20000000.0
+[INFO 04:26:40] my_main Estimated time left: 12 hours, 39 minutes, 3 seconds. Time passed: 1 days, 12 hours, 18 minutes, 34 seconds
+[INFO 04:26:45] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/14818200
+[INFO 04:34:05] my_main t_env: 14868600 / 20000000.0
+[INFO 04:34:05] my_main Estimated time left: 12 hours, 35 minutes, 49 seconds. Time passed: 1 days, 12 hours, 26 minutes, 0 seconds
+[INFO 04:34:10] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/14868600
+[INFO 04:41:29] my_main t_env: 14919000 / 20000000.0
+[INFO 04:41:29] my_main Estimated time left: 12 hours, 25 minutes, 24 seconds. Time passed: 1 days, 12 hours, 33 minutes, 24 seconds
+[INFO 04:41:33] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/14919000
+[INFO 04:48:55] my_main t_env: 14969400 / 20000000.0
+[INFO 04:48:55] my_main Estimated time left: 12 hours, 22 minutes, 53 seconds. Time passed: 1 days, 12 hours, 40 minutes, 50 seconds
+[INFO 04:49:00] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/14969400
+[INFO 04:56:22] my_main t_env: 15019800 / 20000000.0
+[INFO 04:56:22] my_main Estimated time left: 12 hours, 14 minutes, 44 seconds. Time passed: 1 days, 12 hours, 48 minutes, 16 seconds
+[INFO 04:56:26] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/15019800
+[INFO 05:03:48] my_main t_env: 15070200 / 20000000.0
+[INFO 05:03:48] my_main Estimated time left: 12 hours, 7 minutes, 43 seconds. Time passed: 1 days, 12 hours, 55 minutes, 43 seconds
+[INFO 05:03:52] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/15070200
+[INFO 05:11:13] my_main t_env: 15120600 / 20000000.0
+[INFO 05:11:13] my_main Estimated time left: 11 hours, 58 minutes, 44 seconds. Time passed: 1 days, 13 hours, 3 minutes, 8 seconds
+[INFO 05:11:18] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/15120600
+[INFO 05:18:41] my_main t_env: 15171000 / 20000000.0
+[INFO 05:18:41] my_main Estimated time left: 11 hours, 54 minutes, 18 seconds. Time passed: 1 days, 13 hours, 10 minutes, 35 seconds
+[INFO 05:18:45] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/15171000
+[INFO 05:26:07] my_main t_env: 15221400 / 20000000.0
+[INFO 05:26:07] my_main Estimated time left: 11 hours, 44 minutes, 51 seconds. Time passed: 1 days, 13 hours, 18 minutes, 1 seconds
+[INFO 05:26:11] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/15221400
+[INFO 05:33:31] my_main t_env: 15271800 / 20000000.0
+[INFO 05:33:31] my_main Estimated time left: 11 hours, 35 minutes, 5 seconds. Time passed: 1 days, 13 hours, 25 minutes, 26 seconds
+[INFO 05:33:36] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/15271800
+[INFO 05:40:59] my_main t_env: 15322200 / 20000000.0
+[INFO 05:40:59] my_main Estimated time left: 11 hours, 32 minutes, 56 seconds. Time passed: 1 days, 13 hours, 32 minutes, 54 seconds
+[INFO 05:41:04] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/15322200
+[INFO 05:48:32] my_main t_env: 15372600 / 20000000.0
+[INFO 05:48:32] my_main Estimated time left: 11 hours, 32 minutes, 30 seconds. Time passed: 1 days, 13 hours, 40 minutes, 26 seconds
+[INFO 05:48:36] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/15372600
+[INFO 05:56:01] my_main t_env: 15423000 / 20000000.0
+[INFO 05:56:01] my_main Estimated time left: 11 hours, 19 minutes, 57 seconds. Time passed: 1 days, 13 hours, 47 minutes, 56 seconds
+[INFO 05:56:06] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/15423000
+[INFO 06:03:29] my_main t_env: 15473400 / 20000000.0
+[INFO 06:03:29] my_main Estimated time left: 11 hours, 9 minutes, 55 seconds. Time passed: 1 days, 13 hours, 55 minutes, 23 seconds
+[INFO 06:03:33] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/15473400
+[INFO 06:10:54] my_main t_env: 15523800 / 20000000.0
+[INFO 06:10:54] my_main Estimated time left: 10 hours, 58 minutes, 35 seconds. Time passed: 1 days, 14 hours, 2 minutes, 48 seconds
+[INFO 06:10:58] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/15523800
+[INFO 06:18:22] my_main t_env: 15574200 / 20000000.0
+[INFO 06:18:22] my_main Estimated time left: 10 hours, 56 minutes, 19 seconds. Time passed: 1 days, 14 hours, 10 minutes, 17 seconds
+[INFO 06:18:26] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/15574200
+[INFO 06:25:50] my_main t_env: 15624600 / 20000000.0
+[INFO 06:25:50] my_main Estimated time left: 10 hours, 48 minutes, 5 seconds. Time passed: 1 days, 14 hours, 17 minutes, 45 seconds
+[INFO 06:25:54] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/15624600
+[INFO 06:33:19] my_main t_env: 15675000 / 20000000.0
+[INFO 06:33:19] my_main Estimated time left: 10 hours, 41 minutes, 53 seconds. Time passed: 1 days, 14 hours, 25 minutes, 13 seconds
+[INFO 06:33:23] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/15675000
+[INFO 06:40:47] my_main t_env: 15725400 / 20000000.0
+[INFO 06:40:47] my_main Estimated time left: 10 hours, 32 minutes, 58 seconds. Time passed: 1 days, 14 hours, 32 minutes, 41 seconds
+[INFO 06:40:51] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/15725400
+[INFO 06:48:13] my_main t_env: 15775800 / 20000000.0
+[INFO 06:48:13] my_main Estimated time left: 10 hours, 23 minutes, 54 seconds. Time passed: 1 days, 14 hours, 40 minutes, 8 seconds
+[INFO 06:48:17] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/15775800
+[INFO 06:55:42] my_main t_env: 15826200 / 20000000.0
+[INFO 06:55:42] my_main Estimated time left: 10 hours, 18 minutes, 58 seconds. Time passed: 1 days, 14 hours, 47 minutes, 36 seconds
+[INFO 06:55:46] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/15826200
+[INFO 07:03:06] my_main t_env: 15876600 / 20000000.0
+[INFO 07:03:06] my_main Estimated time left: 10 hours, 6 minutes, 6 seconds. Time passed: 1 days, 14 hours, 55 minutes, 1 seconds
+[INFO 07:03:11] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/15876600
+[INFO 07:10:33] my_main t_env: 15927000 / 20000000.0
+[INFO 07:10:33] my_main Estimated time left: 10 hours, 1 minutes, 44 seconds. Time passed: 1 days, 15 hours, 2 minutes, 28 seconds
+[INFO 07:10:38] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/15927000
+[INFO 07:18:01] my_main t_env: 15977400 / 20000000.0
+[INFO 07:18:01] my_main Estimated time left: 9 hours, 56 minutes, 24 seconds. Time passed: 1 days, 15 hours, 9 minutes, 56 seconds
+[INFO 07:18:06] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/15977400
+[INFO 07:25:26] my_main t_env: 16027800 / 20000000.0
+[INFO 07:25:26] my_main Estimated time left: 9 hours, 44 minutes, 34 seconds. Time passed: 1 days, 15 hours, 17 minutes, 21 seconds
+[INFO 07:25:30] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/16027800
+[INFO 07:32:48] my_main t_env: 16078200 / 20000000.0
+[INFO 07:32:48] my_main Estimated time left: 9 hours, 32 minutes, 43 seconds. Time passed: 1 days, 15 hours, 24 minutes, 43 seconds
+[INFO 07:32:53] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/16078200
+[INFO 07:40:15] my_main t_env: 16128600 / 20000000.0
+[INFO 07:40:15] my_main Estimated time left: 9 hours, 32 minutes, 46 seconds. Time passed: 1 days, 15 hours, 32 minutes, 10 seconds
+[INFO 07:40:20] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/16128600
+[INFO 07:47:43] my_main t_env: 16179000 / 20000000.0
+[INFO 07:47:43] my_main Estimated time left: 9 hours, 25 minutes, 53 seconds. Time passed: 1 days, 15 hours, 39 minutes, 38 seconds
+[INFO 07:47:48] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/16179000
+[INFO 07:55:09] my_main t_env: 16229400 / 20000000.0
+[INFO 07:55:09] my_main Estimated time left: 9 hours, 15 minutes, 30 seconds. Time passed: 1 days, 15 hours, 47 minutes, 3 seconds
+[INFO 07:55:13] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/16229400
+[INFO 08:02:36] my_main t_env: 16279800 / 20000000.0
+[INFO 08:02:36] my_main Estimated time left: 9 hours, 10 minutes, 35 seconds. Time passed: 1 days, 15 hours, 54 minutes, 31 seconds
+[INFO 08:02:40] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/16279800
+[INFO 08:10:01] my_main t_env: 16330200 / 20000000.0
+[INFO 08:10:01] my_main Estimated time left: 8 hours, 59 minutes, 41 seconds. Time passed: 1 days, 16 hours, 1 minutes, 56 seconds
+[INFO 08:10:06] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/16330200
+[INFO 08:17:27] my_main t_env: 16380600 / 20000000.0
+[INFO 08:17:27] my_main Estimated time left: 8 hours, 53 minutes, 29 seconds. Time passed: 1 days, 16 hours, 9 minutes, 21 seconds
+[INFO 08:17:31] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/16380600
+[INFO 08:24:51] my_main t_env: 16431000 / 20000000.0
+[INFO 08:24:51] my_main Estimated time left: 8 hours, 44 minutes, 27 seconds. Time passed: 1 days, 16 hours, 16 minutes, 46 seconds
+[INFO 08:24:55] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/16431000
+[INFO 08:32:20] my_main t_env: 16481400 / 20000000.0
+[INFO 08:32:20] my_main Estimated time left: 8 hours, 42 minutes, 13 seconds. Time passed: 1 days, 16 hours, 24 minutes, 14 seconds
+[INFO 08:32:24] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/16481400
+[INFO 08:39:45] my_main t_env: 16531800 / 20000000.0
+[INFO 08:39:45] my_main Estimated time left: 8 hours, 30 minutes, 26 seconds. Time passed: 1 days, 16 hours, 31 minutes, 40 seconds
+[INFO 08:39:50] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/16531800
+[INFO 08:47:11] my_main t_env: 16582200 / 20000000.0
+[INFO 08:47:11] my_main Estimated time left: 8 hours, 23 minutes, 56 seconds. Time passed: 1 days, 16 hours, 39 minutes, 5 seconds
+[INFO 08:47:15] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/16582200
+[INFO 08:54:39] my_main t_env: 16632600 / 20000000.0
+[INFO 08:54:39] my_main Estimated time left: 8 hours, 18 minutes, 45 seconds. Time passed: 1 days, 16 hours, 46 minutes, 33 seconds
+[INFO 08:54:43] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/16632600
+[INFO 09:02:06] my_main t_env: 16683000 / 20000000.0
+[INFO 09:02:06] my_main Estimated time left: 8 hours, 11 minutes, 1 seconds. Time passed: 1 days, 16 hours, 54 minutes, 1 seconds
+[INFO 09:02:11] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/16683000
+[INFO 09:09:39] my_main t_env: 16733400 / 20000000.0
+[INFO 09:09:39] my_main Estimated time left: 8 hours, 8 minutes, 27 seconds. Time passed: 1 days, 17 hours, 1 minutes, 33 seconds
+[INFO 09:09:43] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/16733400
+[INFO 09:17:04] my_main t_env: 16783800 / 20000000.0
+[INFO 09:17:04] my_main Estimated time left: 7 hours, 53 minutes, 16 seconds. Time passed: 1 days, 17 hours, 8 minutes, 58 seconds
+[INFO 09:17:08] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/16783800
+[INFO 09:24:32] my_main t_env: 16834200 / 20000000.0
+[INFO 09:24:32] my_main Estimated time left: 7 hours, 49 minutes, 36 seconds. Time passed: 1 days, 17 hours, 16 minutes, 27 seconds
+[INFO 09:24:37] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/16834200
+[INFO 09:31:59] my_main t_env: 16884600 / 20000000.0
+[INFO 09:31:59] my_main Estimated time left: 7 hours, 40 minutes, 14 seconds. Time passed: 1 days, 17 hours, 23 minutes, 53 seconds
+[INFO 09:32:03] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/16884600
+[INFO 09:39:28] my_main t_env: 16935000 / 20000000.0
+[INFO 09:39:28] my_main Estimated time left: 7 hours, 35 minutes, 28 seconds. Time passed: 1 days, 17 hours, 31 minutes, 23 seconds
+[INFO 09:39:33] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/16935000
+[INFO 09:46:54] my_main t_env: 16985400 / 20000000.0
+[INFO 09:46:54] my_main Estimated time left: 7 hours, 24 minutes, 41 seconds. Time passed: 1 days, 17 hours, 38 minutes, 49 seconds
+[INFO 09:46:59] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/16985400
+[INFO 09:54:22] my_main t_env: 17035800 / 20000000.0
+[INFO 09:54:22] my_main Estimated time left: 7 hours, 18 minutes, 46 seconds. Time passed: 1 days, 17 hours, 46 minutes, 17 seconds
+[INFO 09:54:27] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/17035800
+[INFO 10:01:51] my_main t_env: 17086200 / 20000000.0
+[INFO 10:01:51] my_main Estimated time left: 7 hours, 12 minutes, 50 seconds. Time passed: 1 days, 17 hours, 53 minutes, 46 seconds
+[INFO 10:01:56] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/17086200
+[INFO 10:09:21] my_main t_env: 17136600 / 20000000.0
+[INFO 10:09:21] my_main Estimated time left: 7 hours, 6 minutes, 16 seconds. Time passed: 1 days, 18 hours, 1 minutes, 16 seconds
+[INFO 10:09:26] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/17136600
+[INFO 10:16:50] my_main t_env: 17187000 / 20000000.0
+[INFO 10:16:50] my_main Estimated time left: 6 hours, 57 minutes, 28 seconds. Time passed: 1 days, 18 hours, 8 minutes, 45 seconds
+[INFO 10:16:55] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/17187000
+[INFO 10:24:18] my_main t_env: 17237400 / 20000000.0
+[INFO 10:24:18] my_main Estimated time left: 6 hours, 49 minutes, 17 seconds. Time passed: 1 days, 18 hours, 16 minutes, 13 seconds
+[INFO 10:24:23] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/17237400
+[INFO 10:31:45] my_main t_env: 17287800 / 20000000.0
+[INFO 10:31:45] my_main Estimated time left: 6 hours, 40 minutes, 53 seconds. Time passed: 1 days, 18 hours, 23 minutes, 40 seconds
+[INFO 10:31:49] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/17287800
+[INFO 10:39:12] my_main t_env: 17338200 / 20000000.0
+[INFO 10:39:12] my_main Estimated time left: 6 hours, 33 minutes, 33 seconds. Time passed: 1 days, 18 hours, 31 minutes, 7 seconds
+[INFO 10:39:17] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/17338200
+[INFO 10:46:39] my_main t_env: 17388600 / 20000000.0
+[INFO 10:46:39] my_main Estimated time left: 6 hours, 25 minutes, 46 seconds. Time passed: 1 days, 18 hours, 38 minutes, 34 seconds
+[INFO 10:46:43] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/17388600
+[INFO 10:54:07] my_main t_env: 17439000 / 20000000.0
+[INFO 10:54:07] my_main Estimated time left: 6 hours, 19 minutes, 26 seconds. Time passed: 1 days, 18 hours, 46 minutes, 2 seconds
+[INFO 10:54:11] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/17439000
+[INFO 11:01:32] my_main t_env: 17489400 / 20000000.0
+[INFO 11:01:32] my_main Estimated time left: 6 hours, 9 minutes, 15 seconds. Time passed: 1 days, 18 hours, 53 minutes, 26 seconds
+[INFO 11:01:37] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/17489400
+[INFO 11:09:01] my_main t_env: 17539800 / 20000000.0
+[INFO 11:09:01] my_main Estimated time left: 6 hours, 5 minutes, 41 seconds. Time passed: 1 days, 19 hours, 56 seconds
+[INFO 11:09:07] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/17539800
+[INFO 11:16:27] my_main t_env: 17590200 / 20000000.0
+[INFO 11:16:27] my_main Estimated time left: 5 hours, 55 minutes, 32 seconds. Time passed: 1 days, 19 hours, 8 minutes, 22 seconds
+[INFO 11:16:32] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/17590200
+[INFO 11:23:54] my_main t_env: 17640600 / 20000000.0
+[INFO 11:23:54] my_main Estimated time left: 5 hours, 48 minutes, 32 seconds. Time passed: 1 days, 19 hours, 15 minutes, 49 seconds
+[INFO 11:23:59] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/17640600
+[INFO 11:31:21] my_main t_env: 17691000 / 20000000.0
+[INFO 11:31:21] my_main Estimated time left: 5 hours, 41 minutes, 20 seconds. Time passed: 1 days, 19 hours, 23 minutes, 16 seconds
+[INFO 11:31:25] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/17691000
+[INFO 11:38:43] my_main t_env: 17741400 / 20000000.0
+[INFO 11:38:43] my_main Estimated time left: 5 hours, 30 minutes, 5 seconds. Time passed: 1 days, 19 hours, 30 minutes, 38 seconds
+[INFO 11:38:47] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/17741400
+[INFO 11:46:10] my_main t_env: 17791800 / 20000000.0
+[INFO 11:46:10] my_main Estimated time left: 5 hours, 26 minutes, 30 seconds. Time passed: 1 days, 19 hours, 38 minutes, 5 seconds
+[INFO 11:46:14] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/17791800
+[INFO 11:53:38] my_main t_env: 17842200 / 20000000.0
+[INFO 11:53:38] my_main Estimated time left: 5 hours, 19 minutes, 10 seconds. Time passed: 1 days, 19 hours, 45 minutes, 32 seconds
+[INFO 11:53:43] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/17842200
+[INFO 12:01:03] my_main t_env: 17892600 / 20000000.0
+[INFO 12:01:03] my_main Estimated time left: 5 hours, 10 minutes, 17 seconds. Time passed: 1 days, 19 hours, 52 minutes, 57 seconds
+[INFO 12:01:07] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/17892600
+[INFO 12:08:30] my_main t_env: 17943000 / 20000000.0
+[INFO 12:08:30] my_main Estimated time left: 5 hours, 3 minutes, 55 seconds. Time passed: 1 days, 20 hours, 24 seconds
+[INFO 12:08:35] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/17943000
+[INFO 12:15:57] my_main t_env: 17993400 / 20000000.0
+[INFO 12:15:57] my_main Estimated time left: 4 hours, 56 minutes, 44 seconds. Time passed: 1 days, 20 hours, 7 minutes, 51 seconds
+[INFO 12:16:01] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/17993400
+[INFO 12:23:28] my_main t_env: 18043800 / 20000000.0
+[INFO 12:23:28] my_main Estimated time left: 4 hours, 51 minutes, 47 seconds. Time passed: 1 days, 20 hours, 15 minutes, 22 seconds
+[INFO 12:23:32] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/18043800
+[INFO 12:30:56] my_main t_env: 18094200 / 20000000.0
+[INFO 12:30:56] my_main Estimated time left: 4 hours, 42 minutes, 22 seconds. Time passed: 1 days, 20 hours, 22 minutes, 51 seconds
+[INFO 12:31:01] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/18094200
+[INFO 12:38:25] my_main t_env: 18144600 / 20000000.0
+[INFO 12:38:25] my_main Estimated time left: 4 hours, 35 minutes, 36 seconds. Time passed: 1 days, 20 hours, 30 minutes, 20 seconds
+[INFO 12:38:30] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/18144600
+[INFO 12:45:54] my_main t_env: 18195000 / 20000000.0
+[INFO 12:45:54] my_main Estimated time left: 4 hours, 28 minutes, 8 seconds. Time passed: 1 days, 20 hours, 37 minutes, 49 seconds
+[INFO 12:45:59] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/18195000
+[INFO 12:53:24] my_main t_env: 18245400 / 20000000.0
+[INFO 12:53:24] my_main Estimated time left: 4 hours, 20 minutes, 57 seconds. Time passed: 1 days, 20 hours, 45 minutes, 19 seconds
+[INFO 12:53:28] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/18245400
+[INFO 13:00:58] my_main t_env: 18295800 / 20000000.0
+[INFO 13:00:58] my_main Estimated time left: 4 hours, 15 minutes, 29 seconds. Time passed: 1 days, 20 hours, 52 minutes, 52 seconds
+[INFO 13:01:02] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/18295800
+[INFO 13:08:31] my_main t_env: 18346200 / 20000000.0
+[INFO 13:08:31] my_main Estimated time left: 4 hours, 7 minutes, 49 seconds. Time passed: 1 days, 21 hours, 25 seconds
+[INFO 13:08:35] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/18346200
+[INFO 13:15:59] my_main t_env: 18396600 / 20000000.0
+[INFO 13:15:59] my_main Estimated time left: 3 hours, 57 minutes, 37 seconds. Time passed: 1 days, 21 hours, 7 minutes, 53 seconds
+[INFO 13:16:03] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/18396600
+[INFO 13:23:28] my_main t_env: 18447000 / 20000000.0
+[INFO 13:23:28] my_main Estimated time left: 3 hours, 50 minutes, 43 seconds. Time passed: 1 days, 21 hours, 15 minutes, 23 seconds
+[INFO 13:23:33] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/18447000
+[INFO 13:30:55] my_main t_env: 18497400 / 20000000.0
+[INFO 13:30:55] my_main Estimated time left: 3 hours, 42 minutes, 5 seconds. Time passed: 1 days, 21 hours, 22 minutes, 50 seconds
+[INFO 13:30:59] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/18497400
+[INFO 13:38:27] my_main t_env: 18547800 / 20000000.0
+[INFO 13:38:27] my_main Estimated time left: 3 hours, 36 minutes, 55 seconds. Time passed: 1 days, 21 hours, 30 minutes, 21 seconds
+[INFO 13:38:31] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/18547800
+[INFO 13:45:55] my_main t_env: 18598200 / 20000000.0
+[INFO 13:45:55] my_main Estimated time left: 3 hours, 27 minutes, 33 seconds. Time passed: 1 days, 21 hours, 37 minutes, 49 seconds
+[INFO 13:45:59] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/18598200
+[INFO 13:53:23] my_main t_env: 18648600 / 20000000.0
+[INFO 13:53:23] my_main Estimated time left: 3 hours, 20 minutes, 27 seconds. Time passed: 1 days, 21 hours, 45 minutes, 18 seconds
+[INFO 13:53:27] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/18648600
+[INFO 14:00:49] my_main t_env: 18699000 / 20000000.0
+[INFO 14:00:49] my_main Estimated time left: 3 hours, 12 minutes, 0 seconds. Time passed: 1 days, 21 hours, 52 minutes, 44 seconds
+[INFO 14:00:54] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/18699000
+[INFO 14:08:16] my_main t_env: 18749400 / 20000000.0
+[INFO 14:08:16] my_main Estimated time left: 3 hours, 4 minutes, 32 seconds. Time passed: 1 days, 22 hours, 10 seconds
+[INFO 14:08:20] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/18749400
+[INFO 14:15:45] my_main t_env: 18799800 / 20000000.0
+[INFO 14:15:45] my_main Estimated time left: 2 hours, 58 minutes, 31 seconds. Time passed: 1 days, 22 hours, 7 minutes, 40 seconds
+[INFO 14:15:51] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/18799800
+[INFO 14:23:12] my_main t_env: 18850200 / 20000000.0
+[INFO 14:23:12] my_main Estimated time left: 2 hours, 49 minutes, 45 seconds. Time passed: 1 days, 22 hours, 15 minutes, 6 seconds
+[INFO 14:23:16] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/18850200
+[INFO 14:30:39] my_main t_env: 18900600 / 20000000.0
+[INFO 14:30:39] my_main Estimated time left: 2 hours, 42 minutes, 27 seconds. Time passed: 1 days, 22 hours, 22 minutes, 33 seconds
+[INFO 14:30:44] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/18900600
+[INFO 14:38:10] my_main t_env: 18951000 / 20000000.0
+[INFO 14:38:10] my_main Estimated time left: 2 hours, 36 minutes, 24 seconds. Time passed: 1 days, 22 hours, 30 minutes, 4 seconds
+[INFO 14:38:14] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/18951000
+[INFO 14:45:38] my_main t_env: 19001400 / 20000000.0
+[INFO 14:45:38] my_main Estimated time left: 2 hours, 27 minutes, 58 seconds. Time passed: 1 days, 22 hours, 37 minutes, 32 seconds
+[INFO 14:45:42] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/19001400
+[INFO 14:53:05] my_main t_env: 19051800 / 20000000.0
+[INFO 14:53:05] my_main Estimated time left: 2 hours, 20 minutes, 15 seconds. Time passed: 1 days, 22 hours, 45 minutes, 0 seconds
+[INFO 14:53:09] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/19051800
+[INFO 15:00:34] my_main t_env: 19102200 / 20000000.0
+[INFO 15:00:34] my_main Estimated time left: 2 hours, 13 minutes, 16 seconds. Time passed: 1 days, 22 hours, 52 minutes, 29 seconds
+[INFO 15:00:38] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/19102200
+[INFO 15:08:04] my_main t_env: 19152600 / 20000000.0
+[INFO 15:08:04] my_main Estimated time left: 2 hours, 5 minutes, 58 seconds. Time passed: 1 days, 22 hours, 59 minutes, 58 seconds
+[INFO 15:08:08] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/19152600
+[INFO 15:15:31] my_main t_env: 19203000 / 20000000.0
+[INFO 15:15:31] my_main Estimated time left: 1 hours, 58 minutes, 0 seconds. Time passed: 1 days, 23 hours, 7 minutes, 26 seconds
+[INFO 15:15:35] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/19203000
+[INFO 15:22:58] my_main t_env: 19253400 / 20000000.0
+[INFO 15:22:58] my_main Estimated time left: 1 hours, 50 minutes, 14 seconds. Time passed: 1 days, 23 hours, 14 minutes, 52 seconds
+[INFO 15:23:02] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/19253400
+[INFO 15:30:24] my_main t_env: 19303800 / 20000000.0
+[INFO 15:30:24] my_main Estimated time left: 1 hours, 42 minutes, 46 seconds. Time passed: 1 days, 23 hours, 22 minutes, 19 seconds
+[INFO 15:30:29] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/19303800
+[INFO 15:37:59] my_main t_env: 19354200 / 20000000.0
+[INFO 15:37:59] my_main Estimated time left: 1 hours, 37 minutes, 9 seconds. Time passed: 1 days, 23 hours, 29 minutes, 54 seconds
+[INFO 15:38:04] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/19354200
+[INFO 15:45:34] my_main t_env: 19404600 / 20000000.0
+[INFO 15:45:34] my_main Estimated time left: 1 hours, 29 minutes, 32 seconds. Time passed: 1 days, 23 hours, 37 minutes, 29 seconds
+[INFO 15:45:38] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/19404600
+[INFO 15:53:08] my_main t_env: 19455000 / 20000000.0
+[INFO 15:53:08] my_main Estimated time left: 1 hours, 21 minutes, 55 seconds. Time passed: 1 days, 23 hours, 45 minutes, 3 seconds
+[INFO 15:53:13] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/19455000
+[INFO 16:00:28] my_main t_env: 19505400 / 20000000.0
+[INFO 16:00:28] my_main Estimated time left: 1 hours, 11 minutes, 48 seconds. Time passed: 1 days, 23 hours, 52 minutes, 22 seconds
+[INFO 16:00:32] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/19505400
+[INFO 16:06:51] my_main t_env: 19555800 / 20000000.0
+[INFO 16:06:51] my_main Estimated time left: 56 minutes, 16 seconds. Time passed: 1 days, 23 hours, 58 minutes, 45 seconds
+[INFO 16:06:54] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/19555800
+[INFO 16:12:12] my_main t_env: 19606200 / 20000000.0
+[INFO 16:12:12] my_main Estimated time left: 41 minutes, 49 seconds. Time passed: 2 days, 4 minutes, 6 seconds
+[INFO 16:12:15] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/19606200
+[INFO 16:16:53] my_main t_env: 19656600 / 20000000.0
+[INFO 16:16:53] my_main Estimated time left: 31 minutes, 55 seconds. Time passed: 2 days, 8 minutes, 48 seconds
+[INFO 16:16:56] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/19656600
+[INFO 16:21:25] my_main t_env: 19707000 / 20000000.0
+[INFO 16:21:25] my_main Estimated time left: 26 minutes, 19 seconds. Time passed: 2 days, 13 minutes, 19 seconds
+[INFO 16:21:27] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/19707000
+[INFO 16:25:10] my_main t_env: 19757400 / 20000000.0
+[INFO 16:25:10] my_main Estimated time left: 18 minutes, 2 seconds. Time passed: 2 days, 17 minutes, 4 seconds
+[INFO 16:25:12] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/19757400
+[INFO 16:28:35] my_main t_env: 19807800 / 20000000.0
+[INFO 16:28:35] my_main Estimated time left: 13 minutes, 3 seconds. Time passed: 2 days, 20 minutes, 30 seconds
+[INFO 16:28:38] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/19807800
+[INFO 16:31:49] my_main t_env: 19858200 / 20000000.0
+[INFO 16:31:49] my_main Estimated time left: 9 minutes, 5 seconds. Time passed: 2 days, 23 minutes, 44 seconds
+[INFO 16:31:50] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/19858200
+[INFO 16:36:14] my_main t_env: 19908600 / 20000000.0
+[INFO 16:36:14] my_main Estimated time left: 8 minutes, 0 seconds. Time passed: 2 days, 28 minutes, 8 seconds
+[INFO 16:36:17] my_main Saving models to results/models/vdn_seed4_4playereasy_2025-01-14 16:07:59.614229/19908600

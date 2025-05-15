@@ -1,0 +1,2595 @@
+[INFO 02:28:42] pymarl Running command 'my_main'
+[INFO 02:28:42] pymarl Started run with ID "6"
+[DEBUG 02:28:42] pymarl Starting Heartbeat
+[DEBUG 02:28:42] my_main Started
+[INFO 02:28:42] my_main Experiment Parameters:
+[INFO 02:28:42] my_main 
+
+{   'action_selector': 'soft_policies',
+    'add_value_last_step': True,
+    'agent': 'rnn',
+    'agent_output_type': 'pi_logits',
+    'batch_size': 10,
+    'batch_size_run': 1,
+    'buffer_cpu_only': True,
+    'buffer_size': 10,
+    'checkpoint_path': '/alpha/ComplexOvercooked/results/models/ippo_seed0_supereasy_2025-01-15 '
+                       '14:37:17.060721',
+    'common_reward': True,
+    'critic_type': 'ac_critic',
+    'entropy_coef': 0.01,
+    'env': 'overcooked2',
+    'env_args': {   'debug': True,
+                    'ifrender': True,
+                    'map_name': 'supereasy',
+                    'seed': 669894734},
+    'epochs': 8,
+    'eps_clip': 0.1,
+    'evaluate': True,
+    'gamma': 0.99,
+    'grad_norm_clip': 10,
+    'hidden_dim': 64,
+    'hypergroup': None,
+    'label': 'default_label',
+    'learner': 'ppo_learner',
+    'learner_log_interval': 2000,
+    'load_step': 19986000,
+    'local_results_path': 'results',
+    'log_interval': 2000,
+    'lr': 0.0003,
+    'mac': 'basic_mac',
+    'mask_before_softmax': True,
+    'name': 'ippo',
+    'obs_agent_id': True,
+    'obs_individual_obs': False,
+    'obs_last_action': False,
+    'optim_alpha': 0.99,
+    'optim_eps': 1e-05,
+    'q_nstep': 5,
+    'render': False,
+    'repeat_id': 1,
+    'reward_scalarisation': 'mean',
+    'runner': 'parallel',
+    'runner_log_interval': 2000,
+    'save_model': False,
+    'save_model_interval': 50000,
+    'save_replay': False,
+    'seed': 669894734,
+    'standardise_returns': False,
+    'standardise_rewards': False,
+    't_max': 20050000,
+    'target_update_interval_or_tau': 0.01,
+    'test_greedy': False,
+    'test_interval': 2000,
+    'test_nepisode': 15,
+    'use_cuda': False,
+    'use_rnn': True,
+    'use_tensorboard': False,
+    'use_wandb': False,
+    'wandb_mode': 'offline',
+    'wandb_project': None,
+    'wandb_save_model': False,
+    'wandb_team': None}
+
+当前时间步: 0
+当前时间步: 0
+shape of state: 73
+shape of observation: 73
+[INFO 02:28:44] my_main Loading model from /alpha/ComplexOvercooked/results/models/ippo_seed0_supereasy_2025-01-15 14:37:17.060721/19986000
+当前时间步: 0
+当前时间步: 0
+actions: [2 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 1
+当前时间步: 1
+actions: [0 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 2
+当前时间步: 2
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 3
+当前时间步: 3
+actions: [1 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 4
+当前时间步: 4
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 5
+当前时间步: 5
+actions: [3 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 6
+当前时间步: 6
+actions: [1 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 7
+当前时间步: 7
+actions: [2 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 8
+当前时间步: 8
+actions: [3 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 9
+当前时间步: 9
+actions: [4 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 10
+当前时间步: 10
+actions: [2 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 11
+当前时间步: 11
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 12
+当前时间步: 12
+actions: [0 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 13
+当前时间步: 13
+actions: [2 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 14
+当前时间步: 14
+actions: [4 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 15
+当前时间步: 15
+actions: [0 5]
+从仓库中拿到东西
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 16
+当前时间步: 16
+actions: [0 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 17
+当前时间步: 17
+actions: [2 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 18
+当前时间步: 18
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 19
+当前时间步: 19
+actions: [2 5]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 20
+当前时间步: 20
+actions: [1 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 21
+当前时间步: 21
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 22
+当前时间步: 22
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 23
+当前时间步: 23
+actions: [2 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 24
+当前时间步: 24
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 25
+当前时间步: 25
+actions: [2 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 26
+当前时间步: 26
+actions: [4 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 27
+当前时间步: 27
+actions: [0 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 28
+当前时间步: 28
+actions: [3 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 29
+当前时间步: 29
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 30
+当前时间步: 30
+actions: [3 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 31
+当前时间步: 31
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 32
+当前时间步: 32
+actions: [2 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 33
+当前时间步: 33
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 34
+当前时间步: 34
+actions: [2 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 35
+当前时间步: 35
+actions: [1 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 36
+当前时间步: 36
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 37
+当前时间步: 37
+actions: [3 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 38
+当前时间步: 38
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 39
+当前时间步: 39
+actions: [0 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 40
+当前时间步: 40
+actions: [2 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 41
+当前时间步: 41
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 42
+当前时间步: 42
+actions: [3 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 43
+当前时间步: 43
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 44
+当前时间步: 44
+actions: [0 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 45
+当前时间步: 45
+actions: [3 5]
+从仓库中拿到东西
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 46
+当前时间步: 46
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 47
+当前时间步: 47
+actions: [3 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 48
+当前时间步: 48
+actions: [4 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 49
+当前时间步: 49
+actions: [0 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 50
+当前时间步: 50
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 51
+当前时间步: 51
+actions: [1 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 52
+当前时间步: 52
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 53
+当前时间步: 53
+actions: [0 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 54
+当前时间步: 54
+actions: [3 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 55
+当前时间步: 55
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 56
+当前时间步: 56
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 57
+当前时间步: 57
+actions: [1 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 58
+当前时间步: 58
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 59
+当前时间步: 59
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 60
+当前时间步: 60
+actions: [1 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 61
+当前时间步: 61
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 62
+当前时间步: 62
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 63
+当前时间步: 63
+actions: [1 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 64
+当前时间步: 64
+actions: [4 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 65
+当前时间步: 65
+actions: [0 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 66
+当前时间步: 66
+actions: [3 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 67
+当前时间步: 67
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 68
+当前时间步: 68
+actions: [0 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 69
+当前时间步: 69
+actions: [3 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 70
+当前时间步: 70
+actions: [4 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 71
+当前时间步: 71
+actions: [0 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 72
+当前时间步: 72
+actions: [2 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 73
+当前时间步: 73
+actions: [3 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 74
+当前时间步: 74
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 75
+当前时间步: 75
+actions: [2 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 76
+当前时间步: 76
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 77
+当前时间步: 77
+actions: [2 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 78
+当前时间步: 78
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 79
+当前时间步: 79
+actions: [3 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 80
+当前时间步: 80
+actions: [0 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 81
+当前时间步: 81
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 82
+当前时间步: 82
+actions: [0 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 83
+当前时间步: 83
+actions: [0 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 84
+当前时间步: 84
+actions: [2 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 85
+当前时间步: 85
+actions: [0 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 86
+当前时间步: 86
+actions: [0 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 87
+当前时间步: 87
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 88
+当前时间步: 88
+actions: [1 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 89
+当前时间步: 89
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 90
+当前时间步: 90
+actions: [1 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 91
+当前时间步: 91
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 92
+当前时间步: 92
+actions: [3 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 93
+当前时间步: 93
+actions: [0 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 94
+当前时间步: 94
+actions: [0 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 95
+当前时间步: 95
+actions: [0 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 96
+当前时间步: 96
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 97
+当前时间步: 97
+actions: [1 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 98
+当前时间步: 98
+actions: [0 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 99
+当前时间步: 99
+actions: [0 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 100
+当前时间步: 100
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 101
+当前时间步: 101
+actions: [3 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 102
+当前时间步: 102
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 103
+当前时间步: 103
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 104
+当前时间步: 104
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 105
+当前时间步: 105
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 106
+当前时间步: 106
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 107
+当前时间步: 107
+actions: [1 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 108
+当前时间步: 108
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 109
+当前时间步: 109
+actions: [3 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 110
+当前时间步: 110
+actions: [0 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 111
+当前时间步: 111
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 112
+当前时间步: 112
+actions: [1 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 113
+当前时间步: 113
+actions: [4 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 114
+当前时间步: 114
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 115
+当前时间步: 115
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 116
+当前时间步: 116
+actions: [0 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 117
+当前时间步: 117
+actions: [3 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 118
+当前时间步: 118
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 119
+当前时间步: 119
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 120
+当前时间步: 120
+actions: [2 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 121
+当前时间步: 121
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 122
+当前时间步: 122
+actions: [2 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 123
+当前时间步: 123
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 124
+当前时间步: 124
+actions: [3 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 125
+当前时间步: 125
+actions: [1 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 126
+当前时间步: 126
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 127
+当前时间步: 127
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 128
+当前时间步: 128
+actions: [1 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 129
+当前时间步: 129
+actions: [3 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 130
+当前时间步: 130
+actions: [1 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 131
+当前时间步: 131
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 132
+当前时间步: 132
+actions: [2 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 133
+当前时间步: 133
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 134
+当前时间步: 134
+actions: [2 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 135
+当前时间步: 135
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 136
+当前时间步: 136
+actions: [1 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 137
+当前时间步: 137
+actions: [3 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 138
+当前时间步: 138
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 139
+当前时间步: 139
+actions: [3 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 140
+当前时间步: 140
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 141
+当前时间步: 141
+actions: [0 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 142
+当前时间步: 142
+actions: [0 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 143
+当前时间步: 143
+actions: [2 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 144
+当前时间步: 144
+actions: [2 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 145
+当前时间步: 145
+actions: [0 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 146
+当前时间步: 146
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 147
+当前时间步: 147
+actions: [0 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 148
+当前时间步: 148
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 149
+当前时间步: 149
+actions: [3 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 150
+当前时间步: 150
+actions: [0 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 151
+当前时间步: 151
+actions: [0 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 152
+当前时间步: 152
+actions: [2 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 153
+当前时间步: 153
+actions: [0 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 154
+当前时间步: 154
+actions: [3 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 155
+当前时间步: 155
+actions: [2 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 156
+当前时间步: 156
+actions: [3 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 157
+当前时间步: 157
+actions: [0 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 158
+当前时间步: 158
+actions: [4 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 159
+当前时间步: 159
+actions: [2 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 160
+当前时间步: 160
+actions: [3 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 161
+当前时间步: 161
+actions: [2 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 162
+当前时间步: 162
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 163
+当前时间步: 163
+actions: [1 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 164
+当前时间步: 164
+actions: [2 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 165
+当前时间步: 165
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 166
+当前时间步: 166
+actions: [3 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 167
+当前时间步: 167
+actions: [0 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 168
+当前时间步: 168
+actions: [1 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 169
+当前时间步: 169
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 170
+当前时间步: 170
+actions: [0 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 171
+当前时间步: 171
+actions: [0 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 172
+当前时间步: 172
+actions: [1 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 173
+当前时间步: 173
+actions: [0 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 174
+当前时间步: 174
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 175
+当前时间步: 175
+actions: [2 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 176
+当前时间步: 176
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 177
+当前时间步: 177
+actions: [1 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 178
+当前时间步: 178
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 179
+当前时间步: 179
+actions: [1 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 180
+当前时间步: 180
+actions: [2 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 181
+当前时间步: 181
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 182
+当前时间步: 182
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 183
+当前时间步: 183
+actions: [2 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 184
+当前时间步: 184
+actions: [0 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 185
+当前时间步: 185
+actions: [0 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 186
+当前时间步: 186
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 187
+当前时间步: 187
+actions: [3 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 188
+当前时间步: 188
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 189
+当前时间步: 189
+actions: [2 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 190
+当前时间步: 190
+actions: [4 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 191
+当前时间步: 191
+actions: [0 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 192
+当前时间步: 192
+actions: [1 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 193
+当前时间步: 193
+actions: [0 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 194
+当前时间步: 194
+actions: [4 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 195
+当前时间步: 195
+actions: [0 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 196
+当前时间步: 196
+actions: [2 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 197
+当前时间步: 197
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 198
+当前时间步: 198
+actions: [2 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 199
+当前时间步: 199
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 200
+当前时间步: 200
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 201
+当前时间步: 201
+actions: [0 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 202
+当前时间步: 202
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 203
+当前时间步: 203
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 204
+当前时间步: 204
+actions: [3 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 205
+当前时间步: 205
+actions: [1 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 206
+当前时间步: 206
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 207
+当前时间步: 207
+actions: [2 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 208
+当前时间步: 208
+actions: [0 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 209
+当前时间步: 209
+actions: [1 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 210
+当前时间步: 210
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 211
+当前时间步: 211
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 212
+当前时间步: 212
+actions: [3 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 213
+当前时间步: 213
+actions: [0 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 214
+当前时间步: 214
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 215
+当前时间步: 215
+actions: [1 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 216
+当前时间步: 216
+actions: [0 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 217
+当前时间步: 217
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 218
+当前时间步: 218
+actions: [3 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 219
+当前时间步: 219
+actions: [0 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 220
+当前时间步: 220
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 221
+当前时间步: 221
+actions: [1 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 222
+当前时间步: 222
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 223
+当前时间步: 223
+actions: [0 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 224
+当前时间步: 224
+actions: [0 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 225
+当前时间步: 225
+actions: [2 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 226
+当前时间步: 226
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 227
+当前时间步: 227
+actions: [1 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 228
+当前时间步: 228
+actions: [3 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 229
+当前时间步: 229
+actions: [1 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 230
+当前时间步: 230
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 231
+当前时间步: 231
+actions: [3 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 232
+当前时间步: 232
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 233
+当前时间步: 233
+actions: [3 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 234
+当前时间步: 234
+actions: [0 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 235
+当前时间步: 235
+actions: [0 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 236
+当前时间步: 236
+actions: [2 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 237
+当前时间步: 237
+actions: [3 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 238
+当前时间步: 238
+actions: [0 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 239
+当前时间步: 239
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 240
+当前时间步: 240
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 241
+当前时间步: 241
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 242
+当前时间步: 242
+actions: [3 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 243
+当前时间步: 243
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 244
+当前时间步: 244
+actions: [1 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 245
+当前时间步: 245
+actions: [0 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 246
+当前时间步: 246
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 247
+当前时间步: 247
+actions: [1 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 248
+当前时间步: 248
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 249
+当前时间步: 249
+actions: [1 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 250
+当前时间步: 250
+actions: [4 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 251
+当前时间步: 251
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 252
+当前时间步: 252
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 253
+当前时间步: 253
+actions: [3 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 254
+当前时间步: 254
+actions: [1 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 255
+当前时间步: 255
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 256
+当前时间步: 256
+actions: [0 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 257
+当前时间步: 257
+actions: [0 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 258
+当前时间步: 258
+actions: [4 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 259
+当前时间步: 259
+actions: [1 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 260
+当前时间步: 260
+actions: [2 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 261
+当前时间步: 261
+actions: [1 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 262
+当前时间步: 262
+actions: [0 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 263
+当前时间步: 263
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 264
+当前时间步: 264
+actions: [2 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 265
+当前时间步: 265
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 266
+当前时间步: 266
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 267
+当前时间步: 267
+actions: [0 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 268
+当前时间步: 268
+actions: [0 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 269
+当前时间步: 269
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 270
+当前时间步: 270
+actions: [3 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 271
+当前时间步: 271
+actions: [0 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 272
+当前时间步: 272
+actions: [0 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 273
+当前时间步: 273
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 274
+当前时间步: 274
+actions: [2 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 275
+当前时间步: 275
+actions: [4 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 276
+当前时间步: 276
+actions: [2 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 277
+当前时间步: 277
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 278
+当前时间步: 278
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 279
+当前时间步: 279
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 280
+当前时间步: 280
+actions: [1 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 281
+当前时间步: 281
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 282
+当前时间步: 282
+actions: [0 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 283
+当前时间步: 283
+actions: [1 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 284
+当前时间步: 284
+actions: [3 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 285
+当前时间步: 285
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 286
+当前时间步: 286
+actions: [1 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 287
+当前时间步: 287
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 288
+当前时间步: 288
+actions: [3 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 289
+当前时间步: 289
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 290
+当前时间步: 290
+actions: [2 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 291
+当前时间步: 291
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 292
+当前时间步: 292
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 293
+当前时间步: 293
+actions: [3 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 294
+当前时间步: 294
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 295
+当前时间步: 295
+actions: [3 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 296
+当前时间步: 296
+actions: [0 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 297
+当前时间步: 297
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 298
+当前时间步: 298
+actions: [0 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 299
+当前时间步: 299
+actions: [3 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 300
+当前时间步: 300
+actions: [0 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 301
+当前时间步: 301
+actions: [4 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 302
+当前时间步: 302
+actions: [3 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 303
+当前时间步: 303
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 304
+当前时间步: 304
+actions: [1 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 305
+当前时间步: 305
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 306
+当前时间步: 306
+actions: [0 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 307
+当前时间步: 307
+actions: [2 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 308
+当前时间步: 308
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 309
+当前时间步: 309
+actions: [1 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 310
+当前时间步: 310
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 311
+当前时间步: 311
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 312
+当前时间步: 312
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 313
+当前时间步: 313
+actions: [0 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 314
+当前时间步: 314
+actions: [1 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 315
+当前时间步: 315
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 316
+当前时间步: 316
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 317
+当前时间步: 317
+actions: [0 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 318
+当前时间步: 318
+actions: [1 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 319
+当前时间步: 319
+actions: [0 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 320
+当前时间步: 320
+actions: [3 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 321
+当前时间步: 321
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 322
+当前时间步: 322
+actions: [2 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 323
+当前时间步: 323
+actions: [3 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 324
+当前时间步: 324
+actions: [0 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 325
+当前时间步: 325
+actions: [4 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 326
+当前时间步: 326
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 327
+当前时间步: 327
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 328
+当前时间步: 328
+actions: [1 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 329
+当前时间步: 329
+actions: [4 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 330
+当前时间步: 330
+actions: [2 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 331
+当前时间步: 331
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 332
+当前时间步: 332
+actions: [0 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 333
+当前时间步: 333
+actions: [1 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 334
+当前时间步: 334
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 335
+当前时间步: 335
+actions: [2 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 336
+当前时间步: 336
+actions: [3 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 337
+当前时间步: 337
+actions: [1 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 338
+当前时间步: 338
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 339
+当前时间步: 339
+actions: [1 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 340
+当前时间步: 340
+actions: [0 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 341
+当前时间步: 341
+actions: [3 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 342
+当前时间步: 342
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 343
+当前时间步: 343
+actions: [3 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 344
+当前时间步: 344
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 345
+当前时间步: 345
+actions: [3 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 346
+当前时间步: 346
+actions: [0 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 347
+当前时间步: 347
+actions: [1 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 348
+当前时间步: 348
+actions: [4 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 349
+当前时间步: 349
+actions: [3 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 350
+当前时间步: 350
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 351
+当前时间步: 351
+actions: [3 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 352
+当前时间步: 352
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 353
+当前时间步: 353
+actions: [1 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 354
+当前时间步: 354
+actions: [2 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 355
+当前时间步: 355
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 356
+当前时间步: 356
+actions: [0 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 357
+当前时间步: 357
+actions: [2 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 358
+当前时间步: 358
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 359
+当前时间步: 359
+actions: [1 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 360
+当前时间步: 360
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 361
+当前时间步: 361
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 362
+当前时间步: 362
+actions: [3 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 363
+当前时间步: 363
+actions: [0 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 364
+当前时间步: 364
+actions: [4 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 365
+当前时间步: 365
+actions: [3 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 366
+当前时间步: 366
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 367
+当前时间步: 367
+actions: [1 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 368
+当前时间步: 368
+actions: [4 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 369
+当前时间步: 369
+actions: [0 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 370
+当前时间步: 370
+actions: [2 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 371
+当前时间步: 371
+actions: [4 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 372
+当前时间步: 372
+actions: [1 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 373
+当前时间步: 373
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 374
+当前时间步: 374
+actions: [0 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 375
+当前时间步: 375
+actions: [0 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 376
+当前时间步: 376
+actions: [1 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 377
+当前时间步: 377
+actions: [2 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 378
+当前时间步: 378
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 379
+当前时间步: 379
+actions: [2 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 380
+当前时间步: 380
+actions: [1 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 381
+当前时间步: 381
+actions: [2 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 382
+当前时间步: 382
+actions: [1 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 383
+当前时间步: 383
+actions: [0 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 384
+当前时间步: 384
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 385
+当前时间步: 385
+actions: [0 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 386
+当前时间步: 386
+actions: [0 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 387
+当前时间步: 387
+actions: [0 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 388
+当前时间步: 388
+actions: [3 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 389
+当前时间步: 389
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 390
+当前时间步: 390
+actions: [0 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 391
+当前时间步: 391
+actions: [2 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 392
+当前时间步: 392
+actions: [3 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 393
+当前时间步: 393
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 394
+当前时间步: 394
+actions: [0 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 395
+当前时间步: 395
+actions: [2 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 396
+当前时间步: 396
+actions: [0 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 397
+当前时间步: 397
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 398
+当前时间步: 398
+actions: [3 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 399
+当前时间步: 399
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 400
+当前时间步: 400
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 401
+当前时间步: 401
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 402
+当前时间步: 402
+actions: [1 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 403
+当前时间步: 403
+actions: [3 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 404
+当前时间步: 404
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 405
+当前时间步: 405
+actions: [1 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 406
+当前时间步: 406
+actions: [3 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 407
+当前时间步: 407
+actions: [2 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 408
+当前时间步: 408
+actions: [0 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 409
+当前时间步: 409
+actions: [0 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 410
+当前时间步: 410
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 411
+当前时间步: 411
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 412
+当前时间步: 412
+actions: [1 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 413
+当前时间步: 413
+actions: [3 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 414
+当前时间步: 414
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 415
+当前时间步: 415
+actions: [2 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 416
+当前时间步: 416
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 417
+当前时间步: 417
+actions: [1 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 418
+当前时间步: 418
+actions: [0 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 419
+当前时间步: 419
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 420
+当前时间步: 420
+actions: [3 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 421
+当前时间步: 421
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 422
+当前时间步: 422
+actions: [3 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 423
+当前时间步: 423
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 424
+当前时间步: 424
+actions: [0 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 425
+当前时间步: 425
+actions: [0 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 426
+当前时间步: 426
+actions: [3 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 427
+当前时间步: 427
+actions: [4 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 428
+当前时间步: 428
+actions: [1 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 429
+当前时间步: 429
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 430
+当前时间步: 430
+actions: [0 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 431
+当前时间步: 431
+actions: [3 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 432
+当前时间步: 432
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 433
+当前时间步: 433
+actions: [3 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 434
+当前时间步: 434
+actions: [1 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 435
+当前时间步: 435
+actions: [3 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 436
+当前时间步: 436
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 437
+当前时间步: 437
+actions: [2 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 438
+当前时间步: 438
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 439
+当前时间步: 439
+actions: [2 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 440
+当前时间步: 440
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 441
+当前时间步: 441
+actions: [0 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 442
+当前时间步: 442
+actions: [1 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 443
+当前时间步: 443
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 444
+当前时间步: 444
+actions: [0 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 445
+当前时间步: 445
+actions: [1 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 446
+当前时间步: 446
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 447
+当前时间步: 447
+actions: [2 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 448
+当前时间步: 448
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 449
+当前时间步: 449
+actions: [3 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 450
+当前时间步: 450
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 451
+当前时间步: 451
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 452
+当前时间步: 452
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 453
+当前时间步: 453
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 454
+当前时间步: 454
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 455
+当前时间步: 455
+actions: [0 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 456
+当前时间步: 456
+actions: [2 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 457
+当前时间步: 457
+actions: [3 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 458
+当前时间步: 458
+actions: [0 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 459
+当前时间步: 459
+actions: [1 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 460
+当前时间步: 460
+actions: [0 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 461
+当前时间步: 461
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 462
+当前时间步: 462
+actions: [1 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 463
+当前时间步: 463
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 464
+当前时间步: 464
+actions: [3 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 465
+当前时间步: 465
+actions: [0 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 466
+当前时间步: 466
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 467
+当前时间步: 467
+actions: [2 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 468
+当前时间步: 468
+actions: [1 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 469
+当前时间步: 469
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 470
+当前时间步: 470
+actions: [2 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 471
+当前时间步: 471
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 472
+当前时间步: 472
+actions: [2 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 473
+当前时间步: 473
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 474
+当前时间步: 474
+actions: [1 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 475
+当前时间步: 475
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 476
+当前时间步: 476
+actions: [1 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 477
+当前时间步: 477
+actions: [0 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 478
+当前时间步: 478
+actions: [3 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 479
+当前时间步: 479
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 480
+当前时间步: 480
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 481
+当前时间步: 481
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 482
+当前时间步: 482
+actions: [0 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 483
+当前时间步: 483
+actions: [1 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 484
+当前时间步: 484
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 485
+当前时间步: 485
+actions: [1 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 486
+当前时间步: 486
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 487
+当前时间步: 487
+actions: [1 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 488
+当前时间步: 488
+actions: [0 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 489
+当前时间步: 489
+actions: [4 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 490
+当前时间步: 490
+actions: [0 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 491
+当前时间步: 491
+actions: [0 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 492
+当前时间步: 492
+actions: [2 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 493
+当前时间步: 493
+actions: [4 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 494
+当前时间步: 494
+actions: [0 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 495
+当前时间步: 495
+actions: [1 3]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 496
+当前时间步: 496
+actions: [3 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 497
+当前时间步: 497
+actions: [1 1]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 498
+当前时间步: 498
+actions: [4 4]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 499
+当前时间步: 499
+actions: [3 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 500
+当前时间步: 500
+actions: [4 0]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 501
+当前时间步: 501
+actions: [3 2]
+sparse_reward: 0.0
+shaped_reward: 0.0
+当前时间步: 502
+当前时间步: 502
+actions: [0 4]
+sparse_reward: 0.0
+shaped_reward: 0.0

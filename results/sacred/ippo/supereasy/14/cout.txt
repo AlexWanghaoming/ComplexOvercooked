@@ -1,0 +1,107 @@
+[INFO 02:42:25] pymarl Running command 'my_main'
+[INFO 02:42:25] pymarl Started run with ID "14"
+[DEBUG 02:42:25] pymarl Starting Heartbeat
+[DEBUG 02:42:25] my_main Started
+[INFO 02:42:25] my_main Experiment Parameters:
+[INFO 02:42:25] my_main 
+
+{   'action_selector': 'soft_policies',
+    'add_value_last_step': True,
+    'agent': 'rnn',
+    'agent_output_type': 'pi_logits',
+    'batch_size': 10,
+    'batch_size_run': 1,
+    'buffer_cpu_only': True,
+    'buffer_size': 10,
+    'checkpoint_path': 'results/models/ippo_seed4_supereasy_2025-01-16 '
+                       '21:06:38.941962',
+    'common_reward': True,
+    'critic_type': 'ac_critic',
+    'entropy_coef': 0.01,
+    'env': 'overcooked2',
+    'env_args': {   'debug': False,
+                    'fps': 60,
+                    'ifrender': False,
+                    'map_name': 'supereasy',
+                    'seed': 895027370},
+    'epochs': 8,
+    'eps_clip': 0.1,
+    'evaluate': True,
+    'gamma': 0.99,
+    'grad_norm_clip': 10,
+    'hidden_dim': 64,
+    'hypergroup': None,
+    'label': 'default_label',
+    'learner': 'ppo_learner',
+    'learner_log_interval': 2000,
+    'load_step': 18582000,
+    'local_results_path': 'results',
+    'log_interval': 2000,
+    'lr': 0.0003,
+    'mac': 'basic_mac',
+    'mask_before_softmax': True,
+    'name': 'ippo',
+    'obs_agent_id': True,
+    'obs_individual_obs': False,
+    'obs_last_action': False,
+    'optim_alpha': 0.99,
+    'optim_eps': 1e-05,
+    'q_nstep': 5,
+    'render': False,
+    'repeat_id': 1,
+    'reward_scalarisation': 'mean',
+    'runner': 'parallel',
+    'runner_log_interval': 2000,
+    'save_model': False,
+    'save_model_interval': 50000,
+    'save_replay': False,
+    'seed': 895027370,
+    'standardise_returns': False,
+    'standardise_rewards': False,
+    't_max': 20050000,
+    'target_update_interval_or_tau': 0.01,
+    'test_greedy': False,
+    'test_interval': 2000,
+    'test_nepisode': 15,
+    'use_cuda': False,
+    'use_rnn': True,
+    'use_tensorboard': False,
+    'use_wandb': False,
+    'wandb_mode': 'offline',
+    'wandb_project': None,
+    'wandb_save_model': False,
+    'wandb_team': None}
+
+shape of state: 73
+shape of observation: 73
+[INFO 02:42:26] my_main Loading model from results/models/ippo_seed4_supereasy_2025-01-16 21:06:38.941962/18582000
+Warning: Input is not a terminal (fd=17).
+[DEBUG 02:42:28] asyncio Using selector: EpollSelector
+> [0;32m/alpha/ComplexOvercooked/src/envs/overcook_pygame/overcook_gym_class.py[0m(273)[0;36mupdate[0;34m()[0m
+[0;32m    272 [0;31m                        [0mipdb[0m[0;34m.[0m[0mset_trace[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[0;32m--> 273 [0;31m                    [0mpygame[0m[0;34m.[0m[0mevent[0m[0;34m.[0m[0mpost[0m[0;34m([0m[0mpygame[0m[0;34m.[0m[0mevent[0m[0;34m.[0m[0mEvent[0m[0;34m([0m[0mTASK_FINISH_EVENT[0m[0;34m,[0m [0;34m{[0m[0;34m'action'[0m[0;34m:[0m [0mplayer[0m[0;34m.[0m[0mitem[0m[0;34m,[0m [0;34m'player'[0m[0;34m:[0m [0mplayer[0m[0;34m.[0m[0mname[0m[0;34m,[0m [0;34m'score'[0m[0;34m:[0m [0mscore[0m[0;34m}[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[0;32m    274 [0;31m                    [0mplayer[0m[0;34m.[0m[0mdish[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[DEBUG 02:42:28] asyncio Using selector: EpollSelector
+
+Process Process-1:
+Traceback (most recent call last):
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/alpha/ComplexOvercooked/src/runners/parallel_runner.py", line 305, in env_worker
+    _, reward, terminated, truncated, env_info = env.step(actions)
+  File "/alpha/ComplexOvercooked/src/envs/overcooked2_wrapper.py", line 42, in step
+    self.nobs, share_obs, rewards, dones, infos, available_actions = self.env.step(actions)
+  File "/alpha/ComplexOvercooked/src/envs/overcook_pygame/overcook_gym_env.py", line 267, in step
+    self.game.Cointable.update(self.game.playergroup[i],
+  File "/alpha/ComplexOvercooked/src/envs/overcook_pygame/overcook_gym_class.py", line 273, in update
+    pygame.event.post(pygame.event.Event(TASK_FINISH_EVENT, {'action': player.item, 'player': player.name, 'score': score}))
+  File "/alpha/ComplexOvercooked/src/envs/overcook_pygame/overcook_gym_class.py", line 273, in update
+    pygame.event.post(pygame.event.Event(TASK_FINISH_EVENT, {'action': player.item, 'player': player.name, 'score': score}))
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/bdb.py", line 88, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "/home/wanghm/anaconda3/envs/proagent/lib/python3.9/bdb.py", line 113, in dispatch_line
+    if self.quitting: raise BdbQuit
+bdb.BdbQuit
