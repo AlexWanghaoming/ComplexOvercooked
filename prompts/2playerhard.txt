@@ -24,7 +24,7 @@ Instructions:
 - Players cannot synthesize an item directly using objects held in their hands. For example, if Player 0 is holding cookedfish in dish and Player 1 is holding AClemon , one of the players must first place an item on the table, allowing the other player to perform the synthesis.
 - if an order is avaliable in the kitchen, please deliver it at once. 
 
-Skill: 
+Skills: 
 In this game, each player can ONLY perform the following 8 allowed skills: pickup, place_on_counter, put_raw_on_cutting_table, put_raw_in_pot, fill_dish_with, synthesize, deliver_order, wait. Do not attempt to use any other skills that are not listed here.
 def pickup(obj):
     if object_in_hand() == "nothing": # hand holds nothing
@@ -50,14 +50,24 @@ def fill_dish_with(obj):
             pass
 
 def synthesize(obj):
-    if obj in ["AClemoncookedfish"]
+    if obj == "AClemoncookedfish"
         if object_in_hand() == "cookedfish":
             pass
         elif object_in_hand() == "AClemon":
             pass
+    elif obj == "ACtomatocookedbeefhamburger":
+        if object_in_hand() == "ACtomato":
+            pass
+        elif object_in_hand() == "cookedbeefhamburger":
+            pass
+    elif obj == "cookedbeefhamburger":
+        if object_in_hand() == "cookedbeef":
+            pass
+        elif object_in_hand() == "hamburger":
+            pass
 
 def deliver_order(order):
-    if object_in_hand() in ["AClemoncookedfish"]:
+    if current_task() in ["AClemoncookedfish", "cookedfish", "cookedbeefhamburger", "ACtomatocookedbeefhamburger"]:
         pass
 
 def wait(num):  # wait positive num timesteps
@@ -66,49 +76,43 @@ def wait(num):  # wait positive num timesteps
 
 Here are few examples:
 <example>
-H: Scene 0: Player 0 holds nothing. Player 1 holds nothing. Kitchen states: Pot is empty, cutting_table is empty. Current order is AClemoncookedfish and the remaining time is 198. 
-A: Analysis: Pot is empty. Both Player 0 and Player 1 hold nothing and need to start preparing the ingredients. These two players should pickup rawfish.
-Intention for Player 1: "pickup(rawfish)".
+H: Scene 0: Player 0 holds nothing. Player 1 holds nothing. Kitchen states: Pot is empty, cutting_table is empty. Current task orders are cookedfish and cookedbeefhamburger. The remaining timestep is 198. 
+A: Analysis: Pot is empty. Both Player 0 and Player 1 hold nothing and need to start preparing the ingredients. Player0 should prepare cookedfish and Player1 should pickup dish. 
+Intention for Player 1: "pickup(dish)".
 Plan for Player 0: "pickup(rawfish)".
 </example>
 
 <example> 
-H: Scene 81: Player 0 holds nothing. Player 1 holds nothing. Kitchen states: Pot has 1 rawfish, cutting table is empty. Current order is AClemoncookedfish and the remaining time is 120. 
-A: Analysis: The pot has a rawfish and both players are holding nothing. Player 1 should pick up an BClemon from the dispenser and put it on the cuttingtable to start cutting. Player 0 can wait for the cookedfish to be ready or pickup a dish from the dispenser to prepare for the next cooking cycle.
-Intention for Player 1: "pickup(BClemon)".
-Plan for Player 0: "wait(10)" or "pickup(dish)".
+H: Scene 81: Player 0 holds nothing. Player 1 holds dish. Kitchen states: Pot has 1 cookedfish, cutting table is empty. Current task orders are cookedfish and cookedbeefhamburger. The remaining time is 160. 
+A: Analysis: The pot has a rawfish and Player 1 holds dish. Player 1 should fill dish with cookedfish. Player 0 should pickup rawbeef to prepare cookedbeefhamburger. 
+Intention for Player 1: "fill_dish_with(cookedfish)".
+Plan for Player 0: "pickup(rawbeef)".
 </example>
 
 <example> 
-H: Scene 42: Player 0 holds one rawfish. Player 1 holds one rawfish. Kitchen states: Pot is empty and need only one rawfish, cutting table is empty. Current order is AClemoncookedfish and the remaining time is 120. 
-A: Analysis: The pot has is empty and need one rawfish to start cooking. Both Player 0 and Player 1 are holding a rawfish. Player 0 should put the rawfish in the pot and Player 1 should place the rawfish on the counter.
-Intention for Player 1: "put_raw_in_pot()".
-Plan for Player 0: "place_on_counter(rawfish)".
+H: Scene 42: Player 0 holds one cookedbeef in dish. Player 1 holds one BClemon. Kitchen states: Pot is empty, cutting table is empty. Current task orders are AClemoncookedfish and cookedbeefhamburger. The remaining time is 120. 
+A: Analysis: Player 0 holds one cookedbeef in dish, he should fill dish with hamburger to finish cookedbeefhamburger. Player1 should prepare AClemoncookedfish so he should put the BClemon on the cutting table.
+Intention for Player 1: "put_raw_on_cutting_table(BClemon)".
+Plan for Player 0: "fill_dish_with(hamburger)".
 </example>
 
 <exmaple> 
-H: Scene 9: Player 0 holds one cookedfish. Player 1 holds one AClemon. Kitchen states: Pot is empty, cutting table is empty. Current order is AClemoncookedfish and the remaining time is 120. 
-A: Analysis: Since Player 1 is holding the AClemon, he need place it on the counter. Player 0 can also place it on the counter. In the next few steps, Player0 should pickup dish and combine the AClemon and cookedfish to synthesize AClemoncookedfish. Player 1 can go on to pickup BClemon.
-Intention for Player 1: "place_on_counter(AClemon)".
-Plan for Player 0: "place_on_counter(cookedfish)".
-</example>
-
-<exmaple> 
-H: Scene 39: Player 0 holds one dish. Player 1 holds one BClemon. Kitchen states: Pot is empty, AClemon in cutting_table is occupied, AClemoncookedfish is avaliable in the kitchen. Current order is AClemoncookedfish and the remaining time is 120. 
-A: Analysis: Player 0 holds one dish, and Player 1 holds one BClemon. Player 0 should fill the dish with AClemoncookedfish, and then the cutting_table is occupied so that Player 1 should place the BClemon on one counter and to wait for the cutting_table is empty.
-Intention for Player 1: "fill_dish_with(AClemoncookedfish)". 
-Plan for Player 0: "place_on_counter(BClemon)".
-</example>
-
-<exmaple> 
-H: Scene 45: Player 0 holds one AClemon in dish. Player 1 holds nothing. Kitchen states: Pot is empty, cutting_table is empty, There is cookedfish avaliable in the kitchen. Current order is AClemoncookedfish and the remaining time is 120. 
-A: Analysis: Player 0 holds one AClemon in dish, and Player 1 holds nothing. Player 0 should combine the cookedfish and AClemon in hand to synthesize AClemoncookedfish, and Player 1 should pickup BClemon.
-Intention for Player 1: "pickup(BClemon)". 
+H: Scene 9: Player 0 holds one cookedfish in dish. Player 1 holds nothing. Kitchen states: Pot is empty, cutting table is empty. There is AClemon avaliable in the kitchen. Current task orders are AClemoncookedfish and cookedbeefhamburger and the remaining time is 78. 
+A: Analysis: Player0 should combine the cookedfish in dish and AClemon to synthesize AClemoncookedfish, and Player1 should pickup rawbeef to prepare cookedbeefhamburger.
+Intention for Player 1: "pickup(rawbeef)".
 Plan for Player 0: "synthesize(AClemoncookedfish)".
 </example>
 
 <exmaple> 
-H: Scene 66: Player 0 holds nothing. Player 1 holds nothing. Kitchen states: Pot is empty, cutting_table is empty, There are AClemon without dish, AClemoncookedfish in dish in the kitchen. Current order is AClemoncookedfish and the remaining time is 120. 
+H: Scene 39: Player 0 holds cookedbeefhamburger in dish. Player 1 holds one cookedfish. Kitchen states: Pot is empty, AClemon in cutting_table is empy. Current task orders are AClemoncookedfish and cookedbeefhamburger and the remaining time is 80. 
+A: Analysis: Player 0 holds one cookedbeefhamburger, and Player 1 holds one cookedfish. Player 0 should deliver_order, Player 1 should place the cookedfish on the counter and to prepare AClemoncookedfish.
+Intention for Player 1: "place_on_counter(cookedfish)". 
+Plan for Player 0: "deliver_order()".
+</example>
+
+
+<exmaple> 
+H: Scene 66: Player 0 holds . Player 1 holds nothing. Kitchen states: Pot is empty, cutting_table is empty, There are AClemon without dish, AClemoncookedfish in dish in the kitchen. Current order is AClemoncookedfish and the remaining time is 120. 
 A: Analysis: Player 0 holds nothing, and Player 1 holds nothing. Player 0 should pickup AClemoncookedfish, and Player 1 should pickup rawfish.
 Intention for Player 1: "pickup(rawfish)". 
 Plan for Player 0: "pickup(AClemoncookedfish)".

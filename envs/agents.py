@@ -84,13 +84,14 @@ class HumanAgent:
                 self.current_actions[0] = self.current_actions[1] = self.keyboard_mapping['b'][p2_keys[-1]] if p2_keys else 0
         else:
             self.current_actions[0] = self.current_actions[1] = 0
+            
     def select_action(self, obs: np.ndarray, avail_actions: list, agent_idx: int):
         return self.current_actions[agent_idx]
     
 
 class LLMAgent:
-    def __init__(self, mdp, env, agent_index):
-        self.agent = LlmMediumLevelAgent(mdp=mdp, env=env, agent_index=agent_index)
+    def __init__(self, args, mdp, env, agent_index):
+        self.agent = LlmMediumLevelAgent(mdp=mdp, env=env, agent_index=agent_index, layout=args.map_name)
 
     def select_action(self, env, avail_actions:List, agent_idx:int):
         return self.agent.action(env=env)

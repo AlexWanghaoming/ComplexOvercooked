@@ -1,0 +1,10 @@
+Group,Mean,Std
+RL+LLM,11,4.85
+RL+LLM,9,3.67
+RL+Human,38,7.56
+RL+Human,46,4.85
+LLM+Human,34,6.2
+LLM+Human,43,3
+RL+RL,12,4.31
+LLM+LLM,22,6.82
+Human+Human,57,3.03

@@ -1,4 +1,3 @@
-import argparse
 from collections import defaultdict
 from pathlib import Path
 import matplotlib as mpl
@@ -25,25 +24,28 @@ plt.rcParams.update({
 })
 mpl.rcParams['font.family'] = 'Arial'  # 设置字体为 Arial
 mpl.rcParams['font.size'] = 18  # 设置基本字体大小为 12 点
-mpl.rcParams['axes.labelsize'] = 20  # 设置坐标轴标签的字体大小
+mpl.rcParams['axes.labelsize'] = 24  # 设置坐标轴标签的字体大小
 mpl.rcParams['axes.titlesize'] = 20  # 设置坐标轴标题的字体大小
-mpl.rcParams['xtick.labelsize'] = 16  # 设置x轴刻度标签的字体大小
-mpl.rcParams['ytick.labelsize'] = 16  # 设置y轴刻度标签的字体大小
-mpl.rcParams['legend.fontsize'] = 15  # 设置图例的字体大小
+mpl.rcParams['xtick.labelsize'] = 20  # 设置x轴刻度标签的字体大小
+mpl.rcParams['ytick.labelsize'] = 24  # 设置y轴刻度标签的字体大小
+mpl.rcParams['legend.fontsize'] = 18  # 设置图例的字体大小
 
 # ALPHA = 0.2
 
+# 测试数据
+# data = {
+#     "Group": [
+#         "RL+LLM", "RL+LLM", "RL+Human", "RL+Human",
+#         "LLM+Human", "LLM+Human", "RL+RL", "LLM+LLM", "Human+Human"
+#     ],
+#     "Mean": [0.85, 0.82, 0.75, 0.71, 0.78, 0.92, 0.90, 0.86, 0.88],
+#     "Std": [0.04, 0.05, 0.06, 0.07, 0.06, 0.03, 0.04, 0.05, 0.03]
+# }
+# df = pd.DataFrame(data)
 
-data = {
-    "Group": [
-        "RL+LLM", "RL+LLM", "RL+Human", "RL+Human",
-        "LLM+Human", "LLM+Human", "RL+RL", "LLM+LLM", "Human+Human"
-    ],
-    "Mean": [0.85, 0.82, 0.75, 0.71, 0.78, 0.92, 0.90, 0.86, 0.88],
-    "Std": [0.04, 0.05, 0.06, 0.07, 0.06, 0.03, 0.04, 0.05, 0.03]
-}
-
-df = pd.DataFrame(data)
+map_name = "2playerhard"
+# map_name = "supereasy"
+df = pd.read_csv(f"eval_res_{map_name}.csv")
 
 # 分组信息
 groups = ["RL+LLM", "RL+Human", "LLM+Human", "RL+RL", "LLM+LLM", "Human+Human"]
@@ -83,9 +85,9 @@ for i, group in enumerate(groups):
 
 # 美化图表
 plt.xticks(index, groups)
-plt.ylabel("Cooperation Performance", fontsize=14)
+plt.ylabel("Mean episodic reward")
 # plt.title("Cross-Agent and Self-Agent Cooperation Performance", fontsize=16)
-plt.ylim(0.6, 1.0)
+# plt.ylim(0.6, 1.0)
 plt.tight_layout()
 
 # 添加图例
@@ -93,8 +95,8 @@ handles, labels = plt.gca().get_legend_handles_labels()
 by_label = dict(zip(labels, handles))
 # del by_label['RL→LLM']
 
-plt.legend(by_label.values(), by_label.keys(), loc='upper right')
+# plt.legend(by_label.values(), by_label.keys(), loc='upper left')
 
 # 保存图像
-plt.savefig("cross_agent_collaboration_supereasy.pdf", dpi=300, bbox_inches='tight')
-plt.show()
+plt.savefig(f"cross_agent_collaboration_{map_name}.pdf", dpi=300, bbox_inches='tight')
+# plt.show()

@@ -61,7 +61,7 @@ class LlmMediumLevelAgent():
 		self.cache_list = None
 		self.layout_prompt = self.generate_layout_prompt()
 
-		with open("prompts/supereasy.txt", "r") as f:
+		with open(f"prompts/{layout}.txt", "r", encoding="utf-8") as f:
 			self.instruction_message = [{"role": "system", "content": f.read()}]
 
 	def get_cache(self)->list:
@@ -199,7 +199,7 @@ class LlmMediumLevelAgent():
 			else:
 				self.add_msg_to_dialog_history({"role": "assistant", "content": f"There are no {obj} avaliable, please generate another different plan."})
 
-		if self.current_ml_action == "synthesize":
+		elif self.current_ml_action == "synthesize":
 			hold_objects = self.mdp.get_player_hold_objects()[self.agent_index]
 			if "dish" in hold_objects:
 				if len(hold_objects) > 1:
@@ -238,6 +238,14 @@ class LlmMediumLevelAgent():
 						return False
 				else:
 					raise NotImplementedError
+				
+		elif "deliver_order" in self.current_ml_action:
+			if not any(item in hold_objects for item in state['task']):
+
+				self.add_msg_to_dialog_history({"role": "assistant", "content": f"Current plan for player{self.agent_index} is not valid because the {hold_objects} that player hold is not in current task orders {state['task']}"})
+				
+				return False
+
 
 		return True
 		
@@ -257,11 +265,11 @@ class LlmMediumLevelAgent():
 		
 	def generate_state_prompt(self, state):
 		counter_objects, counter_objects_pos = self.mdp.get_counter_objects_dict()
-		synthesis_objects = [obj for obj in counter_objects if obj not in ["dish", "BClemon", "rawfish"]]
+		synthesis_objects = [obj for obj in counter_objects if obj not in ["dish", "BClemon", "rawfish", "BCtomato", "rawbeef"]]
         # ss = [obj for obj in counter]
-		# print("Current state:", state)
-		ego = f"player_{self.agent_index}"
-		teammate = f"player_{1-self.agent_index}"
+		print("Current state:", state)
+		# ego = f"player_{self.agent_index}"
+		# teammate = f"player_{1-self.agent_index}"
 		time_prompt = f"Scene {state['timestep']}: "
 		ego_object = state["player"][self.agent_index]
 		teammate_object = state["player"][1-self.agent_index]
@@ -271,10 +279,10 @@ class LlmMediumLevelAgent():
 		if "dish" in teammate_object and len(ego_object)>1:
 			teammate_object = f"{teammate_object[0]} in dish"
 		teammate_state_prompt = f"<Player {1-self.agent_index}> holds {teammate_object}."
-		
 		kitchen_state_prompt = "Kitchen states: "
 		kitchen_state_prompt += ",".join(state['pot']) + ","
 		kitchen_state_prompt += ",".join(state['cutting_table']) + "."
+
 		if len(synthesis_objects) > 0:
 			ss = ""
 			for synthesis_obj in synthesis_objects:
@@ -285,7 +293,11 @@ class LlmMediumLevelAgent():
 					ss += f"{synthesis_obj} without dish,"
 			kitchen_state_prompt += f"There are {ss} in the kitchen."
 
-		task_state_prompt = f"Task states: Current order is {state['task']} and the remaining time is {state['tasktime']}."
+		if len(state['task']) > 1: # 多个orders
+			task_state_prompt = f"Task states: Current orders are {state['task']} and the remaining times are {state['tasktime']}."
+		else:
+			task_state_prompt = f"Task states: Current order is {state['task']} and the remaining time is {state['tasktime']}."
+
 		return (self.layout_prompt + time_prompt + ego_state_prompt +
 				teammate_state_prompt + kitchen_state_prompt + task_state_prompt)
 	
@@ -317,24 +329,15 @@ class LlmMediumLevelAgent():
 		if "place" in action_string:
 			ml_action = "place_obj_on_counter"
 
-		elif "pick" in action_string:
-			if "AClemoncooked" in action_string:
-				ml_action = "pickup_AClemoncooked"
-			elif "rawfish" in action_string:
-				ml_action = "pickup_rawfish"
-			elif "BClemon" in action_string:
-				ml_action = "pickup_BClemon"
-			elif "dish" in action_string:
-				ml_action = "pickup_dish"
-			elif "cookedfish" in action_string:
-				ml_action = "pickup_cookedfish"	
-			elif "AClemon" in action_string:
-				ml_action = "pickup_AClemon"	
-			else:
-				raise NotImplementedError
+		elif "pickup" in action_string:
+			pattern = r"pickup(?:[(]|_)(\w+)(?:[)]|)" 
+			item = re.search(pattern, action_string).group(1) # 从大模型生成的pickup(rawbeef)提取出rawbeef字符串
+			assert item in ["dish", "rawfish", "rawbeef", "BClemon", "BCtomato", "cookedfish", "cookedbeef", "AClemon", "ACtomato", "hamburger", "cookedbeefhamburger" "AClemoncookedfish", "ACtomatocookedbeefhamburger",]	
+
+			ml_action = f"pickup_{item}"
 
 		elif "put" in action_string:
-			if "rawfish" in action_string:
+			if "rawfish" in action_string or "rawbeef" in action_string:
 				ml_action = "put_raw_in_pot"
 			elif "BClemon" in action_string or "BCtomato" in action_string:
 				ml_action = "put_raw_on_cutting_table"
@@ -355,7 +358,6 @@ class LlmMediumLevelAgent():
 			ml_action='wait(1)'  
 			action_string = ml_action
 		if "wait" in action_string:
-			
 			def parse_wait_string(s):
 				# Check if it's just "wait"
 				if s == "wait":
@@ -372,18 +374,14 @@ class LlmMediumLevelAgent():
 				return 1
 			
 			self.time_to_wait = parse_wait_string(action_string)    
-			# print(ml_action) 
-			# print(self.time_to_wait) 
-			
 			ml_action = f"wait({self.time_to_wait})"
-
 		else:
 			pass
 		
 		# aviod to generate two skill, eg, Plan for Player 0: "deliver_soup(), pickup(onion)".
 		if "," in ml_action:
 			ml_action = ml_action.split(',')[0].strip()
-       
+
 		return ml_action    
 
 	def generate_ml_action(self, state):
@@ -404,7 +402,7 @@ class LlmMediumLevelAgent():
 		# ipdb.set_trace()
 
 		print(f"\n\n### Observation module to GPT\n")   
-		# print(f"state_prompt: {state_prompt}")
+		print(f"state_prompt: {state_prompt}")
 		
 
 		state_message = {"role": "user", "content": state_prompt}
@@ -594,7 +592,7 @@ class LlmMediumLevelAgent():
 		"""
 		
 		if "pickup" in self.current_ml_action:
-			pattern = r"pickup(?:[(]|_)(\w+)(?:[)]|)" # fit both pickup(onion) and pickup_onion
+			pattern = r"pickup(?:[(]|_)(\w+)(?:[)]|)" 
 			obj_str = re.search(pattern, self.current_ml_action).group(1)
 			# print("obj_str:", obj_str)
 			return obj_str in state["player"][self.agent_index]
@@ -606,11 +604,9 @@ class LlmMediumLevelAgent():
 		elif "put" in self.current_ml_action or "place" in self.current_ml_action:
 			return state["player"][self.agent_index][0] == 'nothing'
 		
-		elif "synthesize" in self.current_ml_action:
+		elif "synthesize" in self.current_ml_action: # TODO: 如何高效的判断合成动作是否完成
 			hold_objects = self.mdp.get_player_hold_objects()[self.agent_index]
-			if "AClemoncookedfish" in hold_objects:  # 用盘子把东西合成到手上了
-				return True
-			elif "nothing" in hold_objects:    # 把东西合成到counter table的盘子上了
+			if any(item in hold_objects for item in ["AClemoncookedfish", "nothing", "ACtomatocookedbeefhamburger", "cookedbeefhamburger"]):
 				return True
 			else:
 				return False
@@ -622,6 +618,7 @@ class LlmMediumLevelAgent():
 
 		else:
 			print("002")
+
 
 class Node:
     """
@@ -644,6 +641,7 @@ class Node:
     def __eq__(self, other):
         return self.position == other.position
     
+
 def find_path(start_pos_and_or, other_pos_and_or, goal, terrain_mtx):  
     
     start_node = Node(None, start_pos_and_or)  
@@ -738,7 +736,6 @@ def find_path(start_pos_and_or, other_pos_and_or, goal, terrain_mtx):
                     previous_node.position[0][1] - start_node.position[0][1]
                 ), last_node.f + 1 
        
-
 
 if __name__ == "__main__":
 	mdp = ComplexOvercookedGridworld(map_name='supereasy')

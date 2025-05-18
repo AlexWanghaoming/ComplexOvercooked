@@ -559,9 +559,6 @@ class OvercookPygameEnv(gym.Env):
         
         return game_state
     
-    
-    
-
     def get_obs(self) -> List[List[np.ndarray]]:
         """
         Encode state with some manually designed features. Works for arbitrary number of players
@@ -621,7 +618,7 @@ class OvercookPygameEnv(gym.Env):
             if player.item:
                 itemindex = (self.itemdict[player.item] - 1) * 2
                 playab_closet_item_pos[i][itemindex:itemindex + 2] = [0, 0]
-            elif player.dish:
+            elif player.dish: # TODO：这里逻辑有问题
                 dishindex = (self.itemdict[player.dish] - 1) * 2
                 playab_closet_item_pos[i][dishindex:dishindex + 2] = [0, 0]
 
@@ -689,8 +686,8 @@ class OvercookPygameEnv(gym.Env):
                 pots_lang.append(f"pot{p} is empty")
             elif pot.is_cooking:
                 pots_state[p*2:(p+1)*2] = [0, 1]
-                pots_lang.append(f"pot{p} is cooking, the {pot.item} will be ready in {pot.remaining_time} seconds")
-
+                pot_item = pot.item.replace("raw", "cooked")
+                pots_lang.append(f"pot{p} is cooking, the {pot_item} will be ready in {pot.remaining_time} timesteps")
             elif pot.is_ready:
                 pots_state[p*2:(p+1)*2] = [1, 0]
                 pots_lang.append(f"{pot.item} in pot{p} is ready")
@@ -711,10 +708,10 @@ class OvercookPygameEnv(gym.Env):
                 cuttingtables_lang.append(f"cutting_table{p} is empty")
             elif cuttingtable.is_cutting:#非空又没切这种情况理论上没有？
                 cuttingtables_state[p*2:(p+1)*2] = [0, 1]
-                cuttingtables_lang.append(f"cutting_table{p} is occupied")
+                cuttingtables_lang.append(f"cutting_table{p} is occupied by {cuttingtable.item}")
             elif cuttingtable.is_ready:
                 cuttingtables_state[p*2:(p+1)*2] = [1, 0]
-                cuttingtables_lang.append(f"{cuttingtable.item} in cutting_table{p} is ready")
+                cuttingtables_lang.append(f"{cuttingtable.item} on cutting_table{p} is ready")
 
         self.state.update({"cutting_table": cuttingtables_lang})
 
