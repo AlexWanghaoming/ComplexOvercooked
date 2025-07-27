@@ -8,6 +8,7 @@ from collections import defaultdict
 from typing import Union, Dict, Tuple, List, Optional, Any
 from gymnasium.spaces import flatdim
 from envs.overcook_main import MainGame
+
 from envs.overcook_class import ONEBLOCK, Table, Action, Direction, \
     TASK_FINISH_EVENT, OUT_SUPPLY_EVENT, OUT_DISH_EVENT, GET_MATERIAL_EVENT, \
         GET_DISH_EVENT, MADE_NEWTHING_EVENT, BEGINCUTTING_EVENT, CUTTINGDOWN_EVENT, \
@@ -67,6 +68,7 @@ def get_cleaned_matrix_size(matrix):
     return len(matrix)-height, width
 
 
+
 class OvercookPygameEnv(gym.Env):
     metadata = {'name': 'MyEnv-v0', 'render.modes': ['human']}
 
@@ -79,6 +81,7 @@ class OvercookPygameEnv(gym.Env):
                  ifrender=False, 
                  debug=False,
                  pltheatmap=False,
+                 lossless_obs=True,
                  fps=60):
         # 初始化 pygame
         self.reward_shaping_params = {
@@ -105,7 +108,7 @@ class OvercookPygameEnv(gym.Env):
         self.n_agents:int = maps[map_name]['players']
         self.TASKNUM:int = maps[map_name]['tasknum']
         self.ITEMS:List[str] = maps[map_name]['items']
-
+        self.lossless_obs = lossless_obs
         self.debug = debug
         self.episode_limit = 600
         self.fps = fps
@@ -121,7 +124,12 @@ class OvercookPygameEnv(gym.Env):
         # self.observation_space= gym.spaces.Tuple(tuple(self._setup_observation_space() for _ in range(self.n_agents))) # wanghm
         # self.observation_space = self._setup_observation_space()
         # self.share_observation_space = [self.observation_space, self.observation_space]
-        
+
+        self.terrain = maps[self.map_name]['layout']
+        self.terrain_mtx = self.convert_layout_to_2d_list()
+        self.height = len(self.terrain_mtx)
+        self.width = len(self.terrain_mtx[0])
+
         self.obs_shape = self.dummy_reset()[0].shape[0]
         self.reset_featurize_type(obs_shape=self.obs_shape)
 
@@ -130,6 +138,18 @@ class OvercookPygameEnv(gym.Env):
         self.t = 0
         self._max_episode_steps = 600
 
+
+
+    def convert_layout_to_2d_list(self) -> List[List[str]]:
+        ignore_chars = ['_']
+        terrain_mtx = [[char for char in row if char not in  ignore_chars] for row in self.terrain]
+        terrain_mtx = [row for row in terrain_mtx if row]  # Remove empty rows
+        for y, row in enumerate(terrain_mtx):
+            for x, c in enumerate(row):
+                if c in ['1', '2', '3', '4']:
+                    terrain_mtx[y][x] = ' '
+
+        return terrain_mtx
     # def _setup_observation_space(self):
     #     obs_shape = self.reset()[0].shape[0]
     #     low = np.ones(obs_shape, dtype=np.float32) * -np.inf
@@ -174,15 +194,21 @@ class OvercookPygameEnv(gym.Env):
         self.timercount = 0
         self.state = {}  
 
-        nobs = self.get_obs()
+        if self.lossless_obs:
+            nobs = self.get_obs_grid()
+        else:
+            nobs = self.get_obs()
         return nobs
     
     def reset(self) -> Tuple[Tuple[np.ndarray, np.ndarray], np.ndarray, np.ndarray]:  # wanghm
         self.initialize_game()
         self.timercount = 0
         self.state = {}  # self.state is used in LLM
-        nobs = self.get_obs() 
-        
+        if self.lossless_obs:
+            nobs = self.get_obs_grid()
+        else:
+            nobs = self.get_obs()
+
         available_actions = self.get_avail_actions()
         share_obs = self.get_share_observation(nobs)
         self.episode_reward_dict = {
@@ -539,8 +565,6 @@ class OvercookPygameEnv(gym.Env):
     
     def get_state(self, nobs):
         tasks, tasktime = self.cal_tasktime()
-
-
         game_state = {
                 "player1_pos": (nobs[0][0], nobs[0][1]),  # 玩家位置
                 "player1_item": nobs[0][3],  # 手持物品
@@ -559,6 +583,7 @@ class OvercookPygameEnv(gym.Env):
         
         return game_state
     
+
     def get_obs(self) -> List[List[np.ndarray]]:
         """
         Encode state with some manually designed features. Works for arbitrary number of players
@@ -870,6 +895,141 @@ class OvercookPygameEnv(gym.Env):
 
         # return sparse_r, shaped_r, tasksequence, self.timercount > self.episode_limit, ordered_features, avaliable_actions
         return ordered_features
+
+    def get_obs_grid(self) -> List[np.ndarray]:
+        """
+        生成h*w*n_channels格式的观测，其中h是地图高度，w是地图宽度，n_channels是特征通道数
+        
+        Returns:
+            grid_obs (list[np.ndarray]): 每个玩家的网格观测，形状为 (h, w, n_channels)
+            
+        特征通道包括:
+        - 墙壁位置 (1通道)
+        - 玩家位置 (n_agents通道)
+        - 锅的位置 (1通道)
+        - 案板位置 (1通道)
+        - 收银台位置 (1通道)
+        - 各种物品位置 (len(items)通道)
+        - 锅的状态 (3通道: 空/烹饪中/完成)
+        - 案板状态 (3通道: 空/切菜中/完成)
+        - 任务信息 (len(tasks)通道)
+        """        
+        # 计算总通道数
+        n_channels = (1 +  # 墙壁
+                     self.n_agents +  # 玩家位置
+                     1 +  # 锅位置
+                     1 +  # 案板位置
+                     1 +  # 收银台位置
+                     len(self.itemdict) +  # 各种物品
+                     3 +  # 锅状态
+                     3 +  # 案板状态
+                     len(self.taskdict))  # 任务信息
+        
+        grid_obs = []
+        
+        for agent_id in range(self.n_agents):
+            # 初始化网格观测
+            obs = np.zeros((self.height, self.width, n_channels), dtype=np.float32)
+            channel_idx = 0
+            
+            # 1. 墙壁位置 (通道 0)
+            for i, row in enumerate(self.terrain_mtx):
+                for j, cell in enumerate(row):
+                    if cell == 'X':
+                        obs[i, j, channel_idx] = 1.0
+            channel_idx += 1
+            
+            # 2. 玩家位置 (通道 1-n_agents)
+            for player_id, player in enumerate(self.game.playergroup):
+                player_x, player_y = player.rect.x // 80, player.rect.y // 80
+                if 0 <= player_y < self.height and 0 <= player_x < self.weight:
+                    obs[player_y, player_x, channel_idx + player_id] = 1.0
+            channel_idx += self.n_agents
+            
+            # 3. 锅的位置 (通道 n_agents+1)
+            for pot in self.game.pots:
+                pot_x, pot_y = pot.rect.x // 80, pot.rect.y // 80
+                if 0 <= pot_y < h and 0 <= pot_x < w:
+                    obs[pot_y, pot_x, channel_idx] = 1.0
+            channel_idx += 1
+            
+            # 4. 案板位置 (通道 n_agents+2)
+            for cutting_table in self.game.cuttingtables:
+                ct_x, ct_y = cutting_table.rect.x // 80, cutting_table.rect.y // 80
+                if 0 <= ct_y < h and 0 <= ct_x < w:
+                    obs[ct_y, ct_x, channel_idx] = 1.0
+            channel_idx += 1
+            
+            # 5. 收银台位置 (通道 n_agents+3)
+            coin_x, coin_y = self.game.Cointable.rect.x // 80, self.game.Cointable.rect.y // 80
+            if 0 <= coin_y < h and 0 <= coin_x < w:
+                obs[coin_y, coin_x, channel_idx] = 1.0
+            channel_idx += 1
+            
+            # 6. 各种物品位置 (通道 n_agents+4 到 n_agents+4+len(items)-1)
+            for table in self.game.tables:
+                if table.item:
+                    table_x, table_y = table.rect.x // 80, table.rect.y // 80
+                    if 0 <= table_y < h and 0 <= table_x < w:
+                        item_idx = self.itemdict[table.item] - 1
+                        obs[table_y, table_x, channel_idx + item_idx] = 1.0
+                
+                # 处理盘子
+                if isinstance(table, Table) and table.dish:
+                    table_x, table_y = table.rect.x // 80, table.rect.y // 80
+                    if 0 <= table_y < h and 0 <= table_x < w:
+                        dish_idx = self.itemdict["dish"] - 1
+                        obs[table_y, table_x, channel_idx + dish_idx] = 1.0
+            
+            # 处理玩家手持的物品
+            for player_id, player in enumerate(self.game.playergroup):
+                player_x, player_y = player.rect.x // 80, player.rect.y // 80
+                if 0 <= player_y < h and 0 <= player_x < w:
+                    if player.item:
+                        item_idx = self.itemdict[player.item] - 1
+                        obs[player_y, player_x, channel_idx + item_idx] = 1.0
+                    if player.dish:
+                        dish_idx = self.itemdict["dish"] - 1
+                        obs[player_y, player_x, channel_idx + dish_idx] = 1.0
+            
+            channel_idx += len(self.itemdict)
+            
+            # 7. 锅的状态 (3通道: 空/烹饪中/完成)
+            for pot in self.game.pots:
+                pot_x, pot_y = pot.rect.x // 80, pot.rect.y // 80
+                if 0 <= pot_y < h and 0 <= pot_x < w:
+                    if pot.is_empty:
+                        obs[pot_y, pot_x, channel_idx] = 1.0  # 空
+                    elif pot.is_cooking:
+                        obs[pot_y, pot_x, channel_idx + 1] = 1.0  # 烹饪中
+                    elif pot.is_ready:
+                        obs[pot_y, pot_x, channel_idx + 2] = 1.0  # 完成
+            channel_idx += 3
+            
+            # 8. 案板状态 (3通道: 空/切菜中/完成)
+            for cutting_table in self.game.cuttingtables:
+                ct_x, ct_y = cutting_table.rect.x // 80, cutting_table.rect.y // 80
+                if 0 <= ct_y < h and 0 <= ct_x < w:
+                    if cutting_table.is_empty:
+                        obs[ct_y, ct_x, channel_idx] = 1.0  # 空
+                    elif cutting_table.is_cutting:
+                        obs[ct_y, ct_x, channel_idx + 1] = 1.0  # 切菜中
+                    elif cutting_table.is_ready:
+                        obs[ct_y, ct_x, channel_idx + 2] = 1.0  # 完成
+            channel_idx += 3
+            
+            # 9. 任务信息 (len(tasks)通道)
+            for task in self.game.task_sprites:
+                # 将任务信息编码到整个网格中（可以编码到特定位置或均匀分布）
+                # 这里我们简单地将任务信息编码到收银台位置
+                coin_x, coin_y = self.game.Cointable.rect.x // 80, self.game.Cointable.rect.y // 80
+                if 0 <= coin_y < h and 0 <= coin_x < w:
+                    task_idx = self.taskdict[task.task]
+                    obs[coin_y, coin_x, channel_idx + task_idx] = 1.0
+            
+            grid_obs.append(obs)
+        
+        return grid_obs
 
     def is_done(self):
         return self.timercount >= self.episode_limit
