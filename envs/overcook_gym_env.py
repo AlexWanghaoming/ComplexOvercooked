@@ -8,39 +8,20 @@ from collections import defaultdict
 from typing import Union, Dict, Tuple, List, Optional, Any
 from gymnasium.spaces import flatdim
 from envs.overcook_main import MainGame
-
+from envs.overcook_mdp import ComplexOvercookedGridworld, TASK_VALUE
 from envs.overcook_class import ONEBLOCK, Table, Action, Direction, \
     TASK_FINISH_EVENT, OUT_SUPPLY_EVENT, OUT_DISH_EVENT, GET_MATERIAL_EVENT, \
         GET_DISH_EVENT, MADE_NEWTHING_EVENT, BEGINCUTTING_EVENT, CUTTINGDOWN_EVENT, \
             BEGINCOOKING_EVENT, COOKINGDOWN_EVENT, COOKINGOUT_EVENT, TRY_NEWTHING_EVENT,\
                   PUTTHING_DISH_EVENT, TRASH_EVENT
+from envs.overcook_class import TrashTable, Pot, SupplyTable
+import ipdb
 
 # 获取当前文件的目录
 current_dir = os.path.dirname(__file__)
 maps_path = os.path.join(current_dir, 'maps.json')
 with open(maps_path, 'r', encoding='utf-8') as file:
     maps = json.load(file)
-
-## 合成菜品的得分
-TASK_VALUE = {'AClemoncookedfish': defaultdict(float,{'AClemoncookedfish': 5, 
-                                                      'AClemon': 0, 
-                                                      'cookedfish': 0, 
-                                                      'BClemon': 0,
-                                                      'rawfish': 0}),
-              'cookedfish': defaultdict(float, {'cookedfish': 2, 
-                                                'rawfish': 0}),
-              'ACtomatocookedbeefhamburger': defaultdict(float, {'ACtomatocookedbeefhamburger': 6.0,
-                                                                 'ACtomatohamburger': 0,
-                                                                 'BCtomato': 0,
-                                                                 'ACtomato': 0,
-                                                                 'cookedbeefhamburger': 0,
-                                                                 'cookedbeef': 0,
-                                                                 'rawbeef': 0,
-                                                                 'hamburger': 0}),
-              'cookedbeefhamburger': defaultdict(float, {'cookedbeefhamburger': 3.0, 
-                                                         'cookedbeef': 0, 
-                                                         'rawbeef': 0,
-                                                         'hamburger': 0})}
 
 # 为了解决前两个问题，需要新的状态，记录场上各个食材的数量，玩家lastpick的标志位
 # 计算reward时考虑，如果是【当前需要的食材，且场上食材数量不够2）则reward+1】
@@ -80,8 +61,7 @@ class OvercookPygameEnv(gym.Env):
                  seed=1, 
                  ifrender=False, 
                  debug=False,
-                 pltheatmap=False,
-                 lossless_obs=True,
+                 lossless_obs=False,
                  fps=60):
         # 初始化 pygame
         self.reward_shaping_params = {
@@ -116,19 +96,16 @@ class OvercookPygameEnv(gym.Env):
         self.timercount = 0  # 自定义的计时器
         self.showkey()
         self.ifrender = ifrender
-        self.pltheatmap = pltheatmap
-        if self.pltheatmap:
-            self.heatmapsize:Tuple = get_cleaned_matrix_size(maps[map_name]['layout'])
+        # self.pltheatmap = pltheatmap
+        # if self.pltheatmap:
+        #     self.heatmapsize:Tuple = get_cleaned_matrix_size(maps[map_name]['layout'])
 
-        # wanghm
-        # self.observation_space= gym.spaces.Tuple(tuple(self._setup_observation_space() for _ in range(self.n_agents))) # wanghm
-        # self.observation_space = self._setup_observation_space()
-        # self.share_observation_space = [self.observation_space, self.observation_space]
-
+        # 初始化MDP
+        self.mdp = ComplexOvercookedGridworld(map_name=map_name)
         self.terrain = maps[self.map_name]['layout']
-        self.terrain_mtx = self.convert_layout_to_2d_list()
-        self.height = len(self.terrain_mtx)
-        self.width = len(self.terrain_mtx[0])
+        self.terrain_mtx = self.mdp.terrain_mtx
+        self.height = self.mdp.height
+        self.width = self.mdp.width
 
         self.obs_shape = self.dummy_reset()[0].shape[0]
         self.reset_featurize_type(obs_shape=self.obs_shape)
@@ -138,24 +115,6 @@ class OvercookPygameEnv(gym.Env):
         self.t = 0
         self._max_episode_steps = 600
 
-
-
-    def convert_layout_to_2d_list(self) -> List[List[str]]:
-        ignore_chars = ['_']
-        terrain_mtx = [[char for char in row if char not in  ignore_chars] for row in self.terrain]
-        terrain_mtx = [row for row in terrain_mtx if row]  # Remove empty rows
-        for y, row in enumerate(terrain_mtx):
-            for x, c in enumerate(row):
-                if c in ['1', '2', '3', '4']:
-                    terrain_mtx[y][x] = ' '
-
-        return terrain_mtx
-    # def _setup_observation_space(self):
-    #     obs_shape = self.reset()[0].shape[0]
-    #     low = np.ones(obs_shape, dtype=np.float32) * -np.inf
-    #     high = np.ones(obs_shape, dtype=np.float32) * np.inf
-    #     return gym.spaces.Box(low, high, dtype=np.float32)
-
     def get_share_observation(self, nobs:List[np.ndarray]) -> np.ndarray:
         """
         share observation 和 state 没什么区别
@@ -164,26 +123,47 @@ class OvercookPygameEnv(gym.Env):
         return share_obs
 
     def initialize_game(self):
+        """初始化游戏环境和MDP状态"""
         self.get_need_cutting = 0
         self.get_need_cooking = 0
         self.get_need_synthesis = 0
 
-        self.clock = pygame.time.Clock()
+        # 只在需要渲染时初始化时钟
+        if self.ifrender:
+            self.clock = pygame.time.Clock()
 
+        # 初始化游戏实例
         self.game = MainGame(map_name=self.map_name, 
                              ifrender=self.ifrender)
         
-        self.taskcount = [{key:0 for key in self.TASK_MENU} for i in range(self.n_agents)]
+        # 初始化任务计数器 - 使用字典推导式优化
+        self.taskcount = [{key:0 for key in self.TASK_MENU} for _ in range(self.n_agents)]
         self.alltaskcount = {key:0 for key in self.TASK_MENU} #用来计算总的任务变更
+        
+        # 批量更新任务计数
         for taskname in self.game.taskmenu:
-            self.alltaskcount[taskname]+=1
-        if self.pltheatmap:
-            self.heatmap = [np.zeros((self.heatmapsize[0], self.heatmapsize[1])) for i in range(self.n_agents)]
-        else:
-            self.heatmap = None
+            self.alltaskcount[taskname] += 1
+            
+        # 初始化热力图（如果需要）- 只在需要时分配内存
+        # if self.pltheatmap:
+        #     self.heatmap = [np.zeros((self.heatmapsize[0], self.heatmapsize[1]), dtype=np.float32) for _ in range(self.n_agents)]
+        # else:
+        #     self.heatmap = None
+            
+        # 初始化物品计数器 - 使用字典推导式优化
         self.matiral_count = {key: 0 for key in self.itemdict.keys()}
-        # self.playitem = [self.game.playergroup[i].item for i in range(self.n_agents)]
-        # self.playdish = [self.game.playergroup[i].dish for i in range(self.n_agents)]
+        
+        # 初始化状态字典，用于MDP处理 - 直接引用游戏对象
+        self.state = {
+            "tables": self.game.tables,
+            "pots": self.game.pots,
+            "cuttingtables": self.game.cuttingtables,
+            "players": self.game.playergroup,
+            "cointable": self.game.Cointable,
+            "timercount": 0
+        }
+        
+        # 预先计算玩家字典，避免重复创建
         self.playerdic = {'a':0,'b':1,'c':2,'d':3}
         
     def change_shapereward(self,reward_shaping_params): #for the llm to change the reward_shaping_params
@@ -194,28 +174,34 @@ class OvercookPygameEnv(gym.Env):
         self.timercount = 0
         self.state = {}  
 
-        if self.lossless_obs:
-            nobs = self.get_obs_grid()
-        else:
-            nobs = self.get_obs()
+        nobs = self.get_obs_grid() if self.lossless_obs else self.get_obs()
         return nobs
     
     def reset(self) -> Tuple[Tuple[np.ndarray, np.ndarray], np.ndarray, np.ndarray]:  # wanghm
+        # 初始化游戏并重置计时器
         self.initialize_game()
         self.timercount = 0
-        self.state = {}  # self.state is used in LLM
-        if self.lossless_obs:
-            nobs = self.get_obs_grid()
-        else:
-            nobs = self.get_obs()
+        
+        # 状态字典已在initialize_game中设置，只需更新timercount
+        self.state["timercount"] = self.timercount
+        
+        # 获取MDP特征
+        self.mdp_features = self.mdp.get_mdp_features(self.state)
+        
+        # 获取观察值 - 根据配置选择观察方式
+        nobs = self.get_obs_grid() if self.lossless_obs else self.get_obs()
 
+        # 获取可用动作和共享观察
         available_actions = self.get_avail_actions()
         share_obs = self.get_share_observation(nobs)
+        
+        # 重置奖励字典 - 使用numpy数组直接初始化
         self.episode_reward_dict = {
-            "cumulative_sparse_rewards": np.array([0.0]),
-            "cumulative_shaped_rewards": np.array([0.0]),
-            "cumulative_rewards":np.array([0.0])
+            "cumulative_sparse_rewards": np.zeros(1, dtype=np.float32),
+            "cumulative_shaped_rewards": np.zeros(1, dtype=np.float32),
+            "cumulative_rewards": np.zeros(1, dtype=np.float32)
         }
+        
         return nobs, share_obs, available_actions
 
     def reset_featurize_type(self, obs_shape: int)->None:
@@ -238,80 +224,96 @@ class OvercookPygameEnv(gym.Env):
         return gym.spaces.Box(np.float32(low), np.float32(high), dtype=np.float32)
 
     def get_avail_actions(self)->List[np.ndarray]:
-        avaliable_actions = []
-        for i in range(self.n_agents):
-            avaliable_actions.append(self.get_avail_agent_actions(i))
-        return avaliable_actions
+        # 使用列表推导式优化循环
+        return [self.get_avail_agent_actions(i) for i in range(self.n_agents)]
         
     def get_avail_agent_actions(self, agent_id:int)->np.ndarray:
-        availaction = [Action.STAY]
-        player = self.game.playergroup[agent_id] #python中理论上改动这个player原先的也会变
-        if player.cutting:#切菜时只有不动和交互合法
-            availaction.append(Action.INTERACT)
-            avaliable_actions = [0] * 6
-            for index in availaction:
-                avaliable_actions[index] = 1
+        # 初始化可用动作数组 - 默认所有动作不可用
+        avaliable_actions = [0] * 6
+        player = self.game.playergroup[agent_id]
+        
+        # 停留动作始终可用
+        avaliable_actions[Action.STAY] = 1
+        
+        # 切菜时特殊处理 - 只有停留和交互可用
+        if player.cutting:
+            avaliable_actions[Action.INTERACT] = 1
             return avaliable_actions
 
-        #检测移动是否会阻塞
-        tempplayergroup = []
-        for j in range(self.n_agents):
-            if j != agent_id:
-                tempplayergroup.append(self.game.playergroup[j])
+        # 预先创建其他玩家列表 - 只创建一次
+        tempplayergroup = [self.game.playergroup[j] for j in range(self.n_agents) if j != agent_id]
 
-        for action in range(1,5):
-            if player.availaction(action, self.game.walls, tempplayergroup):#直接调用移动函数判断是否合法,转向是合法的
-                availaction.append(action)
+        # 检测移动动作是否可用
+        for action in range(1, 5):
+            if player.availaction(action, self.game.walls, tempplayergroup):
+                avaliable_actions[action] = 1
 
-        #检测交互是否合法（比如前面是空气，桌子上也没有菜或者任何可取的，就不合法）
-        for table in self.game.tables:
-            if table.availbeinter(player):
-                availaction.append(Action.INTERACT)
-                break
+        # 检测交互是否合法 - 优化循环结构
+        interact_available = False
+        
+        # 检查是否可以与收银台交互
         if self.game.Cointable.availbeinter(player):
-                availaction.append(Action.INTERACT)
-        # availaction.append(5)
-
-        avaliable_actions = [0] * 6
-        for index in availaction:
-            avaliable_actions[index] = 1
+            interact_available = True
+        else:
+            # 检查是否可以与任何桌子交互
+            for table in self.game.tables:
+                if table.availbeinter(player):
+                    interact_available = True
+                    break
+        
+        # 设置交互动作可用性
+        if interact_available:
+            avaliable_actions[Action.INTERACT] = 1
+            
         return avaliable_actions
 
     def step(self, action_n: List[int]) -> Tuple[Tuple[np.ndarray, np.ndarray], np.ndarray, np.ndarray, np.ndarray, Dict[str, Any], np.ndarray]:
-        if self.pltheatmap:
-            for i in range(self.n_agents):
-                self.heatmap[i][self.game.playergroup[i].rect.y / 80-1][self.game.playergroup[i].rect.x / 80 ] += 1
+        
+        # 热力图更新（仅在需要时）- 使用整除以提高性能
+        # if self.pltheatmap:
+        #     for i in range(self.n_agents):
+        #         player = self.game.playergroup[i]
+        #         self.heatmap[i][player.rect.y // 80 - 1][player.rect.x // 80] += 1
 
+        # 更新时间计数器
         self.timercount += 1
-
+        
+        # 预先创建临时玩家组列表，避免在循环中重复创建
+        temp_player_groups = []
         for i in range(self.n_agents):
-            if action_n[i] == Action.INTERACT:
-                self.game.tables.update(self.game.playergroup[i], 
-                                        True, 
-                                        self.timercount)#有可能会post not finished
-                
-                self.game.Cointable.update(self.game.playergroup[i], 
-                                           True, 
-                                           self.game.taskmenu)#有可能会post success
-            else:
-                self.game.tables.update(self.game.playergroup[i], 
-                                        False, 
-                                        self.timercount)#有可能会post not finished
-                
-                self.game.Cointable.update(self.game.playergroup[i], 
-                                           False, 
-                                           self.game.taskmenu)#有可能会post success  
-                tempplayergroup = []
-                for j in range(self.n_agents):
-                    if j != i:
-                        tempplayergroup.append(self.game.playergroup[j])
-
-                self.game.playergroup[i].update(action=action_n[i], 
-                                                pengzhuang=self.game.walls, 
-                                                player=tempplayergroup)
-                
+            temp_group = [self.game.playergroup[j] for j in range(self.n_agents) if j != i]
+            temp_player_groups.append(temp_group)
+        
+        # 执行动作并更新游戏状态 - 批量处理以减少函数调用
+        for i in range(self.n_agents):
+            player = self.game.playergroup[i]
+            is_interact = action_n[i] == Action.INTERACT
+            
+            # 批量更新tables和Cointable
+            self.game.tables.update(player, is_interact, self.timercount)
+            self.game.Cointable.update(player, is_interact, self.game.taskmenu)
+            
+            # 非交互动作时才更新玩家位置，减少不必要的计算
+            if not is_interact:
+                player.update(action=action_n[i], 
+                             pengzhuang=self.game.walls, 
+                             player=temp_player_groups[i])
+        
+        # 更新状态字典 - 一次性更新所有状态
+        self.state = {
+            "tables": self.game.tables,
+            "pots": self.game.pots,
+            "cuttingtables": self.game.cuttingtables,
+            "players": self.game.playergroup,
+            "cointable": self.game.Cointable,
+            "timercount": self.timercount
+        }
+        
+        # 获取MDP特征
+        self.mdp_features = self.mdp.get_mdp_features(self.state)
         self.game.timercount.update(self.timercount)
         
+        # 计算奖励
         sparse_reward, shaped_reward = self.calculate_reward()
         reward = sparse_reward + shaped_reward
         if self.debug:
@@ -320,28 +322,27 @@ class OvercookPygameEnv(gym.Env):
 
         done = self.is_done()
 
-
+        # 仅在需要时渲染，避免不必要的图形处理
         if self.ifrender:
             self.render()
             
+        # 获取可用动作
         available_actions = self.get_avail_actions()
-        tasksequence = []
-        self.t += 1  # 训练总时间
+        self.t += 1
 
-        infos = {'shaped_r': shaped_reward,
-                 'sparse_r': sparse_reward,
-                 'reward': sparse_reward + shaped_reward,
-                #  'tasksequence': tasksequence,
-                #  'heatmap':self.heatmap
-                }
+        # 构建信息字典 - 只包含必要信息
+        infos = {
+            'shaped_r': shaped_reward,
+            'sparse_r': sparse_reward,
+            'reward': reward,
+        }
         
         self._update_reward_dict(infos)
 
+        # 仅在回合结束时添加额外信息，减少不必要的字典操作
         if done:  
             if float(self.episode_reward_dict["cumulative_rewards"]) > 800: 
-                print('异常分数')
-                print(self.taskcount)
-                print(self.timercount)     
+                print('异常分数', self.taskcount, self.timercount)    
             infos["episode"] = {
                 "ep_reward": self.episode_reward_dict["cumulative_rewards"],
                 "ep_sparse_r": self.episode_reward_dict["cumulative_sparse_rewards"],
@@ -353,12 +354,12 @@ class OvercookPygameEnv(gym.Env):
                 "success_count": self.taskcount,
             }
 
+        # 获取观察和共享观察 - 只在需要时计算
         nobs = self.get_obs()
         share_obs = self.get_share_observation(nobs)
         dones = [done] * self.n_agents
         rewards = [reward] * self.n_agents
         
-        # 返回新的状态、奖励、是否结束和其他信息
         return nobs, share_obs, rewards, dones, infos, available_actions
 
     def _update_reward_dict(self, infos):
@@ -623,55 +624,55 @@ class OvercookPygameEnv(gym.Env):
         
         def rel_xy(p:pygame.sprite.Sprite, 
                    obj:pygame.sprite.Sprite)-> List[int]:
-            return [(p.rect.x-obj.rect.x)/80, 
-                    (p.rect.y-obj.rect.y)/80]  
+            return [(p.rect.x-obj.rect.x)//80, 
+                    (p.rect.y-obj.rect.y)//80]  # 使用整除代替除法
         
-        # assert(isinstance(self.game.task_sprites, pygame.sprite.Group))
-        # assert(isinstance(self.game.playergroup, list))
-        # assert(isinstance(self.game.pots, pygame.sprite.Group))
-        # assert(isinstance(self.game.cuttingtables, pygame.sprite.Group))
-        # assert(isinstance(self.game.tables, pygame.sprite.Group))
-
-        # sparse_r, shaped_r, tasksequence = self._calculate_rew()
         players:List[pygame.sprite.Sprite] = self.game.playergroup
 
-        playab_cointables = [[] for _ in range(self.n_agents)]  # cointable的位置，不需要（最近）因为coin只会有一个
-        playab_closet_item_pos = [[10e9] * (len(self.itemdict)) * 2 for _ in range(self.n_agents)]  # 所有最近物品的位置
+        # 预先计算玩家位置、方向和物品，避免重复计算
+        player_positions = [(p.rect.x, p.rect.y) for p in players]
+        player_directions = [p.direction for p in players]
+        player_items = [p.item for p in players]
+        player_dishes = [p.dish for p in players]
+
+        # 初始化数据结构
+        playab_cointables = [[] for _ in range(self.n_agents)]
+        playab_closet_item_pos = [[10e9] * (len(self.itemdict)) * 2 for _ in range(self.n_agents)]
+        
+        # 计算与cointable的相对距离并处理玩家手持物品
         for i, player in enumerate(players):
             playab_cointables[i] = rel_xy(player, self.game.Cointable)
-            # 计算一下收银台的位置
-            if player.item:
-                itemindex = (self.itemdict[player.item] - 1) * 2
+            
+            if player_items[i]:
+                itemindex = (self.itemdict[player_items[i]] - 1) * 2
                 playab_closet_item_pos[i][itemindex:itemindex + 2] = [0, 0]
-            elif player.dish: # TODO：这里逻辑有问题
+            elif player_dishes[i]:# TODO：这里逻辑有问题
                 dishindex = (self.itemdict[player.dish] - 1) * 2
                 playab_closet_item_pos[i][dishindex:dishindex + 2] = [0, 0]
-
-        emptypalcenum = 0  # 空桌子的数量
+        # 处理桌子和空桌子
+        emptypalcenum = 0
         tablenum = 0
-        playab_tables = [[] for _ in range(self.n_agents)]  # 所有可交互物的位置
-        playab_closet_empty_table_pos = [[10e9, 10e9] for _ in range(self.n_agents)]  # 最近的空桌子
-        for temp in self.game.tables:  # 目前的tables中不包含coin
+        playab_tables = [[] for _ in range(self.n_agents)]
+        playab_closet_empty_table_pos = [[10e9, 10e9] for _ in range(self.n_agents)]
+        
+        # 批量处理tables
+        for temp in self.game.tables:
             if temp.item:
-                # supply的item属性也被改了，现在所有tables都有item属性，如果true说明有这个东西，需要计算最近距离
-                # 在别的玩家身上还要算
+                item_index = (self.itemdict[temp.item] - 1) * 2
                 for i, player in enumerate(players):
-                    itemindex = (self.itemdict[temp.item] - 1) * 2  # 如番茄的存储位置
                     temppos = rel_xy(player, temp)
-
-                    if ManhattanDis(temppos) < ManhattanDis(playab_closet_item_pos[i][itemindex:itemindex + 2]):
-                        playab_closet_item_pos[i][itemindex:itemindex + 2] = temppos
+                    if ManhattanDis(temppos) < ManhattanDis(playab_closet_item_pos[i][item_index:item_index + 2]):
+                        playab_closet_item_pos[i][item_index:item_index + 2] = temppos
             
             if isinstance(temp, Table):
-                if temp.dish:  # 在考虑dish距离，和上一段是一致的，只是dish单独有个属性
+                if temp.dish: # 在考虑dish距离，和上一段是一致的，只是dish单独有个属性
+                    dish_index = (self.itemdict[temp.dish] - 1) * 2
                     for i, player in enumerate(players):
-                        dishindex = (self.itemdict[temp.dish] - 1) * 2
                         temppos = rel_xy(player, temp)
-                        if ManhattanDis(temppos) < ManhattanDis(playab_closet_item_pos[i][dishindex:dishindex + 2]):
-                            playab_closet_item_pos[i][dishindex:dishindex + 2] = temppos
+                        if ManhattanDis(temppos) < ManhattanDis(playab_closet_item_pos[i][dish_index:dish_index + 2]):
+                            playab_closet_item_pos[i][dish_index:dish_index + 2] = temppos
                 if not temp.item:
                     emptypalcenum += 1
-                    # 空桌子就计算一下最近的空桌子
                     for i, player in enumerate(players):
                         temppos = rel_xy(player, temp)
                         if ManhattanDis(temppos) < ManhattanDis(playab_closet_empty_table_pos[i][0:2]):
@@ -681,210 +682,184 @@ class OvercookPygameEnv(gym.Env):
             for i, player in enumerate(players):
                 tablenum += 1
                 playab_tables[i] += rel_xy(player, temp)
-                
-        # print(tablenum)
-        # print(list(self.game.tables))
-        # print(len(self.game.tables))
-        # print("*"*10)
-        for i, player in enumerate(players):
-            if playab_closet_empty_table_pos[i][0] > 100000:  # 没有空桌子了
+        
+        # 处理无效值
+        for i in range(self.n_agents):
+            if playab_closet_empty_table_pos[i][0] > 100000:
                 playab_closet_empty_table_pos[i] = [0, 0]
 
-            for j in range(len(playab_closet_item_pos[i])):  # 如果没有找到这个物品说明还没出现，也赋值0
+            for j in range(len(playab_closet_item_pos[i])):
                 if playab_closet_item_pos[i][j] > 100000:
                     playab_closet_item_pos[i][j] = 0
 
-        # 所有桌子和所有案板、锅和每个玩家的相对距离 num_pots * n_agents * 2 + num_cuttingtables * n_agents * 2
-        playab_pots_pos = [[10e9, 10e9]*len(self.game.pots) for _ in range(self.n_agents)]  #所有锅的相对距离
+        # 批量处理锅和案板
+        playab_pots_pos = [[10e9, 10e9]*len(self.game.pots) for _ in range(self.n_agents)]
         pots_state = [0, 0]*len(self.game.pots)
         pots_remaining_time = [-1]*len(self.game.pots)
         pots_lang = []
+        
+        # 优化锅的处理
         for p, pot in enumerate(self.game.pots):
+            pot_index = p*2
             for i, player in enumerate(players):
                 potpos = rel_xy(player, pot)
-                playab_pots_pos[i][p*2:(p*2)+2] = potpos  # 修正索引计算
-            # (0,0) - 空锅 (is_empty)
-            # (0,1) - 正在烹饪 (is_cooking)  
-            # (1,0) - 食物准备好 (is_ready)
+                playab_pots_pos[i][pot_index:pot_index+2] = potpos
+            
+            # 批量设置锅状态
             if pot.is_empty:
-                pots_state[p*2:(p+1)*2] = [0, 0]
+                pots_state[pot_index:pot_index+2] = [0, 0]
                 pots_lang.append(f"pot{p} is empty")
             elif pot.is_cooking:
-                pots_state[p*2:(p+1)*2] = [0, 1]
+                pots_state[pot_index:pot_index+2] = [0, 1]
                 pot_item = pot.item.replace("raw", "cooked")
                 pots_lang.append(f"pot{p} is cooking, the {pot_item} will be ready in {pot.remaining_time} timesteps")
             elif pot.is_ready:
-                pots_state[p*2:(p+1)*2] = [1, 0]
+                pots_state[pot_index:pot_index+2] = [1, 0]
                 pots_lang.append(f"{pot.item} in pot{p} is ready")
 
-            pots_remaining_time[p] = pot.remaining_time / 10 if pot.remaining_time >=0 else -1
+            pots_remaining_time[p] = pot.remaining_time // 10 if pot.remaining_time >=0 else -1
 
         self.state.update({"pot": pots_lang})
 
+        # 优化案板处理
         cuttingtables_lang = []
-        playab_cuttingtables_pos = [[10e9, 10e9]*len(self.game.cuttingtables) for _ in range(self.n_agents)]  #所有案板的相对距离
+        playab_cuttingtables_pos = [[10e9, 10e9]*len(self.game.cuttingtables) for _ in range(self.n_agents)]
         cuttingtables_state = [0,0]*len(self.game.cuttingtables)
-        for p,cuttingtable in enumerate(self.game.cuttingtables):
+        
+        for p, cuttingtable in enumerate(self.game.cuttingtables):
+            ct_index = p*2
             for i, player in enumerate(players):
                 cuttingtablepos = rel_xy(player, cuttingtable)
-                playab_cuttingtables_pos[i][p*2:(p*2)+2] = cuttingtablepos
+                playab_cuttingtables_pos[i][ct_index:ct_index+2] = cuttingtablepos
+            
+            # 批量设置案板状态
             if cuttingtable.is_empty:
-                cuttingtables_state[p*2:(p+1)*2] = [0, 0]
+                cuttingtables_state[ct_index:ct_index+2] = [0, 0]
                 cuttingtables_lang.append(f"cutting_table{p} is empty")
-            elif cuttingtable.is_cutting:#非空又没切这种情况理论上没有？
-                cuttingtables_state[p*2:(p+1)*2] = [0, 1]
+            elif cuttingtable.is_cutting:
+                cuttingtables_state[ct_index:ct_index+2] = [0, 1]
                 cuttingtables_lang.append(f"cutting_table{p} is occupied by {cuttingtable.item}")
             elif cuttingtable.is_ready:
-                cuttingtables_state[p*2:(p+1)*2] = [1, 0]
+                cuttingtables_state[ct_index:ct_index+2] = [1, 0]
                 cuttingtables_lang.append(f"{cuttingtable.item} on cutting_table{p} is ready")
 
         self.state.update({"cutting_table": cuttingtables_lang})
 
-        tasktime = []
+        # 简化任务目标和特征处理
         nowtime = self.timercount
         self.state.update({"timestep": nowtime})
 
         tasks = []
         task_name = []
+        tasktime = []
         for task in self.game.task_sprites:
             tasks.append(task)
             task_name.append(task.task)
-            tasktime.append((task.timer - (nowtime - task.start_time)))
-        self.state.update({"task": task_name, 
-                           "tasktime": tasktime})
+            tasktime.append(task.timer - (nowtime - task.start_time))
+            
+        self.state.update({"task": task_name, "tasktime": tasktime})
 
-        current_goal = list(map(lambda x: (np.eye(len(self.taskdict))[self.taskdict[x.task]]).tolist(), tasks))  # 这里为什么+1
-        # current_goal = list(map(lambda x: (np.eye(len(self.taskdict)+1)[self.taskdict[x.task]]).tolist(), tasks))  # 这里为什么+1
+        # 优化任务目标处理
+        current_goal = [np.eye(len(self.taskdict))[self.taskdict[task.task]].tolist() for task in tasks]
         
-        # 在任务数多于一个的环境中考虑各任务名称和任务剩余时长
+        # 简化任务特征处理
         if len(tasks) > 1:
-            flatencurrent_goal = []
-            for taskonehot in current_goal:
-                flatencurrent_goal += taskonehot
-            # task = np.array([remaintime/10, self.game.NOWCOIN, iscook, emptypalcenum ] + tasktime + taskreward + flatencurrent_goal)
-            task_feature = [i / 100 for i in tasktime] + flatencurrent_goal
+            flatencurrent_goal = [item for sublist in current_goal for item in sublist]
+            task_feature = [i // 100 for i in tasktime] + flatencurrent_goal  # 使用整除
         else:
             task_feature = []
 
-        # TODO
-        # 增加最近的空桌子，最近的几个操作台，最近的所有物资，如果在手上，则(0,0)
-        # 如果这个环境中不会出现这个物资，该怎么办？不加，或者还没产生，怎么赋值？(0,0)
-
-        # TODO整理成feature字典
-        # all_features = {}
-        # for i, player in enumerate(players):
-        #     # player orientation
-        #     orientation_idx = [self.directiondict[str(player.direction)]]
-        #     all_features[f"p{i}_orientation"] = np.eye(4)[orientation_idx]
-            
-        #     # player holding object
-        #     if player.item:
-        #         hold_obj = np.eye(len(self.itemdict))[self.itemdict[player.item]].tolist()
-        #     else:
-        #         hold_obj = np.zeros(len(self.itemdict)).tolist()
-        #     all_features[f"p{i}_obj"] = hold_obj
-
+        # 优化玩家特征处理
         player_absolute_positions = []
         player_relative_positions = []
         player_features = []
-        if self.debug:
-            print(f"当前时间步: {self.timercount}")
-        hold_objects = defaultdict(list)  # 使用defaultdict替代列表
+        hold_objects = defaultdict(list)
         ori = []
         pos = []
         
+        # 预先创建碰撞检测精灵
+        rect_sprite = pygame.sprite.Sprite()
+        
         for i, player in enumerate(players):
-            # 玩家朝向
-            orientation_idx = Direction.DIRECTION2INDEX[player.direction]
+            # 玩家朝向 - 使用预计算的方向
+            orientation_idx = Direction.DIRECTION2INDEX[player_directions[i]]
             orientation = np.eye(len(Direction.DIRECTION2INDEX))[orientation_idx].tolist()
-            ori.append(tuple(player.direction))
-            # 玩家手持物品
-
-            # player.item和player.dish需要分开判断
-            if player.item:
-                hold_obj = np.eye(len(self.itemdict))[self.itemdict[player.item]-1].tolist()
-                hold_objects[i].append(player.item)
-                if player.dish:
-                    hold_obj[self.itemdict[player.item]-1] = 1.0
+            ori.append(tuple(player_directions[i]))
+            
+            # 玩家手持物品 - 使用预计算的物品
+            if player_items[i]:
+                hold_obj = np.eye(len(self.itemdict))[self.itemdict[player_items[i]]-1].tolist()
+                hold_objects[i].append(player_items[i])
+                if player_dishes[i]:
+                    hold_obj[self.itemdict[player_items[i]]-1] = 1.0
                     hold_obj[self.itemdict["dish"]-1] = 1.0
                     hold_objects[i].append("dish")
             else:
-                if player.dish:
+                if player_dishes[i]:
                     hold_obj = np.eye(len(self.itemdict))[self.itemdict["dish"]-1].tolist()
                     hold_objects[i].append("dish")
                 else:
                     hold_obj = np.zeros(len(self.itemdict)).tolist()
                     hold_objects[i].append("nothing")
 
-            # 玩家四周是否有墙壁
+            # 优化碰撞检测
             collide = []
-            rect_sprite = pygame.sprite.Sprite()
-            for direction in list(Direction.directions.values()): # 下右上左
-                rect_sprite.rect = player.rect.move(direction[0] * ONEBLOCK / 2,
-                                                    direction[1] * ONEBLOCK / 2)
+            for direction in list(Direction.directions.values()):
+                rect_sprite.rect = player.rect.move(direction[0] * ONEBLOCK // 2, direction[1] * ONEBLOCK // 2)
                 is_block = pygame.sprite.spritecollide(rect_sprite, self.game.tables, False)
                 collide.append(int(bool(is_block)))
-
+            if self.debug:
+                print('*' * 10)
+                print(f'玩家{i} player_feature:')
+                print(f'面向：{orientation} {self.directionzhongwen[str(player.direction)]}')
+                print(f'手持物品: {hold_obj}', player.item if player.item else '空手')
+                print(f'四面是否有墙壁：{collide}')
+                print(f'和coin table的相对距离：{playab_cointables[i]}')
+                print(f'和pots的相对距离：{playab_pots_pos[i]}')
+                print(f'和cuttingtables的相对距离：{playab_pots_pos[i]}')
+                print(f'和每个功能桌子（非table、cointable）的相对距离：{playab_tables[i]}')
+                print("\n")
+            # 合并特征
             player_features.append(
-                np.array(orientation
-                         +hold_obj
-                         +collide
-                         +playab_cointables[i]
-                         +playab_pots_pos[i]
-                        +playab_cuttingtables_pos[i]
-                        +playab_closet_item_pos[i]
-                        # +playab_tables[i] 
-                        # +playab_closet_empty_table_pos[i]
-                         ))
-            
-            # if self.debug:
-            #     print('*' * 10)
-            #     print(f'玩家{i} player_feature:')
-            #     print(f'面向：{orientation} {self.directionzhongwen[str(player.direction)]}')
-            #     print(f'手持物品: {hold_obj}', player.item if player.item else '空手')
-            #     print(f'四面是否有墙壁：{collide}')
-            #     print(f'和coin table的相对距离：{playab_cointables[i]}')
-            #     print(f'和pots的相对距离：{playab_pots_pos[i]}')
-            #     print(f'和cuttingtables的相对距离：{playab_pots_pos[i]}')
-            #     print(f'和每个功能桌子（非table、cointable）的相对距离：{playab_tables[i]}')
-            #     print("\n")
+                np.array(orientation + hold_obj + collide + playab_cointables[i] + 
+                        playab_pots_pos[i] + playab_cuttingtables_pos[i] + 
+                        playab_closet_item_pos[i])
+            )
 
-            player_absolute_positions.append(np.array([player.rect.x / 80, 
-                                                        player.rect.y / 80]))
-            pos.append((player.rect.x//80, player.rect.y//80))
+            # 计算位置
+            player_x, player_y = player_positions[i]
+            player_absolute_positions.append(np.array([player_x // 80, player_y // 80]))
+            pos.append((player_x // 80, player_y // 80))
+            
+            # 计算相对位置
             tempdis = []
             for j in range(self.n_agents):
                 if j != i:
                     tempdis += rel_xy(players[i], self.game.playergroup[j])
             player_relative_positions.append(np.array(tempdis))
 
+        # 更新状态
         self.state.update({"player": hold_objects})
         self.state.update({"players_pos_and_or": tuple(zip(*[pos, ori]))})
+        
+        # 构建最终特征
         ordered_features = []
         for i in range(self.n_agents):
-            player_i_features = player_features[i]
-            player_i_abs_pos = player_absolute_positions[i]
-            player_i_rel_pos = player_relative_positions[i]
-            other_player_features = np.concatenate(
-                [player_features[j] for j in range(self.n_agents) if j != i]
-            )
-            player_i_ordered_features = np.squeeze(
-                np.concatenate(
-                    [
-                        player_i_features,
-                        other_player_features,
-                        player_i_rel_pos,
-                        player_i_abs_pos,
-                        pots_state,
-                        pots_remaining_time,
-                        cuttingtables_state,
-                        task_feature
-                    ]
-                )
-            )
-
-            # if pots_remaining_time[0] > 0:
-            #     print(pots_remaining_time)
+            # 预先计算其他玩家特征
+            other_player_features = np.concatenate([player_features[j] for j in range(self.n_agents) if j != i])
+            
+            # 一次性合并所有特征
+            player_i_ordered_features = np.squeeze(np.concatenate([
+                player_features[i],
+                other_player_features,
+                player_relative_positions[i],
+                player_absolute_positions[i],
+                pots_state,
+                pots_remaining_time,
+                cuttingtables_state,
+                task_feature
+            ]))
+            
             ordered_features.append(player_i_ordered_features)
             # if self.debug:
             #     print(f'玩家{i} 的相对距离:{player_i_rel_pos}')
@@ -904,132 +879,132 @@ class OvercookPygameEnv(gym.Env):
             grid_obs (list[np.ndarray]): 每个玩家的网格观测，形状为 (h, w, n_channels)
             
         特征通道包括:
-        - 墙壁位置 (1通道)
-        - 玩家位置 (n_agents通道)
-        - 锅的位置 (1通道)
-        - 案板位置 (1通道)
-        - 收银台位置 (1通道)
-        - 各种物品位置 (len(items)通道)
-        - 锅的状态 (3通道: 空/烹饪中/完成)
-        - 案板状态 (3通道: 空/切菜中/完成)
-        - 任务信息 (len(tasks)通道)
-        """        
-        # 计算总通道数
-        n_channels = (1 +  # 墙壁
-                     self.n_agents +  # 玩家位置
-                     1 +  # 锅位置
-                     1 +  # 案板位置
-                     1 +  # 收银台位置
-                     len(self.itemdict) +  # 各种物品
-                     3 +  # 锅状态
-                     3 +  # 案板状态
-                     len(self.taskdict))  # 任务信息
+        channel1：矩阵中，所有锅的位置为1，其余位置为0 
+        channel2：矩阵中，所有案板的位置为1，其余位置为0 
+        channel3：矩阵中，所有coin table的位置为1，其余位置为0 
+        channel4：矩阵中，所有垃圾桶的位置为1，其余位置为0 
+        channel5：矩阵中，所有盘子提供处的位置为1，其余位置为0 
+        channel6：矩阵中，所有生鱼提供处的位置为1，其余位置为0 
+        channel7：矩阵中，所有未切柠檬提供处的位置为1，其余位置为0 
+        channel8：矩阵中，所有汉堡提供处的位置为1，其余位置为0 
+        channel9：矩阵中，所有生肉提供处的位置为1，其余位置为0 
+        channel10：矩阵中，玩家1当前位置为1，其余位置为0 
+        channel11：矩阵中，玩家2当前位置为1，其余位置为0 
+        channel12：矩阵中，玩家1面朝方向分别为0，1，2，3，其余位置为0 
+        channel13：矩阵中，玩家2面朝方向分别为0，1，2，3，其余位置为0 
+        channel14-15：锅的状态，只用编码is_cooking和is_ready两种，如果是则为1，其余位置为0 
+        channel16: 锅中烹饪的剩余时间，没有就是-1， 
+        channel17-18：案板的状态，只用编码is_cutting和is_ready两种，如果是则为1，其余位置为0
+        """
+        # 固定为18个通道
+        n_channels = 18
+        
+        # 准备当前状态
+        state = {
+            "tables": self.game.tables,
+            "pots": self.game.pots,
+            "cuttingtables": self.game.cuttingtables,
+            "players": self.game.playergroup,
+            "cointable": self.game.Cointable
+        }
+        
+        # 获取MDP特征
+        mdp_features = self.mdp.get_mdp_features(state)
+        
+        # 预先获取所有位置信息，避免重复调用
+        pot_locations = self.mdp.get_pot_locations()
+        cutting_table_locations = self.mdp.get_cutting_table_locations()
+        trash_locations = self.mdp.get_trash_locations()
+        dish_dispenser_locations = self.mdp.get_dish_dispenser_locations()
+        rawfish_locations = self.mdp.get_rawfish_dispenser_locations()
+        lemon_locations = self.mdp.get_lemon_dispenser_locations()
+        hamburger_locations = self.mdp.get_hamburger_dispenser_locations()
+        rawbeef_locations = self.mdp.get_rawbeef_dispenser_locations()
+        player_positions = self.mdp.get_player_positions(state)
+        player_directions = self.mdp.get_player_directions(state)
+        
+        # 预先计算锅和案板的位置和状态
+        pot_positions = [(pot.rect.x // 80, pot.rect.y // 80) for pot in self.game.pots]
+        pot_cooking_states = [pot.is_cooking for pot in self.game.pots]
+        pot_ready_states = [pot.is_ready for pot in self.game.pots]
+        pot_remaining_times = [pot.remaining_time if hasattr(pot, 'remaining_time') else -1 for pot in self.game.pots]
+        pot_cooking_times = [pot.cookingtime if hasattr(pot, 'cookingtime') else 1 for pot in self.game.pots]
+        
+        cutting_table_positions = [(ct.rect.x // 80, ct.rect.y // 80) for ct in self.game.cuttingtables]
+        cutting_table_cutting_states = [ct.is_cutting for ct in self.game.cuttingtables]
+        cutting_table_ready_states = [ct.is_ready for ct in self.game.cuttingtables]
+        
+        # 预先计算coin table位置
+        coin_x, coin_y = self.game.Cointable.rect.x // 80, self.game.Cointable.rect.y // 80
         
         grid_obs = []
         
         for agent_id in range(self.n_agents):
-            # 初始化网格观测
+            # 初始化网格观测 - 一次性分配内存
             obs = np.zeros((self.height, self.width, n_channels), dtype=np.float32)
-            channel_idx = 0
             
-            # 1. 墙壁位置 (通道 0)
-            for i, row in enumerate(self.terrain_mtx):
-                for j, cell in enumerate(row):
-                    if cell == 'X':
-                        obs[i, j, channel_idx] = 1.0
-            channel_idx += 1
+            # 批量填充静态位置信息
+            self._fill_locations(obs, pot_locations, 0)
+            self._fill_locations(obs, cutting_table_locations, 1)
             
-            # 2. 玩家位置 (通道 1-n_agents)
-            for player_id, player in enumerate(self.game.playergroup):
-                player_x, player_y = player.rect.x // 80, player.rect.y // 80
-                if 0 <= player_y < self.height and 0 <= player_x < self.weight:
-                    obs[player_y, player_x, channel_idx + player_id] = 1.0
-            channel_idx += self.n_agents
+            # 填充coin table位置
+            if 0 <= coin_y < self.height and 0 <= coin_x < self.width:
+                obs[coin_y, coin_x, 2] = 1.0
             
-            # 3. 锅的位置 (通道 n_agents+1)
-            for pot in self.game.pots:
-                pot_x, pot_y = pot.rect.x // 80, pot.rect.y // 80
-                if 0 <= pot_y < h and 0 <= pot_x < w:
-                    obs[pot_y, pot_x, channel_idx] = 1.0
-            channel_idx += 1
+            # 批量填充其他静态位置
+            self._fill_locations(obs, trash_locations, 3)
+            self._fill_locations(obs, dish_dispenser_locations, 4)
+            self._fill_locations(obs, rawfish_locations, 5)
+            self._fill_locations(obs, lemon_locations, 6)
+            self._fill_locations(obs, hamburger_locations, 7)
+            self._fill_locations(obs, rawbeef_locations, 8)
             
-            # 4. 案板位置 (通道 n_agents+2)
-            for cutting_table in self.game.cuttingtables:
-                ct_x, ct_y = cutting_table.rect.x // 80, cutting_table.rect.y // 80
-                if 0 <= ct_y < h and 0 <= ct_x < w:
-                    obs[ct_y, ct_x, channel_idx] = 1.0
-            channel_idx += 1
+            # 填充玩家位置和方向 - 只处理前两个玩家
+            for player_id, player_pos in enumerate(player_positions):
+                if player_id < 2:  # 只处理前两个玩家
+                    player_x, player_y = player_pos
+                    if 0 <= player_y < self.height and 0 <= player_x < self.width:
+                        # 玩家位置
+                        obs[player_y, player_x, 9 + player_id] = 1.0
+                        # 玩家方向
+                        direction_idx = Direction.DIRECTION2INDEX[player_directions[player_id]]
+                        obs[player_y, player_x, 11 + player_id] = direction_idx
             
-            # 5. 收银台位置 (通道 n_agents+3)
-            coin_x, coin_y = self.game.Cointable.rect.x // 80, self.game.Cointable.rect.y // 80
-            if 0 <= coin_y < h and 0 <= coin_x < w:
-                obs[coin_y, coin_x, channel_idx] = 1.0
-            channel_idx += 1
+            # 批量处理锅的状态
+            for i, (pot_x, pot_y) in enumerate(pot_positions):
+                if 0 <= pot_y < self.height and 0 <= pot_x < self.width:
+                    # 一次性设置锅的所有状态
+                    if pot_cooking_states[i]:
+                        obs[pot_y, pot_x, 13] = 1.0
+                    if pot_ready_states[i]:
+                        obs[pot_y, pot_x, 14] = 1.0
+                    
+                    # 设置剩余时间
+                    remaining_time = pot_remaining_times[i]
+                    cooking_time = pot_cooking_times[i]
+                    if pot_cooking_states[i] and remaining_time > 0:
+                        obs[pot_y, pot_x, 15] = remaining_time / cooking_time
+                    else:
+                        obs[pot_y, pot_x, 15] = -1
             
-            # 6. 各种物品位置 (通道 n_agents+4 到 n_agents+4+len(items)-1)
-            for table in self.game.tables:
-                if table.item:
-                    table_x, table_y = table.rect.x // 80, table.rect.y // 80
-                    if 0 <= table_y < h and 0 <= table_x < w:
-                        item_idx = self.itemdict[table.item] - 1
-                        obs[table_y, table_x, channel_idx + item_idx] = 1.0
-                
-                # 处理盘子
-                if isinstance(table, Table) and table.dish:
-                    table_x, table_y = table.rect.x // 80, table.rect.y // 80
-                    if 0 <= table_y < h and 0 <= table_x < w:
-                        dish_idx = self.itemdict["dish"] - 1
-                        obs[table_y, table_x, channel_idx + dish_idx] = 1.0
-            
-            # 处理玩家手持的物品
-            for player_id, player in enumerate(self.game.playergroup):
-                player_x, player_y = player.rect.x // 80, player.rect.y // 80
-                if 0 <= player_y < h and 0 <= player_x < w:
-                    if player.item:
-                        item_idx = self.itemdict[player.item] - 1
-                        obs[player_y, player_x, channel_idx + item_idx] = 1.0
-                    if player.dish:
-                        dish_idx = self.itemdict["dish"] - 1
-                        obs[player_y, player_x, channel_idx + dish_idx] = 1.0
-            
-            channel_idx += len(self.itemdict)
-            
-            # 7. 锅的状态 (3通道: 空/烹饪中/完成)
-            for pot in self.game.pots:
-                pot_x, pot_y = pot.rect.x // 80, pot.rect.y // 80
-                if 0 <= pot_y < h and 0 <= pot_x < w:
-                    if pot.is_empty:
-                        obs[pot_y, pot_x, channel_idx] = 1.0  # 空
-                    elif pot.is_cooking:
-                        obs[pot_y, pot_x, channel_idx + 1] = 1.0  # 烹饪中
-                    elif pot.is_ready:
-                        obs[pot_y, pot_x, channel_idx + 2] = 1.0  # 完成
-            channel_idx += 3
-            
-            # 8. 案板状态 (3通道: 空/切菜中/完成)
-            for cutting_table in self.game.cuttingtables:
-                ct_x, ct_y = cutting_table.rect.x // 80, cutting_table.rect.y // 80
-                if 0 <= ct_y < h and 0 <= ct_x < w:
-                    if cutting_table.is_empty:
-                        obs[ct_y, ct_x, channel_idx] = 1.0  # 空
-                    elif cutting_table.is_cutting:
-                        obs[ct_y, ct_x, channel_idx + 1] = 1.0  # 切菜中
-                    elif cutting_table.is_ready:
-                        obs[ct_y, ct_x, channel_idx + 2] = 1.0  # 完成
-            channel_idx += 3
-            
-            # 9. 任务信息 (len(tasks)通道)
-            for task in self.game.task_sprites:
-                # 将任务信息编码到整个网格中（可以编码到特定位置或均匀分布）
-                # 这里我们简单地将任务信息编码到收银台位置
-                coin_x, coin_y = self.game.Cointable.rect.x // 80, self.game.Cointable.rect.y // 80
-                if 0 <= coin_y < h and 0 <= coin_x < w:
-                    task_idx = self.taskdict[task.task]
-                    obs[coin_y, coin_x, channel_idx + task_idx] = 1.0
+            # 批量处理案板状态
+            for i, (ct_x, ct_y) in enumerate(cutting_table_positions):
+                if 0 <= ct_y < self.height and 0 <= ct_x < self.width:
+                    # 一次性设置案板的所有状态
+                    if cutting_table_cutting_states[i]:
+                        obs[ct_y, ct_x, 16] = 1.0
+                    if cutting_table_ready_states[i]:
+                        obs[ct_y, ct_x, 17] = 1.0
             
             grid_obs.append(obs)
         
         return grid_obs
+        
+    def _fill_locations(self, obs, locations, channel):
+        """辅助方法：批量填充网格位置"""
+        for x, y in locations:
+            if 0 <= y < self.height and 0 <= x < self.width:
+                obs[y, x, channel] = 1.0
 
     def is_done(self):
         return self.timercount >= self.episode_limit

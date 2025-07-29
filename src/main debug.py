@@ -16,8 +16,8 @@ from sacred.observers import FileStorageObserver
 from sacred.utils import apply_backspaces_and_linefeeds
 import torch as th
 
-from utils.logging import get_logger
-from run import run
+from src.utils.logging import get_logger
+from src.run import run
 from typing import Dict, Tuple, List
 
 SETTINGS["CAPTURE_MODE"] = (
@@ -94,7 +94,7 @@ def config_copy(config):
 if __name__ == "__main__":
     params = deepcopy(sys.argv)
     th.set_num_threads(1)
-    params.append('--config=ippo')
+    params.append('--config=mappo')
     params.append('--env-config=overcooked2')
     
     # Get the defaults from default.yaml

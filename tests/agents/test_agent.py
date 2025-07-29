@@ -51,7 +51,7 @@ def main():
                             ifrender=True,
                             debug=False,
                             fps=10)
-    mdp = ComplexOvercookedGridworld(env)
+    mdp = ComplexOvercookedGridworld(map_name=args.map_name)
 
     if args.p0 == args.p1 == 'human':
         args.both_human = True

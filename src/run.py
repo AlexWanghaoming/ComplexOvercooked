@@ -12,9 +12,9 @@ from components.episode_buffer import ReplayBuffer
 from components.transforms import OneHot
 from learners import REGISTRY as le_REGISTRY
 from runners import REGISTRY as r_REGISTRY
-from utils.general_reward_support import test_alg_config_supports_reward
-from utils.logging import Logger
-from utils.timehelper import time_left, time_str
+from src.utils.general_reward_support import test_alg_config_supports_reward
+from src.utils.logging import Logger
+from src.utils.timehelper import time_left, time_str
 
 
 def linear_annealed_factor(t_env, start_value, end_value, anneal_start, anneal_end):
@@ -55,7 +55,7 @@ def run(_run, _config, _log):
     except:
         map_name = _config["env_args"]["key"]
     unique_token = (
-        f"{_config['name']}_seed{_config['seed']}_{map_name}_{datetime.datetime.now().strftime("%Y%m%d_%H%M%S")}"
+        f"{_config['name']}_seed{_config['seed']}_{map_name}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
     )
 
     args.unique_token = unique_token

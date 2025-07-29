@@ -24,7 +24,7 @@ lr: 1.0e-3 # Learning rate for agents
 lr_decay: True # Decay learning rate over time
 reward_shaping_horizon: 1.0e+7 # Linearly decay reward shaping over this many timesteps
 
-use_wandb: True # Log results to W&B
+use_wandb: False # Log results to W&B
 wandb_team: "wanghm" # W&B team name
 wandb_project: epymarl_overcooked2 # W&B project name
 wandb_mode: "online" # W&B mode (online/offline)

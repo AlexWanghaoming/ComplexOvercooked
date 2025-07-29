@@ -1,0 +1,10 @@
+{"time":"2025-07-28T18:18:50.837045+08:00","level":"INFO","msg":"using version","core version":"0.19.1"}
+{"time":"2025-07-28T18:18:50.837086+08:00","level":"INFO","msg":"created symlink","path":"/Users/alexwang/phD/ComplexOvercooked/src/wandb/run-20250728_181850-pvcv942n/logs/debug-core.log"}
+{"time":"2025-07-28T18:18:51.14575+08:00","level":"INFO","msg":"created new stream","id":"pvcv942n"}
+{"time":"2025-07-28T18:18:51.145785+08:00","level":"INFO","msg":"stream: started","id":"pvcv942n"}
+{"time":"2025-07-28T18:18:51.145874+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"pvcv942n"}
+{"time":"2025-07-28T18:18:51.145893+08:00","level":"INFO","msg":"handler: started","stream_id":"pvcv942n"}
+{"time":"2025-07-28T18:18:51.145892+08:00","level":"INFO","msg":"sender: started","stream_id":"pvcv942n"}
+{"time":"2025-07-28T18:19:21.147877+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+{"time":"2025-07-28T18:19:53.447029+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": context deadline exceeded"}
+{"time":"2025-07-28T18:20:11.138482+08:00","level":"INFO","msg":"stream: closing","id":"pvcv942n"}

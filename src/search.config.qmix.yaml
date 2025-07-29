@@ -1,0 +1,22 @@
+exclude: null
+grid-search:
+
+  "--config":
+    - "qmix"
+
+  lr:
+    - 0.001
+
+  use_rnn:
+    - True
+
+
+  epsilon_anneal_time:
+    - 5000000
+
+    
+grid-search-groups:
+  env0:
+    - "--env-config": "overcooked2"
+    - env_args.map_name: supereasy
+    - env_args.ifrender: False

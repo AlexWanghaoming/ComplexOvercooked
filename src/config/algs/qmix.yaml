@@ -4,9 +4,7 @@
 action_selector: "epsilon_greedy"
 epsilon_start: 1.0
 epsilon_finish: 0.05
-epsilon_anneal_time: 50000
-# epsilon_anneal_time: 5000000
-
+epsilon_anneal_time: 5000000
 evaluation_epsilon: 0.0
 
 runner: "episode"
@@ -14,8 +12,7 @@ runner: "episode"
 buffer_size: 5000
 
 # update the tget network every {} episodes
-target_update_interval_or_tau: 200
-# target_update_interval_or_tau: 100
+target_update_interval_or_tau: 100
 
 
 obs_agent_id: True
@@ -30,7 +27,7 @@ agent_output_type: "q"
 learner: "q_learner"
 double_q: True
 mixer: "qmix"
-use_rnn: False
+use_rnn: True
 # mixing_embed_dim: 128
 mixing_embed_dim: 32
 
