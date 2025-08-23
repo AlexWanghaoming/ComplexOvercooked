@@ -1059,8 +1059,19 @@ class OvercookPygameEnv(gym.Env):
             plt.close()
             
     def close(self):
-        # 关闭 Pygame
-        pygame.quit()
+        try:
+            if hasattr(self, 'game') and self.game:
+                # 清理游戏资源
+                if hasattr(self.game, 'all_sprites'):
+                    self.game.all_sprites.empty()
+                if hasattr(self.game, 'window') and self.game.window:
+                    self.game.window = None
+            
+            # 清理pygame资源
+            if pygame.get_init():
+                pygame.quit()
+        except Exception as e:
+            print(f"Error during cleanup: {e}")
 
     def seed(self, seed=None):
         # 设置随机数生成器的种子

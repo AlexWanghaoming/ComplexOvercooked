@@ -3,7 +3,10 @@ env: "overcooked2"
 env_args:
   map_name: "supereasy"
   ifrender: False
+  lossless_obs: True
 
+mac: "basic_mac" # Basic controller
+agent: "rnn"
 common_reward: True  # Run experiment with common reward setup
 reward_scalarisation: "mean"  # How to aggregate rewards to single common reward (only used if common_reward is True)
 test_greedy: True

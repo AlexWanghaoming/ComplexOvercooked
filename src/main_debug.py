@@ -94,7 +94,7 @@ def config_copy(config):
 if __name__ == "__main__":
     params = deepcopy(sys.argv)
     th.set_num_threads(1)
-    params.append('--config=mappo')
+    params.append('--config=iql')
     params.append('--env-config=overcooked2')
     
     # Get the defaults from default.yaml
@@ -118,8 +118,6 @@ if __name__ == "__main__":
         map_name = config_dict["env_args"]["map_name"]
     except:
         map_name = config_dict["env_args"]["key"]
-
-    print("config_dict:",config_dict)
     # config_dict = OmegaConf.to_container(config_dict)
     # now add all the config to sacred
     ex.add_config(config_dict)

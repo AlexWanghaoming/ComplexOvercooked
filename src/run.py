@@ -286,32 +286,6 @@ def run_sequential(args, logger):
                             os.path.join(save_path, f), os.path.join(wandb_save_dir, f)
                         )
 
-        # if args.save_model and (
-        #     runner.t_env - model_save_time >= args.save_model_interval
-        #     or model_save_time == 0
-        # ):
-        #     model_save_time = runner.t_env
-        #     save_path = os.path.join(
-        #         args.local_results_path, "models", args.unique_token, str(runner.t_env)
-        #     )
-        #     # "results/models/{}".format(unique_token)
-        #     os.makedirs(save_path, exist_ok=True)
-        #     logger.console_logger.info("Saving models to {}".format(save_path))
-
-        #     # learner should handle saving/loading -- delegate actor save/load to mac,
-        #     # use appropriate filenames to do critics, optimizer states
-        #     learner.save_models(save_path)
-
-        #     if args.use_wandb and args.wandb_save_model:
-        #         wandb_save_dir = os.path.join(
-        #             logger.wandb.dir, "models", args.unique_token, str(runner.t_env)
-        #         )
-        #         os.makedirs(wandb_save_dir, exist_ok=True)
-        #         for f in os.listdir(save_path):
-        #             shutil.copyfile(
-        #                 os.path.join(save_path, f), os.path.join(wandb_save_dir, f)
-        #             )
-
         episode += args.batch_size_run
 
         if (runner.t_env - last_log_T) >= args.log_interval: 

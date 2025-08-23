@@ -27,39 +27,30 @@ def digitize(num):
 
 class MainGame(object):
 
-    def __init__(self,
-                  map_name, 
-                  ifrender=False):
+    def __init__(self, map_name, ifrender=False):
         
         LINES = maps[map_name]['layout']
         self.TASK_MENU = maps[map_name]['task']
         TASKNUM = maps[map_name]['tasknum']
         PLAYERNUM = maps[map_name]['players']
         # 定义主函数#替换成类方法，方便后续更新
-
+        lines = LINES
         # 初始化pygame
         self.done = False
         self.NOWCOIN = 100
-
-        pygame.init()
-        # pygame.mixer.music.load('overcook_pygame/music/background.mp3')
-        # pygame.mixer.music.set_volume(0.2)
-        # pygame.mixer.music.play()
-
-        """
-        X: 桌子， F：生鱼供应处，B：生牛肉供应处，H：汉堡包供应处，M：番茄供应处，D：盘子供应处，L：柠檬供应处，
-        T：垃圾桶，E：送菜口，C：锅，U：案板
-        """
-
-        lines = LINES
-        # window_width = 80 * ONEBLOCK * (len(lines[0]) + 2)
-        # window_height = 80 * ONEBLOCK * (len(lines) + 1)
-        window_width = ONEBLOCK * (len(lines[0]) + 2)
-        window_height = ONEBLOCK * (len(lines) + 1)
+        window_width = ONEBLOCK * (len(LINES[0]) + 2)
+        window_height = ONEBLOCK * (len(LINES) + 1)
+        # 只在需要渲染时初始化pygame显示
         if ifrender:
+            pygame.init()
             self.window = pygame.display.set_mode((window_width, window_height))
             pygame.display.set_caption('Overcooked Game')
         else:
+            # 对于训练环境，避免初始化显示系统
+            pygame.init()
+            # 使用虚拟显示或完全避免显示初始化
+            os.environ['SDL_VIDEODRIVER'] = 'dummy'
+            self.window = None
             self.window = pygame.display.set_mode((window_width, window_height), pygame.HIDDEN)
 
         # 设置窗口大小和标题
