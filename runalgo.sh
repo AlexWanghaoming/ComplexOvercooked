@@ -1,8 +1,8 @@
 #!/bin/bash
 
-envs=(2playerhard)
+envs=(supereasy)
 
-algos=(vdn)
+algos=(ippo)
 
 for e in "${envs[@]}"
 do
@@ -10,7 +10,7 @@ do
    do
        for i in {1}
        do
-          python src/main.py --config=${algo} --env-config=overcooked2 with env_args.map_name=$e seed=7 hidden_dim=256 t_max=20000000 &
+          python src/main.py --config=${algo} --env-config=overcooked2 with env_args.map_name=$e seed=7 hidden_dim=128 t_max=10000000 &
           echo "Running with ${algo} and $e for seed=$i"
           sleep 1s
        done

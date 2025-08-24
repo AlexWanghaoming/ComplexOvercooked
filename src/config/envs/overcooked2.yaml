@@ -3,7 +3,7 @@ env: "overcooked2"
 env_args:
   map_name: "supereasy"
   ifrender: False
-  lossless_obs: True
+  lossless_obs: False
 
 mac: "basic_mac" # Basic controller
 agent: "rnn"
