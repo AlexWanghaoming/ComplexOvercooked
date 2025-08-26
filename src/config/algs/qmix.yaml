@@ -21,7 +21,7 @@ obs_individual_obs: False
 
 # use the Q_Learner to train
 standardise_returns: False
-standardise_rewards: True
+standardise_rewards: False
 
 agent_output_type: "q"
 learner: "q_learner"

@@ -3,6 +3,9 @@ import gym
 import pygame
 import os, sys
 import json
+import threading
+import time
+from queue import Queue, Empty
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from collections import defaultdict
 from typing import Union, Dict, Tuple, List, Optional, Any
@@ -63,6 +66,19 @@ class OvercookPygameEnv(gym.Env):
                  debug=False,
                  lossless_obs=False,
                  fps=60):
+        # 添加初始化标志
+        self._is_closing = False
+        self._initialized = False
+        
+        # 添加事件处理相关属性
+        self._event_queue = Queue()
+        self._event_lock = threading.Lock()
+        self._event_timeout = 0.001  # 1ms timeout
+
+        # 安全初始化pygame
+        if not pygame.get_init():
+            pygame.init()
+        
         # 初始化 pygame
         self.reward_shaping_params = {
             'one_step': 0, # 每走一步给一个负奖励
@@ -114,6 +130,9 @@ class OvercookPygameEnv(gym.Env):
         self.initialize_game()
         self.t = 0
         self._max_episode_steps = 600
+        
+        self._initialized = True
+
 
     def get_share_observation(self, nobs:List[np.ndarray]) -> np.ndarray:
         """
@@ -144,12 +163,6 @@ class OvercookPygameEnv(gym.Env):
         for taskname in self.game.taskmenu:
             self.alltaskcount[taskname] += 1
             
-        # 初始化热力图（如果需要）- 只在需要时分配内存
-        # if self.pltheatmap:
-        #     self.heatmap = [np.zeros((self.heatmapsize[0], self.heatmapsize[1]), dtype=np.float32) for _ in range(self.n_agents)]
-        # else:
-        #     self.heatmap = None
-            
         # 初始化物品计数器 - 使用字典推导式优化
         self.matiral_count = {key: 0 for key in self.itemdict.keys()}
         
@@ -166,14 +179,13 @@ class OvercookPygameEnv(gym.Env):
         # 预先计算玩家字典，避免重复创建
         self.playerdic = {'a':0,'b':1,'c':2,'d':3}
         
-    def change_shapereward(self,reward_shaping_params): #for the llm to change the reward_shaping_params
-        self.reward_shaping_params = reward_shaping_params
-        
     def dummy_reset(self):
         self.initialize_game()
         self.timercount = 0
-        self.state = {}  
-
+        
+        # 确保状态字典正确设置
+        self.state["timercount"] = self.timercount
+        
         nobs = self.get_obs_grid() if self.lossless_obs else self.get_obs()
         return nobs
     
@@ -268,12 +280,6 @@ class OvercookPygameEnv(gym.Env):
         return avaliable_actions
 
     def step(self, action_n: List[int]) -> Tuple[Tuple[np.ndarray, np.ndarray], np.ndarray, np.ndarray, np.ndarray, Dict[str, Any], np.ndarray]:
-        
-        # 热力图更新（仅在需要时）- 使用整除以提高性能
-        # if self.pltheatmap:
-        #     for i in range(self.n_agents):
-        #         player = self.game.playergroup[i]
-        #         self.heatmap[i][player.rect.y // 80 - 1][player.rect.x // 80] += 1
 
         # 更新时间计数器
         self.timercount += 1
@@ -315,6 +321,7 @@ class OvercookPygameEnv(gym.Env):
         
         # 计算奖励
         sparse_reward, shaped_reward = self.calculate_reward()
+        # sparse_reward, shaped_reward = 0,0
         reward = sparse_reward + shaped_reward
         if self.debug:
             print('sparse_reward:', sparse_reward)
@@ -382,15 +389,83 @@ class OvercookPygameEnv(gym.Env):
         self.itemdict:Dict[str, int] = {char: index + 1 for index, char in enumerate(self.ITEMS)}
         self.taskdict:Dict[str, int] = {char: index for index, char in enumerate(self.TASK_MENU)}
 
+    def _safe_get_events(self, timeout=None):
+        """安全获取pygame事件，防止死锁和段错误"""
+        try:
+            if timeout is None:
+                return pygame.event.get()
+            else:
+                # 非阻塞事件获取
+                events = []
+                start_time = time.time()
+                while time.time() - start_time < timeout:
+                    event_list = pygame.event.get()
+                    if event_list:
+                        events.extend(event_list)
+                        break
+                    time.sleep(0.001)  # 短暂休眠避免CPU占用过高
+                return events
+        except Exception as e:
+            print(f"Error getting pygame events: {e}")
+            return []
+        
+    def _handle_task_finish_event(self, event):
+        """处理任务完成事件"""
+        sparse_reward = 0.0
+        
+        task_value = self.TASK_MENU[event.action]
+        reward_value = task_value[0] if isinstance(task_value, list) else task_value
+        
+        self.game.NOWCOIN += reward_value
+        self.taskcount[self.playerdic[event.player]][event.action] += 1
+        sparse_reward += reward_value
+        
+        # 优化任务匹配逻辑
+        self._update_task_after_completion(event.action)
+        
+        return sparse_reward, 0.0
+    
+    def _update_task_after_completion(self, action):
+        """任务完成后更新任务列表"""
+        named_tasks = []
+        for task in self.game.task_sprites:
+            if task.task == action:  # 去找到agent完成了哪个任务优先筛检剩余时间少的任务
+                named_tasks.append(task)  # 有可能为空，为空是因为前面倒计时重新更新了
+        if named_tasks:
+            min_task = min(named_tasks, key=lambda task: task.remaining_time)
+            min_task.newtask(self.timercount)
+            self.game.taskmenu[self.game.task_dict[min_task]] = min_task.task
+            self.alltaskcount[min_task.task] += 1
+        else:
+            self.game.NOWCOIN += 1  # 代表之前倒计时重新了
+    
+    def _update_coin_display(self):
+        """更新金币显示"""
+        th, hu, te, on = digitize(self.game.NOWCOIN)
+        self.game.num1.set_num(th)
+        self.game.num2.set_num(hu)
+        self.game.num3.set_num(te)
+        self.game.num4.set_num(on)
+    
     def calculate_reward(self) -> Tuple[float, float]:
+        """优化后的奖励计算函数"""
         tasksequence = []
-        finished_count = 0
         sparse_reward = 0.0
         shaped_reward = 0.0
         
-        self.game.task_sprites.update(self.timercount)
+        # 安全更新任务精灵
+        try:
+            self.game.task_sprites.update(self.timercount)
+        except Exception as e:
+            if self.debug:
+                print(f"Task sprites update error: {e}")
+            return sparse_reward, shaped_reward
+        
+        # 安全获取事件
+        events = self._safe_get_events()
+        
         taskfinished = [False for _ in range(len(self.game.task_sprites))]  # 当前这个时间步，有没有任务被完成了
-        for event in pygame.event.get():
+        for event in events:
             if event.type == pygame.USEREVENT:
                 if event.action == "countdown_finished":
                     self.game_over = True
@@ -408,26 +483,9 @@ class OvercookPygameEnv(gym.Env):
                     # reward-=10
 
             elif event.type == TASK_FINISH_EVENT:  # hjh这里是任务完成的奖励
-            
-                self.game.NOWCOIN += self.TASK_MENU[event.action][0] if isinstance(self.TASK_MENU[event.action], list) else self.TASK_MENU[event.action]
-                # finished_count += self.TASK_MENU[event.action]
-                self.taskcount[self.playerdic[event.player]][event.action] += 1  # 用于展示任务完成次数
-                sparse_reward += self.TASK_MENU[event.action][0] if isinstance(self.TASK_MENU[event.action], list) else self.TASK_MENU[event.action]
-                # print(f"成功送出菜品 {event.action}")
-
-                named_tasks = []
-                for task in self.game.task_sprites:
-                    if task.task == event.action:  # 去找到agent完成了哪个任务优先筛检剩余时间少的任务
-                        named_tasks.append(task)  # 有可能为空，为空是因为前面倒计时重新更新了
-                if named_tasks:
-                    min_task = min(named_tasks, key=lambda task: task.remaining_time)
-                    min_task.newtask(self.timercount)
-                    self.game.taskmenu[self.game.task_dict[min_task]] = min_task.task
-                    self.alltaskcount[min_task.task] += 1
-                    # taskfinished[self.game.task_dict[min_task]]=True#对应的任务被完成了，此时对应的task被更新了一次
-                else:
-                    self.game.NOWCOIN += 1  # 代表之前倒计时重新了
-                    #tasksequence.pop()
+                task_sparse_reward, task_shaped_reward = self._handle_task_finish_event(event)
+                sparse_reward += task_sparse_reward
+                shaped_reward += task_shaped_reward
                 tasksequence.append("Successfully delivered the required food")
 
             elif event.type == OUT_SUPPLY_EVENT:
@@ -553,13 +611,10 @@ class OvercookPygameEnv(gym.Env):
                         # shaped_reward -= 1
                         break
 
-            shaped_reward += self.reward_shaping_params['one_step']
-
-            th, hu, te, on = digitize(self.game.NOWCOIN)
-            self.game.num1.set_num(th)
-            self.game.num2.set_num(hu)
-            self.game.num3.set_num(te)
-            self.game.num4.set_num(on)
+        shaped_reward += self.reward_shaping_params['one_step']
+        
+        # 优化数字显示更新
+        self._update_coin_display()
 
         # return sparse_reward, shaped_reward, tasksequence
         return sparse_reward, shaped_reward
@@ -585,7 +640,7 @@ class OvercookPygameEnv(gym.Env):
         return game_state
     
 
-    def get_obs(self) -> List[List[np.ndarray]]:
+    def get_obs(self) -> List[np.ndarray]:
         """
         Encode state with some manually designed features. Works for arbitrary number of players
 
@@ -1059,19 +1114,40 @@ class OvercookPygameEnv(gym.Env):
             plt.close()
             
     def close(self):
+        """安全地清理所有资源"""
         try:
+            # 设置关闭标志，防止其他方法继续操作
+            self._is_closing = True
+            
+            # 清理游戏资源
             if hasattr(self, 'game') and self.game:
-                # 清理游戏资源
-                if hasattr(self.game, 'all_sprites'):
-                    self.game.all_sprites.empty()
-                if hasattr(self.game, 'window') and self.game.window:
-                    self.game.window = None
+                try:
+                    if hasattr(self.game, 'all_sprites') and self.game.all_sprites:
+                        self.game.all_sprites.empty()
+                    if hasattr(self.game, 'window'):
+                        self.game.window = None
+                    self.game = None
+                except Exception as e:
+                    print(f"Game cleanup error: {e}")
             
             # 清理pygame资源
-            if pygame.get_init():
-                pygame.quit()
+            try:
+                if pygame.get_init():
+                    # 清空事件队列
+                    pygame.event.clear()
+                    # 退出pygame
+                    pygame.quit()
+            except Exception as e:
+                print(f"Pygame cleanup error: {e}")
+                
+            # 清理其他资源
+            if hasattr(self, 'clock'):
+                self.clock = None
+                
         except Exception as e:
-            print(f"Error during cleanup: {e}")
+            print(f"Critical error during cleanup: {e}")
+        finally:
+            self._is_closing = False
 
     def seed(self, seed=None):
         # 设置随机数生成器的种子
