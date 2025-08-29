@@ -9,7 +9,7 @@ from envs.overcook_gym_env import OvercookPygameEnv
 def test_overcooked2_env():
     print("\n| test_overcooked2_env()")
     # env = OvercookPygameEnv(map_name='4playersplit', ifrender=True, debug=True)
-    env = OvercookPygameEnv(map_name='supereasy', ifrender=False, debug=False, lossless_obs=False, fps=100)
+    env = OvercookPygameEnv(map_name='supereasy', ifrender=True, debug=False, lossless_obs=False, fps=60)
     # env = OvercookPygameEnv(map_name='supereasy', ifrender=True, debug=True)
     for _ in range(2):
         nobs, _, available_actions = env.reset()

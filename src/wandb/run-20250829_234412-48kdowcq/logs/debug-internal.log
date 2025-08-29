@@ -1,0 +1,16 @@
+{"time":"2025-08-29T23:44:12.382995+08:00","level":"INFO","msg":"using version","core version":"0.19.1"}
+{"time":"2025-08-29T23:44:12.383035+08:00","level":"INFO","msg":"created symlink","path":"/Users/alexwang/phD/ComplexOvercooked/src/wandb/run-20250829_234412-48kdowcq/logs/debug-core.log"}
+{"time":"2025-08-29T23:44:12.493961+08:00","level":"INFO","msg":"created new stream","id":"48kdowcq"}
+{"time":"2025-08-29T23:44:12.494005+08:00","level":"INFO","msg":"stream: started","id":"48kdowcq"}
+{"time":"2025-08-29T23:44:12.494248+08:00","level":"INFO","msg":"handler: started","stream_id":"48kdowcq"}
+{"time":"2025-08-29T23:44:12.494263+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"48kdowcq"}
+{"time":"2025-08-29T23:44:12.49427+08:00","level":"INFO","msg":"sender: started","stream_id":"48kdowcq"}
+{"time":"2025-08-29T23:44:22.843634+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-08-29T23:45:39.46951+08:00","level":"INFO","msg":"stream: closing","id":"48kdowcq"}
+{"time":"2025-08-29T23:45:39.469743+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-08-29T23:45:39.470429+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-08-29T23:45:59.650348+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-08-29T23:46:02.549698+08:00","level":"INFO","msg":"handler: closed","stream_id":"48kdowcq"}
+{"time":"2025-08-29T23:46:02.549755+08:00","level":"INFO","msg":"sender: closed","stream_id":"48kdowcq"}
+{"time":"2025-08-29T23:46:02.549739+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"48kdowcq"}
+{"time":"2025-08-29T23:46:02.550423+08:00","level":"INFO","msg":"stream: closed","id":"48kdowcq"}

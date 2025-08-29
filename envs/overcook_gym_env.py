@@ -168,7 +168,6 @@ class OvercookPygameEnv(gym.Env):
     #     self.playerdic = {'a':0,'b':1,'c':2,'d':3}
         
     def dummy_reset(self):
-        # self.initialize_game()
         self.timercount = 0
         # 确保状态字典正确设置
         self.state["timercount"] = self.timercount
@@ -177,7 +176,12 @@ class OvercookPygameEnv(gym.Env):
         return nobs
     
     def reset(self) -> Tuple[Tuple[np.ndarray, np.ndarray], np.ndarray, np.ndarray]:
-        # self.game = MainGame(map_name=self.map_name, ifrender=self.ifrender)
+        
+        self.game.init_maps()
+        self.game.init_tasks()
+        self.game.init_all_sprites()
+        
+        
         """初始化游戏环境和MDP状态"""
         self.get_need_cutting = 0
         self.get_need_cooking = 0
@@ -437,9 +441,8 @@ class OvercookPygameEnv(gym.Env):
         sparse_reward = 0.0
         shaped_reward = 0.0
         
-        # self.game.task_sprites.update(self.timercount)
+        self.game.task_sprites.update(self.timercount)
         
-        # 安全获取事件
         events = pygame.event.get()
         
         taskfinished = [False for _ in range(len(self.game.task_sprites))]  # 当前这个时间步，有没有任务被完成了

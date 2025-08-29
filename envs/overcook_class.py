@@ -1,6 +1,9 @@
 import pygame
 from pygame.transform import scale as picscale
 from pygame.image import load as picload
+from pygame.event import post as post
+from pygame.event import Event as Event
+
 import random
 import os
 from typing import List, Dict, Tuple, Any, Union
@@ -83,8 +86,9 @@ class Direction():
                     }
 
 class TaskBoard(pygame.sprite.Sprite):
-    def __init__(self, x, y, taskmenu):
+    def __init__(self, x, y, taskmenu, ifrender):
         super().__init__()
+        self.ifrender = ifrender
         self.menu = taskmenu
         # 根据概率选择任务
         task_items = list(self.menu.keys())
@@ -101,7 +105,13 @@ class TaskBoard(pygame.sprite.Sprite):
         self.timer = 200
         self.remaining_time = self.timer
         self.start_time = 0
-
+        
+    def updateimg(self, ):
+        progress_bar_rect = pygame.Rect(0, ONEBLOCK*7/8-3, 3*ONEBLOCK * (1-self.remaining_time / self.timer), ONEBLOCK / 8)
+        progress_bar_surface = pygame.Surface(progress_bar_rect.size)
+        progress_bar_surface.fill((128, 200, 0))
+        self.image.blit(progress_bar_surface, progress_bar_rect)
+        
     def update(self,nowtime) -> None:
         if self.timer > 0:
             elapsed_time = nowtime - self.start_time
@@ -109,12 +119,10 @@ class TaskBoard(pygame.sprite.Sprite):
             if self.remaining_time <= 0:
                 oldtask = self.task
                 self.newtask(nowtime)
-                pygame.event.post(pygame.event.Event(pygame.USEREVENT, {'action': 'notfinished','newtask':self.task,'oldtask':oldtask,'taskclass':self}))
+                post(Event(pygame.USEREVENT, {'action': 'notfinished','newtask':self.task,'oldtask':oldtask,'taskclass':self}))
             else:
-                progress_bar_rect = pygame.Rect(0, ONEBLOCK*7/8-3, 3*ONEBLOCK * (1-self.remaining_time / self.timer), ONEBLOCK / 8)
-                progress_bar_surface = pygame.Surface(progress_bar_rect.size)
-                progress_bar_surface.fill((128, 200, 0))
-                self.image.blit(progress_bar_surface, progress_bar_rect)
+                if self.ifrender:
+                    self.updateimg()
 
     def newtask(self, nowtime):
         # 根据概率选择新任务
@@ -163,19 +171,20 @@ class Picshow(pygame.sprite.Sprite):
 
 
 class SupplyTable(pygame.sprite.Sprite):
-    def __init__(self, x, y, item, itempics):
+    def __init__(self, x, y, item, itempics, ifrender):
         super().__init__()
         self.item = item  # 设置物品属性，默认为 None
         self.pics = itempics
+        self.ifrender = ifrender
         self.updateimg()
         self.rect = self.image.get_rect()  # 获取图片的矩形区域
         self.rect.x = x  # 设置矩形区域的位置
         self.rect.y = y
 
     def isnewthing(self,item):
-        pygame.event.post(pygame.event.Event(TRY_NEWTHING_EVENT))
+        post(Event(TRY_NEWTHING_EVENT))
         if frozenset([self.item,item]) in RECIPE:
-            pygame.event.post(pygame.event.Event(MADE_NEWTHING_EVENT,{'newitem':RECIPE[frozenset([self.item,item])]}))
+            post(Event(MADE_NEWTHING_EVENT,{'newitem':RECIPE[frozenset([self.item,item])]}))
             return RECIPE[frozenset([self.item,item])]
         
     def updateimg(self, ):
@@ -192,22 +201,22 @@ class SupplyTable(pygame.sprite.Sprite):
                 if self.item=='dish':
                     if not player.dish:
                         player.dish = 'dish'
-                        pygame.event.post(pygame.event.Event(OUT_DISH_EVENT))
+                        post(Event(OUT_DISH_EVENT))
                         if player.item:
-                            pygame.event.post(pygame.event.Event(PUTTHING_DISH_EVENT, {'item': player.item}))
+                            post(Event(PUTTHING_DISH_EVENT, {'item': player.item}))
                 else:
                     if not player.item:
-
-
                         player.item = self.item
-                        pygame.event.post(pygame.event.Event(OUT_SUPPLY_EVENT, {'item': self.item}))
+                        post(Event(OUT_SUPPLY_EVENT, {'item': self.item}))
                     elif player.dish and self.item:
                         tmp = self.isnewthing(player.item)
                         if tmp:
-                            pygame.event.post(pygame.event.Event(PUTTHING_DISH_EVENT, {'item': tmp}))
+                            post(Event(PUTTHING_DISH_EVENT, {'item': tmp}))
                             player.item = tmp
-                            player.updateimg()
-                player.updateimg()
+                            if self.ifrender:
+                                player.updateimg()
+                if self.ifrender:
+                    player.updateimg()
 
     def availbeinter(self,player):
         if player.rect.move(player.direction[0] * ONEBLOCK / 2,
@@ -225,8 +234,9 @@ class SupplyTable(pygame.sprite.Sprite):
 
 
 class TimerTable(pygame.sprite.Sprite):
-    def __init__(self, x, y, font, time):
+    def __init__(self, x, y, font, time, ifrender):
         super().__init__()
+        self.ifrender = ifrender
         self.timer = time
         self.image = font.render(str(self.timer),True,(0,0,0))
         self.font = font
@@ -236,13 +246,15 @@ class TimerTable(pygame.sprite.Sprite):
 
     def update(self,nowtime) -> None:
         if self.timer - nowtime<=0:
-            pygame.event.post(pygame.event.Event(pygame.USEREVENT, {'action': 'countdown_finished'}))
-        self.image = self.font.render(str((self.timer - nowtime)//10),True,(0,0,0))
+            post(Event(pygame.USEREVENT, {'action': 'countdown_finished'}))
+        if self.ifrender:
+            self.image = self.font.render(str((self.timer - nowtime)//10),True,(0,0,0))
 
 
 class CoinTable(pygame.sprite.Sprite):
-    def __init__(self, x, y):
+    def __init__(self, x, y, ifrender):
         super().__init__()
+        self.ifrender = ifrender
         self.updateimg()
         self.rect = self.image.get_rect()  # 获取图片的矩形区域
         self.rect.x = x  # 设置矩形区域的位置
@@ -260,11 +272,12 @@ class CoinTable(pygame.sprite.Sprite):
                                 player.direction[1] * ONEBLOCK / 2).colliderect(self.rect):
                 if player.dish and player.item in taskmenu:
                     # score = taskmenu[player.item][0] if isinstance(taskmenu[player.item], list) else taskmenu[player.item]
-                    # pygame.event.post(pygame.event.Event(TASK_FINISH_EVENT, {'action': player.item, 'player': player.name, 'score': score}))
-                    pygame.event.post(pygame.event.Event(TASK_FINISH_EVENT, {'action': player.item, 'player': player.name}))
+                    # post(Event(TASK_FINISH_EVENT, {'action': player.item, 'player': player.name, 'score': score}))
+                    post(Event(TASK_FINISH_EVENT, {'action': player.item, 'player': player.name}))
                     player.dish = None
                     player.item = None
-                    player.updateimg()
+                    if self.ifrender:
+                        player.updateimg()
 
     def availbeinter(self,player):
         if player.rect.move(player.direction[0] * ONEBLOCK / 2,
@@ -275,8 +288,9 @@ class CoinTable(pygame.sprite.Sprite):
 
 
 class TrashTable(pygame.sprite.Sprite):
-    def __init__(self, x, y):
+    def __init__(self, x, y, ifrender):
         super().__init__()
+        self.ifrender = ifrender
         self.updateimg()
         self.rect = self.image.get_rect()  # 获取图片的矩形区域
         self.rect.x = x  # 设置矩形区域的位置
@@ -291,10 +305,12 @@ class TrashTable(pygame.sprite.Sprite):
             if player.rect.move(player.direction[0] * ONEBLOCK / 2,
                                 player.direction[1] * ONEBLOCK / 2).colliderect(self.rect):
                 #
-                pygame.event.post(pygame.event.Event(TRASH_EVENT, {'item': player.item}))
+                post(Event(TRASH_EVENT, {'item': player.item}))
                 player.dish = None
                 player.item = None
-                player.updateimg()
+                if self.ifrender:
+                    player.updateimg()
+                
     def availbeinter(self,player):
         if player.rect.move(player.direction[0] * ONEBLOCK / 2,
                             player.direction[1] * ONEBLOCK / 2).colliderect(self.rect):
@@ -304,8 +320,9 @@ class TrashTable(pygame.sprite.Sprite):
 
 
 class Table(pygame.sprite.Sprite):
-    def __init__(self, x, y, item, dish, tablepics):
+    def __init__(self, x, y, item, dish, tablepics, ifrender):
         super().__init__()
+        self.ifrender = ifrender
         self.item = item  # 设置物品属性，默认为 None
         self.dish = dish
         self.pics = tablepics
@@ -315,9 +332,9 @@ class Table(pygame.sprite.Sprite):
         self.rect.y = y
 
     def isnewthing(self,item):
-        pygame.event.post(pygame.event.Event(TRY_NEWTHING_EVENT))
+        post(Event(TRY_NEWTHING_EVENT))
         if frozenset([self.item,item]) in RECIPE:
-            pygame.event.post(pygame.event.Event(MADE_NEWTHING_EVENT,{'newitem':RECIPE[frozenset([self.item,item])]}))
+            post(Event(MADE_NEWTHING_EVENT,{'newitem':RECIPE[frozenset([self.item,item])]}))
             return RECIPE[frozenset([self.item,item])]
         
     def updateimg(self, ):
@@ -335,7 +352,6 @@ class Table(pygame.sprite.Sprite):
         if keys:
             if player.rect.move(player.direction[0] * ONEBLOCK / 2,
                                 player.direction[1] * ONEBLOCK / 2).colliderect(self.rect):
-                #
                 if self.dish:  # 桌上有盘子
                     if self.item:  # 盘子里有东西
                         if not player.item and not player.dish:
@@ -343,15 +359,14 @@ class Table(pygame.sprite.Sprite):
                             player.exchangeitem(self)
 
                         elif not player.item and player.dish:  # 手上有盘子
-
-                            pygame.event.post(pygame.event.Event(PUTTHING_DISH_EVENT, {'item': self.item}))
+                            post(Event(PUTTHING_DISH_EVENT, {'item': self.item}))
                             player.exchangeitem(self)
-                            #pygame.event.post(pygame.event.Event(PUTTHING_DISH_EVENT, {'item': self.item}))交换，因此不变情况
+                            #post(Event(PUTTHING_DISH_EVENT, {'item': self.item}))交换，因此不变情况
 
                         else:#手上有东西
                             tmp = self.isnewthing(player.item)
                             if tmp:
-                                pygame.event.post(pygame.event.Event(PUTTHING_DISH_EVENT, {'item': tmp}))
+                                post(Event(PUTTHING_DISH_EVENT, {'item': tmp}))
                                 self.item = tmp
                                 player.item = None
                         # 手上有盘有东西或手上无盘有东西没法拿了
@@ -359,12 +374,10 @@ class Table(pygame.sprite.Sprite):
                         if player.item and player.dish:#把手上的盘子里的东西放桌上的盘子里
                             
                             self.item, player.item =player.item,self.item
-                            #pygame.event.post(pygame.event.Event(PUTTHING_DISH_EVENT, {'item': self.item}))放置，场上情况也不变
+                            #post(Event(PUTTHING_DISH_EVENT, {'item': self.item}))放置，场上情况也不变
                         elif player.item and not player.dish:#把东西放盘子里
                             self.item, player.item =player.item,self.item
-                            pygame.event.post(pygame.event.Event(PUTTHING_DISH_EVENT, {'item': self.item}))
-
-
+                            post(Event(PUTTHING_DISH_EVENT, {'item': self.item}))
                         else:
                             player.dish, self.dish =self.dish,player.dish#拿起盘子或交换盘子（无事发生）
 
@@ -373,12 +386,12 @@ class Table(pygame.sprite.Sprite):
                         if not player.item:#玩家空手,东西# 玩家手上有盘子，东西装盘子里
                             self.item, player.item =player.item,self.item
                             if player.dish:
-                                pygame.event.post(pygame.event.Event(PUTTHING_DISH_EVENT, {'item': player.item}))
+                                post(Event(PUTTHING_DISH_EVENT, {'item': player.item}))
 
                         elif player.dish:
                             tmp = self.isnewthing(player.item)
                             if tmp:
-                                pygame.event.post(pygame.event.Event(PUTTHING_DISH_EVENT, {'item': tmp}))
+                                post(Event(PUTTHING_DISH_EVENT, {'item': tmp}))
                                 self.item = tmp
                                 self.dish,player.dish = player.dish,self.dish
                                 player.item = None
@@ -388,12 +401,11 @@ class Table(pygame.sprite.Sprite):
                     else:  # 桌上没东西
                         if player.item:  # 把手上的盘子里的东西放桌上的盘子里
                             self.item, player.item =player.item,self.item
-
-
                         if player.dish:
                             player.dish, self.dish =self.dish,player.dish
-                self.updateimg()
-                player.updateimg()
+                if self.ifrender:
+                    self.updateimg()
+                    player.updateimg()
 
     def availbeinter(self,player):
         if player.rect.move(player.direction[0] * ONEBLOCK / 2,
@@ -438,9 +450,9 @@ class Table(pygame.sprite.Sprite):
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self,name, x, y, playerpic, itempic):
-
+    def __init__(self,name, x, y, playerpic, itempic, ifrender):
         super().__init__()
+        self.ifrender = ifrender
         self.name = name
         self.playerpic = playerpic
         self.itempic = itempic
@@ -451,6 +463,7 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+        
         # TODO: 目前layout矩阵中x轴是从0开始，y轴从1开始
         self.control = {Action.STAY: (0,0),
                         Action.DOWN: (0,1),
@@ -463,13 +476,13 @@ class Player(pygame.sprite.Sprite):
 
     def exchangedish(self,table):
         self.dish,table.dish = table.dish,self.dish
-        pygame.event.post(pygame.event.Event(GET_DISH_EVENT, 
+        post(Event(GET_DISH_EVENT, 
                                              {'player': self.name,'olditem':self.dish,
                                               'newitem':table.dish}))
 
     def exchangeitem(self,table):
         self.item,table.item = table.item,self.item
-        pygame.event.post(pygame.event.Event(GET_MATERIAL_EVENT, 
+        post(Event(GET_MATERIAL_EVENT, 
                                              {'player': self.name,'olditem':self.item,
                                               'newitem':table.item}))        
     
@@ -531,8 +544,9 @@ class Player(pygame.sprite.Sprite):
             return
         else:
             self.direction = move_vector
-            self.updateimg()
-            return True#改变方向是available的
+            if self.ifrender:
+                self.updateimg()
+            return True #改变方向是available的
         pengzhuangflag = True
 
         # 碰撞检测
@@ -562,8 +576,9 @@ class Player(pygame.sprite.Sprite):
 
 class CuttingTable(pygame.sprite.Sprite):
 
-    def __init__(self, x, y,  itempics):
+    def __init__(self, x, y,  itempics, ifrender):
         super().__init__()
+        self.ifrender = ifrender
         self.item = None  # 设置物品属性，默认为 None
         self.pics = itempics
         self.cuttingtime = 6
@@ -593,9 +608,9 @@ class CuttingTable(pygame.sprite.Sprite):
         return self.item is None
     
     def isnewthing(self,item):
-        pygame.event.post(pygame.event.Event(TRY_NEWTHING_EVENT))
+        post(Event(TRY_NEWTHING_EVENT))
         if frozenset([self.item,item]) in RECIPE:
-            pygame.event.post(pygame.event.Event(MADE_NEWTHING_EVENT,{'newitem':RECIPE[frozenset([self.item,item])]}))
+            post(Event(MADE_NEWTHING_EVENT,{'newitem':RECIPE[frozenset([self.item,item])]}))
             return RECIPE[frozenset([self.item,item])]
     
     def updateimg(self, ):
@@ -618,35 +633,36 @@ class CuttingTable(pygame.sprite.Sprite):
                     if 'BC' in player.item:
                     # 如果玩家有可以切的东西，就放进去切
                         if self.item is None:
-                            pygame.event.post(pygame.event.Event(BEGINCUTTING_EVENT,{'item':player.item}))
+                            post(Event(BEGINCUTTING_EVENT,{'item':player.item}))
                             self.item, player.item = player.item, self.item
                             player.cutting = True
                             self.cuttingplayer = player
-                            player.updateimg()
-                            self.updateimg()
-
+                            if self.ifrender:
+                                player.updateimg()
+                                self.updateimg()
                             self.start_time = nowtime
                             self.timer = self.cuttingtime
                     elif player.dish and self.item:
                         tmp = self.isnewthing(player.item)
                         if tmp:
-                            pygame.event.post(pygame.event.Event(PUTTHING_DISH_EVENT, {'item': tmp}))
+                            post(Event(PUTTHING_DISH_EVENT, {'item': tmp}))
                             player.item = tmp
                             self.item = None
-                            player.updateimg()
-                            self.updateimg()
+                            if self.ifrender:
+                                player.updateimg()
+                                self.updateimg()
                 else:
                     #没东西可以把东西拿出来
                     if not player.cutting:
                         if self.item:
                             if player.dish:
-                                pygame.event.post(pygame.event.Event(PUTTHING_DISH_EVENT, {'item': self.item}))                            
+                                post(Event(PUTTHING_DISH_EVENT, {'item': self.item}))                            
                             player.exchangeitem(self)
 
                             #self.item, player.item = player.item, self.item
-                        
-                            player.updateimg()
-                            self.updateimg()
+                            if self.ifrender:
+                                player.updateimg()
+                                self.updateimg()
 
         if self.item and self.timer > 0:
             elapsed_time = nowtime - self.start_time
@@ -658,7 +674,7 @@ class CuttingTable(pygame.sprite.Sprite):
                 if 'BC' in self.item:
                     self.item=self.item.replace('BC','AC')
                     
-                    pygame.event.post(pygame.event.Event(CUTTINGDOWN_EVENT,{'item':self.item}))
+                    post(Event(CUTTINGDOWN_EVENT,{'item':self.item}))
                     self.image = picscale(picload(os.path.join(current_dir, f'assets/table/cuttingboard-pixilart.png')).convert_alpha(),
                                           ONEBLOCKSIZE)
                     item_rect = pygame.Rect(ONEBLOCK / 4, 
@@ -668,13 +684,13 @@ class CuttingTable(pygame.sprite.Sprite):
                     item_surface = picscale(self.pics[self.item], (ONEBLOCK / 2, ONEBLOCK / 2))
                     self.image.blit(item_surface, item_rect)
                 self.timer=0
-
             else:
-                self.updateimg()
-                progress_bar_rect = pygame.Rect(0, 0, ONEBLOCK * (1 - remaining_time / self.timer), ONEBLOCK / 8)
-                progress_bar_surface = pygame.Surface(progress_bar_rect.size)
-                progress_bar_surface.fill((255, 0, 0))
-                self.image.blit(progress_bar_surface, progress_bar_rect)
+                if self.ifrender:
+                    self.updateimg()
+                    progress_bar_rect = pygame.Rect(0, 0, ONEBLOCK * (1 - remaining_time / self.timer), ONEBLOCK / 8)
+                    progress_bar_surface = pygame.Surface(progress_bar_rect.size)
+                    progress_bar_surface.fill((255, 0, 0))
+                    self.image.blit(progress_bar_surface, progress_bar_rect)
     
     def availbeinter(self,player):
         if player.rect.move(player.direction[0] * ONEBLOCK / 2,
@@ -696,8 +712,9 @@ class CuttingTable(pygame.sprite.Sprite):
 
 class Pot(pygame.sprite.Sprite):
 
-    def __init__(self, x, y,  itempics):
+    def __init__(self, x, y,  itempics, ifrender):
         super().__init__()
+        self.ifrender = ifrender
         self.item = None  # 设置物品属性，默认为 None
         self.pics = itempics
         self.timer = 0
@@ -730,9 +747,9 @@ class Pot(pygame.sprite.Sprite):
             self.image.blit(item_surface, item_rect)
 
     def isnewthing(self,item):
-        pygame.event.post(pygame.event.Event(TRY_NEWTHING_EVENT))
+        post(Event(TRY_NEWTHING_EVENT))
         if frozenset([self.item,item]) in RECIPE:
-            pygame.event.post(pygame.event.Event(MADE_NEWTHING_EVENT,{'newitem':RECIPE[frozenset([self.item,item])]}))
+            post(Event(MADE_NEWTHING_EVENT,{'newitem':RECIPE[frozenset([self.item,item])]}))
             return RECIPE[frozenset([self.item,item])]
         
     def update(self, player, keys, nowtime) -> None:
@@ -742,30 +759,32 @@ class Pot(pygame.sprite.Sprite):
                     if 'raw' in player.item:
                     # 如果玩家有可以烧的东西，就放进去烧
                         if self.item is None:
-                            pygame.event.post(pygame.event.Event(BEGINCOOKING_EVENT,{'item':player.item}))
+                            post(Event(BEGINCOOKING_EVENT,{'item':player.item}))
                             self.item, player.item = player.item, self.item
-                            player.updateimg()
-                            self.updateimg()
+                            if self.ifrender:
+                                player.updateimg()
+                                self.updateimg()
                             self.start_time = nowtime
                             self.timer = self.cookingtime
                     elif player.dish and self.item:
                         tmp = self.isnewthing(player.item)
                         if tmp:
-                            pygame.event.post(pygame.event.Event(PUTTHING_DISH_EVENT, {'item': tmp}))
+                            post(Event(PUTTHING_DISH_EVENT, {'item': tmp}))
                             player.item = tmp
                             self.item = None
-                            player.updateimg()
-                            self.updateimg()
+                            if self.ifrender:
+                                player.updateimg()
+                                self.updateimg()
                 else:
                     #没东西可以把东西拿出来#7.18修改如果没熟不能拿出来
                     if self.item and 'raw' not in self.item:
                         if player.dish:
-                            pygame.event.post(pygame.event.Event(PUTTHING_DISH_EVENT, {'item': self.item}))
-                        pygame.event.post(pygame.event.Event(COOKINGOUT_EVENT,{'item':self.item}))
+                            post(Event(PUTTHING_DISH_EVENT, {'item': self.item}))
+                        post(Event(COOKINGOUT_EVENT,{'item':self.item}))
                         self.item,player.item = player.item,self.item
-                        
-                        player.updateimg()
-                        self.updateimg()
+                        if self.ifrender:
+                            player.updateimg()
+                            self.updateimg()
 
         if self.item and self.timer > 0:
 
@@ -774,15 +793,17 @@ class Pot(pygame.sprite.Sprite):
             if self.remaining_time <= 0:
                 if 'raw' in self.item:
                     self.item=self.item.replace('raw','cooked')
-                    pygame.event.post(pygame.event.Event(COOKINGDOWN_EVENT,{'item':self.item}))
-                    self.updateimg()
+                    post(Event(COOKINGDOWN_EVENT,{'item':self.item}))
+                    if self.ifrender:
+                        self.updateimg()
                 self.timer=0
                 self.remaining_time=-1
             else:
-                progress_bar_rect = pygame.Rect(0, 0, ONEBLOCK * (1 - self.remaining_time / self.timer), ONEBLOCK / 8)
-                progress_bar_surface = pygame.Surface(progress_bar_rect.size)
-                progress_bar_surface.fill((255, 0, 0))
-                self.image.blit(progress_bar_surface, progress_bar_rect)
+                if self.ifrender:
+                    progress_bar_rect = pygame.Rect(0, 0, ONEBLOCK * (1 - self.remaining_time / self.timer), ONEBLOCK / 8)
+                    progress_bar_surface = pygame.Surface(progress_bar_rect.size)
+                    progress_bar_surface.fill((255, 0, 0))
+                    self.image.blit(progress_bar_surface, progress_bar_rect)
 
     def availbeinter(self,player):
         if player.rect.move(player.direction[0] * ONEBLOCK / 2,
