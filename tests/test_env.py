@@ -9,19 +9,17 @@ from envs.overcook_gym_env import OvercookPygameEnv
 def test_overcooked2_env():
     print("\n| test_overcooked2_env()")
     # env = OvercookPygameEnv(map_name='4playersplit', ifrender=True, debug=True)
-    env = OvercookPygameEnv(map_name='supereasy', ifrender=False, debug=False, lossless_obs=False, fps=30)
+    env = OvercookPygameEnv(map_name='supereasy', ifrender=False, debug=False, lossless_obs=False, fps=100)
     # env = OvercookPygameEnv(map_name='supereasy', ifrender=True, debug=True)
+    for _ in range(2):
+        nobs, _, available_actions = env.reset()
+        print("observation shape:", nobs[0].shape)
+        done = False
+        while not done:
+            random_action = np.random.randint(0, 6, size=env.n_agents)
+            nobs, _, rewards, dones, infos, available_actions = env.step(random_action)
+            done = dones[0]
     
-    nobs, share_obs, available_actions = env.reset()
-    print("observation shape:", nobs[0].shape)
-    done = False
-    while not done:
-        random_action = np.random.randint(0, 6, size=env.n_agents)
-        nobs, share_obs, rewards, dones, infos, available_actions = env.step(random_action)
-        done = dones[0]
-    
-    env.close()
-
 def test_function_performance():
     """
     测试 OvercookPygameEnv 中关键函数的性能
@@ -32,7 +30,7 @@ def test_function_performance():
     env = OvercookPygameEnv(map_name='supereasy', ifrender=False, debug=False, lossless_obs=True, fps=30)
     
     # 初始化环境
-    nobs, share_obs, available_actions = env.reset()
+    nobs, _, available_actions = env.reset()
     
     # 测试参数
     num_tests = 100
@@ -54,7 +52,7 @@ def test_function_performance():
         action = test_actions[i]
         
         start_time = time.perf_counter()
-        nobs, share_obs, rewards, dones, infos, available_actions = env.step(action)
+        nobs, _, rewards, dones, infos, available_actions = env.step(action)
         end_time = time.perf_counter()
         
         step_times.append(end_time - start_time)
@@ -80,7 +78,7 @@ def test_function_performance():
         # 偶尔执行一个动作以保持环境动态性
         if i % 10 == 0 and i > 0:
             action = np.random.randint(0, 6, size=env.n_agents)
-            nobs, share_obs, rewards, dones, infos, available_actions = env.step(action)
+            nobs, _, rewards, dones, infos, available_actions = env.step(action)
             if dones[0]:
                 env.reset()
     
@@ -101,7 +99,7 @@ def test_function_performance():
         # 偶尔执行一个动作以保持环境动态性
         if i % 10 == 0 and i > 0:
             action = np.random.randint(0, 6, size=env.n_agents)
-            nobs, share_obs, rewards, dones, infos, available_actions = env.step(action)
+            nobs, _, rewards, dones, infos, available_actions = env.step(action)
             if dones[0]:
                 env.reset()
     
@@ -195,7 +193,7 @@ def test_performance_under_load():
                 action = np.random.randint(0, 6, size=env.n_agents)
                 
                 start_time = time.perf_counter()
-                nobs, share_obs, rewards, dones, infos, available_actions = env.step(action)
+                nobs, _, rewards, dones, infos, available_actions = env.step(action)
                 end_time = time.perf_counter()
                 
                 step_times.append((end_time - start_time) * 1000)  # 转换为毫秒
@@ -215,9 +213,8 @@ if __name__ == '__main__':
     test_overcooked2_env()
     
     # 运行性能测试
-    test_function_performance()
+    # test_function_performance()
     
     # 运行负载测试
-    test_performance_under_load()
+    # test_performance_under_load()
     
-    print("\n✅ 所有测试完成!")

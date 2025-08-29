@@ -46,10 +46,7 @@ class MainGame(object):
             self.window = pygame.display.set_mode((window_width, window_height))
             pygame.display.set_caption('Overcooked Game')
         else:
-            # 对于训练环境，避免初始化显示系统
             pygame.init()
-            # 使用虚拟显示或完全避免显示初始化
-            os.environ['SDL_VIDEODRIVER'] = 'dummy'
             self.window = None
             self.window = pygame.display.set_mode((window_width, window_height), pygame.HIDDEN)
 
@@ -171,6 +168,7 @@ class MainGame(object):
         self.num4 = DigitDisplay(ONEBLOCK / 2 + 5 * 5 * 3, ONEBLOCK / 10)
         
         Coin = Picshow(0, 0, os.path.join(current_dir, f'assets/font/coin.png'))
+        
         self.task_sprites = pygame.sprite.Group()
         self.task_sprites.add(TaskBoard((1.75) * ONEBLOCK, 0, self.TASK_MENU))
         
@@ -187,6 +185,7 @@ class MainGame(object):
         # task1 = taskBoard(1.75 * ONEBLOCK, 0,TASK_MENU)
         # task2 = taskBoard((1.75 + 3) * ONEBLOCK, 0)
         # self.task_sprites = pygame.sprite.Group(task1)
+        
         # 创建精灵组
         self.all_sprites = pygame.sprite.Group(walls, 
                                                self.num1, 

@@ -1,0 +1,112 @@
+[INFO 18:12:34] my_main *******************
+[INFO 18:12:34] my_main WANDB RUN ID:
+[INFO 18:12:34] my_main 9nsnhe0b
+[INFO 18:12:34] my_main *******************
+shape of state: 73
+shape of observation: 73
+[INFO 18:12:36] my_main Beginning training for 20000000.0 timesteps
+[INFO 18:12:36] my_main t_env: 600 / 20000000.0
+[INFO 18:12:36] my_main Estimated time left: 2 minutes, 15 seconds. Time passed: 0 seconds
+[INFO 18:12:37] my_main New best model saved with performance: 0.0
+[DEBUG 18:12:53] pymarl Stopping Heartbeat
+[WARNING 18:12:53] pymarl Aborted after 0:00:24!
+Traceback (most recent call last):
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/stdout_capturing.py", line 164, in tee_output_fd
+    yield out  # let the caller do their printing
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/run.py", line 238, in __call__
+    self.result = self.main_function(*args)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/config/captured_function.py", line 42, in captured_function
+    result = wrapped(*args, **kwargs)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/main_debug.py", line 45, in my_main
+    run(_run, config, _log)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/run.py", line 78, in run
+    run_sequential(args=args, logger=logger)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/run.py", line 215, in run_sequential
+    episode_batch = runner.run(test_mode=False)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/runners/episode_runner.py", line 84, in run
+    "state": [self.env.get_state()],
+  File "/Users/alexwang/phD/ComplexOvercooked/envs/overcooked2_wrapper.py", line 73, in get_state
+    return self.env.get_obs()[0]
+  File "/Users/alexwang/phD/ComplexOvercooked/envs/overcook_gym_env.py", line 839, in get_obs
+    ori.append(tuple(player_directions[i]))
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/subprocess.py", line 1209, in wait
+    return self._wait(timeout=timeout)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/subprocess.py", line 1953, in _wait
+    time.sleep(delay)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/alexwang/phD/ComplexOvercooked/src/main_debug.py", line 141, in <module>
+    ex.run_commandline(params)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/experiment.py", line 313, in run_commandline
+    return self.run(
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/experiment.py", line 277, in run
+    run()
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/run.py", line 234, in __call__
+    with capture_stdout() as self._output_file:
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/stdout_capturing.py", line 177, in tee_output_fd
+    tee_stdout.wait(timeout=1)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/subprocess.py", line 1222, in wait
+    self._wait(timeout=sigint_timeout)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/subprocess.py", line 1953, in _wait
+    time.sleep(delay)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/stdout_capturing.py", line 164, in tee_output_fd
+    yield out  # let the caller do their printing
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/run.py", line 238, in __call__
+    self.result = self.main_function(*args)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/config/captured_function.py", line 42, in captured_function
+    result = wrapped(*args, **kwargs)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/main_debug.py", line 45, in my_main
+    run(_run, config, _log)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/run.py", line 78, in run
+    run_sequential(args=args, logger=logger)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/run.py", line 215, in run_sequential
+    episode_batch = runner.run(test_mode=False)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/runners/episode_runner.py", line 84, in run
+    "state": [self.env.get_state()],
+  File "/Users/alexwang/phD/ComplexOvercooked/envs/overcooked2_wrapper.py", line 73, in get_state
+    return self.env.get_obs()[0]
+  File "/Users/alexwang/phD/ComplexOvercooked/envs/overcook_gym_env.py", line 839, in get_obs
+    ori.append(tuple(player_directions[i]))
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/subprocess.py", line 1209, in wait
+    return self._wait(timeout=timeout)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/subprocess.py", line 1953, in _wait
+    time.sleep(delay)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/alexwang/phD/ComplexOvercooked/src/main_debug.py", line 141, in <module>
+    ex.run_commandline(params)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/experiment.py", line 313, in run_commandline
+    return self.run(
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/experiment.py", line 277, in run
+    run()
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/run.py", line 234, in __call__
+    with capture_stdout() as self._output_file:
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/stdout_capturing.py", line 177, in tee_output_fd
+    tee_stdout.wait(timeout=1)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/subprocess.py", line 1222, in wait
+    self._wait(timeout=sigint_timeout)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/subprocess.py", line 1953, in _wait
+    time.sleep(delay)
+KeyboardInterrupt

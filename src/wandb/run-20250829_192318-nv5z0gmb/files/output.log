@@ -1,0 +1,35 @@
+[INFO 19:23:20] my_main *******************
+[INFO 19:23:20] my_main WANDB RUN ID:
+[INFO 19:23:20] my_main nv5z0gmb
+[INFO 19:23:20] my_main *******************
+shape of state: 73
+shape of observation: 73
+[INFO 19:23:21] my_main Beginning training for 20000000.0 timesteps
+[INFO 19:23:21] my_main t_env: 600 / 20000000.0
+[INFO 19:23:21] my_main Estimated time left: 2 minutes, 2 seconds. Time passed: 0 seconds
+/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/stdout_capturing.py:179: UserWarning: tee_stdout.wait timeout. Forcibly terminating.
+  warnings.warn("tee_stdout.wait timeout. Forcibly terminating.")
+/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/stdout_capturing.py:185: UserWarning: tee_stderr.wait timeout. Forcibly terminating.
+  warnings.warn("tee_stderr.wait timeout. Forcibly terminating.")
+[DEBUG 19:23:23] pymarl Stopping Heartbeat
+[ERROR 19:23:23] pymarl Failed after 0:00:08!
+Traceback (most recent calls WITHOUT Sacred internals):
+  File "/Users/alexwang/phD/ComplexOvercooked/src/main_debug.py", line 45, in my_main
+    run(_run, config, _log)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/run.py", line 78, in run
+    run_sequential(args=args, logger=logger)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/run.py", line 257, in run_sequential
+    episode_info = runner.run(test_mode=True)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/runners/episode_runner.py", line 98, in run
+    _, total_r, terminated, truncated, env_info = self.env.step(actions[0])
+  File "/Users/alexwang/phD/ComplexOvercooked/envs/overcooked2_wrapper.py", line 42, in step
+    self.nobs, share_obs, rewards, dones, infos, available_actions = self.env.step(actions)
+  File "/Users/alexwang/phD/ComplexOvercooked/envs/overcook_gym_env.py", line 328, in step
+    sparse_reward, shaped_reward = self.calculate_reward()
+  File "/Users/alexwang/phD/ComplexOvercooked/envs/overcook_gym_env.py", line 440, in calculate_reward
+    self.game.task_sprites.update(self.timercount)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/pygame/sprite.py", line 556, in update
+    sprite.update(*args, **kwargs)
+  File "/Users/alexwang/phD/ComplexOvercooked/envs/overcook_class.py", line 115, in update
+    progress_bar_surface = pygame.Surface(progress_bar_rect.size)
+pygame.error: Invalid resolution for Surface

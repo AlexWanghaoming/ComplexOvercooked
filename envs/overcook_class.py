@@ -109,11 +109,7 @@ class TaskBoard(pygame.sprite.Sprite):
             if self.remaining_time <= 0:
                 oldtask = self.task
                 self.newtask(nowtime)
-                pygame.event.post(pygame.event.Event(pygame.USEREVENT, {'action': 'notfinished',
-                                                                        'newtask':self.task,
-                                                                        'oldtask':oldtask,
-                                                                        'taskclass':self}))
-
+                pygame.event.post(pygame.event.Event(pygame.USEREVENT, {'action': 'notfinished','newtask':self.task,'oldtask':oldtask,'taskclass':self}))
             else:
                 progress_bar_rect = pygame.Rect(0, ONEBLOCK*7/8-3, 3*ONEBLOCK * (1-self.remaining_time / self.timer), ONEBLOCK / 8)
                 progress_bar_surface = pygame.Surface(progress_bar_rect.size)

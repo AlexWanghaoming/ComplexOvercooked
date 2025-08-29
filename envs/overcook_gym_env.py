@@ -51,8 +51,6 @@ def get_cleaned_matrix_size(matrix):
     # Size of the cleaned matrix (width, height)
     return len(matrix)-height, width
 
-
-
 class OvercookPygameEnv(gym.Env):
     metadata = {'name': 'MyEnv-v0', 'render.modes': ['human']}
 
@@ -66,14 +64,6 @@ class OvercookPygameEnv(gym.Env):
                  debug=False,
                  lossless_obs=False,
                  fps=60):
-        # 添加初始化标志
-        self._is_closing = False
-        self._initialized = False
-        
-        # 添加事件处理相关属性
-        self._event_queue = Queue()
-        self._event_lock = threading.Lock()
-        self._event_timeout = 0.001  # 1ms timeout
 
         # 安全初始化pygame
         if not pygame.get_init():
@@ -112,60 +102,17 @@ class OvercookPygameEnv(gym.Env):
         self.timercount = 0  # 自定义的计时器
         self.showkey()
         self.ifrender = ifrender
-        # self.pltheatmap = pltheatmap
-        # if self.pltheatmap:
-        #     self.heatmapsize:Tuple = get_cleaned_matrix_size(maps[map_name]['layout'])
-
+        
         # 初始化MDP
         self.mdp = ComplexOvercookedGridworld(map_name=map_name)
         self.terrain = maps[self.map_name]['layout']
         self.terrain_mtx = self.mdp.terrain_mtx
         self.height = self.mdp.height
         self.width = self.mdp.width
-
-        self.obs_shape = self.dummy_reset()[0].shape[0]
-        self.reset_featurize_type(obs_shape=self.obs_shape)
-
-        # 初始化游戏
-        self.initialize_game()
-        self.t = 0
-        self._max_episode_steps = 600
         
-        self._initialized = True
-
-
-    def get_share_observation(self, nobs:List[np.ndarray]) -> np.ndarray:
-        """
-        share observation 和 state 没什么区别
-        """
-        share_obs = np.stack(nobs, axis=0)
-        return share_obs
-
-    def initialize_game(self):
-        """初始化游戏环境和MDP状态"""
-        self.get_need_cutting = 0
-        self.get_need_cooking = 0
-        self.get_need_synthesis = 0
-
-        # 只在需要渲染时初始化时钟
-        if self.ifrender:
-            self.clock = pygame.time.Clock()
-
         # 初始化游戏实例
         self.game = MainGame(map_name=self.map_name, 
                              ifrender=self.ifrender)
-        
-        # 初始化任务计数器 - 使用字典推导式优化
-        self.taskcount = [{key:0 for key in self.TASK_MENU} for _ in range(self.n_agents)]
-        self.alltaskcount = {key:0 for key in self.TASK_MENU} #用来计算总的任务变更
-        
-        # 批量更新任务计数
-        for taskname in self.game.taskmenu:
-            self.alltaskcount[taskname] += 1
-            
-        # 初始化物品计数器 - 使用字典推导式优化
-        self.matiral_count = {key: 0 for key in self.itemdict.keys()}
-        
         # 初始化状态字典，用于MDP处理 - 直接引用游戏对象
         self.state = {
             "tables": self.game.tables,
@@ -175,23 +122,81 @@ class OvercookPygameEnv(gym.Env):
             "cointable": self.game.Cointable,
             "timercount": 0
         }
+
+        self.obs_shape = self.dummy_reset()[0].shape[0]
+        self.reset_featurize_type(obs_shape=self.obs_shape)
         
-        # 预先计算玩家字典，避免重复创建
-        self.playerdic = {'a':0,'b':1,'c':2,'d':3}
+        if self.ifrender:
+            self.clock = pygame.time.Clock()
+        
+        self.t = 0
+        self._max_episode_steps = 600
+
+    # def get_share_observation(self, nobs:List[np.ndarray]) -> np.ndarray:
+    #     """
+    #     share observation 和 state 没什么区别
+    #     """
+    #     share_obs = np.stack(nobs, axis=0)
+    #     return share_obs
+
+    # def initialize_game(self):
+    #     """初始化游戏环境和MDP状态"""
+    #     self.get_need_cutting = 0
+    #     self.get_need_cooking = 0
+    #     self.get_need_synthesis = 0
+
+    #     # 只在需要渲染时初始化时钟
+    #     if self.ifrender:
+    #         self.clock = pygame.time.Clock()
+
+    #     # 初始化游戏实例
+    #     self.game = MainGame(map_name=self.map_name, 
+    #                          ifrender=self.ifrender)
+        
+    #     # 初始化任务计数器 - 使用字典推导式优化
+    #     self.taskcount = [{key:0 for key in self.TASK_MENU} for _ in range(self.n_agents)]
+    #     self.alltaskcount = {key:0 for key in self.TASK_MENU} #用来计算总的任务变更
+        
+    #     # 批量更新任务计数
+    #     for taskname in self.game.taskmenu:
+    #         self.alltaskcount[taskname] += 1
+            
+    #     # 初始化物品计数器 - 使用字典推导式优化
+    #     self.matiral_count = {key: 0 for key in self.itemdict.keys()}
+        
+    #     # 预先计算玩家字典，避免重复创建
+    #     self.playerdic = {'a':0,'b':1,'c':2,'d':3}
         
     def dummy_reset(self):
-        self.initialize_game()
+        # self.initialize_game()
         self.timercount = 0
-        
         # 确保状态字典正确设置
         self.state["timercount"] = self.timercount
         
         nobs = self.get_obs_grid() if self.lossless_obs else self.get_obs()
         return nobs
     
-    def reset(self) -> Tuple[Tuple[np.ndarray, np.ndarray], np.ndarray, np.ndarray]:  # wanghm
-        # 初始化游戏并重置计时器
-        self.initialize_game()
+    def reset(self) -> Tuple[Tuple[np.ndarray, np.ndarray], np.ndarray, np.ndarray]:
+        # self.game = MainGame(map_name=self.map_name, ifrender=self.ifrender)
+        """初始化游戏环境和MDP状态"""
+        self.get_need_cutting = 0
+        self.get_need_cooking = 0
+        self.get_need_synthesis = 0
+        
+        # 初始化任务计数器 - 使用字典推导式优化
+        self.taskcount = [{key:0 for key in self.TASK_MENU} for _ in range(self.n_agents)]
+        self.alltaskcount = {key:0 for key in self.TASK_MENU}  #用来计算总的任务变更
+        
+        # 批量更新任务计数
+        for taskname in self.game.taskmenu:
+            self.alltaskcount[taskname] += 1
+            
+        # 初始化物品计数器 - 使用字典推导式优化
+        self.matiral_count = {key: 0 for key in self.itemdict.keys()}
+        
+        # 预先计算玩家字典，避免重复创建
+        self.playerdic = {'a':0,'b':1,'c':2,'d':3}
+        
         self.timercount = 0
         
         # 状态字典已在initialize_game中设置，只需更新timercount
@@ -205,7 +210,7 @@ class OvercookPygameEnv(gym.Env):
 
         # 获取可用动作和共享观察
         available_actions = self.get_avail_actions()
-        share_obs = self.get_share_observation(nobs)
+        # share_obs = self.get_share_observation(nobs)
         
         # 重置奖励字典 - 使用numpy数组直接初始化
         self.episode_reward_dict = {
@@ -214,7 +219,7 @@ class OvercookPygameEnv(gym.Env):
             "cumulative_rewards": np.zeros(1, dtype=np.float32)
         }
         
-        return nobs, share_obs, available_actions
+        return nobs, None, available_actions
 
     def reset_featurize_type(self, obs_shape: int)->None:
         # reset observation_space, share_observation_space and action_space
@@ -321,7 +326,6 @@ class OvercookPygameEnv(gym.Env):
         
         # 计算奖励
         sparse_reward, shaped_reward = self.calculate_reward()
-        # sparse_reward, shaped_reward = 0,0
         reward = sparse_reward + shaped_reward
         if self.debug:
             print('sparse_reward:', sparse_reward)
@@ -363,11 +367,11 @@ class OvercookPygameEnv(gym.Env):
 
         # 获取观察和共享观察 - 只在需要时计算
         nobs = self.get_obs()
-        share_obs = self.get_share_observation(nobs)
+        # share_obs = self.get_share_observation(nobs)
         dones = [done] * self.n_agents
         rewards = [reward] * self.n_agents
         
-        return nobs, share_obs, rewards, dones, infos, available_actions
+        return nobs, None, rewards, dones, infos, available_actions
 
     def _update_reward_dict(self, infos):
         self.episode_reward_dict["cumulative_sparse_rewards"] += np.array(infos["sparse_r"])
@@ -388,26 +392,6 @@ class OvercookPygameEnv(gym.Env):
         '''
         self.itemdict:Dict[str, int] = {char: index + 1 for index, char in enumerate(self.ITEMS)}
         self.taskdict:Dict[str, int] = {char: index for index, char in enumerate(self.TASK_MENU)}
-
-    def _safe_get_events(self, timeout=None):
-        """安全获取pygame事件，防止死锁和段错误"""
-        try:
-            if timeout is None:
-                return pygame.event.get()
-            else:
-                # 非阻塞事件获取
-                events = []
-                start_time = time.time()
-                while time.time() - start_time < timeout:
-                    event_list = pygame.event.get()
-                    if event_list:
-                        events.extend(event_list)
-                        break
-                    time.sleep(0.001)  # 短暂休眠避免CPU占用过高
-                return events
-        except Exception as e:
-            print(f"Error getting pygame events: {e}")
-            return []
         
     def _handle_task_finish_event(self, event):
         """处理任务完成事件"""
@@ -453,16 +437,10 @@ class OvercookPygameEnv(gym.Env):
         sparse_reward = 0.0
         shaped_reward = 0.0
         
-        # 安全更新任务精灵
-        try:
-            self.game.task_sprites.update(self.timercount)
-        except Exception as e:
-            if self.debug:
-                print(f"Task sprites update error: {e}")
-            return sparse_reward, shaped_reward
+        # self.game.task_sprites.update(self.timercount)
         
         # 安全获取事件
-        events = self._safe_get_events()
+        events = pygame.event.get()
         
         taskfinished = [False for _ in range(len(self.game.task_sprites))]  # 当前这个时间步，有没有任务被完成了
         for event in events:
@@ -1072,7 +1050,6 @@ class OvercookPygameEnv(gym.Env):
         self.game.window.fill((255, 250, 205))
         self.game.all_sprites.draw(self.game.window)
         
-        
         # 绘制reward
         self.game.draw_reward()
         
@@ -1081,75 +1058,9 @@ class OvercookPygameEnv(gym.Env):
         ## 控制游戏帧率：一秒跑多少timestep
         self.clock.tick(self.fps)
         
-    def pltsuccessrate(self,filename='successrate'):
-        import matplotlib.pyplot as plt
-        # 计算每个人的成功率
-        success_rates = []
-        for person_data in self.taskcount:
-            success_rate = {key: (person_data[key] / self.alltaskcount[key]) if self.alltaskcount[key] != 0 else 0 for key in self.alltaskcount}
-            success_rates.append(success_rate)
-
-        # 绘制柱状图
-        fig, axs = plt.subplots(1, len(success_rates), figsize=(18, 8), sharey=True)
-
-        for i, ax in enumerate(axs):
-            keys = list(success_rates[i].keys())
-            values = list(success_rates[i].values())
-            ax.bar(keys, values)
-            ax.set_title(f'Person {i + 1} Success Rate')
-            ax.set_xticklabels(keys, rotation=45, ha='right')
-        plt.savefig(f'results/{filename}.png', dpi=300)  # 'dpi'参数设置图像的分辨率
-        # 关闭图表以避免在保存后再次显示
-        plt.close()
-        
-    def pltheatmappng(self,fiename='heatmap'):
-        import matplotlib.pyplot as plt
-        for i in range(self.n_agents):
-            # 使用imshow()函数制热力图
-            plt.imshow(self.heatmap[i], cmap='hot', interpolation='nearest')
-            # 添加颜色条
-            plt.colorbar()
-            plt.savefig(f'results/{fiename}{i}.png', dpi=300)  # 'dpi'参数设置图像的分辨率
-            # 关闭图表以避免在保存后再次显示
-            plt.close()
-            
     def close(self):
-        """安全地清理所有资源"""
-        try:
-            # 设置关闭标志，防止其他方法继续操作
-            self._is_closing = True
-            
-            # 清理游戏资源
-            if hasattr(self, 'game') and self.game:
-                try:
-                    if hasattr(self.game, 'all_sprites') and self.game.all_sprites:
-                        self.game.all_sprites.empty()
-                    if hasattr(self.game, 'window'):
-                        self.game.window = None
-                    self.game = None
-                except Exception as e:
-                    print(f"Game cleanup error: {e}")
-            
-            # 清理pygame资源
-            try:
-                if pygame.get_init():
-                    # 清空事件队列
-                    pygame.event.clear()
-                    # 退出pygame
-                    pygame.quit()
-            except Exception as e:
-                print(f"Pygame cleanup error: {e}")
-                
-            # 清理其他资源
-            if hasattr(self, 'clock'):
-                self.clock = None
-                
-        except Exception as e:
-            print(f"Critical error during cleanup: {e}")
-        finally:
-            self._is_closing = False
+        pygame.quit()
 
     def seed(self, seed=None):
         # 设置随机数生成器的种子
         return np.random(seed=seed)
-

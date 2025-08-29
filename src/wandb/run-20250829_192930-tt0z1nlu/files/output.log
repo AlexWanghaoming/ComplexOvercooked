@@ -1,0 +1,136 @@
+[INFO 19:29:31] my_main *******************
+[INFO 19:29:31] my_main WANDB RUN ID:
+[INFO 19:29:31] my_main tt0z1nlu
+[INFO 19:29:31] my_main *******************
+shape of state: 73
+shape of observation: 73
+[INFO 19:29:32] my_main Beginning training for 20000000.0 timesteps
+[INFO 19:29:33] my_main t_env: 600 / 20000000.0
+[INFO 19:29:33] my_main Estimated time left: 2 minutes, 23 seconds. Time passed: 0 seconds
+[INFO 19:29:34] my_main New best model saved with performance: 0.0
+[DEBUG 19:29:38] pymarl Stopping Heartbeat
+[WARNING 19:29:38] pymarl Aborted after 0:00:11!
+Traceback (most recent call last):
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/stdout_capturing.py", line 164, in tee_output_fd
+    yield out  # let the caller do their printing
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/run.py", line 238, in __call__
+    self.result = self.main_function(*args)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/config/captured_function.py", line 42, in captured_function
+    result = wrapped(*args, **kwargs)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/main_debug.py", line 45, in my_main
+    run(_run, config, _log)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/run.py", line 78, in run
+    run_sequential(args=args, logger=logger)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/run.py", line 215, in run_sequential
+    episode_batch = runner.run(test_mode=False)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/runners/episode_runner.py", line 94, in run
+    actions:th.Tensor = self.mac.select_actions(
+  File "/Users/alexwang/phD/ComplexOvercooked/src/controllers/basic_controller.py", line 20, in select_actions
+    agent_outputs = self.forward(ep_batch, t_ep, test_mode=test_mode)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/controllers/basic_controller.py", line 27, in forward
+    agent_outs, self.hidden_states = self.agent(agent_inputs, self.hidden_states)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/modules/agents/rnn_agent.py", line 27, in forward
+    h = self.rnn(x, h_in)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/torch/nn/modules/rnn.py", line 1812, in forward
+    ret = _VF.gru_cell(
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/subprocess.py", line 1209, in wait
+    return self._wait(timeout=timeout)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/subprocess.py", line 1953, in _wait
+    time.sleep(delay)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/alexwang/phD/ComplexOvercooked/src/main_debug.py", line 141, in <module>
+    ex.run_commandline(params)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/experiment.py", line 313, in run_commandline
+    return self.run(
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/experiment.py", line 277, in run
+    run()
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/run.py", line 234, in __call__
+    with capture_stdout() as self._output_file:
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/stdout_capturing.py", line 177, in tee_output_fd
+    tee_stdout.wait(timeout=1)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/subprocess.py", line 1222, in wait
+    self._wait(timeout=sigint_timeout)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/subprocess.py", line 1953, in _wait
+    time.sleep(delay)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/stdout_capturing.py", line 164, in tee_output_fd
+    yield out  # let the caller do their printing
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/run.py", line 238, in __call__
+    self.result = self.main_function(*args)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/config/captured_function.py", line 42, in captured_function
+    result = wrapped(*args, **kwargs)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/main_debug.py", line 45, in my_main
+    run(_run, config, _log)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/run.py", line 78, in run
+    run_sequential(args=args, logger=logger)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/run.py", line 215, in run_sequential
+    episode_batch = runner.run(test_mode=False)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/runners/episode_runner.py", line 94, in run
+    actions:th.Tensor = self.mac.select_actions(
+  File "/Users/alexwang/phD/ComplexOvercooked/src/controllers/basic_controller.py", line 20, in select_actions
+    agent_outputs = self.forward(ep_batch, t_ep, test_mode=test_mode)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/controllers/basic_controller.py", line 27, in forward
+    agent_outs, self.hidden_states = self.agent(agent_inputs, self.hidden_states)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/modules/agents/rnn_agent.py", line 27, in forward
+    h = self.rnn(x, h_in)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/torch/nn/modules/rnn.py", line 1812, in forward
+    ret = _VF.gru_cell(
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/subprocess.py", line 1209, in wait
+    return self._wait(timeout=timeout)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/subprocess.py", line 1953, in _wait
+    time.sleep(delay)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/alexwang/phD/ComplexOvercooked/src/main_debug.py", line 141, in <module>
+    ex.run_commandline(params)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/experiment.py", line 313, in run_commandline
+    return self.run(
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/experiment.py", line 277, in run
+    run()
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/run.py", line 234, in __call__
+    with capture_stdout() as self._output_file:
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/stdout_capturing.py", line 177, in tee_output_fd
+    tee_stdout.wait(timeout=1)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/subprocess.py", line 1222, in wait
+    self._wait(timeout=sigint_timeout)
+  File "/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/subprocess.py", line 1953, in _wait
+    time.sleep(delay)
+KeyboardInterrupt

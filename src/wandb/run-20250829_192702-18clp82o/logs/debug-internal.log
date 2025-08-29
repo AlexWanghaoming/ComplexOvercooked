@@ -1,0 +1,11 @@
+{"time":"2025-08-29T19:27:02.982547+08:00","level":"INFO","msg":"using version","core version":"0.19.1"}
+{"time":"2025-08-29T19:27:02.982589+08:00","level":"INFO","msg":"created symlink","path":"/Users/alexwang/phD/ComplexOvercooked/src/wandb/run-20250829_192702-18clp82o/logs/debug-core.log"}
+{"time":"2025-08-29T19:27:03.08852+08:00","level":"INFO","msg":"created new stream","id":"18clp82o"}
+{"time":"2025-08-29T19:27:03.088567+08:00","level":"INFO","msg":"stream: started","id":"18clp82o"}
+{"time":"2025-08-29T19:27:03.088585+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"18clp82o"}
+{"time":"2025-08-29T19:27:03.088605+08:00","level":"INFO","msg":"sender: started","stream_id":"18clp82o"}
+{"time":"2025-08-29T19:27:03.088592+08:00","level":"INFO","msg":"handler: started","stream_id":"18clp82o"}
+{"time":"2025-08-29T19:27:05.985258+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-08-29T19:27:44.398181+08:00","level":"INFO","msg":"stream: closing","id":"18clp82o"}
+{"time":"2025-08-29T19:27:44.398228+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-08-29T19:27:44.398879+08:00","level":"INFO","msg":"Stopped system monitor"}
