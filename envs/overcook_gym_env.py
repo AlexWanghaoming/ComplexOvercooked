@@ -425,7 +425,8 @@ class OvercookPygameEnv(gym.Env):
             self.game.taskmenu[self.game.task_dict[min_task]] = min_task.task
             self.alltaskcount[min_task.task] += 1
         else:
-            self.game.NOWCOIN += 1  # 代表之前倒计时重新了
+            # self.game.NOWCOIN += 1  # 代表之前倒计时重新了
+            pass
     
     def _update_coin_display(self):
         """更新金币显示"""
@@ -456,7 +457,7 @@ class OvercookPygameEnv(gym.Env):
                     if self.game.taskmenu[self.game.task_dict[event.taskclass]] != event.oldtask:
                         print("任务冲突，以新任务为准,这条不应该会出现")
                     else:
-                        self.game.NOWCOIN -= 1
+                        # self.game.NOWCOIN -= 1
                         self.game.taskmenu[self.game.task_dict[event.taskclass]] = event.newtask
                         tasksequence.append("Failed to complete required food within the time")
                         self.alltaskcount[event.newtask]+=1
@@ -594,8 +595,8 @@ class OvercookPygameEnv(gym.Env):
 
         shaped_reward += self.reward_shaping_params['one_step']
         
-        # 优化数字显示更新
-        self._update_coin_display()
+        if self.ifrender:
+            self._update_coin_display()
 
         # return sparse_reward, shaped_reward, tasksequence
         return sparse_reward, shaped_reward

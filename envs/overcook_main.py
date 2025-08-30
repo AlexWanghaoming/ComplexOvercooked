@@ -30,15 +30,13 @@ def digitize(num):
 class MainGame(object):
 
     def __init__(self, map_name, ifrender=False):
-        LINES = maps[map_name]['layout']
+        self.LINES = maps[map_name]['layout']
         self.TASK_MENU = maps[map_name]['task']
         self.TASKNUM = maps[map_name]['tasknum']
         self.PLAYERNUM = maps[map_name]['players']
-        self.lines = LINES
-        self.done = False
-        self.NOWCOIN = 100
-        window_width = ONEBLOCK * (len(LINES[0]) + 2)
-        window_height = ONEBLOCK * (len(LINES) + 1)
+        self.NOWCOIN = 0
+        window_width = ONEBLOCK * (len(self.LINES[0]) + 2)
+        window_height = ONEBLOCK * (len(self.LINES) + 1)
         
         pygame.init()
 
@@ -126,7 +124,7 @@ class MainGame(object):
         self.pots = Group() 
         self.cuttingtables = Group()  
         # 创建地图
-        for i, line in enumerate(self.lines):
+        for i, line in enumerate(self.LINES):
             for j, char in enumerate(line):
                 x = j * ONEBLOCK
                 y = (i + 1) * ONEBLOCK
@@ -182,7 +180,7 @@ class MainGame(object):
         # randome choice TASKNUM task from task menu
         if self.TASKNUM>=2:
             for i in range(1, self.TASKNUM):
-                self.task_sprites.add(TaskBoard((3*(i-1)) * ONEBLOCK, len(lines)*ONEBLOCK, self.TASK_MENU, self.ifrender))
+                self.task_sprites.add(TaskBoard((3*(i-1)) * ONEBLOCK, len(self.LINES)*ONEBLOCK, self.TASK_MENU, self.ifrender))
                 
         self.task_dict = {}
         self.taskmenu = []
