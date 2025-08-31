@@ -10,7 +10,7 @@ import time
 
 
 def test_keyboard():
-    env = OvercookPygameEnv(map_name='supereasy', ifrender=True, debug=True)
+    env = OvercookPygameEnv(map_name='supereasy', ifrender=False, debug=False, fps=5)
     nobs, share_obs, available_actions = env.reset()
 
     # 设置键盘检测的时间间隔
@@ -49,7 +49,8 @@ def test_keyboard():
             nobs, share_obs, rewards, dones, infos, available_actions = env.step((p1_action, p2_action))
         else:
             nobs, share_obs, rewards, dones, infos, available_actions = env.step((0, 0))
-        print(rewards)
+        if any(rewards) > 0:
+            print(rewards)
         reward+=rewards[0]
         env.game.update_reward(reward)
         if dones[0]:

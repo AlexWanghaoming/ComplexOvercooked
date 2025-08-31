@@ -29,59 +29,49 @@ def digitize(num):
 
 class MainGame(object):
 
-    def __init__(self, map_name, ifrender=False):
+    def __init__(self, map_name, ifrender):
         self.LINES = maps[map_name]['layout']
         self.TASK_MENU = maps[map_name]['task']
         self.TASKNUM = maps[map_name]['tasknum']
         self.PLAYERNUM = maps[map_name]['players']
         self.NOWCOIN = 0
-        window_width = ONEBLOCK * (len(self.LINES[0]) + 2)
-        window_height = ONEBLOCK * (len(self.LINES) + 1)
-        
+        self.window_width = ONEBLOCK * (len(self.LINES[0]) + 2)
+        self.window_height = ONEBLOCK * (len(self.LINES) + 1)
+        self.current_reward = 0.0
+
         pygame.init()
 
         self.ifrender = ifrender
         # 只在需要渲染时初始化pygame显示
         if ifrender:
-            self.window = pygame.display.set_mode((window_width, window_height)) # 加载窗口
+            self.window = pygame.display.set_mode((self.window_width, self.window_height)) # 加载窗口
             pygame.display.set_caption('ComplexOvercooked Game')
         else:
-            self.window = pygame.display.set_mode((window_width, window_height), pygame.HIDDEN)
+            self.window = pygame.display.set_mode((self.window_width, self.window_height), pygame.HIDDEN)
 
-        self.load_pics()
-        
-        self.init_maps()
-        
-        self.init_tasks()
-
-        # 初始化墙壁
-        wall_1 = Wall(-20, 0, 20, window_height)
-        wall_2 = Wall(0, -20, window_width, 20)
-        wall_3 = Wall(window_width, 0, 20, window_height)
-        wall_4 = Wall(0, window_height, window_width, 20)
-        walls = Group(wall_1, 
-                                    wall_2, 
-                                    wall_3, 
-                                    wall_4)
-        walls.add(self.tables)
-        walls.add(self.tables, self.Cointable)
-        self.walls = walls
         self.num1 = DigitDisplay(ONEBLOCK / 2, ONEBLOCK / 10)
         self.num2 = DigitDisplay(ONEBLOCK / 2 + 5 * 5, ONEBLOCK / 10)
         self.num3 = DigitDisplay(ONEBLOCK / 2 + 5 * 5 * 2, ONEBLOCK / 10)
         self.num4 = DigitDisplay(ONEBLOCK / 2 + 5 * 5 * 3, ONEBLOCK / 10)
-                    
+        
         font = pygame.font.SysFont('arial', ONEBLOCK)
-        self.timercount = TimerTable(window_width - ONEBLOCK, 0, font, 600, self.ifrender)
+        self.timercount = TimerTable(self.window_width - ONEBLOCK, 0, font, 600, self.ifrender)
         self.Coin = Picshow(0, 0, os.path.join(current_dir, f'assets/font/coin.png'))
         
-        self.init_all_sprites()
-
-        # 在创建其他显示组件后添加rewards显示
-        self.rewards_text = pygame.font.SysFont('arial', 24)
-        self.current_reward = 0.0
-
-    def load_pics(self):
+        self._load_pics() # 加载图片
+        
+        self.init_game()
+        
+    def init_game(self):        
+        self._init_maps() # 初始化地图
+        
+        self._init_walls() # 初始化墙
+        
+        self._init_tasks() # 初始化任务精灵
+        
+        self._init_all_sprites() # 初始化所有精灵
+        
+    def _load_pics(self):
         # 加载player面朝各个方向的图片
         self.picplayerlist = [{
             '(0, 1)_': picscale(picload(os.path.join(current_dir, f'assets/chef{i}/f1.png')).convert_alpha(),
@@ -118,7 +108,7 @@ class MainGame(object):
             key in
             supplylist}
     
-    def init_maps(self):
+    def _init_maps(self):
         self.playergroup = []
         self.tables = Group()  # 需要交互的
         self.pots = Group() 
@@ -172,8 +162,19 @@ class MainGame(object):
                     self.playergroup.append(Player('c', x, y, self.picplayerlist[2], self.itempics, self.ifrender))
                 elif char == '4':
                     self.playergroup.append(Player('d', x, y, self.picplayerlist[3], self.itempics, self.ifrender))
-    
-    def init_tasks(self):
+                    
+    def _init_walls(self):
+        # 初始化墙壁
+        wall_1 = Wall(-20, 0, 20, self.window_height)
+        wall_2 = Wall(0, -20, self.window_width, 20)
+        wall_3 = Wall(self.window_width, 0, 20, self.window_height)
+        wall_4 = Wall(0, self.window_height, self.window_width, 20)
+        walls = Group(wall_1, wall_2, wall_3, wall_4)
+        walls.add(self.tables)
+        walls.add(self.tables, self.Cointable)
+        self.walls = walls
+        
+    def _init_tasks(self):
         # 创建任务精灵组
         self.task_sprites = Group()
         self.task_sprites.add(TaskBoard((1.75) * ONEBLOCK, 0, self.TASK_MENU, self.ifrender))
@@ -189,7 +190,7 @@ class MainGame(object):
             self.taskmenu.append(task.task)
         # print(self.task_dict)
     
-    def init_all_sprites(self):
+    def _init_all_sprites(self):
         self.all_sprites = Group(self.walls, 
                                 self.num1, 
                                 self.num2, 
@@ -209,5 +210,5 @@ class MainGame(object):
     def draw_reward(self):
         """在界面上绘制reward"""
         if hasattr(self, 'window'):
-            reward_surface = self.rewards_text.render(f'Reward: {self.current_reward:.2f}', True, (0, 0, 0))
+            reward_surface = pygame.font.SysFont('arial', 24).render(f'Sparse Reward: {self.current_reward:.2f}', True, (0, 0, 0))
             self.window.blit(reward_surface, (ONEBLOCK * 5, ONEBLOCK / 10))

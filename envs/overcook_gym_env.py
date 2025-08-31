@@ -42,7 +42,6 @@ def digitize(num):
     # 返回每一位数字组成的元组
     return thousands, hundreds, tens, ones
 
-
 def get_cleaned_matrix_size(matrix):
     # Find the height of the cleaned matrix
     height = next((i for i, s in enumerate(reversed(matrix)) if s.strip('_')), len(matrix))
@@ -51,10 +50,16 @@ def get_cleaned_matrix_size(matrix):
     # Size of the cleaned matrix (width, height)
     return len(matrix)-height, width
 
+def ManhattanDis(relativepos:Tuple[int, int])->int:
+    return abs(relativepos[0]) + abs(relativepos[1])
+        
+def rel_xy(p:pygame.sprite.Sprite, obj:pygame.sprite.Sprite)-> List[int]:
+    return [(p.rect.x-obj.rect.x)//80, (p.rect.y-obj.rect.y)//80]  # 使用整除代替除法
+            
 class OvercookPygameEnv(gym.Env):
     metadata = {'name': 'MyEnv-v0', 'render.modes': ['human']}
 
-    # 玩家1：蓝色； 玩家2：红色
+    # 玩家0：蓝色； 玩家1：红色
     # 玩家动作： stay：0，下：1，右：2，上：3，左：4，interact：5
     # X: 桌子， F：生鱼供应处，B：生牛肉供应处，H：汉堡包供应处，M：番茄供应处，D：盘子供应处，L：柠檬供应处，T：垃圾桶，E：送菜口，C：锅，U：案板
     def __init__(self, 
@@ -135,25 +140,17 @@ class OvercookPygameEnv(gym.Env):
     
     def reset(self) -> Tuple[Tuple[np.ndarray, np.ndarray], np.ndarray, np.ndarray]:
         
-        self.game.init_maps()
-        self.game.init_tasks()
-        self.game.init_all_sprites()
-        
-        
-        """初始化游戏环境和MDP状态"""
+        self.game.init_game()
+    
         self.get_need_cutting = 0
         self.get_need_cooking = 0
         self.get_need_synthesis = 0
         
-        # 初始化任务计数器 - 使用字典推导式优化
+        # 初始化任务计数器
         self.taskcount = [{key:0 for key in self.TASK_MENU} for _ in range(self.n_agents)]
         self.alltaskcount = {key:0 for key in self.TASK_MENU}  #用来计算总的任务变更
-        
-        # 批量更新任务计数
-        for taskname in self.game.taskmenu:
-            self.alltaskcount[taskname] += 1
             
-        # 初始化物品计数器 - 使用字典推导式优化
+        # 初始化物品计数器 
         self.matiral_count = {key: 0 for key in self.itemdict.keys()}
         
         # 预先计算玩家字典，避免重复创建
@@ -327,8 +324,9 @@ class OvercookPygameEnv(gym.Env):
                 "success_count": self.taskcount,
             }
 
-        # 获取观察和共享观察 - 只在需要时计算
+
         nobs = self.get_obs()
+        
         # share_obs = self.get_share_observation(nobs)
         dones = [done] * self.n_agents
         rewards = [reward] * self.n_agents
@@ -396,7 +394,7 @@ class OvercookPygameEnv(gym.Env):
     
     def calculate_reward(self) -> Tuple[float, float]:
         """优化后的奖励计算函数"""
-        tasksequence = []
+        # tasksequence = []
         sparse_reward = 0.0
         shaped_reward = 0.0
         
@@ -417,7 +415,7 @@ class OvercookPygameEnv(gym.Env):
                     else:
                         # self.game.NOWCOIN -= 1
                         self.game.taskmenu[self.game.task_dict[event.taskclass]] = event.newtask
-                        tasksequence.append("Failed to complete required food within the time")
+                        # tasksequence.append("Failed to complete required food within the time")
                         self.alltaskcount[event.newtask]+=1
                     # print("未能在任务时间内完成菜品制作")
                     # reward-=10
@@ -426,7 +424,7 @@ class OvercookPygameEnv(gym.Env):
                 task_sparse_reward, task_shaped_reward = self._handle_task_finish_event(event)
                 sparse_reward += task_sparse_reward
                 shaped_reward += task_shaped_reward
-                tasksequence.append("Successfully delivered the required food")
+                # tasksequence.append("Successfully delivered the required food")
 
             elif event.type == OUT_SUPPLY_EVENT:
                 self.matiral_count[event.item] += 1
@@ -444,7 +442,7 @@ class OvercookPygameEnv(gym.Env):
                 self.matiral_count['dish'] += 1
                 if self.matiral_count['dish'] <= 2:
                     shaped_reward += self.reward_shaping_params['out_dish']
-                    tasksequence.append("Take out the dish from the supplys")
+                    # tasksequence.append("Take out the dish from the supplys")
                     if self.debug:
                         print("从仓库中拿到盘子")
                     # self.get_reward_counts['out_dish']+=1
@@ -454,7 +452,7 @@ class OvercookPygameEnv(gym.Env):
                 for task in self.game.task_sprites:
                     if TASK_VALUE[task.task][event.newitem] > TASK_VALUE[task.task][event.olditem]:
                         shaped_reward += self.reward_shaping_params['pick_need_material']
-                        tasksequence.append("Exchange a thing more meaningful for the tasks")
+                        # tasksequence.append("Exchange a thing more meaningful for the tasks")
                         if self.debug:
                             print("换过来的东西是更有价值的")
                         # self.get_reward_counts['pick_need_material']+=1
@@ -465,7 +463,7 @@ class OvercookPygameEnv(gym.Env):
             elif event.type == TRY_NEWTHING_EVENT:
                 shaped_reward += self.reward_shaping_params['try_new_thing']
                 # self.get_reward_counts['try_new_thing']+=1
-                tasksequence.append("Trying to synthesize new things")
+                # tasksequence.append("Trying to synthesize new things")
                 if self.debug:
                     print("尝试合成")
             elif event.type == MADE_NEWTHING_EVENT:
@@ -487,7 +485,7 @@ class OvercookPygameEnv(gym.Env):
 
             elif event.type == BEGINCUTTING_EVENT:
                 shaped_reward += self.reward_shaping_params['process_cutting']
-                tasksequence.append(f"begin cutting up material")
+                # tasksequence.append(f"begin cutting up material")
                 if self.debug:
                     print("正在切菜")
 
@@ -496,14 +494,14 @@ class OvercookPygameEnv(gym.Env):
                     if event.item in task.task:  # TODO: 目前是简单的字符串判定逻辑，例如：AClemon in AClemoncookedfish,后期考虑修改
                         shaped_reward += self.reward_shaping_params['get_need_cutting']
                         self.get_need_cutting += 1
-                        tasksequence.append(f"cut the {event.item} completely")
+                        # tasksequence.append(f"cut the {event.item} completely")
                         if self.debug:
                             print(f"把{event.item}切好了，奖励{shaped_reward}")
                     else:
                         shaped_reward -= self.reward_shaping_params['get_need_cutting'] # 切出当前任务中不需要的东西，惩罚
             elif event.type == BEGINCOOKING_EVENT:
                 shaped_reward += self.reward_shaping_params['process_cooking']
-                tasksequence.append(f"begin cooking")
+                # tasksequence.append(f"begin cooking")
                 if self.debug:
                     print("正在煮菜")
 
@@ -512,7 +510,7 @@ class OvercookPygameEnv(gym.Env):
                     if event.item in task.task:
                         shaped_reward += self.reward_shaping_params['get_need_cooking']
                         self.get_need_cooking += 1
-                        tasksequence.append(f"cook up the required material{event.item}")
+                        # tasksequence.append(f"cook up the required material{event.item}")
                         if self.debug:
                             print(f"把{event.item}煮好了，奖励{self.reward_shaping_params['get_need_cooking']}")
                     else:
@@ -527,14 +525,14 @@ class OvercookPygameEnv(gym.Env):
 
             elif event.type == PUTTHING_DISH_EVENT:
                 if 'raw' or 'BC' in event.item:
-                    tasksequence.append("Carrying unprocessed products on a plate")
+                    # tasksequence.append("Carrying unprocessed products on a plate")
                     if self.debug:
                         print('用盘子端未加工品')
                     shaped_reward -= self.reward_shaping_params['putting_dish']
                 else:
                     for task in self.game.task_sprites:
                         if event.item in TASK_VALUE[task.task]:
-                            tasksequence.append("Carrying required processed products on a plate")
+                            # tasksequence.append("Carrying required processed products on a plate")
                             if self.debug:
                                 print('端到的东西是加工过的')
                             shaped_reward += self.reward_shaping_params['putting_dish']
@@ -542,7 +540,7 @@ class OvercookPygameEnv(gym.Env):
             elif event.type == TRASH_EVENT:
                 for task in self.game.task_sprites:
                     if event.item in TASK_VALUE[task.task].keys():  # wanghm
-                        tasksequence.append("Pour something into the trash can")
+                        # tasksequence.append("Pour something into the trash can")
                         # if TASK_VALUE[task.task][event.item] >=3:
                         #     if self.print_rew_log:
                         #     print(f"倒掉了{event.item},得到负奖励-1")
@@ -575,7 +573,6 @@ class OvercookPygameEnv(gym.Env):
             }
         
         return game_state
-    
 
     def get_obs(self) -> List[np.ndarray]:
         """
@@ -611,13 +608,6 @@ class OvercookPygameEnv(gym.Env):
         # def concat_dicts(a:Dict, b:Dict)->Dict:
         #     return {**a, **b}
         
-        def ManhattanDis(relativepos:Tuple[int, int])->int:
-            return abs(relativepos[0]) + abs(relativepos[1])
-        
-        def rel_xy(p:pygame.sprite.Sprite, 
-                   obj:pygame.sprite.Sprite)-> List[int]:
-            return [(p.rect.x-obj.rect.x)//80, 
-                    (p.rect.y-obj.rect.y)//80]  # 使用整除代替除法
         
         players:List[pygame.sprite.Sprite] = self.game.playergroup
 
@@ -631,16 +621,17 @@ class OvercookPygameEnv(gym.Env):
         playab_cointables = [[] for _ in range(self.n_agents)]
         playab_closet_item_pos = [[10e9] * (len(self.itemdict)) * 2 for _ in range(self.n_agents)]
         
-        # 计算与cointable的相对距离并处理玩家手持物品
+        # 计算与cointable的相对距离
         for i, player in enumerate(players):
             playab_cointables[i] = rel_xy(player, self.game.Cointable)
             
             if player_items[i]:
                 itemindex = (self.itemdict[player_items[i]] - 1) * 2
                 playab_closet_item_pos[i][itemindex:itemindex + 2] = [0, 0]
-            elif player_dishes[i]:# TODO：这里逻辑有问题
+            if player_dishes[i]:
                 dishindex = (self.itemdict[player.dish] - 1) * 2
                 playab_closet_item_pos[i][dishindex:dishindex + 2] = [0, 0]
+
         # 处理桌子和空桌子
         emptypalcenum = 0
         tablenum = 0
@@ -677,7 +668,8 @@ class OvercookPygameEnv(gym.Env):
         
         # 处理无效值
         for i in range(self.n_agents):
-            if playab_closet_empty_table_pos[i][0] > 100000:
+            # 没有空桌子了
+            if playab_closet_empty_table_pos[i][0] > 100000: 
                 playab_closet_empty_table_pos[i] = [0, 0]
 
             for j in range(len(playab_closet_item_pos[i])):
@@ -778,37 +770,50 @@ class OvercookPygameEnv(gym.Env):
             orientation = np.eye(len(Direction.DIRECTION2INDEX))[orientation_idx].tolist()
             ori.append(tuple(player_directions[i]))
             
-            # 玩家手持物品 - 使用预计算的物品
-            if player_items[i]:
-                hold_obj = np.eye(len(self.itemdict))[self.itemdict[player_items[i]]-1].tolist()
-                hold_objects[i].append(player_items[i])
-                if player_dishes[i]:
-                    hold_obj[self.itemdict[player_items[i]]-1] = 1.0
-                    hold_obj[self.itemdict["dish"]-1] = 1.0
-                    hold_objects[i].append("dish")
-            else:
-                if player_dishes[i]:
-                    hold_obj = np.eye(len(self.itemdict))[self.itemdict["dish"]-1].tolist()
-                    hold_objects[i].append("dish")
-                else:
-                    hold_obj = np.zeros(len(self.itemdict)).tolist()
-                    hold_objects[i].append("nothing")
+            # 玩家手持物品 - 简化逻辑
+            hold_obj = np.zeros(len(self.itemdict)).tolist()
+            held_items = []
 
-            # 优化碰撞检测
-            collide = []
-            for direction in list(Direction.directions.values()):
-                rect_sprite.rect = player.rect.move(direction[0] * ONEBLOCK // 2, direction[1] * ONEBLOCK // 2)
-                is_block = pygame.sprite.spritecollide(rect_sprite, self.game.tables, False)
-                collide.append(int(bool(is_block)))
+            # 处理手持物品
+            if player_items[i]:
+                hold_obj[self.itemdict[player_items[i]]-1] = 1.0
+                held_items.append(player_items[i])
+
+            # 处理盘子（可以与物品同时持有）
+            if player_dishes[i]:
+                hold_obj[self.itemdict["dish"]-1] = 1.0
+                held_items.append("dish")
+            # 如果什么都没持有
+            if not held_items:
+                held_items.append("nothing")
+            hold_objects[i] = held_items
+
+            # 碰撞检测 - 只检测玩家正前方
+            rect_sprite.rect = player.rect.move(player.direction[0] * ONEBLOCK // 2, player.direction[1] * ONEBLOCK // 2)
+            is_front_blocked = pygame.sprite.spritecollide(rect_sprite, self.game.walls, False)
+            # 检测前方是否有其他玩家
+            is_player_blocked = False
+            for j, other_player in enumerate(players):
+                if i != j:
+                    if rect_sprite.rect.colliderect(other_player.rect):
+                        is_player_blocked = True
+                        break
+                    
+            collide = [int(bool(is_front_blocked)), int(bool(is_player_blocked))]
+                            
             if self.debug:
                 print('*' * 10)
-                print(f'玩家{i} player_feature:')
-                print(f'面向：{orientation} {self.directionzhongwen[str(player.direction)]}')
+                if i==0:
+                    print(f'玩家{i}（蓝色） player_feature:')
+                else:
+                    print(f'玩家{i}（红色） player_feature:')
+                    
+                print(f'面向：{orientation} {Direction.DIRECTION2CAR[player.direction]}')
                 print(f'手持物品: {hold_obj}', player.item if player.item else '空手')
-                print(f'四面是否有墙壁：{collide}')
+                print(f'面前是否有墙壁和其他玩家：{collide}')
                 print(f'和coin table的相对距离：{playab_cointables[i]}')
                 print(f'和pots的相对距离：{playab_pots_pos[i]}')
-                print(f'和cuttingtables的相对距离：{playab_pots_pos[i]}')
+                print(f'和cuttingtables的相对距离：{playab_cuttingtables_pos[i]}')
                 print(f'和每个功能桌子（非table、cointable）的相对距离：{playab_tables[i]}')
                 print("\n")
             # 合并特征
@@ -853,9 +858,6 @@ class OvercookPygameEnv(gym.Env):
             ]))
             
             ordered_features.append(player_i_ordered_features)
-            # if self.debug:
-            #     print(f'玩家{i} 的相对距离:{player_i_rel_pos}')
-            #     print(f'玩家{i} 的绝对位置:{player_i_abs_pos}')
 
         if self.debug and len(tasks) > 1:
             print(f'当前任务特征: 任务{flatencurrent_goal},任务剩余时间{tasktime}')

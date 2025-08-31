@@ -116,10 +116,12 @@ class TaskBoard(pygame.sprite.Sprite):
         if self.timer > 0:
             elapsed_time = nowtime - self.start_time
             self.remaining_time = self.timer - elapsed_time
+            
+            # 当前任务的剩余时间为0时，发布一个notfinished的USEREVENT
             if self.remaining_time <= 0:
                 oldtask = self.task
                 self.newtask(nowtime)
-                post(Event(pygame.USEREVENT, {'action': 'notfinished','newtask':self.task,'oldtask':oldtask,'taskclass':self}))
+                post(Event(pygame.USEREVENT, {'action': 'notfinished', 'newtask':self.task,'oldtask':oldtask,'taskclass':self}))
             else:
                 if self.ifrender:
                     self.updateimg()
