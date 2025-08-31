@@ -64,10 +64,6 @@ class OvercookPygameEnv(gym.Env):
                  debug=False,
                  lossless_obs=False,
                  fps=60):
-
-        # 安全初始化pygame
-        if not pygame.get_init():
-            pygame.init()
         
         # 初始化 pygame
         self.reward_shaping_params = {
@@ -98,7 +94,6 @@ class OvercookPygameEnv(gym.Env):
         self.debug = debug
         self.episode_limit = 600
         self.fps = fps
-        self.game_over = False
         self.timercount = 0  # 自定义的计时器
         self.showkey()
         self.ifrender = ifrender
@@ -132,46 +127,9 @@ class OvercookPygameEnv(gym.Env):
         self.t = 0
         self._max_episode_steps = 600
 
-    # def get_share_observation(self, nobs:List[np.ndarray]) -> np.ndarray:
-    #     """
-    #     share observation 和 state 没什么区别
-    #     """
-    #     share_obs = np.stack(nobs, axis=0)
-    #     return share_obs
-
-    # def initialize_game(self):
-    #     """初始化游戏环境和MDP状态"""
-    #     self.get_need_cutting = 0
-    #     self.get_need_cooking = 0
-    #     self.get_need_synthesis = 0
-
-    #     # 只在需要渲染时初始化时钟
-    #     if self.ifrender:
-    #         self.clock = pygame.time.Clock()
-
-    #     # 初始化游戏实例
-    #     self.game = MainGame(map_name=self.map_name, 
-    #                          ifrender=self.ifrender)
-        
-    #     # 初始化任务计数器 - 使用字典推导式优化
-    #     self.taskcount = [{key:0 for key in self.TASK_MENU} for _ in range(self.n_agents)]
-    #     self.alltaskcount = {key:0 for key in self.TASK_MENU} #用来计算总的任务变更
-        
-    #     # 批量更新任务计数
-    #     for taskname in self.game.taskmenu:
-    #         self.alltaskcount[taskname] += 1
-            
-    #     # 初始化物品计数器 - 使用字典推导式优化
-    #     self.matiral_count = {key: 0 for key in self.itemdict.keys()}
-        
-    #     # 预先计算玩家字典，避免重复创建
-    #     self.playerdic = {'a':0,'b':1,'c':2,'d':3}
-        
     def dummy_reset(self):
         self.timercount = 0
-        # 确保状态字典正确设置
         self.state["timercount"] = self.timercount
-        
         nobs = self.get_obs_grid() if self.lossless_obs else self.get_obs()
         return nobs
     
@@ -207,7 +165,7 @@ class OvercookPygameEnv(gym.Env):
         self.state["timercount"] = self.timercount
         
         # 获取MDP特征
-        self.mdp_features = self.mdp.get_mdp_features(self.state)
+        # self.mdp_features = self.mdp.get_mdp_features(self.state)
         
         # 获取观察值 - 根据配置选择观察方式
         nobs = self.get_obs_grid() if self.lossless_obs else self.get_obs()
@@ -325,7 +283,7 @@ class OvercookPygameEnv(gym.Env):
         }
         
         # 获取MDP特征
-        self.mdp_features = self.mdp.get_mdp_features(self.state)
+        # self.mdp_features = self.mdp.get_mdp_features(self.state)
         self.game.timercount.update(self.timercount)
         
         # 计算奖励
@@ -450,8 +408,8 @@ class OvercookPygameEnv(gym.Env):
         for event in events:
             if event.type == pygame.USEREVENT:
                 if event.action == "countdown_finished":
-                    self.game_over = True
-
+                    # self.game_over = True
+                    pass
                 elif event.action == "notfinished":
                     # 如果不同，代表已经经过前面的事件更新了，那此时我不用更新了
                     if self.game.taskmenu[self.game.task_dict[event.taskclass]] != event.oldtask:
@@ -598,7 +556,6 @@ class OvercookPygameEnv(gym.Env):
         if self.ifrender:
             self._update_coin_display()
 
-        # return sparse_reward, shaped_reward, tasksequence
         return sparse_reward, shaped_reward
     
     def get_state(self, nobs):
@@ -608,12 +565,10 @@ class OvercookPygameEnv(gym.Env):
                 "player1_item": nobs[0][3],  # 手持物品
                 "player1_has_dish": nobs[0][4],  # 是否持有盘子
                 "player1_is_cutting": nobs[0][5],  # 是否在切菜
-                
                 "player2_pos": (nobs[1][0], nobs[1][1]),
                 "player2_item": nobs[1][3],
                 "player2_has_dish": nobs[1][4],
                 "player2_is_cutting": nobs[1][5],
-                
                 "order": tasks,  # 当前订单列表
                 "tasktime": tasktime,  # 当前得分
                 "time_left":  self.timercount  # 剩余时间

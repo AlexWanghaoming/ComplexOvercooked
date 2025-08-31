@@ -211,9 +211,3 @@ class MainGame(object):
         if hasattr(self, 'window'):
             reward_surface = self.rewards_text.render(f'Reward: {self.current_reward:.2f}', True, (0, 0, 0))
             self.window.blit(reward_surface, (ONEBLOCK * 5, ONEBLOCK / 10))
-
-
-
-if __name__ == '__main__':
-    mainwindows = MainGame(map_name="supereasy", 
-                           ifrender=True)
