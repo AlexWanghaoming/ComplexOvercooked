@@ -34,7 +34,6 @@ class MainGame(object):
         self.TASK_MENU = maps[map_name]['task']
         self.TASKNUM = maps[map_name]['tasknum']
         self.PLAYERNUM = maps[map_name]['players']
-        self.NOWCOIN = 0
         self.window_width = ONEBLOCK * (len(self.LINES[0]) + 2)
         self.window_height = ONEBLOCK * (len(self.LINES) + 1)
         self.current_reward = 0.0
@@ -62,7 +61,10 @@ class MainGame(object):
         
         self.init_game()
         
-    def init_game(self):        
+    def init_game(self):
+             
+        self.NOWCOIN = 0
+        
         self._init_maps() # 初始化地图
         
         self._init_walls() # 初始化墙

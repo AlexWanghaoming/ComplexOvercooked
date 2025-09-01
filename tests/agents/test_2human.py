@@ -49,8 +49,10 @@ def test_keyboard():
             nobs, share_obs, rewards, dones, infos, available_actions = env.step((p1_action, p2_action))
         else:
             nobs, share_obs, rewards, dones, infos, available_actions = env.step((0, 0))
+                
         if any(rewards) > 0:
             print(rewards)
+            
         reward+=rewards[0]
         env.game.update_reward(reward)
         if dones[0]:

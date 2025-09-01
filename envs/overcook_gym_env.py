@@ -54,7 +54,7 @@ def ManhattanDis(relativepos:Tuple[int, int])->int:
     return abs(relativepos[0]) + abs(relativepos[1])
         
 def rel_xy(p:pygame.sprite.Sprite, obj:pygame.sprite.Sprite)-> List[int]:
-    return [(p.rect.x-obj.rect.x)//80, (p.rect.y-obj.rect.y)//80]  # 使用整除代替除法
+    return [(p.rect.x-obj.rect.x)/80, (p.rect.y-obj.rect.y)/80]  # 使用整除代替除法
             
 class OvercookPygameEnv(gym.Env):
     metadata = {'name': 'MyEnv-v0', 'render.modes': ['human']}
@@ -171,7 +171,7 @@ class OvercookPygameEnv(gym.Env):
         available_actions = self.get_avail_actions()
         # share_obs = self.get_share_observation(nobs)
         
-        # 重置奖励字典 - 使用numpy数组直接初始化
+        # 重置奖励字典
         self.episode_reward_dict = {
             "cumulative_sparse_rewards": np.zeros(1, dtype=np.float32),
             "cumulative_shaped_rewards": np.zeros(1, dtype=np.float32),
@@ -367,7 +367,7 @@ class OvercookPygameEnv(gym.Env):
         # 优化任务匹配逻辑
         self._update_task_after_completion(event.action)
         
-        return sparse_reward, 0.0
+        return sparse_reward
     
     def _update_task_after_completion(self, action):
         """任务完成后更新任务列表"""
@@ -381,7 +381,7 @@ class OvercookPygameEnv(gym.Env):
             self.game.taskmenu[self.game.task_dict[min_task]] = min_task.task
             self.alltaskcount[min_task.task] += 1
         else:
-            # self.game.NOWCOIN += 1  # 代表之前倒计时重新了
+            self.game.NOWCOIN += 1  # 代表之前倒计时重新了
             pass
     
     def _update_coin_display(self):
@@ -413,7 +413,7 @@ class OvercookPygameEnv(gym.Env):
                     if self.game.taskmenu[self.game.task_dict[event.taskclass]] != event.oldtask:
                         print("任务冲突，以新任务为准,这条不应该会出现")
                     else:
-                        # self.game.NOWCOIN -= 1
+                        self.game.NOWCOIN -= 1
                         self.game.taskmenu[self.game.task_dict[event.taskclass]] = event.newtask
                         # tasksequence.append("Failed to complete required food within the time")
                         self.alltaskcount[event.newtask]+=1
@@ -421,9 +421,8 @@ class OvercookPygameEnv(gym.Env):
                     # reward-=10
 
             elif event.type == TASK_FINISH_EVENT:  # hjh这里是任务完成的奖励
-                task_sparse_reward, task_shaped_reward = self._handle_task_finish_event(event)
+                task_sparse_reward = self._handle_task_finish_event(event)
                 sparse_reward += task_sparse_reward
-                shaped_reward += task_shaped_reward
                 # tasksequence.append("Successfully delivered the required food")
 
             elif event.type == OUT_SUPPLY_EVENT:
@@ -701,7 +700,7 @@ class OvercookPygameEnv(gym.Env):
                 pots_state[pot_index:pot_index+2] = [1, 0]
                 pots_lang.append(f"{pot.item} in pot{p} is ready")
 
-            pots_remaining_time[p] = pot.remaining_time // 10 if pot.remaining_time >=0 else -1
+            pots_remaining_time[p] = pot.remaining_time / 10 if pot.remaining_time >=0 else -1
 
         self.state.update({"pot": pots_lang})
 
@@ -749,7 +748,7 @@ class OvercookPygameEnv(gym.Env):
         # 简化任务特征处理
         if len(tasks) > 1:
             flatencurrent_goal = [item for sublist in current_goal for item in sublist]
-            task_feature = [i // 100 for i in tasktime] + flatencurrent_goal  # 使用整除
+            task_feature = [i / 100 for i in tasktime] + flatencurrent_goal  # 使用整除
         else:
             task_feature = []
 
@@ -789,7 +788,7 @@ class OvercookPygameEnv(gym.Env):
             hold_objects[i] = held_items
 
             # 碰撞检测 - 只检测玩家正前方
-            rect_sprite.rect = player.rect.move(player.direction[0] * ONEBLOCK // 2, player.direction[1] * ONEBLOCK // 2)
+            rect_sprite.rect = player.rect.move(player.direction[0] * ONEBLOCK / 2, player.direction[1] * ONEBLOCK / 2)
             is_front_blocked = pygame.sprite.spritecollide(rect_sprite, self.game.walls, False)
             # 检测前方是否有其他玩家
             is_player_blocked = False
@@ -825,8 +824,8 @@ class OvercookPygameEnv(gym.Env):
 
             # 计算位置
             player_x, player_y = player_positions[i]
-            player_absolute_positions.append(np.array([player_x // 80, player_y // 80]))
-            pos.append((player_x // 80, player_y // 80))
+            player_absolute_positions.append(np.array([player_x / 80, player_y / 80]))
+            pos.append((player_x / 80, player_y / 80))
             
             # 计算相对位置
             tempdis = []
@@ -858,7 +857,7 @@ class OvercookPygameEnv(gym.Env):
             ]))
             
             ordered_features.append(player_i_ordered_features)
-
+            
         if self.debug and len(tasks) > 1:
             print(f'当前任务特征: 任务{flatencurrent_goal},任务剩余时间{tasktime}')
 
@@ -918,18 +917,18 @@ class OvercookPygameEnv(gym.Env):
         player_directions = self.mdp.get_player_directions(state)
         
         # 预先计算锅和案板的位置和状态
-        pot_positions = [(pot.rect.x // 80, pot.rect.y // 80) for pot in self.game.pots]
+        pot_positions = [(pot.rect.x / 80, pot.rect.y / 80) for pot in self.game.pots]
         pot_cooking_states = [pot.is_cooking for pot in self.game.pots]
         pot_ready_states = [pot.is_ready for pot in self.game.pots]
         pot_remaining_times = [pot.remaining_time if hasattr(pot, 'remaining_time') else -1 for pot in self.game.pots]
         pot_cooking_times = [pot.cookingtime if hasattr(pot, 'cookingtime') else 1 for pot in self.game.pots]
         
-        cutting_table_positions = [(ct.rect.x // 80, ct.rect.y // 80) for ct in self.game.cuttingtables]
+        cutting_table_positions = [(ct.rect.x / 80, ct.rect.y / 80) for ct in self.game.cuttingtables]
         cutting_table_cutting_states = [ct.is_cutting for ct in self.game.cuttingtables]
         cutting_table_ready_states = [ct.is_ready for ct in self.game.cuttingtables]
         
         # 预先计算coin table位置
-        coin_x, coin_y = self.game.Cointable.rect.x // 80, self.game.Cointable.rect.y // 80
+        coin_x, coin_y = self.game.Cointable.rect.x / 80, self.game.Cointable.rect.y / 80
         
         grid_obs = []
         

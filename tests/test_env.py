@@ -19,7 +19,7 @@ def test_overcooked2_env():
             random_action = np.random.randint(0, 6, size=env.n_agents)
             nobs, _, rewards, dones, infos, available_actions = env.step(random_action)
             done = dones[0]
-    
+            print(nobs)
 def test_function_performance():
     """
     测试 OvercookPygameEnv 中关键函数的性能
