@@ -249,8 +249,7 @@ class TimerTable(pygame.sprite.Sprite):
     def update(self,nowtime) -> None:
         if self.timer - nowtime<=0:
             post(Event(pygame.USEREVENT, {'action': 'countdown_finished'}))
-        if self.ifrender:
-            self.image = self.font.render(str((self.timer - nowtime)//10),True,(0,0,0))
+        self.image = self.font.render(str((self.timer - nowtime)//10),True,(0,0,0))
 
 
 class CoinTable(pygame.sprite.Sprite):

@@ -248,8 +248,5 @@ class ReplayBuffer(EpisodeBatch):
             return self[ep_ids]
 
     def __repr__(self):
-        return "ReplayBuffer. {}/{} episodes. Keys:{} Groups:{}".format(self.episodes_in_buffer,
-                                                                        self.buffer_size,
-                                                                        self.scheme.keys(),
-                                                                        self.groups.keys())
+        return "ReplayBuffer. {}/{} episodes. Keys:{} Groups:{}".format(self.episodes_in_buffer,self.buffer_size,self.scheme.keys(),self.groups.keys())
 

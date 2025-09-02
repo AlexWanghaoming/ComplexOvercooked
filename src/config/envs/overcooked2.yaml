@@ -4,6 +4,11 @@ env_args:
   map_name: "supereasy"
   ifrender: False
   lossless_obs: False
+  debug: False
+
+batch_size_run: 1
+batch_size: 32 # Number of episodes to train on
+buffer_size: 5000 # total episode data in replay buffer
 
 mac: "basic_mac" # Basic controller
 agent: "rnn"
@@ -21,11 +26,12 @@ use_cuda: False # Use gpu by default unless it isn't available
 buffer_cpu_only: True # If true we won't keep all of the replay buffer in vram
 use_rnn: True
 hidden_dim: 64
-
+grad_norm_clip: 10 # Reduce magnitude of gradients above this L2 norm
 gamma: 0.99
+
 lr: 1.0e-3 # Learning rate for agents
 lr_decay: True # Decay learning rate over time
-reward_shaping_horizon: 1.0e+7 # Linearly decay reward shaping over this many timesteps
+reward_shaping_fraction: 0.3 # Linearly decay reward shaping over this many timesteps
 
 use_wandb: True # Log results to W&B
 wandb_team: "wanghm" # W&B team name
@@ -34,3 +40,9 @@ wandb_mode: "online" # W&B mode (online/offline)
 wandb_save_model: False # Save models to W&B (only done if use_wandb is True and save_model is True)
 save_model: True # Save the models to disk
 save_model_interval: 100000 # Save models after this many timesteps
+local_results_path: "results" # Path for local results
+
+checkpoint_path: "" # Load a checkpoint from this path
+evaluate: False # Evaluate model for test_nepisode episodes and quit (no training)
+save_replay: False # Saving the replay of the model loaded from checkpoint_path
+

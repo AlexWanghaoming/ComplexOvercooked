@@ -94,39 +94,36 @@ def config_copy(config):
 if __name__ == "__main__":
     params = deepcopy(sys.argv)
     th.set_num_threads(1)
-    params.append('--config=iql')
+    params.append('--config=vdn')
     params.append('--env-config=overcooked2')
+    config_dict = {}
     
     # Get the defaults from default.yaml
-    with open(
-        os.path.join(os.path.dirname(__file__), "config", "default.yaml"), "r"
-    ) as f:
-        try:
-            config_dict = yaml.safe_load(f)
-        except yaml.YAMLError as exc:
-            assert False, "default.yaml error: {}".format(exc)
+    # with open(
+    #     os.path.join(os.path.dirname(__file__), "config", "default.yaml"), "r"
+    # ) as f:
+    #     try:
+    #         config_dict = yaml.safe_load(f)
+    #     except yaml.YAMLError as exc:
+    #         assert False, "default.yaml error: {}".format(exc)
 
     # Load algorithm and env base configs
     alg_config = _get_config(params, "--config", "algs")
     env_config = _get_config(params, "--env-config", "envs")
 
+    # 参数优先级 env > alg > default
     # config_dict = {**config_dict, **env_config, **alg_config}
-    config_dict = recursive_dict_update(config_dict, alg_config) # 用alg_config更新config_dict
+    config_dict = recursive_dict_update(config_dict, alg_config) # 用alg_config覆盖config_dict
     config_dict = recursive_dict_update(config_dict, env_config)
 
-    try:
-        map_name = config_dict["env_args"]["map_name"]
-    except:
-        map_name = config_dict["env_args"]["key"]
-    # config_dict = OmegaConf.to_container(config_dict)
-    # now add all the config to sacred
+    map_name = config_dict["env_args"]["map_name"]
+    
+    # add all the config to sacred
     ex.add_config(config_dict)
 
-    for param in params:
-        if param.startswith("env_args.map_name"):
-            map_name = param.split("=")[1]
-        elif param.startswith("env_args.key"):
-            map_name = param.split("=")[1]
+    if param.startswith("env_args.map_name"):
+        map_name = param.split("=")[1]
+
 
     # Save to disk by default for sacred
     logger.info("Saving to FileStorageObserver in results/sacred.")

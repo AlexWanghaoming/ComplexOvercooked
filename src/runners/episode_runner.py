@@ -103,8 +103,7 @@ class EpisodeRunner:
                 reward = env_info["sparse_r"] + env_info["shaped_r"] * self.reward_shaping_factor
 
             terminated = terminated or truncated
-            if test_mode and self.args.render:
-                self.env.render()
+           
             episode_return += reward
 
             post_transition_data = {
@@ -125,8 +124,7 @@ class EpisodeRunner:
             "avail_actions": [self.env.get_avail_actions()],
             "obs": [self.env.get_obs()],
         }
-        if test_mode and self.args.render:
-            print(f"Episode return: {episode_return}")
+        
         self.batch.update(last_data, ts=self.t)
 
         # Select actions in the last stored state

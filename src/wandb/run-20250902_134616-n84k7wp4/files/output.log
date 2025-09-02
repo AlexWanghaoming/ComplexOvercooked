@@ -1,0 +1,64 @@
+[INFO 13:46:18] my_main *******************
+[INFO 13:46:18] my_main WANDB RUN ID:
+[INFO 13:46:18] my_main n84k7wp4
+[INFO 13:46:18] my_main *******************
+**********
+玩家0（蓝色） player_feature:
+面向：[0.0, 0.0, 0.0, 1.0] ↓
+手持物品: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] 空手
+面前是否有墙壁和其他玩家：[0, 0]
+和coin table的相对距离：[-2.0, 1.0]
+和pots的相对距离：[1.0, 0.0]
+和cuttingtables的相对距离：[-3.0, -1.0]
+和每个功能桌子（非table、cointable）的相对距离：[1.0, 0.0, -3.0, -1.0, 0.0, -2.0, -1.0, -2.0, -2.0, -2.0]
+
+
+**********
+玩家1（红色） player_feature:
+面向：[0.0, 0.0, 0.0, 1.0] ↓
+手持物品: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] 空手
+面前是否有墙壁和其他玩家：[1, 0]
+和coin table的相对距离：[0.0, 2.0]
+和pots的相对距离：[3.0, 1.0]
+和cuttingtables的相对距离：[-1.0, 0.0]
+和每个功能桌子（非table、cointable）的相对距离：[3.0, 1.0, -1.0, 0.0, 2.0, -1.0, 1.0, -1.0, 0.0, -1.0]
+
+
+**********
+玩家0（蓝色） player_feature:
+面向：[0.0, 0.0, 0.0, 1.0] ↓
+手持物品: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] 空手
+面前是否有墙壁和其他玩家：[0, 0]
+和coin table的相对距离：[-2.0, 1.0]
+和pots的相对距离：[1.0, 0.0]
+和cuttingtables的相对距离：[-3.0, -1.0]
+和每个功能桌子（非table、cointable）的相对距离：[1.0, 0.0, -3.0, -1.0, 0.0, -2.0, -1.0, -2.0, -2.0, -2.0]
+
+
+**********
+玩家1（红色） player_feature:
+面向：[0.0, 0.0, 0.0, 1.0] ↓
+手持物品: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] 空手
+面前是否有墙壁和其他玩家：[1, 0]
+和coin table的相对距离：[0.0, 2.0]
+和pots的相对距离：[3.0, 1.0]
+和cuttingtables的相对距离：[-1.0, 0.0]
+和每个功能桌子（非table、cointable）的相对距离：[3.0, 1.0, -1.0, 0.0, 2.0, -1.0, 1.0, -1.0, 0.0, -1.0]
+
+
+shape of state: 69
+shape of observation: 69
+/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/stdout_capturing.py:179: UserWarning: tee_stdout.wait timeout. Forcibly terminating.
+  warnings.warn("tee_stdout.wait timeout. Forcibly terminating.")
+/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/stdout_capturing.py:185: UserWarning: tee_stderr.wait timeout. Forcibly terminating.
+  warnings.warn("tee_stderr.wait timeout. Forcibly terminating.")
+[DEBUG 13:46:21] pymarl Stopping Heartbeat
+[ERROR 13:46:21] pymarl Failed after 0:00:08!
+Traceback (most recent calls WITHOUT Sacred internals):
+  File "/Users/alexwang/phD/ComplexOvercooked/src/main_debug.py", line 45, in my_main
+    run(_run, config, _log)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/run.py", line 72, in run
+    run_sequential(args=args, logger=logger)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/run.py", line 155, in run_sequential
+    if args.checkpoint_path != "":
+AttributeError: 'types.SimpleNamespace' object has no attribute 'checkpoint_path'

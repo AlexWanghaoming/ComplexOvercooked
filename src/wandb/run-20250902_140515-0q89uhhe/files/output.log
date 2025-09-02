@@ -1,0 +1,26 @@
+[INFO 14:05:16] my_main *******************
+[INFO 14:05:16] my_main WANDB RUN ID:
+[INFO 14:05:16] my_main 0q89uhhe
+[INFO 14:05:16] my_main *******************
+shape of state: 69
+shape of observation: 69
+[INFO 14:05:18] my_main Beginning training for 20000000.0 timesteps
+[INFO 14:05:18] my_main t_env: 600 / 20000000.0
+[INFO 14:05:18] my_main Estimated time left: 1 minutes, 37 seconds. Time passed: 0 seconds
+[INFO 14:05:19] my_main New best model saved with performance: 0.0
+/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/stdout_capturing.py:179: UserWarning: tee_stdout.wait timeout. Forcibly terminating.
+  warnings.warn("tee_stdout.wait timeout. Forcibly terminating.")
+/Users/alexwang/miniforge3/envs/llm_rl/lib/python3.10/site-packages/sacred/stdout_capturing.py:185: UserWarning: tee_stderr.wait timeout. Forcibly terminating.
+  warnings.warn("tee_stderr.wait timeout. Forcibly terminating.")
+[DEBUG 14:05:27] pymarl Stopping Heartbeat
+[ERROR 14:05:27] pymarl Failed after 0:00:15!
+Traceback (most recent calls WITHOUT Sacred internals):
+  File "/Users/alexwang/phD/ComplexOvercooked/src/main_debug.py", line 45, in my_main
+    run(_run, config, _log)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/run.py", line 72, in run
+    run_sequential(args=args, logger=logger)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/run.py", line 223, in run_sequential
+    learner.train(episode_sample, runner.t_env, episode)
+  File "/Users/alexwang/phD/ComplexOvercooked/src/learners/q_learner.py", line 142, in train
+    grad_norm = th.nn.utils.clip_grad_norm_(self.params, self.args.grad_norm_clip)
+AttributeError: 'types.SimpleNamespace' object has no attribute 'grad_norm_clip'

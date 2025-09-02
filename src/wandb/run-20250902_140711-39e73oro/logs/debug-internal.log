@@ -1,0 +1,11 @@
+{"time":"2025-09-02T14:07:11.122004+08:00","level":"INFO","msg":"using version","core version":"0.19.1"}
+{"time":"2025-09-02T14:07:11.122037+08:00","level":"INFO","msg":"created symlink","path":"/Users/alexwang/phD/ComplexOvercooked/src/wandb/run-20250902_140711-39e73oro/logs/debug-core.log"}
+{"time":"2025-09-02T14:07:11.227926+08:00","level":"INFO","msg":"created new stream","id":"39e73oro"}
+{"time":"2025-09-02T14:07:11.227996+08:00","level":"INFO","msg":"stream: started","id":"39e73oro"}
+{"time":"2025-09-02T14:07:11.228018+08:00","level":"INFO","msg":"handler: started","stream_id":"39e73oro"}
+{"time":"2025-09-02T14:07:11.228081+08:00","level":"INFO","msg":"sender: started","stream_id":"39e73oro"}
+{"time":"2025-09-02T14:07:11.228116+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"39e73oro"}
+{"time":"2025-09-02T14:07:12.290931+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-09-02T14:09:10.416709+08:00","level":"INFO","msg":"stream: closing","id":"39e73oro"}
+{"time":"2025-09-02T14:09:10.416768+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-09-02T14:09:10.417418+08:00","level":"INFO","msg":"Stopped system monitor"}

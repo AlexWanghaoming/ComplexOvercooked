@@ -1,0 +1,16 @@
+{"time":"2025-09-02T13:46:16.68077+08:00","level":"INFO","msg":"using version","core version":"0.19.1"}
+{"time":"2025-09-02T13:46:16.680806+08:00","level":"INFO","msg":"created symlink","path":"/Users/alexwang/phD/ComplexOvercooked/src/wandb/run-20250902_134616-n84k7wp4/logs/debug-core.log"}
+{"time":"2025-09-02T13:46:16.790452+08:00","level":"INFO","msg":"created new stream","id":"n84k7wp4"}
+{"time":"2025-09-02T13:46:16.79049+08:00","level":"INFO","msg":"stream: started","id":"n84k7wp4"}
+{"time":"2025-09-02T13:46:16.790713+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"n84k7wp4"}
+{"time":"2025-09-02T13:46:16.79077+08:00","level":"INFO","msg":"handler: started","stream_id":"n84k7wp4"}
+{"time":"2025-09-02T13:46:16.790772+08:00","level":"INFO","msg":"sender: started","stream_id":"n84k7wp4"}
+{"time":"2025-09-02T13:46:18.10324+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-09-02T13:46:21.79099+08:00","level":"INFO","msg":"stream: closing","id":"n84k7wp4"}
+{"time":"2025-09-02T13:46:21.791244+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-09-02T13:46:21.792194+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-09-02T13:46:23.661615+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-09-02T13:46:25.108569+08:00","level":"INFO","msg":"handler: closed","stream_id":"n84k7wp4"}
+{"time":"2025-09-02T13:46:25.108587+08:00","level":"INFO","msg":"sender: closed","stream_id":"n84k7wp4"}
+{"time":"2025-09-02T13:46:25.10858+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"n84k7wp4"}
+{"time":"2025-09-02T13:46:25.109396+08:00","level":"INFO","msg":"stream: closed","id":"n84k7wp4"}

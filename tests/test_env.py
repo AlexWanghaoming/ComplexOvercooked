@@ -9,7 +9,7 @@ from envs.overcook_gym_env import OvercookPygameEnv
 def test_overcooked2_env():
     print("\n| test_overcooked2_env()")
     # env = OvercookPygameEnv(map_name='4playersplit', ifrender=True, debug=True)
-    env = OvercookPygameEnv(map_name='supereasy', ifrender=False, debug=False, lossless_obs=False, fps=15)
+    env = OvercookPygameEnv(map_name='supereasy', ifrender=True, debug=False, lossless_obs=False, fps=15)
     # env = OvercookPygameEnv(map_name='supereasy', ifrender=True, debug=True)
     for _ in range(2):
         nobs, _, available_actions = env.reset()
@@ -20,6 +20,7 @@ def test_overcooked2_env():
             nobs, _, rewards, dones, infos, available_actions = env.step(random_action)
             done = dones[0]
             print(nobs)
+            
 def test_function_performance():
     """
     测试 OvercookPygameEnv 中关键函数的性能

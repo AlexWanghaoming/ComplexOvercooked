@@ -59,13 +59,7 @@ def run(_run, _config, _log):
     )
 
     args.unique_token = unique_token
-    if args.use_tensorboard:
-        tb_logs_direc = os.path.join(
-            dirname(dirname(abspath(__file__))), "results", "tb_logs"
-        )
-        tb_exp_direc = os.path.join(tb_logs_direc, "{}").format(unique_token)
-        logger.setup_tb(tb_exp_direc)
-
+    
     if args.use_wandb:
         logger.setup_wandb(
             _config, args.wandb_team, args.wandb_project, args.wandb_mode
@@ -158,7 +152,7 @@ def run_sequential(args, logger):
         learner.cuda()
 
     ######################### start training  #######################
-    if args.checkpoint_path != "":
+    if args.checkpoint_path != "":  # 从checkpoint_path加载模型
         timesteps = []
         timestep_to_load = 0
 
@@ -228,12 +222,14 @@ def run_sequential(args, logger):
 
             learner.train(episode_sample, runner.t_env, episode)
 
-            if args.reward_shaping_horizon:
-                runner.reward_shaping_factor = linear_annealed_factor(t_env=runner.t_env, 
-                                                                    start_value=1, 
+            reward_shaping_fraction = getattr(args, 'reward_shaping_fraction', 0.5)  # 默认系数为0.5
+            
+            # 对reward_shaping_factor进行衰减，结束点为reward_shaping_fraction * t_max
+            runner.reward_shaping_factor = linear_annealed_factor(t_env=runner.t_env, 
+                                                                    start_value=1,  
                                                                     end_value=0, 
                                                                     anneal_start=1, 
-                                                                    anneal_end=args.reward_shaping_horizon)
+                                                                    anneal_end=args.t_max * reward_shaping_fraction)
 
             
         # Execute test runs once in a while

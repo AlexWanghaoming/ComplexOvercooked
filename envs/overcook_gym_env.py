@@ -54,7 +54,7 @@ def ManhattanDis(relativepos:Tuple[int, int])->int:
     return abs(relativepos[0]) + abs(relativepos[1])
         
 def rel_xy(p:pygame.sprite.Sprite, obj:pygame.sprite.Sprite)-> List[int]:
-    return [(p.rect.x-obj.rect.x)/80, (p.rect.y-obj.rect.y)/80]  # 使用整除代替除法
+    return [(p.rect.x-obj.rect.x)//80, (p.rect.y-obj.rect.y)//80]  # 使用整除代替除法
             
 class OvercookPygameEnv(gym.Env):
     metadata = {'name': 'MyEnv-v0', 'render.modes': ['human']}
@@ -80,11 +80,11 @@ class OvercookPygameEnv(gym.Env):
             'made_newthing': 0,  # hjh合成的奖励要多一点
             'process_cutting': 0,  # 只要在切，就加分
             'get_need_cutting': 3,  # 切出有意义的东西了
-            'process_cooking': 0,  # 只要放东西进去煮，就加分/或放进去是need的东西才加分
+            'process_cooking': 0,  # 只要放东西进去煮，就加分或放进去是need的东西才加分
             'get_need_cooking': 3,  # 煮出有意义的东西了
             # 'process_cutting': 0.15,  # 只要在切，就加分
             # 'get_need_cutting': 0.8,  # 切出有意义的东西了
-            # 'process_cooking': 0.15,  # 只要放东西进去煮，就加分/或放进去是need的东西才加分
+            # 'process_cooking': 0.15,  # 只要放东西进去煮，就加分或放进去是need的东西才加分
             # 'get_need_cooking': 0.8,  # 煮出有意义的东西了
             'try_new_thing': 0,  # hjh 只要去尝试合成了（手上有东西去碰另外的东西）
             'putting_dish': 0  # hjh 只要用盘子收东西，或者把做好的东西放到盘子上就给奖励
@@ -337,9 +337,6 @@ class OvercookPygameEnv(gym.Env):
         self.episode_reward_dict["cumulative_sparse_rewards"] += np.array(infos["sparse_r"])
         self.episode_reward_dict["cumulative_shaped_rewards"] += np.array(infos["shaped_r"])
         self.episode_reward_dict["cumulative_rewards"] += np.array(infos["reward"])
-
-    def pick_random_state_or_goal(self):  # 返回一个随机的合理的状态
-        pass
 
     def showkey(self):
         # 可以让环境反馈一个itempiclist，就不用自己设定了
@@ -788,7 +785,7 @@ class OvercookPygameEnv(gym.Env):
             hold_objects[i] = held_items
 
             # 碰撞检测 - 只检测玩家正前方
-            rect_sprite.rect = player.rect.move(player.direction[0] * ONEBLOCK / 2, player.direction[1] * ONEBLOCK / 2)
+            rect_sprite.rect = player.rect.move(player.direction[0] * ONEBLOCK // 2, player.direction[1] * ONEBLOCK // 2)
             is_front_blocked = pygame.sprite.spritecollide(rect_sprite, self.game.walls, False)
             # 检测前方是否有其他玩家
             is_player_blocked = False
@@ -824,8 +821,8 @@ class OvercookPygameEnv(gym.Env):
 
             # 计算位置
             player_x, player_y = player_positions[i]
-            player_absolute_positions.append(np.array([player_x / 80, player_y / 80]))
-            pos.append((player_x / 80, player_y / 80))
+            player_absolute_positions.append(np.array([player_x // 80, player_y // 80]))
+            pos.append((player_x // 80, player_y // 80))
             
             # 计算相对位置
             tempdis = []
@@ -917,18 +914,18 @@ class OvercookPygameEnv(gym.Env):
         player_directions = self.mdp.get_player_directions(state)
         
         # 预先计算锅和案板的位置和状态
-        pot_positions = [(pot.rect.x / 80, pot.rect.y / 80) for pot in self.game.pots]
+        pot_positions = [(pot.rect.x // 80, pot.rect.y // 80) for pot in self.game.pots]
         pot_cooking_states = [pot.is_cooking for pot in self.game.pots]
         pot_ready_states = [pot.is_ready for pot in self.game.pots]
         pot_remaining_times = [pot.remaining_time if hasattr(pot, 'remaining_time') else -1 for pot in self.game.pots]
         pot_cooking_times = [pot.cookingtime if hasattr(pot, 'cookingtime') else 1 for pot in self.game.pots]
         
-        cutting_table_positions = [(ct.rect.x / 80, ct.rect.y / 80) for ct in self.game.cuttingtables]
+        cutting_table_positions = [(ct.rect.x // 80, ct.rect.y // 80) for ct in self.game.cuttingtables]
         cutting_table_cutting_states = [ct.is_cutting for ct in self.game.cuttingtables]
         cutting_table_ready_states = [ct.is_ready for ct in self.game.cuttingtables]
         
         # 预先计算coin table位置
-        coin_x, coin_y = self.game.Cointable.rect.x / 80, self.game.Cointable.rect.y / 80
+        coin_x, coin_y = self.game.Cointable.rect.x // 80, self.game.Cointable.rect.y // 80
         
         grid_obs = []
         
