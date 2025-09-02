@@ -94,7 +94,7 @@ def config_copy(config):
 if __name__ == "__main__":
     params = deepcopy(sys.argv)
     th.set_num_threads(1)
-    params.append('--config=vdn')
+    params.append('--config=ippo')
     params.append('--env-config=overcooked2')
     config_dict = {}
     
@@ -121,9 +121,9 @@ if __name__ == "__main__":
     # add all the config to sacred
     ex.add_config(config_dict)
 
-    if param.startswith("env_args.map_name"):
-        map_name = param.split("=")[1]
-
+    for param in params:
+        if param.startswith("env_args.map_name"):
+            map_name = param.split("=")[1]
 
     # Save to disk by default for sacred
     logger.info("Saving to FileStorageObserver in results/sacred.")

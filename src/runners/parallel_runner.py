@@ -152,8 +152,6 @@ class ParallelRunner:
                     ]:  # Only send the actions to the env if it hasn't terminated
                         parent_conn.send(("step", cpu_actions[action_idx]))
                     action_idx += 1  # actions is not a list over every env
-                    if idx == 0 and test_mode and self.args.render:
-                        parent_conn.send(("render", None))
 
             # Update envs_not_terminated
             envs_not_terminated = [
