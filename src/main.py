@@ -46,37 +46,25 @@ if __name__ == "__main__":
     th.set_num_threads(1)
     # params.append('--config=mappo')
     # params.append('--env-config=overcooked2')
-    
-    # Get the defaults from default.yaml
-    with open(
-        os.path.join(os.path.dirname(__file__), "config", "default.yaml"), "r"
-    ) as f:
-        try:
-            config_dict = yaml.safe_load(f)
-        except yaml.YAMLError as exc:
-            assert False, "default.yaml error: {}".format(exc)
-
+    config_dict = {}
     # Load algorithm and env base configs
     alg_config = get_config(params, "--config", "algs")
     env_config = get_config(params, "--env-config", "envs")
-
+    
+    # 参数优先级 alg > env > default
     # config_dict = {**config_dict, **env_config, **alg_config}
-    config_dict = recursive_dict_update(config_dict, alg_config) # 用alg_config更新config_dict
     config_dict = recursive_dict_update(config_dict, env_config)
+    config_dict = recursive_dict_update(config_dict, alg_config) # 用alg_config覆盖config_dict
 
-    try:
-        map_name = config_dict["env_args"]["map_name"]
-    except:
-        map_name = config_dict["env_args"]["key"]
+    map_name = config_dict["env_args"]["map_name"]
 
     print("config_dict:",config_dict)
+    
     # now add all the config to sacred
     ex.add_config(config_dict)
 
     for param in params:
         if param.startswith("env_args.map_name"):
-            map_name = param.split("=")[1]
-        elif param.startswith("env_args.key"):
             map_name = param.split("=")[1]
 
     # Save to disk by default for sacred
@@ -85,8 +73,6 @@ if __name__ == "__main__":
         results_path, f"sacred/{config_dict['name']}/{map_name}"
     )
 
-    # ex.observers.append(MongoObserver(db_name="marlbench")) #url='172.31.5.187:27017'))
     ex.observers.append(FileStorageObserver.create(file_obs_path))
-    # ex.observers.append(MongoObserver())
 
     ex.run_commandline(params)

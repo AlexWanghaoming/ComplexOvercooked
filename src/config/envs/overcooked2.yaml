@@ -6,7 +6,7 @@ env_args:
   lossless_obs: False
   debug: False
 
-batch_size_run: 1
+batch_size_run: 1 # 并行的环境数量
 batch_size: 32 # Number of episodes to train on
 buffer_size: 5000 # total episode data in replay buffer
 
@@ -21,7 +21,7 @@ log_interval: 6000
 runner_log_interval: 6000
 learner_log_interval: 6000
 
-t_max: 2.0e+7
+t_max: 1.0e+7
 use_cuda: False # Use gpu by default unless it isn't available
 buffer_cpu_only: True # If true we won't keep all of the replay buffer in vram
 use_rnn: True

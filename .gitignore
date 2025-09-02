@@ -1,5 +1,6 @@
 results/sacred
 wandb/*
+src/wandb/*
 __pycache__/
 *pdf
 *pptx
