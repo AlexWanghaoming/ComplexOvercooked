@@ -94,7 +94,7 @@ def config_copy(config):
 if __name__ == "__main__":
     params = deepcopy(sys.argv)
     th.set_num_threads(1)
-    params.append('--config=ippo')
+    params.append('--config=iql')
     params.append('--env-config=overcooked2')
     config_dict = {}
     

@@ -12,7 +12,7 @@ batch_size: 10
 # update the target network every {} training steps
 target_update_interval_or_tau: 0.01
 
-lr: 0.0003
+lr: 0.001
 hidden_dim: 64
 
 obs_agent_id: True

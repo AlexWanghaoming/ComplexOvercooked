@@ -31,7 +31,7 @@ gamma: 0.99
 
 lr: 1.0e-3 # Learning rate for agents
 lr_decay: True # Decay learning rate over time
-reward_shaping_fraction: 0.3 # Linearly decay reward shaping over this many timesteps
+reward_shaping_fraction: 0.5 # Linearly decay reward shaping over this many timesteps
 optim_alpha: 0.99 # RMSProp alpha
 optim_eps: 0.00001 # RMSProp epsilon
 grad_norm_clip: 10 # Reduce magnitude of gradients above this L2 norm
