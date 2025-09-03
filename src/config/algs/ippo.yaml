@@ -23,13 +23,13 @@ obs_individual_obs: False
 agent_output_type: "pi_logits"
 learner: "ppo_learner"
 standardise_returns: False
-standardise_rewards: False
+standardise_rewards: True
 use_rnn: True
 q_nstep: 5 # 1 corresponds to normal r + gammaV
 critic_type: "ac_critic"
 epochs: 8
 eps_clip: 0.1
-entropy_coef: 0.01
+entropy_coef: 0.1
 name: "ippo"
 
-t_max: 20050000
+t_max: 10000000

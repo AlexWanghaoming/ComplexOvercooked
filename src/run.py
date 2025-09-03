@@ -231,6 +231,7 @@ def run_sequential(args, logger):
                                                                     anneal_start=1, 
                                                                     anneal_end=args.t_max * reward_shaping_fraction)
 
+            logger.log_stat("reward_shaping_factor", runner.reward_shaping_factor, runner.t_env)
             
         # Execute test runs once in a while
         n_test_runs = max(1, args.test_nepisode // runner.batch_size)

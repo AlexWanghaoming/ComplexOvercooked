@@ -15,7 +15,7 @@ with open(maps_path, 'r', encoding='utf-8') as file:
     maps = json.load(file)
 
 # 合成菜品的得分
-TASK_VALUE = {'AClemoncookedfish': defaultdict(float,{'AClemoncookedfish': 5, 
+TASK_VALUE = {'AClemoncookedfish': defaultdict(float,{'AClemoncookedfish': 3, 
                                                       'AClemon': 0, 
                                                       'cookedfish': 0, 
                                                       'BClemon': 0,
