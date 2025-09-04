@@ -12,7 +12,6 @@ from components.episode_buffer import ReplayBuffer
 from components.transforms import OneHot
 from learners import REGISTRY as le_REGISTRY
 from runners import REGISTRY as r_REGISTRY
-from src.utils.general_reward_support import test_alg_config_supports_reward
 from src.utils.logging import Logger
 from src.utils.timehelper import time_left, time_str
 
@@ -36,9 +35,6 @@ def run(_run, _config, _log):
     args = SN(**_config)
         
     args.device = "cuda" if args.use_cuda else "cpu"
-    assert test_alg_config_supports_reward(
-        args
-    ), "The specified algorithm does not support the general reward setup. Please choose a different algorithm or set `common_reward=True`."
 
     # setup loggers
     logger = Logger(_log)

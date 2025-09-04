@@ -9,8 +9,7 @@ grid-search:
     - 0.0005
 
 
-  use_rnn:
-    - True
+
 
 
   epsilon_anneal_time:

@@ -6,14 +6,9 @@ env_args:
   lossless_obs: False
   debug: False
 
-batch_size_run: 1 # 并行的环境数量
-batch_size: 32 # Number of episodes to train on
-buffer_size: 5000 # total episode data in replay buffer
-
 agent: "rnn"
 n_agents: 2
-common_reward: True  # Run experiment with common reward setup
-reward_scalarisation: "mean"  # How to aggregate rewards to single common reward (only used if common_reward is True)
+
 test_greedy: True
 test_nepisode: 3
 test_interval: 50000
@@ -31,8 +26,7 @@ gamma: 0.99
 lr: 1.0e-3 # Learning rate for agents
 lr_decay: True # Decay learning rate over time
 reward_shaping_fraction: 0.5 # Linearly decay reward shaping over this many timesteps
-optim_alpha: 0.99 # RMSProp alpha
-optim_eps: 0.00001 # RMSProp epsilon
+
 grad_norm_clip: 10 # Reduce magnitude of gradients above this L2 norm
 add_value_last_step: True
 

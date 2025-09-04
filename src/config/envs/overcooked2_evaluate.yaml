@@ -11,13 +11,10 @@ env_args:
 #   p0: "rl"  # 可选值: ["random", "rl", "human", "llm"]
 #   p1: "llm"  # 可选值: ["random", "rl", "human", "llm"]
 
-common_reward: True  # Run experiment with common reward setup
-reward_scalarisation: "mean"  # How to aggregate rewards to single common reward (only used if common_reward is True)
 
 evaluate: True
 test_nepisode: 20
 use_cuda: False # Use gpu by default unless it isn't available
 buffer_cpu_only: True # If true we won't keep all of the replay buffer in vram
-use_rnn: True
 batch_size_run: 1 # Number of environments to run in parallel
 test_greedy: False # Use greedy evaluation (if False, will set epsilon floor to 0

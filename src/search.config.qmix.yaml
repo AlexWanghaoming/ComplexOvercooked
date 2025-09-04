@@ -7,9 +7,6 @@ grid-search:
   lr:
     - 0.001
 
-  use_rnn:
-    - True
-
 
   epsilon_anneal_time:
     - 5000000

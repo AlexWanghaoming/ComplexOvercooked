@@ -10,7 +10,6 @@ from modules.critics import REGISTRY as critic_registry
 
 class COMALearner:
     def __init__(self, mac, scheme, logger, args):
-        assert args.common_reward, "COMA only supports common reward setting"
         self.args = args
         self.n_agents = args.n_agents
         self.n_actions = args.n_actions

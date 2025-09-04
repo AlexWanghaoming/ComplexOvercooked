@@ -93,7 +93,7 @@ def config_copy(config):
 
 if __name__ == "__main__":
     params = deepcopy(sys.argv)
-    params.append('--config=iql')
+    params.append('--config=ippo')
     params.append('--env-config=overcooked2')
     
     ## Get the defaults from default.yaml

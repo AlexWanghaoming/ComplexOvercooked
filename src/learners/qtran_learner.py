@@ -9,7 +9,6 @@ from modules.mixers.qtran import QTranBase
 
 class QLearner:
     def __init__(self, mac, scheme, logger, args):
-        assert args.common_reward, "QTRAN only supports common reward setting"
         self.args = args
         self.mac = mac
         self.logger = logger

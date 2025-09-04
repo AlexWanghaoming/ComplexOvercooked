@@ -7,8 +7,6 @@ grid-search:
   lr:
     - 0.001
 
-  use_rnn:
-    - True
 
   hidden_dim:
     - 64

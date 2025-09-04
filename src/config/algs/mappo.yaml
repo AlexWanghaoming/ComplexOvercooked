@@ -17,15 +17,10 @@ lr: 0.001
 hidden_dim: 128
 
 obs_agent_id: True
-obs_last_action: False
-obs_individual_obs: False
 
 agent_output_type: "pi_logits"
 learner: "ppo_learner"
-entropy_coef: 0.01
-use_rnn: True
-standardise_returns: False
-standardise_rewards: False
+entropy: 0.01
 
 q_nstep: 5 # 1 corresponds to normal r + gammaV
 critic_type: "cv_critic"

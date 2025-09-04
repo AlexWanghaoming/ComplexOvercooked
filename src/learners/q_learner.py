@@ -20,10 +20,8 @@ class QLearner:
         self.mixer = None
         if args.mixer is not None:
             if args.mixer == "vdn":
-                assert args.common_reward, "VDN only supports common reward setting"
                 self.mixer = VDNMixer()
             elif args.mixer == "qmix":
-                assert args.common_reward, "QMIX only supports common reward setting"
                 self.mixer = QMixer(args)
             else:
                 raise ValueError("Mixer {} not recognised.".format(args.mixer))
