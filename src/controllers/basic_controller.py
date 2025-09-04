@@ -5,13 +5,16 @@ import torch as th
 
 # This multi-agent controller shares parameters between agents
 class BasicMAC:
-    def __init__(self, scheme, args, groups=None):
+    def __init__(self, scheme, groups, args):
         self.n_agents = args.n_agents
         self.args = args
         input_shape = self._get_input_shape(scheme)
         self._build_agents(input_shape)
         self.agent_output_type = args.agent_output_type
+
         self.action_selector = action_REGISTRY[args.action_selector](args)
+        self.save_probs = getattr(self.args, 'save_probs', False)
+
         self.hidden_states = None
 
     def select_actions(self, ep_batch, t_ep, t_env, bs=slice(None), test_mode=False):
@@ -24,6 +27,8 @@ class BasicMAC:
     def forward(self, ep_batch, t, test_mode=False):
         agent_inputs = self._build_inputs(ep_batch, t)
         avail_actions = ep_batch["avail_actions"][:, t]
+        if test_mode:
+            self.agent.eval()
         agent_outs, self.hidden_states = self.agent(agent_inputs, self.hidden_states)
 
         # Softmax the agent outputs if they're policy logits
@@ -31,14 +36,18 @@ class BasicMAC:
 
             if getattr(self.args, "mask_before_softmax", True):
                 # Make the logits for unavailable actions very negative to minimise their affect on the softmax
+                agent_outs = agent_outs.reshape(ep_batch.batch_size * self.n_agents, -1)
                 reshaped_avail_actions = avail_actions.reshape(ep_batch.batch_size * self.n_agents, -1)
-                agent_outs[reshaped_avail_actions == 0] = -1e10
-            agent_outs = th.nn.functional.softmax(agent_outs, dim=-1)
+                agent_outs[reshaped_avail_actions == 0] = -1e5
 
+            agent_outs = th.nn.functional.softmax(agent_outs, dim=-1)
+            
         return agent_outs.view(ep_batch.batch_size, self.n_agents, -1)
-    
+
     def init_hidden(self, batch_size):
-        self.hidden_states = self.agent.init_hidden().unsqueeze(0).expand(batch_size, self.n_agents, -1)  # bav
+        self.hidden_states = self.agent.init_hidden()
+        if self.hidden_states is not None:
+            self.hidden_states = self.hidden_states.unsqueeze(0).expand(batch_size, self.n_agents, -1)  # bav
 
     def parameters(self):
         return self.agent.parameters()
@@ -72,7 +81,7 @@ class BasicMAC:
         if self.args.obs_agent_id:
             inputs.append(th.eye(self.n_agents, device=batch.device).unsqueeze(0).expand(bs, -1, -1))
 
-        inputs = th.cat([x.reshape(bs*self.n_agents, -1) for x in inputs], dim=1)
+        inputs = th.cat([x.reshape(bs, self.n_agents, -1) for x in inputs], dim=-1)
         return inputs
 
     def _get_input_shape(self, scheme):

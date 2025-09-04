@@ -85,7 +85,7 @@ class EpisodeBatch:
             self.data.episode_data[k] = v.to(device)
         self.device = device
 
-    def update(self, data:Dict, bs=slice(None), ts=slice(None), mark_filled=True):
+    def update(self, data, bs=slice(None), ts=slice(None), mark_filled=True):
         slices = self._parse_slices((bs, ts))
         for k, v in data.items():
             if k in self.data.transition_data:
@@ -101,12 +101,8 @@ class EpisodeBatch:
                 raise KeyError("{} not found in transition or episode data".format(k))
 
             dtype = self.scheme[k].get("dtype", th.float32)
-            if type(v) == list:
-                v = th.tensor(np.array(v), dtype=dtype, device=self.device)
-            # print("k:", k)
-            # print("v:", v)
+            v = th.tensor(v, dtype=dtype, device=self.device)
             self._check_safe_view(v, target[k][_slices])
-            # import pdb; pdb.set_trace()
             target[k][_slices] = v.view_as(target[k][_slices])
 
             if k in self.preprocess:
@@ -121,8 +117,6 @@ class EpisodeBatch:
         for s in dest.shape[::-1]:
             if v.shape[idx] != s:
                 if s != 1:
-                    # import pdb; pdb.set_trace()
-
                     raise ValueError("Unsafe reshape of {} to {}".format(v.shape, dest.shape))
             else:
                 idx -= 1

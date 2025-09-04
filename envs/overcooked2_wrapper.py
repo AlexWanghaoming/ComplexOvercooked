@@ -8,9 +8,11 @@ import warnings
 
 class Overcooked2Wrapper(MultiAgentEnv):
     def __init__(self, map_name, seed, common_reward=True, reward_scalarisation='mean', **kwargs):
+        
         self.env = OvercookPygameEnv(map_name=map_name, 
                                      seed=seed, 
                                      **kwargs)
+        
         self.episode_limit = self.env.episode_limit
         self.n_agents = self.env.n_agents
         # print(env.action_space)

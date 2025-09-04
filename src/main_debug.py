@@ -93,19 +93,17 @@ def config_copy(config):
 
 if __name__ == "__main__":
     params = deepcopy(sys.argv)
-    th.set_num_threads(1)
     params.append('--config=iql')
     params.append('--env-config=overcooked2')
-    config_dict = {}
     
-    # Get the defaults from default.yaml
-    # with open(
-    #     os.path.join(os.path.dirname(__file__), "config", "default.yaml"), "r"
-    # ) as f:
-    #     try:
-    #         config_dict = yaml.safe_load(f)
-    #     except yaml.YAMLError as exc:
-    #         assert False, "default.yaml error: {}".format(exc)
+    ## Get the defaults from default.yaml
+    with open(
+        os.path.join(os.path.dirname(__file__), "config", "default.yaml"), "r"
+    ) as f:
+        try:
+            config_dict = yaml.safe_load(f)
+        except yaml.YAMLError as exc:
+            assert False, "default.yaml error: {}".format(exc)
 
     # Load algorithm and env base configs
     alg_config = _get_config(params, "--config", "algs")

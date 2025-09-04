@@ -1,9 +1,11 @@
 REGISTRY = {}
 
 from .basic_controller import BasicMAC
-from .non_shared_controller import NonSharedMAC
-from .maddpg_controller import MADDPGMAC
+from .ppo_controller import PPOMAC
+from .conv_controller import ConvMAC
+from .n_controller import NMAC
 
 REGISTRY["basic_mac"] = BasicMAC
-REGISTRY["non_shared_mac"] = NonSharedMAC
-REGISTRY["maddpg_mac"] = MADDPGMAC
+REGISTRY["ppo_mac"] = PPOMAC
+REGISTRY["conv_mac"] = ConvMAC
+REGISTRY["n_mac"] = NMAC

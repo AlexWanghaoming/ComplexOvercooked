@@ -50,10 +50,7 @@ def run(_run, _config, _log):
     # configure tensorboard logger
     # unique_token = "{}__{}".format(args.name, datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
 
-    try:
-        map_name = _config["env_args"]["map_name"]
-    except:
-        map_name = _config["env_args"]["key"]
+    map_name = _config["env_args"]["map_name"]
     unique_token = (
         f"{_config['name']}_seed{_config['seed']}_{map_name}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
     )
@@ -73,9 +70,6 @@ def run(_run, _config, _log):
 
     # Finish logging
     logger.finish()
-
-    # Clean up after finishing
-    print("Exiting Main")
 
     print("Stopping all threads")
     for t in threading.enumerate():
@@ -110,23 +104,19 @@ def run_sequential(args, logger):
     args.n_actions = env_info["n_actions"]
     args.state_shape = env_info["state_shape"]
     # ipdb.set_trace()
-    # Default/Base scheme
+
+    # batch中需要记录的字段
     scheme = {
         "state": {"vshape": env_info["state_shape"]},
         "obs": {"vshape": env_info["obs_shape"], "group": "agents"},
         "actions": {"vshape": (1,), "group": "agents", "dtype": th.long},
-        "avail_actions": {
-            "vshape": (env_info["n_actions"],),
-            "group": "agents",
-            "dtype": th.int,
-        },
+        "avail_actions": {"vshape": (env_info["n_actions"],), "group": "agents", "dtype": th.int},
+        "probs": {"vshape": (env_info["n_actions"],), "group": "agents", "dtype": th.float},
+        "reward": {"vshape": (1,)},
         "terminated": {"vshape": (1,), "dtype": th.uint8},
     }
+    
     # For individual rewards in gymmai reward is of shape (1, n_agents)
-    if args.common_reward:
-        scheme["reward"] = {"vshape": (1,)}
-    else:
-        scheme["reward"] = {"vshape": (args.n_agents,)}
     groups = {"agents": args.n_agents}
     preprocess = {"actions": ("actions_onehot", [OneHot(out_dim=args.n_actions)])}
 
@@ -140,7 +130,7 @@ def run_sequential(args, logger):
     )
 
     # Setup multiagent controller here
-    mac = mac_REGISTRY[args.mac](buffer.scheme, args, groups)
+    mac = mac_REGISTRY[args.mac](buffer.scheme, groups, args)
 
     # Give runner the scheme
     runner.setup(scheme=scheme, groups=groups, preprocess=preprocess, mac=mac)
@@ -200,7 +190,7 @@ def run_sequential(args, logger):
     last_time = start_time
 
     logger.console_logger.info("Beginning training for {} timesteps".format(args.t_max))
-    best_performance = -float("inf")  # Initialize with a very low value
+    best_performance = -float("inf") 
     best_model_path = None
 
     while runner.t_env <= args.t_max:

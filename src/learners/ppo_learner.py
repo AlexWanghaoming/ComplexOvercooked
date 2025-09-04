@@ -1,12 +1,12 @@
-# code heavily adapted from https://github.com/AnujMahajanOxf/MAVEN
 import copy
-
 import torch as th
-from torch.optim import Adam
-
+from torch.optim import AdamW
 from components.episode_buffer import EpisodeBatch
+from controllers.n_controller import NMAC
 from components.standarize_stream import RunningMeanStd
-from modules.critics import REGISTRY as critic_resigtry
+from components.action_selectors import categorical_entropy
+from src.utils.value_norm import ValueNorm
+from src.utils.rl_utils import build_gae_targets
 
 
 class PPOLearner:
@@ -17,280 +17,140 @@ class PPOLearner:
         self.logger = logger
         self.lr = args.lr
         self.mac = mac
-        self.old_mac = copy.deepcopy(mac)
-        self.agent_params = list(mac.parameters())
-        self.agent_optimiser = Adam(params=self.agent_params, lr=args.lr)
-
-        self.critic = critic_resigtry[args.critic_type](scheme, args)
-        self.target_critic = copy.deepcopy(self.critic)
-
-        self.critic_params = list(self.critic.parameters())
-        self.critic_optimiser = Adam(params=self.critic_params, lr=args.lr)
 
         self.last_target_update_step = 0
         self.critic_training_steps = 0
         self.log_stats_t = -self.args.learner_log_interval - 1
 
+        # a trick to reuse mac
+        dummy_args = copy.deepcopy(args)
+        dummy_args.n_actions = 1
+        self.critic = NMAC(scheme, None, dummy_args)
+        self.params = list(mac.parameters()) + list(self.critic.parameters())
+        
+        self.optimiser = AdamW(params=self.params, lr=args.lr)
+
         device = "cuda" if args.use_cuda else "cpu"
-        if self.args.standardise_returns:
-            self.ret_ms = RunningMeanStd(shape=(self.n_agents,), device=device)
-        if self.args.standardise_rewards:
-            rew_shape = (1,) if self.args.common_reward else (self.n_agents,)
-            self.rew_ms = RunningMeanStd(shape=rew_shape, device=device)
+        
+        self.use_value_norm = getattr(self.args, "use_value_norm", False)
+        if self.use_value_norm:
+            self.value_norm = ValueNorm(1, device=self.args.device)
 
     def train(self, batch: EpisodeBatch, t_env: int, episode_num: int):
-        # Get the relevant quantities
-
-        rewards = batch["reward"][:, :-1]
-        actions = batch["actions"][:, :]
+        rewards = batch["reward"][:, :-1]  # (bs, 600, 1)
+        actions = batch["actions"][:, :-1]  #  # (bs, 600, n_agents, 1)
         terminated = batch["terminated"][:, :-1].float()
         mask = batch["filled"][:, :-1].float()
         mask[:, 1:] = mask[:, 1:] * (1 - terminated[:, :-1])
-        actions = actions[:, :-1]
+        avail_actions = batch["avail_actions"][:, :-1] # (bs, 600, n_agents, n_actions)
+        
+        old_probs = batch["probs"][:, :-1] # (bs, 600, n_agents, n_actions)
+        old_probs[avail_actions == 0] = 1e-10
+        old_logprob = th.log(th.gather(old_probs, dim=3, index=actions)).detach()
+        mask_agent = mask.unsqueeze(2).repeat(1, 1, self.n_agents, 1)
+        
+        # targets and gae advantages
+        with th.no_grad():
+            old_values = []
+            self.critic.init_hidden(batch.batch_size)
+            for t in range(batch.max_seq_length):
+                agent_outs = self.critic.forward(batch, t=t)
+                old_values.append(agent_outs)
+            old_values = th.stack(old_values, dim=1)  # (32, 601, 2, 1)
 
-        if self.args.standardise_rewards:
-            self.rew_ms.update(rewards)
-            rewards = (rewards - self.rew_ms.mean) / th.sqrt(self.rew_ms.var)
+            if self.use_value_norm:
+                value_shape = old_values.shape
+                values = self.value_norm.denormalize(old_values.view(-1)).view(value_shape)
 
-        if self.args.common_reward:
-            assert (
-                rewards.size(2) == 1
-            ), "Expected singular agent dimension for common rewards"
-            # reshape rewards to be of shape (batch_size, episode_length, n_agents)
-            rewards = rewards.expand(-1, -1, self.n_agents)
 
-        mask = mask.repeat(1, 1, self.n_agents)
+            # shape: (bs, 601, n_agents, 1)
+            advantages, targets = build_gae_targets(rewards.unsqueeze(2).repeat(1, 1, self.n_agents, 1), mask_agent, values, self.args.gamma, self.args.gae_lambda)
 
-        critic_mask = mask.clone()
+            if self.use_value_norm:
+                targets_shape = targets.shape
+                targets = targets.reshape(-1)
+                self.value_norm.update(targets)
+                targets = self.value_norm.normalize(targets).view(targets_shape)
+        
+        advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-6)
+        
+        # PPO Loss
+        for _ in range(self.args.mini_epochs):
+            # Critic
+            values = []
+            self.critic.init_hidden(batch.batch_size)
+            for t in range(batch.max_seq_length-1):
+                agent_outs = self.critic.forward(batch, t=t)
+                values.append(agent_outs)
+            values = th.stack(values, dim=1) 
 
-        old_mac_out = []
-        self.old_mac.init_hidden(batch.batch_size)
-        for t in range(batch.max_seq_length - 1):
-            agent_outs = self.old_mac.forward(batch, t=t)
-            old_mac_out.append(agent_outs)
-        old_mac_out = th.stack(old_mac_out, dim=1)  # Concat over time
-        old_pi = old_mac_out
-        old_pi[mask == 0] = 1.0
+            # value clip
+            values_clipped = old_values[:,:-1] + (values - old_values[:,:-1]).clamp(-self.args.eps_clip,self.args.eps_clip)
 
-        old_pi_taken = th.gather(old_pi, dim=3, index=actions).squeeze(3)
-        old_log_pi_taken = th.log(old_pi_taken + 1e-10)
+            # 0-out the targets that came from padded data
+            td_error = th.max((values - targets.detach())** 2, (values_clipped - targets.detach())** 2)
+            masked_td_error = td_error * mask_agent
+            critic_loss = 0.5 * masked_td_error.sum() / mask_agent.sum()
 
-        for k in range(self.args.epochs):
-            mac_out = []
+            # Actor
+            pi = []
             self.mac.init_hidden(batch.batch_size)
-            for t in range(batch.max_seq_length - 1):
+            for t in range(batch.max_seq_length-1):
                 agent_outs = self.mac.forward(batch, t=t)
-                mac_out.append(agent_outs)
-            mac_out = th.stack(mac_out, dim=1)  # Concat over time
+                pi.append(agent_outs)
+            pi = th.stack(pi, dim=1)  # Concat over time
 
-            pi = mac_out
-            advantages, critic_train_stats = self.train_critic_sequential(
-                self.critic, self.target_critic, batch, rewards, critic_mask
-            )
-            advantages = advantages.detach()
-            # Calculate policy grad with mask
-
-            pi[mask == 0] = 1.0
-
-            pi_taken = th.gather(pi, dim=3, index=actions).squeeze(3)
-            log_pi_taken = th.log(pi_taken + 1e-10)
-
-            ratios = th.exp(log_pi_taken - old_log_pi_taken.detach())
+            pi[avail_actions == 0] = 1e-10
+            pi_taken = th.gather(pi, dim=3, index=actions)
+            log_pi_taken = th.log(pi_taken)
+            
+            ratios = th.exp(log_pi_taken - old_logprob)
             surr1 = ratios * advantages
-            surr2 = (
-                th.clamp(ratios, 1 - self.args.eps_clip, 1 + self.args.eps_clip)
-                * advantages
-            )
-
-            entropy = -th.sum(pi * th.log(pi + 1e-10), dim=-1)
-            pg_loss = (
-                -(
-                    (th.min(surr1, surr2) + self.args.entropy_coef * entropy) * mask
-                ).sum()
-                / mask.sum()
-            )
+            surr2 = th.clamp(ratios, 1-self.args.eps_clip, 1+self.args.eps_clip) * advantages
+            actor_loss = -(th.min(surr1, surr2) * mask_agent).sum() / mask_agent.sum()
+            
+            # entropy
+            entropy_loss = categorical_entropy(pi).mean(-1, keepdim=True) # mean over agents
+            entropy_loss[mask == 0] = 0 # fill nan
+            entropy_loss = (entropy_loss * mask).sum() / mask.sum()
+            loss = actor_loss + self.args.critic_coef * critic_loss - self.args.entropy * entropy_loss / entropy_loss.item()
 
             # Optimise agents
-            self.agent_optimiser.zero_grad()
-            pg_loss.backward()
-            grad_norm = th.nn.utils.clip_grad_norm_(
-                self.agent_params, self.args.grad_norm_clip
-            )
-            self.agent_optimiser.step()
+            self.optimiser.zero_grad()
+            loss.backward()
+            grad_norm = th.nn.utils.clip_grad_norm_(self.params, self.args.grad_norm_clip)
+            self.optimiser.step()
 
         # wanghm
         if self.args.lr_decay:
             self.lr_decay(cur_steps=t_env)
-            
-        self.old_mac.load_state(self.mac)
-        self.critic_training_steps += 1
-        if (
-            self.args.target_update_interval_or_tau > 1
-            and (self.critic_training_steps - self.last_target_update_step)
-            / self.args.target_update_interval_or_tau
-            >= 1.0
-        ):
-            self._update_targets_hard()
-            self.last_target_update_step = self.critic_training_steps
-        elif self.args.target_update_interval_or_tau <= 1.0:
-            self._update_targets_soft(self.args.target_update_interval_or_tau)
 
         if t_env - self.log_stats_t >= self.args.learner_log_interval:
-            ts_logged = len(critic_train_stats["critic_loss"])
-            for key in [
-                "critic_loss",
-                "critic_grad_norm",
-                "td_error_abs",
-                "q_taken_mean",
-                "target_mean",
-            ]:
-                self.logger.log_stat(
-                    key, sum(critic_train_stats[key]) / ts_logged, t_env
-                )
-
-            self.logger.log_stat(
-                "advantage_mean",
-                (advantages * mask).sum().item() / mask.sum().item(),
-                t_env,
-            )
-
+            mask_elems = mask_agent.sum().item()
+            self.logger.log_stat("advantage_mean", (advantages * mask_agent).sum().item() / mask_elems, t_env)
+            self.logger.log_stat("actor_loss", actor_loss.item(), t_env)
+            self.logger.log_stat("entropy_loss", entropy_loss.item(), t_env)
+            self.logger.log_stat("grad_norm", grad_norm, t_env)
             self.logger.log_stat("lr", self.lr, t_env)
-            self.logger.log_stat("pg_loss", pg_loss.item(), t_env)
-            self.logger.log_stat("agent_grad_norm", grad_norm.item(), t_env)
-            self.logger.log_stat(
-                "pi_max",
-                (pi.max(dim=-1)[0] * mask).sum().item() / mask.sum().item(),
-                t_env,
-            )
+            self.logger.log_stat("critic_loss", critic_loss.item(), t_env)
+            self.logger.log_stat("target_mean", (targets * mask_agent).sum().item() / mask_elems, t_env)
             self.log_stats_t = t_env
 
-    def train_critic_sequential(self, critic, target_critic, batch, rewards, mask):
-        # Optimise critic
-        with th.no_grad():
-            target_vals = target_critic(batch)
-            target_vals = target_vals.squeeze(3)
-
-        if self.args.standardise_returns:
-            target_vals = target_vals * th.sqrt(self.ret_ms.var) + self.ret_ms.mean
-
-        target_returns = self.nstep_returns(
-            rewards, mask, target_vals, self.args.q_nstep
-        )
-        if self.args.standardise_returns:
-            self.ret_ms.update(target_returns)
-            target_returns = (target_returns - self.ret_ms.mean) / th.sqrt(
-                self.ret_ms.var
-            )
-
-        running_log = {
-            "critic_loss": [],
-            "critic_grad_norm": [],
-            "td_error_abs": [],
-            "target_mean": [],
-            "q_taken_mean": [],
-        }
-
-        v = critic(batch)[:, :-1].squeeze(3)
-        td_error = target_returns.detach() - v
-        masked_td_error = td_error * mask
-        loss = (masked_td_error**2).sum() / mask.sum()
-
-        self.critic_optimiser.zero_grad()
-        loss.backward()
-        grad_norm = th.nn.utils.clip_grad_norm_(
-            self.critic_params, self.args.grad_norm_clip
-        )
-        self.critic_optimiser.step()
-
-        running_log["critic_loss"].append(loss.item())
-        running_log["critic_grad_norm"].append(grad_norm.item())
-        mask_elems = mask.sum().item()
-        running_log["td_error_abs"].append(
-            (masked_td_error.abs().sum().item() / mask_elems)
-        )
-        running_log["q_taken_mean"].append((v * mask).sum().item() / mask_elems)
-        running_log["target_mean"].append(
-            (target_returns * mask).sum().item() / mask_elems
-        )
-
-        return masked_td_error, running_log
-
-    def nstep_returns(self, rewards, mask, values, nsteps):
-        nstep_values = th.zeros_like(values[:, :-1])
-        for t_start in range(rewards.size(1)):
-            nstep_return_t = th.zeros_like(values[:, 0])
-            for step in range(nsteps + 1):
-                t = t_start + step
-                if t >= rewards.size(1):
-                    break
-                elif step == nsteps:
-                    nstep_return_t += (
-                        self.args.gamma ** (step) * values[:, t] * mask[:, t]
-                    )
-                elif t == rewards.size(1) - 1 and self.args.add_value_last_step:
-                    nstep_return_t += (
-                        self.args.gamma ** (step) * rewards[:, t] * mask[:, t]
-                    )
-                    nstep_return_t += self.args.gamma ** (step + 1) * values[:, t + 1]
-                else:
-                    nstep_return_t += (
-                        self.args.gamma ** (step) * rewards[:, t] * mask[:, t]
-                    )
-            nstep_values[:, t_start, :] = nstep_return_t
-        return nstep_values
-
-    def _update_targets(self):
-        self.target_critic.load_state_dict(self.critic.state_dict())
-
-    def _update_targets_hard(self):
-        self.target_critic.load_state_dict(self.critic.state_dict())
-
-    def _update_targets_soft(self, tau):
-        for target_param, param in zip(
-            self.target_critic.parameters(), self.critic.parameters()
-        ):
-            target_param.data.copy_(target_param.data * (1.0 - tau) + param.data * tau)
-
     def cuda(self):
-        self.old_mac.cuda()
         self.mac.cuda()
         self.critic.cuda()
-        self.target_critic.cuda()
 
     def save_models(self, path):
         self.mac.save_models(path)
-        th.save(self.critic.state_dict(), "{}/critic.th".format(path))
-        th.save(self.agent_optimiser.state_dict(), "{}/agent_opt.th".format(path))
-        th.save(self.critic_optimiser.state_dict(), "{}/critic_opt.th".format(path))
+        th.save(self.optimiser.state_dict(), "{}/agent_opt.th".format(path))
 
     def load_models(self, path):
         self.mac.load_models(path)
-        self.critic.load_state_dict(
-            th.load(
-                "{}/critic.th".format(path), map_location=lambda storage, loc: storage
-            )
-        )
         # Not quite right but I don't want to save target networks
-        self.target_critic.load_state_dict(self.critic.state_dict())
-        self.agent_optimiser.load_state_dict(
-            th.load(
-                "{}/agent_opt.th".format(path),
-                map_location=lambda storage, loc: storage,
-            )
-        )
-        self.critic_optimiser.load_state_dict(
-            th.load(
-                "{}/critic_opt.th".format(path),
-                map_location=lambda storage, loc: storage,
-            )
-        )
+        self.optimiser.load_state_dict(th.load("{}/agent_opt.th".format(path), map_location=lambda storage, loc: storage))
 
     def lr_decay(self, cur_steps):
         factor =  max(1 - cur_steps/self.args.t_max, 0.1)
-
         self.lr = self.args.lr * factor
-
-        for p in self.agent_optimiser.param_groups:
-            p['lr'] = self.lr 
-        for p in self.critic_optimiser.param_groups:
+        for p in self.optimiser.param_groups:
             p['lr'] = self.lr 

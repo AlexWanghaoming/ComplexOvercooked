@@ -2,6 +2,7 @@
 
 action_selector: "soft_policies"
 mask_before_softmax: True
+mac: "ppo_mac"
 
 runner: "parallel"
 

@@ -20,13 +20,6 @@ class ParallelRunner:
             *[Pipe() for _ in range(self.batch_size)]
         )
 
-        # # registering both smac and smacv2 causes a pysc2 error
-        # # --> dynamically register the needed env
-        # if self.args.env == "sc2":
-        #     register_smac()
-        # elif self.args.env == "sc2v2":
-        #     register_smacv2()
-
         env_fn = Overcooked2Wrapper
         env_args = [self.args.env_args.copy() for _ in range(self.batch_size)]
         for i in range(self.batch_size):
@@ -111,12 +104,7 @@ class ParallelRunner:
         self.reset()
 
         all_terminated = False
-        if self.args.common_reward:
-            episode_returns = [0 for _ in range(self.batch_size)]
-        else:
-            episode_returns = [
-                np.zeros(self.args.n_agents) for _ in range(self.batch_size)
-            ]
+        episode_returns = [0 for _ in range(self.batch_size)]
         episode_lengths = [0 for _ in range(self.batch_size)]
         self.mac.init_hidden(batch_size=self.batch_size)
         terminated = [False for _ in range(self.batch_size)]
@@ -124,21 +112,22 @@ class ParallelRunner:
             b_idx for b_idx, termed in enumerate(terminated) if not termed
         ]
         final_env_infos = []  # may store extra stats like battle won. this is filled in ORDER OF TERMINATION
+        save_probs = getattr(self.args, "save_probs", False)
 
         while True:
             # Pass the entire batch of experiences up till now to the agents
             # Receive the actions for each agent at this timestep in a batch for each un-terminated env
-            actions = self.mac.select_actions(
-                self.batch,
-                t_ep=self.t,
-                t_env=self.t_env,
-                bs=envs_not_terminated,
-                test_mode=test_mode,
-            )
+            if save_probs:
+                actions, probs = self.mac.select_actions(self.batch, t_ep=self.t, t_env=self.t_env, bs=envs_not_terminated, test_mode=test_mode)
+            else:
+                actions = self.mac.select_actions(self.batch, t_ep=self.t, t_env=self.t_env, bs=envs_not_terminated, test_mode=test_mode)
+            
             cpu_actions = actions.to("cpu").numpy()
 
             # Update the actions taken
             actions_chosen = {"actions": actions.unsqueeze(1)}
+            if save_probs:
+                actions_chosen["probs"] = probs.unsqueeze(1).to('cpu')
             self.batch.update(
                 actions_chosen, bs=envs_not_terminated, ts=self.t, mark_filled=False
             )

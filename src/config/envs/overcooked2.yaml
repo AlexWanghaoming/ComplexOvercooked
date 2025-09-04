@@ -10,8 +10,8 @@ batch_size_run: 1 # 并行的环境数量
 batch_size: 32 # Number of episodes to train on
 buffer_size: 5000 # total episode data in replay buffer
 
-mac: "basic_mac" # Basic controller
 agent: "rnn"
+n_agents: 2
 common_reward: True  # Run experiment with common reward setup
 reward_scalarisation: "mean"  # How to aggregate rewards to single common reward (only used if common_reward is True)
 test_greedy: True
@@ -24,7 +24,6 @@ learner_log_interval: 6000
 t_max: 1.0e+7
 use_cuda: False # Use gpu by default unless it isn't available
 buffer_cpu_only: True # If true we won't keep all of the replay buffer in vram
-use_rnn: True
 hidden_dim: 64
 grad_norm_clip: 10 # Reduce magnitude of gradients above this L2 norm
 gamma: 0.99
@@ -37,7 +36,7 @@ optim_eps: 0.00001 # RMSProp epsilon
 grad_norm_clip: 10 # Reduce magnitude of gradients above this L2 norm
 add_value_last_step: True
 
-use_wandb: True # Log results to W&B
+use_wandb: False # Log results to W&B
 wandb_team: "wanghm" # W&B team name
 wandb_project: epymarl_overcooked2 # W&B project name
 wandb_mode: "online" # W&B mode (online/offline)
