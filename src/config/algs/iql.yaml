@@ -13,9 +13,7 @@ buffer_size: 5000
 
 target_update_interval: 100
 
-lr: 0.001
-hidden_dim: 64
-
+lr: 0.001/hi
 # use the Q_Learner to train
 agent_output_type: "q"
 learner: "q_learner"

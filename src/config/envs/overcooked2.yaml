@@ -19,8 +19,6 @@ learner_log_interval: 6000
 t_max: 1.0e+7
 use_cuda: False # Use gpu by default unless it isn't available
 buffer_cpu_only: True # If true we won't keep all of the replay buffer in vram
-hidden_dim: 64
-grad_norm_clip: 10 # Reduce magnitude of gradients above this L2 norm
 gamma: 0.99
 
 lr: 1.0e-3 # Learning rate for agents
