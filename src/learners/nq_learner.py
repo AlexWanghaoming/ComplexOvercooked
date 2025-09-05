@@ -122,6 +122,10 @@ class NQLearner:
         grad_norm = th.nn.utils.clip_grad_norm_(self.params, self.args.grad_norm_clip)
         self.optimiser.step()
 
+        # wanghm
+        if self.args.lr_decay:
+            self.lr_decay(cur_steps=t_env)
+        
         if (episode_num - self.last_target_update_episode) / self.args.target_update_interval >= 1.0:
             self._update_targets()
             self.last_target_update_episode = episode_num
@@ -177,3 +181,9 @@ class NQLearner:
         if self.mixer is not None:
             self.mixer.load_state_dict(th.load("{}/mixer.th".format(path), map_location=lambda storage, loc: storage))
         self.optimiser.load_state_dict(th.load("{}/opt.th".format(path), map_location=lambda storage, loc: storage))
+
+    def lr_decay(self, cur_steps):
+        factor =  max(1 - cur_steps/self.args.t_max, 0.1)
+        self.lr = self.args.lr * factor
+        for p in self.optimiser.param_groups:
+            p['lr'] = self.lr 

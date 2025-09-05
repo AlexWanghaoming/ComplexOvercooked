@@ -10,15 +10,18 @@ runner: "parallel"
 
 batch_size_run: 8
 buffer_size: 5000
+target_update_interval: 200
 
-target_update_interval: 100
 
-lr: 0.001/hi
+lr: 0.001
 # use the Q_Learner to train
 agent_output_type: "q"
 learner: "q_learner"
 double_q: True
 mixer: # Mixer becomes None
 
+use_layer_norm: True
+use_orthogonal: True
+gain: 0.01
 
 name: "iql"

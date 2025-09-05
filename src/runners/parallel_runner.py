@@ -159,8 +159,8 @@ class ParallelRunner:
                 if not terminated[idx]:
                     data = parent_conn.recv()
                     # Remaining data for this current timestep
-                    if test_mode:
-                        post_transition_data["reward"].append((data["info"]["sparse_r"],))
+                    if test_mode:  # test mode只看sparse reward
+                        post_transition_data["reward"].append((data["info"]["sparse_r"]))
                         episode_returns[idx] += data["info"]["sparse_r"]
 
                     else:

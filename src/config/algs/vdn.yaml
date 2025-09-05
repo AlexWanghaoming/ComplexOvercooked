@@ -27,5 +27,8 @@ hypernet_embed: 64
 td_lambda: 0.6
 q_lambda: False
 
+use_layer_norm: True
+use_orthogonal: True
+gain: 0.01
 
 name: "vdn"

@@ -79,8 +79,8 @@ class SoftPoliciesSelector():
         self.args = args
 
     def select_action(self, agent_inputs, avail_actions=None, t_env=None, test_mode=False):
-        m = Categorical(agent_inputs)
-        picked_actions = m.sample().long()
+        m = Categorical(agent_inputs) # （bs, num_agents, num_actions）
+        picked_actions = m.sample().long() # 对action依据概率采样
         return picked_actions
 
 

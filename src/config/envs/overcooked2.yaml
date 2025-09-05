@@ -6,7 +6,6 @@ env_args:
   lossless_obs: False
   debug: False
 
-agent: "rnn"
 n_agents: 2
 
 test_greedy: True
@@ -22,15 +21,13 @@ buffer_cpu_only: True # If true we won't keep all of the replay buffer in vram
 gamma: 0.99
 
 lr: 1.0e-3 # Learning rate for agents
-lr_decay: True # Decay learning rate over time
+lr_decay: False # Decay learning rate over time
 reward_shaping_fraction: 0.5 # Linearly decay reward shaping over this many timesteps
 
-grad_norm_clip: 10 # Reduce magnitude of gradients above this L2 norm
-add_value_last_step: True
 
 use_wandb: False # Log results to W&B
 wandb_team: "wanghm" # W&B team name
-wandb_project: epymarl_overcooked2 # W&B project name
+wandb_project: complexOvercooked # W&B project name
 wandb_mode: "online" # W&B mode (online/offline)
 wandb_save_model: False # Save models to W&B (only done if use_wandb is True and save_model is True)
 save_model: True # Save the models to disk
