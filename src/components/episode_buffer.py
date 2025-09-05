@@ -99,12 +99,12 @@ class EpisodeBatch:
                 _slices = slices[0]
             else:
                 raise KeyError("{} not found in transition or episode data".format(k))
-
+    
             dtype = self.scheme[k].get("dtype", th.float32)
             v = th.tensor(v, dtype=dtype, device=self.device)
             self._check_safe_view(v, target[k][_slices])
             target[k][_slices] = v.view_as(target[k][_slices])
-
+    
             if k in self.preprocess:
                 new_k = self.preprocess[k][0]
                 v = target[k][_slices]

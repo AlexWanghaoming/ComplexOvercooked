@@ -9,9 +9,6 @@ grid-search:
     - 0.0005
 
 
-
-
-
   epsilon_anneal_time:
     - 5000000
 

@@ -14,7 +14,7 @@ grid-search:
   eps_clip:
     - 0.1
 
-  entropy_coef:
+  entropy:
     - 0.01
 
     

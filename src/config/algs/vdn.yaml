@@ -3,7 +3,7 @@
 action_selector: "epsilon_greedy"
 epsilon_start: 1.0
 epsilon_finish: 0.1
-epsilon_anneal_time: 5000000
+epsilon_anneal_time: 500000
 evaluation_epsilon: 0.0
 
 runner: "parallel"
@@ -11,19 +11,21 @@ batch_size_run: 8
 buffer_size: 5000
 batch_size: 128
 
+
+# update the target network every {} episodes
+target_update_interval: 100
+
 mac: "n_mac"
 agent: "n_rnn"
 agent_output_type: q
 
-buffer_size: 5000
-
-# update the target network every {} episodes
-target_update_interval_or_tau: 100
-
-
-agent_output_type: "q"
-learner: "q_learner"
+learner: "nq_learner"
 double_q: True
 mixer: "vdn"
+mixing_embed_dim: 32
+hypernet_embed: 64
+td_lambda: 0.6
+q_lambda: False
+
 
 name: "vdn"

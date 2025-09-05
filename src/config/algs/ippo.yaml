@@ -14,9 +14,6 @@ buffer_size: 64
 batch_size_run: 8
 batch_size: 64
 
-# update the target network every {} training steps
-target_update_interval_or_tau: 0.01
-
 lr: 0.001
 hidden_dim: 64
 
@@ -32,8 +29,6 @@ save_probs: True
 
 agent_output_type: "pi_logits"
 learner: "ppo_learner"
-critic_type: "ac_critic"
-
 
 use_layer_norm: True
 use_orthogonal: True
