@@ -4,7 +4,7 @@
 action_selector: "epsilon_greedy"
 epsilon_start: 1.0
 epsilon_finish: 0.05
-epsilon_anneal_time: 2000000
+epsilon_anneal_time: 5000000
 evaluation_epsilon: 0.0
 
 batch_size_run: 8 # batch_size_run=4, buffer_size = 2500, batch_size=64  for 3s5z_vs_3s6z

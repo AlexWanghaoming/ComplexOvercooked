@@ -11,9 +11,8 @@ batch_size_run: 8 # batch_size_run=4, buffer_size = 2500, batch_size=64  for 3s5
 buffer_size: 5000 
 batch_size: 128
 
-
 # update the target network every {} episodes
-target_update_interval: 100
+target_update_interval: 200
 
 mac: "n_mac"
 agent: "n_rnn"
