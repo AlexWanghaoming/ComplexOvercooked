@@ -2,13 +2,13 @@
 # use epsilon greedy action selector
 action_selector: "epsilon_greedy"
 epsilon_start: 1.0
-epsilon_finish: 0.1
-epsilon_anneal_time: 500000
+epsilon_finish: 0.05
+epsilon_anneal_time: 2000000
 evaluation_epsilon: 0.0
 
 runner: "parallel"
-batch_size_run: 8
-buffer_size: 5000
+batch_size_run: 8 # batch_size_run=4, buffer_size = 2500, batch_size=64  for 3s5z_vs_3s6z
+buffer_size: 5000 
 batch_size: 128
 
 
@@ -26,9 +26,13 @@ mixing_embed_dim: 32
 hypernet_embed: 64
 td_lambda: 0.6
 q_lambda: False
+lr: 0.001
 
-use_layer_norm: True
-use_orthogonal: True
+# orthogonal init for DNN
+use_orthogonal: False
 gain: 0.01
+
+# rnn layer normalization
+use_layer_norm: False
 
 name: "vdn"

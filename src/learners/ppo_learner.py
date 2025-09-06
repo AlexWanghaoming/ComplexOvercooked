@@ -61,7 +61,6 @@ class PPOLearner:
                 value_shape = old_values.shape
                 values = self.value_norm.denormalize(old_values.view(-1)).view(value_shape)
 
-
             # shape: (bs, 601, n_agents, 1)
             advantages, targets = build_gae_targets(rewards.unsqueeze(2).repeat(1, 1, self.n_agents, 1), mask_agent, values, self.args.gamma, self.args.gae_lambda)
 
