@@ -218,16 +218,19 @@ class ParallelRunner:
         cur_stats = self.test_stats if test_mode else self.train_stats
         cur_returns = self.test_returns if test_mode else self.train_returns
         log_prefix = "test_" if test_mode else ""
-        infos = [cur_stats] + final_env_infos
-        # cur_stats.update(
-        #     {
-        #         k: sum(d.get(k, 0) for d in infos)
-        #         for k in set.union(*[set(d) for d in infos])
-        #     }
-        # )
+        
+        if test_mode:
+            for p in range(self.args.n_agents):
+                task_menu = final_env_infos[0]['episode']['success_count'][0]                
+                for k in task_menu:
+                    cur_stats.update({f'player{p}_{k}': sum(d['episode']['success_count'][p][k] for d in final_env_infos)})
+            cur_stats.update({'cooked_count': sum(d['episode']['cooked_count'] for d in final_env_infos)})
+            cur_stats.update({'cutted_count': sum(d['episode']['cutted_count'] for d in final_env_infos)})
+            cur_stats.update({'synthesis_count': sum(d['episode']['synthesis_count'] for d in final_env_infos)})
+        
         cur_stats["n_episodes"] = self.batch_size + cur_stats.get("n_episodes", 0)
         cur_stats["ep_length"] = sum(episode_lengths) + cur_stats.get("ep_length", 0)
-
+            
         cur_returns.extend(episode_returns)
 
         n_test_runs = (

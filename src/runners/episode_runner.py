@@ -131,15 +131,18 @@ class EpisodeRunner:
         log_prefix = "test_" if test_mode else ""
         cur_stats["n_episodes"] = 1 + cur_stats.get("n_episodes", 0)
         cur_stats["ep_length"] = self.t + cur_stats.get("ep_length", 0)
-        # 记录 cooked个数和cutted的个数
-        cur_stats['cooked_count'] = env_info['episode']['cooked_count']+ cur_stats.get("cooked_count", 0)
-        cur_stats['cutted_count'] = env_info['episode']['cutted_count']+ cur_stats.get("cutted_count", 0)
-        cur_stats['synthesis_count'] = env_info['episode']['synthesis_count']+ cur_stats.get("synthesis_count", 0)
-
-        # 统计完成的客单数
-        for task in self.env.env.TASK_MENU:
-            success_count = sum(i[task] for i in env_info['episode']['success_count'])
-            cur_stats[task] = success_count + cur_stats.get(task, 0)
+        
+        if test_mode:
+            # 记录 cooked个数和cutted的个数
+            cur_stats['cooked_count'] = env_info['episode']['cooked_count']+ cur_stats.get("cooked_count", 0)
+            cur_stats['cutted_count'] = env_info['episode']['cutted_count']+ cur_stats.get("cutted_count", 0)
+            cur_stats['synthesis_count'] = env_info['episode']['synthesis_count']+ cur_stats.get("synthesis_count", 0)
+            
+            # 统计完成的客单数
+            task_menu = env_info['episode']['success_count'][0]
+            for k in task_menu:
+                success_count = sum(i[k] for i in env_info['episode']['success_count'])
+                cur_stats[k] = success_count + cur_stats.get(k, 0)
 
         if not test_mode:
             self.t_env += self.t
