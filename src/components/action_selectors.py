@@ -23,8 +23,7 @@ class MultinomialActionSelector():
         else:
             self.epsilon = self.schedule.eval(t_env)
             epsilon_action_num = (avail_actions.sum(-1, keepdim=True) + 1e-8)
-            masked_policies = ((1 - self.epsilon) * masked_policies
-                        + avail_actions * self.epsilon/epsilon_action_num)
+            masked_policies = ((1 - self.epsilon) * masked_policies + avail_actions * self.epsilon/epsilon_action_num)
             masked_policies[avail_actions == 0] = 0
                         
             picked_actions = Categorical(masked_policies).sample().long()

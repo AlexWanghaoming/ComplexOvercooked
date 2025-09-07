@@ -15,7 +15,7 @@ class COMACritic(nn.Module):
         self.output_type = "q"
 
         # Set up network layers
-        self.fc1 = nn.Lsinear(input_shape, 128)
+        self.fc1 = nn.Linear(input_shape, 128)
         self.fc2 = nn.Linear(128, 128)
         self.fc3 = nn.Linear(128, self.n_actions)
 
