@@ -10,6 +10,7 @@ runner: "parallel"
 
 batch_size_run: 8
 buffer_size: 5000
+batch_size: 128
 
 target_update_interval: 200
 
@@ -24,5 +25,7 @@ mixer: # Mixer becomes None
 use_layer_norm: False
 use_orthogonal: False
 gain: 0.01
+
+# td_lambda: 0.6 
 
 name: "iql"

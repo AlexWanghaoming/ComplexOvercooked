@@ -18,7 +18,7 @@ target_update_interval: 200
 lr: 0.001
 critic_lr: 0.0005
 td_lambda: 0.6
-entropy: 0.09
+entropy: 0.1
 
 # use COMA
 agent_output_type: "pi_logits"

@@ -6,7 +6,6 @@ from src.modules.mixers.qatten import QattenMixer
 from src.utils.rl_utils import build_td_lambda_targets, build_q_lambda_targets
 import torch as th
 from torch.optim import RMSprop, Adam
-import numpy as np
 from src.utils.th_utils import get_parameters_num
 
 class NQLearner:

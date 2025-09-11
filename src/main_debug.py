@@ -19,6 +19,8 @@ import torch as th
 from src.utils.logging import get_logger
 from src.run import run
 from typing import Dict, Tuple, List
+import ipdb
+
 
 SETTINGS["CAPTURE_MODE"] = (
     "fd"  # set to "no" if you want to see stdout/stderr in console
@@ -28,9 +30,6 @@ logger = get_logger()
 ex = Experiment("pymarl")
 ex.logger = logger
 ex.captured_out_filter = apply_backspaces_and_linefeeds
-
-results_path = os.path.join(dirname(dirname(abspath(__file__))), "results")
-# results_path = "/home/ubuntu/data"
 
 
 @ex.main
@@ -93,7 +92,7 @@ def config_copy(config):
 
 if __name__ == "__main__":
     params = deepcopy(sys.argv)
-    params.append('--config=qatten')
+    params.append('--config=iql')
     params.append('--env-config=overcooked2')
     
     ## Get the defaults from default.yaml
@@ -122,13 +121,16 @@ if __name__ == "__main__":
     for param in params:
         if param.startswith("env_args.map_name"):
             map_name = param.split("=")[1]
-
+        elif param.startswith("local_results_path"):
+            results_path = param.split("=")[1]
+            results_path = os.path.join(dirname(dirname(abspath(__file__))), results_path)
+        # ipdb.set_trace()
+        
     # Save to disk by default for sacred
     logger.info("Saving to FileStorageObserver in results/sacred.")
     file_obs_path = os.path.join(
         results_path, f"sacred/{config_dict['name']}/{map_name}"
     )
-
     # ex.observers.append(MongoObserver(db_name="marlbench")) #url='172.31.5.187:27017'))
     ex.observers.append(FileStorageObserver.create(file_obs_path))
     # ex.observers.append(MongoObserver())

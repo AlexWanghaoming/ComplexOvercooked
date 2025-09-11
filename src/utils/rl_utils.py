@@ -1,5 +1,4 @@
 import torch as th
-import torch.nn as nn
 import numpy as np
 
 def build_td_lambda_targets(rewards, terminated, mask, target_qs, n_agents, gamma, td_lambda):

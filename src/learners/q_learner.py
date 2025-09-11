@@ -5,6 +5,7 @@ from torch.optim import Adam
 from components.episode_buffer import EpisodeBatch
 from modules.mixers.vdn import VDNMixer
 from modules.mixers.qmix import QMixer
+from src.utils.rl_utils import build_td_lambda_targets
 
 
 class QLearner:
@@ -56,7 +57,7 @@ class QLearner:
 
         # Pick the Q-Values for the actions taken by each agent
         chosen_action_qvals = th.gather(mac_out[:, :-1], dim=3, index=actions).squeeze(3)  # Remove the last dim
-        chosen_action_qvals_back = chosen_action_qvals
+        chosen_action_qvals_ = chosen_action_qvals
         
         # Calculate the Q-Values necessary for the target
         target_mac_out = []
@@ -86,7 +87,12 @@ class QLearner:
             chosen_action_qvals = self.mixer(chosen_action_qvals, batch["state"][:, :-1])
             target_max_qvals = self.target_mixer(target_max_qvals, batch["state"][:, 1:])
 
-        # Calculate 1-step Q-Learning targets
+
+        # # 使用TD-lambda
+        # if self.args.td_lambda:
+        #     targets = build_td_lambda_targets(rewards, terminated, mask, target_max_qvals, self.args.n_agents, self.args.gamma, self.args.td_lambda)
+        # else:
+        # 使用 1-step Q-Learning targets
         targets = rewards + self.args.gamma * (1 - terminated) * target_max_qvals
 
         # Td-error

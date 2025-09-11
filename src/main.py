@@ -25,7 +25,6 @@ ex = Experiment("pymarl")
 ex.logger = logger
 ex.captured_out_filter = apply_backspaces_and_linefeeds
 
-results_path = os.path.join(dirname(dirname(abspath(__file__))), "results")
 
 
 @ex.main
@@ -70,9 +69,14 @@ if __name__ == "__main__":
     for param in params:
         if param.startswith("env_args.map_name"):
             map_name = param.split("=")[1]
+        elif param.startswith("local_results_path"):
+            results_path = param.split("=")[1]
+            results_path = os.path.join(dirname(dirname(abspath(__file__))), results_path)
+        # ipdb.set_trace()
 
     # Save to disk by default for sacred
     logger.info("Saving to FileStorageObserver in results/sacred.")
+    
     file_obs_path = os.path.join(
         results_path, f"sacred/{config_dict['name']}/{map_name}"
     )

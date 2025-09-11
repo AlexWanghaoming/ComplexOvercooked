@@ -509,8 +509,8 @@ class OvercookPygameEnv(gym.Env):
                         # tasksequence.append(f"cook up the required material{event.item}")
                         if self.debug:
                             print(f"把{event.item}煮好了，奖励{self.reward_shaping_params['get_need_cooking']}")
-                    else:
-                        shaped_reward -= self.reward_shaping_params['get_need_cooking'] # 烹饪出当前任务中不需要的东西，惩罚
+                    # else:
+                    #     shaped_reward -= self.reward_shaping_params['get_need_cooking'] # 烹饪出当前任务中不需要的东西，惩罚
 
             # elif event.type == COOKINGOUT_EVENT:
             #     if 'raw' in event.item:
